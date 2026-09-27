@@ -13,3 +13,14 @@
 .die-slot{perspective:none}.dice-row{perspective:none}
 .die-canvas{position:absolute;width:190%;height:190%;left:-45%;top:-45%;pointer-events:none;z-index:1}
 .die-shadow{position:absolute;bottom:-5%;height:10%;width:76%;left:12%;border-radius:50%;background:#090c14;opacity:.38;transform-origin:center}
+
+/* One shared table plane, with a shallow triangular grouping. */
+.dice-row{gap:38px;margin:65px 0 66px;position:relative}
+.die-slot:nth-child(1){transform:translateY(9px);z-index:2}
+.die-slot:nth-child(2){transform:translateY(-19px) scale(.94);z-index:1}
+.die-slot:nth-child(3){transform:translateY(15px);z-index:3}
+.orbit{display:none}
+.dice-row:before{content:"";position:absolute;left:-35px;right:-35px;height:96px;bottom:-35px;border-radius:50%;background:#1e2129;border:1px solid #2b2f39;pointer-events:none}
+.die-shadow{width:86%;left:7%;height:12%;bottom:-6%;opacity:.46}
+@media(max-width:850px){.dice-row{gap:29px;margin:48px 0 58px}.die-slot:nth-child(2){transform:translateY(-14px) scale(.94)}.die-slot:nth-child(3){transform:translateY(11px)}.dice-row:before{left:-20px;right:-20px;height:73px;bottom:-29px}}
+@media(max-width:360px){.dice-row{gap:24px}}
