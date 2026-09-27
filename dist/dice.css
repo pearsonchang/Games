@@ -9,3 +9,5 @@
 .pip{border-radius:50%;background:#24262b;box-shadow:inset 0 2px 2px #0009,0 1px 0 #fff9}.face-1 .pip{background:#eea214;box-shadow:inset 0 2px 2px #a45c04,0 1px 0 #fff9}
 .die-shadow{position:absolute;width:110%;height:24%;left:-5%;bottom:-29%;border-radius:50%;background:#05060990;filter:blur(7px)}
 @media(max-width:850px){.dice-row{--size:66px;--depth:33px;gap:34px;margin:43px 0 45px}}@media(max-width:360px){.dice-row{--size:56px;--depth:28px;gap:30px}}
+/* The contact shadow stays beneath the fixed support point during corner spins. */
+.die-shadow{bottom:-11%;height:22%;filter:blur(5px);transform-origin:center;will-change:transform,opacity}
