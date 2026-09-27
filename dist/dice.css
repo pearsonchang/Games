@@ -24,3 +24,14 @@
 .die-shadow{width:86%;left:7%;height:12%;bottom:-6%;opacity:.46}
 @media(max-width:850px){.dice-row{gap:29px;margin:48px 0 58px}.die-slot:nth-child(2){transform:translateY(-14px) scale(.94)}.die-slot:nth-child(3){transform:translateY(11px)}.dice-row:before{left:-20px;right:-20px;height:73px;bottom:-29px}}
 @media(max-width:360px){.dice-row{gap:24px}}
+
+.sound{margin-left:auto;border:1px solid #414651;border-radius:18px;color:#bac2d2;background:#232730;padding:7px 12px;font-size:12px;white-space:nowrap}.sound[aria-pressed=true]{color:#ffc05d;border-color:#775a2d}
+.die-slot:after{content:"";position:absolute;left:-12%;width:124%;height:28%;bottom:-13%;border-radius:50%;border:2px solid #ffbf55;opacity:0;pointer-events:none}
+.spinning .die-slot:after{opacity:.65;border-style:dashed;animation:spin-ring .42s linear infinite}
+.impact:after{animation:impact-ring .45s ease-out both}
+.hit .die-canvas{animation:reward-pop .4s ease-out}
+@keyframes spin-ring{from{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.1)}to{transform:rotate(360deg) scale(1)}}
+@keyframes impact-ring{from{opacity:.8;transform:scale(.65)}to{opacity:0;transform:scale(1.55)}}
+@keyframes reward-pop{0%,100%{translate:0 0}45%{translate:0 -9px}}
+@media(max-width:600px){header{gap:9px;flex-wrap:wrap}.sound{padding:6px 9px}.balance{white-space:nowrap}.brand{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.die-slot:after{display:none}.hit .die-canvas{animation:none}}
