@@ -35,3 +35,11 @@
 @keyframes reward-pop{0%,100%{translate:0 0}45%{translate:0 -9px}}
 @media(max-width:600px){header{gap:9px;flex-wrap:wrap}.sound{padding:6px 9px}.balance{white-space:nowrap}.brand{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.die-slot:after{display:none}.hit .die-canvas{animation:none}}
+
+/* Neon game tokens: graphic surfaces and small cyan/violet accents. */
+.dice-row:before{background:#1e2036;border-color:#454064}
+.die-slot:after{border-color:#6af5d0}
+.spinning .die-slot:after{border-color:#a98aff}
+.die-shadow{background:#111020;opacity:.55}
+.result.won strong{color:#6af5d0}
+.history b.hit{color:#6af5d0;border-color:#416e6b;background:#203333}
