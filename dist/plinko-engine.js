@@ -1,0 +1,11 @@
+'use strict';
+const PLINKO_MULT=[8,3,1,.5,.2,.5,1,3,8];
+const PLINKO_PEGS=Array.from({length:9},(_,r)=>Array.from({length:r%2?10:9},(_,c)=>({x:(r%2?80:110)+c*50,y:92+r*47}))).flat();
+function plinkoPath(lane,random=Math.random){let x=150+lane*100+(random()-.5)*16,y=28,vx=(random()-.5)*55,vy=0;const frames=[[0,x,y,-1]],dt=1/120;let time=0;for(let step=0;step<2400&&y<548;step++){time+=dt;vy+=800*dt;x+=vx*dt;y+=vy*dt;let hit=-1;if(x<22){x=22;vx=Math.abs(vx)*.75}if(x>678){x=678;vx=-Math.abs(vx)*.75}for(let k=0;k<PLINKO_PEGS.length;k++){const p=PLINKO_PEGS[k],dx=x-p.x,dy=y-p.y,d=Math.hypot(dx,dy);if(d<13){let nx=dx/(d||1),ny=dy/(d||1);if(d<.001){nx=.1;ny=-.995}x=p.x+nx*13.1;y=p.y+ny*13.1;const dot=vx*nx+vy*ny;if(dot<0){vx-=1.55*dot*nx;vy-=1.55*dot*ny;vx+=(random()-.5)*32;if(Math.abs(vx)<12)vx=(random()<.5?-1:1)*35;hit=k}}}vx*=.999;if(step%2===0||hit>=0)frames.push([time,x,y,hit]);}frames.push([time,x,548,-1]);const slot=Math.max(0,Math.min(8,Math.floor(x/(700/9))));return {frames,slot,duration:time*1000};}
+class PlinkoRound{
+ constructor({now=()=>Date.now(),random=Math.random,charge,credit,onFinish}={}){Object.assign(this,{now,random,charge,credit,onFinish,state:'idle',counter:0,cost:50,id:'',result:null,path:null});}
+ start(lane){if(this.state==='dropping'||!Number.isInteger(lane)||lane<0||lane>4)return false;const path=plinkoPath(lane,this.random);if(!this.charge(this.cost))return false;this.path=path;this.lane=lane;this.id='plinko-'+(++this.counter);this.startTime=this.now();this.state='dropping';this.result=null;return true;}
+ tick(){if(this.state!=='dropping'||this.now()-this.startTime<this.path.duration)return;this.state='finished';const multiplier=PLINKO_MULT[this.path.slot],amount=Math.floor(this.cost*multiplier);this.result={id:this.id,gameId:'plinko',won:amount>=this.cost,amount,cost:this.cost,multiplier,slot:this.path.slot,seconds:Math.ceil(this.path.duration/1000)};this.credit(amount);this.onFinish?.(this.result);}
+ snapshot(balance,includePath=false){return {type:'plinko-state',state:this.state,roundId:this.id,balance,lane:this.lane,elapsed:this.state==='idle'?0:Math.min(this.now()-this.startTime,this.path.duration),result:this.result,...(includePath?{path:this.path}:{} )};}
+}
+if(typeof module!=='undefined')module.exports={PlinkoRound,plinkoPath,PLINKO_MULT,PLINKO_PEGS};
