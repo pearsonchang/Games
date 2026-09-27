@@ -37,9 +37,9 @@
 @media(prefers-reduced-motion:reduce){.die-slot:after{display:none}.hit .die-canvas{animation:none}}
 
 /* Neon game tokens: graphic surfaces and small cyan/violet accents. */
-.dice-row:before{background:#1e2036;border-color:#454064}
-.die-slot:after{border-color:#6af5d0}
-.spinning .die-slot:after{border-color:#a98aff}
-.die-shadow{background:#111020;opacity:.55}
-.result.won strong{color:#6af5d0}
-.history b.hit{color:#6af5d0;border-color:#416e6b;background:#203333}
+.dice-row:before{background:#202226;border-color:#3b3e43}
+.die-slot:after{border-color:#ffbf55}
+.spinning .die-slot:after{border-color:#ffbf55}
+.die-shadow{background:#111214;opacity:.55}
+.result.won strong{color:#ffbf55}
+.history b.hit{color:#ffbf55;border-color:#75603a;background:#302a20}
