@@ -11,3 +11,15 @@
 @media(max-width:850px){.dice-row{--size:66px;--depth:33px;gap:34px;margin:43px 0 45px}}@media(max-width:360px){.dice-row{--size:56px;--depth:28px;gap:30px}}
 /* The contact shadow stays beneath the fixed support point during corner spins. */
 .die-shadow{bottom:-11%;height:22%;filter:blur(5px);transform-origin:center;will-change:transform,opacity}
+/* Graphic dice: crisp color planes and printed pips, without material shading. */
+.die-face{border:2px solid #17191e;border-radius:4px;box-shadow:none;background:#f4f2eb}
+.face-1{background:#fff5d6}.face-2{background:#ffb52b}.face-3{background:#fff9e9}.face-4{background:#ffcb61}.face-5{background:#ffe5a7}.face-6{background:#f5eee0}
+.pip,.face-1 .pip{background:#24262c;box-shadow:none;border-radius:50%}
+.face-1 .pip{background:#ed9910}
+.die-shadow{background:#080a0f;filter:none;opacity:.45!important;height:12%;bottom:-6%;width:85%;left:7.5%}
+.orbit{border-color:#34363d;border-radius:22px;transform:rotate(-8deg);height:170px;top:210px;width:470px}
+.orbit:after{inset:16px;border:1px dashed #30323a;border-radius:14px}
+.arena{background:#181a20}.stage-copy .eyebrow{color:#ffbd3d}
+.result.won strong{color:#ffbd3d}.roll{box-shadow:0 4px 0 #a96711;border-radius:10px}.roll:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #a96711}
+@media(max-width:850px){.orbit{top:137px;width:330px;height:125px}}
+@media(max-width:360px){.orbit{width:280px}}
