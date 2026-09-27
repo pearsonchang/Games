@@ -12,3 +12,16 @@ header .plain{font-size:3.4cqw}header strong{font-size:4.3cqw}.playing #notice{f
 /* Flat coin artwork; keep the other existing game sprites unchanged. */
 .art-gold,.art-green{background-image:url('coins-flat.png')}.art-gold .coin-value{color:#80520d;text-shadow:none}.art-green .coin-value{color:#075b30;text-shadow:none}
 .art-gold .coin-value{transform:translate(-.3cqw,-.42cqw) rotate(-12deg)}.art-green .coin-value{transform:translate(-.52cqw,-1.17cqw) rotate(-12deg)}
+
+/* Crisp game tokens: flat colored rims and readable, centered values. */
+.art-gold,.art-green{--coin-face:#ffd363;--coin-rim:#f1a527;--coin-ink:#754216;--coin-edge:#b96617;width:8.5cqw;height:8.5cqw;background-image:none;background-color:var(--coin-face);border:.6cqw solid var(--coin-rim);border-radius:50%;box-shadow:0 .55cqw 0 var(--coin-edge);position:relative;overflow:visible}
+.art-green{--coin-face:#8bf0b9;--coin-rim:#32ce89;--coin-ink:#115c40;--coin-edge:#19885b}
+.art-gold:before,.art-green:before{content:"";position:absolute;inset:.52cqw;border:.23cqw solid var(--coin-ink);opacity:.3;border-radius:50%;pointer-events:none}
+.art-gold .coin-value,.art-green .coin-value{inset:0;transform:none;color:var(--coin-ink);font-size:3.9cqw;font-weight:900;text-shadow:none;z-index:1}
+.art-gold:after,.art-green:after{content:"✦";position:absolute;right:-.7cqw;top:-1cqw;color:#fff4c5;font-size:2.5cqw;line-height:1;opacity:0;animation:coin-twinkle 7.5s ease-in-out infinite;animation-delay:var(--coin-delay,0s);pointer-events:none}
+.art-green:after{color:#caffdf}
+@keyframes coin-twinkle{0%,68%,100%{opacity:0;transform:scale(.25) rotate(0)}76%{opacity:.9;transform:scale(1) rotate(15deg)}85%{opacity:0;transform:scale(.4) rotate(30deg)}}
+.mine-sound{position:absolute;right:12cqw;top:3cqw;border:1px solid #5d4b2b;border-radius:50%;width:5.6cqw;height:5.6cqw;background:#2d271c;color:#ffca6a;font-size:3.7cqw;padding:0;line-height:1}
+.mine-sound[aria-pressed=false]{color:#888;border-color:#444;background:transparent}
+header>div{left:26%;width:40%}
+@media(prefers-reduced-motion:reduce){.art-gold:after,.art-green:after{display:none}}
