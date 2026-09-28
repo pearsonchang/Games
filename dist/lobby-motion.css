@@ -9,7 +9,8 @@
 .icon-motion{position:relative;z-index:1;display:grid;place-items:center;pointer-events:none;transition:transform .3s ease}
 .icon-motion .lobby-art{animation:icon-float var(--icon-time) ease-in-out var(--icon-delay) infinite;transform-origin:50% 65%;transition:filter .3s ease}
 .game-card .card-category{z-index:3;pointer-events:none}
-.game-card .art-rocket{background-image:url('rocket-icon-flat.png');background-size:88% auto;background-position:center;mask-image:none;animation-name:icon-boost}
+.game-card .art-rocket{background-image:url('rocket-icon-orbit.png');background-size:100% auto;background-position:center;mask-image:none;animation-name:icon-boost}
+.game-card[data-play=rocket] .icon-spark{display:none}
 .game-card .art-dice{position:relative;top:6px}
 .icon-spark{position:absolute;z-index:2;width:3px;height:3px;border-radius:1px;background:var(--game-accent);box-shadow:0 0 7px rgba(var(--icon-glow),.55);opacity:0;animation:icon-spark 5.8s ease-in-out var(--icon-delay) infinite}
 .icon-spark:first-child{left:9%;top:54%}
