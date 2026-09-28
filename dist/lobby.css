@@ -13,7 +13,7 @@ html,body{background:#0b1322}
 .avatar{background:#23314b;color:#bacdf0}.guest{background:#121e33;border-color:#293c59}
 .filter{border-color:#2a3a55;color:#aabbd3}.filter[aria-pressed=true]{background:#233b60;border-color:#527bad;color:#e1eeff}
 .game-card{background:#121e33;border-color:#2b405e}.game-card:not(:disabled):hover{border-color:#789ccf;box-shadow:0 5px 15px #03081445}
-.cover{background:#142138}.lobby-art{background-image:url('lobby-icons-blue.png');filter:none;mask-image:radial-gradient(ellipse 66% 66% at center,#000 55%,transparent 83%)}
+.cover{background:#142138}.lobby-art{background-image:url('lobby-icons-glass.png');filter:none;mask-image:radial-gradient(ellipse 66% 66% at center,#000 55%,transparent 83%)}
 .card-category{color:#aabedb}.game-details .game-description{color:#b3c2d8}.entry-cost{color:#a9bbd3}.free-entry{color:#d2c197}
 .play-label{color:#a8d5fa}.game-card[data-play=rocket] .play-label,.game-card[data-play=dice] .play-label{color:#bbb9ed}
 .navigation{background:#101d33f5;border-color:#304261;box-shadow:0 6px 24px #03081466}.navigation button{color:#9caecc}.navigation button[aria-current=page]{background:#263d61;color:#d6eaff}
