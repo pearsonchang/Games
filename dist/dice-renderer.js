@@ -19,10 +19,10 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
  const world=v=>{v=rotate(v);v[1]+=1-support;return camera(v)};
  const project=v=>{const s=size*.255*7/(7-v[2]);return [size/2+v[0]*s,size*.53+v[1]*s]};
  const polygons=[];
- for(const patch of DiceMesh.patches){const pts=patch.points.map(world),middle=patch.points[0].map((_,i)=>patch.points.reduce((s,v)=>s+v[i],0)/4),q=middle.map(x=>Math.max(-.75,Math.min(.75,x))),normal=camera(rotate(middle.map((x,i)=>x-q[i])));if(normal[2]<-.005)continue;polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/4,color:['','#fff2cc','#efc47d','#fff8df','#e8b663','#f8dda1','#f4d292'][patch.value]});}
- for(const dot of DiceMesh.dots){if(camera(rotate(dot.normal))[2]<=0)continue;const pts=dot.points.map(world);polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/pts.length,color:'#493729',pip:true});}
+ for(const patch of DiceMesh.patches){const pts=patch.points.map(world),middle=patch.points[0].map((_,i)=>patch.points.reduce((s,v)=>s+v[i],0)/4),q=middle.map(x=>Math.max(-.75,Math.min(.75,x))),normal=camera(rotate(middle.map((x,i)=>x-q[i])));if(normal[2]<-.005)continue;polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/4,color:['','#edf4ff','#93bde8','#f5f8ff','#8b97cd','#c2dcf3','#b2bde8'][patch.value]});}
+ for(const dot of DiceMesh.dots){if(camera(rotate(dot.normal))[2]<=0)continue;const pts=dot.points.map(world);polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/pts.length,color:'#223553',pip:true});}
  // A single outer ink contour keeps the curved shape crisp at every angle.
- const outline=diceHull(polygons.filter(p=>!p.pip).flatMap(p=>p.pts.map(project)));ctx.beginPath();outline.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.strokeStyle='#4c3725';ctx.lineWidth=3.2;ctx.lineJoin='round';ctx.stroke();
+ const outline=diceHull(polygons.filter(p=>!p.pip).flatMap(p=>p.pts.map(project)));ctx.beginPath();outline.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.strokeStyle='#314464';ctx.lineWidth=3.2;ctx.lineJoin='round';ctx.stroke();
  polygons.sort((a,b)=>((a.panel?1:a.pip?2:0)-(b.panel?1:b.pip?2:0))||a.z-b.z);for(const p of polygons){const pts=p.pts.map(project);ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fillStyle=p.color;ctx.fill();if(p.panel){ctx.strokeStyle='#82868b';ctx.lineWidth=1.1;ctx.stroke();}if(!p.pip){ctx.strokeStyle=p.color;ctx.lineWidth=.65;ctx.stroke();}}
 }
 

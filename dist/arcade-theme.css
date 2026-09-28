@@ -40,3 +40,7 @@ body:not(.arcade-mines) #back{background:#182840;border:1px solid var(--arc-line
 /* Shared secondary controls use periwinkle as a restrained companion to blue. */
 .mode.active,.modes button[aria-pressed=true]{background:#263153;border-color:#777fc1;color:#d4d8ff}
 .sound,#rocket-sound,.arcade-mines .mine-sound{color:#b5d8f6;border-color:#3d5c7f;background:#192c46}
+
+.stage-copy .eyebrow,.eyebrow,.result.won strong,.modes button[aria-pressed=true] em{color:#a4cafa}
+.arena-head i{background:#8ebff3}.size-options button[aria-pressed=true]{border-color:#8ebff3}
+.sound[aria-pressed=true],#rocket-sound[aria-pressed=true]{color:#b5d8f6;border-color:#3d5c7f}
