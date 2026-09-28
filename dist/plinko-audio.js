@@ -1,6 +1,7 @@
 'use strict';
 class PlinkoAudio extends DiceAudio{
  constructor(){super();this.lastHit=-Infinity;}
+ charge(){this.stop();this.tone(240,.09,0,'sine',.16);this.tone(380,.09,.07,'sine',.2);this.tone(570,.08,.14,'sine',.22);}
  launch(){this.stop();this.lastHit=-Infinity;this.tone(330,.1,0,'triangle',.35);this.tone(660,.17,.06,'sine',.28);}
  hit(index,now,strength=.4){
   if(now-this.lastHit<45)return;this.lastHit=now;

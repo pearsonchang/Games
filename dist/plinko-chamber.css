@@ -1,0 +1,118 @@
+/* The chamber uses the existing board coordinates; only its presentation changes. */
+.plinko-glass{background:radial-gradient(ellipse at 15% 0,#12244066,transparent 55%),#07111f;font-size:14px;--chamber-line:#6fa8ff24;--chamber-muted:#9caec8}
+.plinko-glass header{max-width:1140px;padding:18px 24px;gap:16px}
+.plinko-glass .brand{font-size:22px;letter-spacing:3px;font-style:italic}
+.plinko-glass .brand span{font-style:normal;letter-spacing:1px}
+.plinko-glass #back{color:#b4c3d8;font-size:14px;min-height:44px}
+.plinko-glass #volt-sound{width:36px;height:36px;background:#122137;border-color:var(--chamber-line)}
+.plinko-glass .balance{font-size:12px;white-space:nowrap}
+.plinko-glass .balance b{font-variant-numeric:tabular-nums;color:#ffcf72}
+.plinko-glass main{max-width:1140px;padding:4px 24px 0;grid-template-columns:minmax(0,1fr) 300px;gap:20px}
+.plinko-glass .arena{background:linear-gradient(160deg,#142138,#0d182a 65%,#161c33);border-color:#6fa8ff29;box-shadow:inset 0 1px 0 #d9e8ff0d,0 24px 60px #00000030;border-radius:22px}
+.plinko-glass .stage-top{margin:0 20px 0;padding:17px 0 14px;align-items:center;border-color:#87a8d619;letter-spacing:0;gap:12px}
+.stage-title{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.stage-title strong{font-size:17px;font-weight:700;color:#edf3ff}
+.stage-title small{display:block;font-size:10px;letter-spacing:2px;color:#8198bc;margin-top:1px}
+.stage-mark{display:grid;place-items:center;width:34px;height:38px;color:#a7eaff!important;background:linear-gradient(150deg,#48cfff19,#8876ff13);clip-path:polygon(25% 0,75% 0,100% 25%,100% 75%,75% 100%,25% 100%,0 75%,0 25%);font-size:30px;font-weight:500!important}
+.plinko-glass #status{color:#a6bddb;font-size:12px;letter-spacing:0;text-align:right}
+.entry-caption{display:flex;justify-content:space-between;max-width:650px;margin:12px auto 3px;padding:0 22px;color:#8398b9;font-size:12px;letter-spacing:1px}
+.entry-caption span:last-child{letter-spacing:3px;color:#7188ab;font-size:11px}
+.plinko-glass .board-wrap{width:calc(100% - 24px);max-width:min(700px,max(420px,calc((100svh - 310px)*7/6)));margin:0 auto;border-radius:16px;border:1px solid #7da2d21a;background:radial-gradient(ellipse at 50% -20%,#4875b51e,transparent 65%),radial-gradient(ellipse at 100% 100%,#8e65e70d,transparent 50%),#081323;box-shadow:inset 0 8px 28px #0208118c,inset 0 -1px 0 #cee8ff12;isolation:isolate;overflow:hidden}
+.plinko-glass .lanes{height:10%;top:0;z-index:2;pointer-events:none}
+.plinko-glass .lanes button{pointer-events:auto;top:0;height:100%;min-height:40px;width:12.4%;border:0;background:none!important;box-shadow:none!important;color:#8fa7c7;border-radius:8px;display:flex;align-items:flex-start;justify-content:center;padding-top:5px;font-size:12px;font-weight:650;transition:color .15s}
+.plinko-glass .lanes button:before{content:'';position:absolute;top:1px;width:60%;height:26px;max-height:56%;border-top:1px solid #6386b84d;border-radius:5px;background:linear-gradient(#739be015,transparent);opacity:.7;z-index:-1}
+.plinko-glass .lanes button[aria-pressed=true]{color:#d9f8ff;border:0;text-shadow:0 0 12px #59d7ff70}
+.plinko-glass .lanes button[aria-pressed=true]:before{border-color:#77ddffa1;background:linear-gradient(#49cfff2b,transparent);opacity:1}
+.plinko-glass .lanes button:hover:not(:disabled){color:#fff}
+.plinko-glass .lanes button:disabled{opacity:.72}
+.plinko-glass .lanes button[aria-pressed=true]:disabled{opacity:1}
+.plinko-glass .lanes button:focus-visible{outline:2px solid #91e7ff;outline-offset:-3px}
+.plinko-glass .slots{top:91.8%;height:8.2%;gap:4px;padding:0 7px 7px;z-index:1}
+.plinko-glass .slot{position:relative;background:linear-gradient(180deg,#111e33,#192a43);border:1px solid #687ba64d;border-top:0;border-bottom:3px solid #667aac70;border-radius:2px 2px 8px 8px;box-shadow:inset 0 7px 12px #020813aa;color:#9dacce;font-size:clamp(11px,1.25vw,16px);font-weight:750;font-variant-numeric:tabular-nums;text-shadow:none}
+.plinko-glass .slot:before{content:'';position:absolute;top:0;left:16%;right:16%;height:1px;background:currentColor;opacity:.25}
+.plinko-glass .slot.medium{background:linear-gradient(#0b1c30,#19304b);color:#aeddef;border-color:#55b6d555;border-bottom-color:#55bfd39c;box-shadow:inset 0 7px 12px #020813aa}
+.plinko-glass .slot.high{background:linear-gradient(#1d2330,#2c2c2e);color:#ffd488;border-color:#c7a86750;border-bottom-color:#e8b85caa;box-shadow:inset 0 7px 12px #080a16b3}
+.plinko-glass .slot.hit{color:#e7faff;background:linear-gradient(#19556d,#245075);border-color:#92eaff;box-shadow:inset 0 2px 12px #7ae3ff26,0 0 24px #49cfff36;animation:chamber-catch .55s ease-out}
+.plinko-glass .slot.high.hit{color:#fff2cf;background:linear-gradient(#6b4e27,#513c28);border-color:#ffda83;box-shadow:0 0 30px #ffc85755}
+.plinko-glass #result{min-height:84px;padding:17px 14px 19px;background:transparent;position:relative}
+.plinko-glass #result:before{content:'';display:block;width:26px;height:2px;border-radius:3px;background:#6cd9ee4d;margin:0 auto 8px}
+.plinko-glass #result span{font-size:18px;letter-spacing:.3px}
+.plinko-glass #result small{font-size:12px;color:#9badc8;margin-top:4px}
+.plinko-glass .big-win{animation:chamber-win 1s ease-out}
+.plinko-glass .big-win #result{background:linear-gradient(0deg,#ffc85709,transparent)}
+.reward-pop{position:absolute;left:50%;top:76%;z-index:3;pointer-events:none;opacity:0;transform:translate(-50%,0);padding:5px 10px;color:#e9fbff;font-size:18px;line-height:1.2;font-weight:800;white-space:nowrap;background:#0b1d31cc;border:1px solid #8ae4ff42;border-radius:8px;box-shadow:0 6px 20px #0005;text-shadow:0 0 12px #49cfff66}
+.reward-pop.big{font-size:22px;color:#ffe2a4;border-color:#ffca6255;text-shadow:0 0 14px #ffc85755}
+.reward-pop.show{animation:chamber-reward 1.4s cubic-bezier(.2,.7,.2,1) both}
+.plinko-glass aside{padding:23px 22px;border-radius:22px;align-self:start;border-color:#6fa8ff21;background:linear-gradient(150deg,#132036,#0e1a2d);box-shadow:inset 0 1px 0 #e2eeff08}
+.plinko-glass .eyebrow{font-size:10px;color:#849bbd;letter-spacing:1.5px}
+.plinko-glass h1{font-size:23px;line-height:1.4;letter-spacing:0;margin:8px 0 13px}
+.plinko-glass .hint{color:#9eafc9;font-size:13px;line-height:1.8}
+.plinko-glass .summary{margin-top:21px;padding-top:18px;border-color:#7995c51f}
+.plinko-glass .summary>div{font-size:14px;margin-bottom:13px}
+.plinko-glass .summary b{font-size:25px;font-variant-numeric:tabular-nums}
+.plinko-glass .summary small{font-size:12px;color:#93a7c7}
+.plinko-glass .launch{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;margin:12px 0 0;padding:12px 16px;background:linear-gradient(112deg,#86dffc,#9aa6fb 80%,#ac9bf6);color:#0b1a32;box-shadow:inset 0 1px 0 #ffffff80,0 3px 0 #35456e,0 7px 20px #5c8eff12;border:1px solid #bedcff66;border-radius:12px;font-size:16px;font-weight:750;position:relative;overflow:hidden}
+.plinko-glass .launch:not(:disabled):hover{background:linear-gradient(112deg,#a8ebff,#b9b7ff);box-shadow:inset 0 1px 0 #fff9,0 3px 0 #35456e,0 7px 20px #5c8eff25}
+.plinko-glass .launch:not(:disabled):active{transform:translateY(2px);box-shadow:0 1px 0 #35456e}
+.launch-glyph{font-size:25px;line-height:1;font-weight:400}
+.launch-arrow{margin-left:auto;font-size:22px;line-height:1}
+#launch-label{flex:1;text-align:left}
+.plinko-glass .launch:disabled{opacity:.55;box-shadow:none}
+.plinko-glass.charging .launch:disabled{opacity:1;background:linear-gradient(112deg,#adf0ff,#c0b4ff)}
+.plinko-glass.charging .launch:after{content:'';position:absolute;inset:0;background:#ffffff35;transform-origin:left;animation:chamber-charge .22s linear}
+.plinko-glass #message{font-size:12px;margin:12px 0 0;line-height:1.7;min-height:21px}
+.dock-cost{display:none}
+.plinko-glass .recent{margin-top:22px;padding-top:15px;border-color:#7995c51f}
+.recent h2{display:flex;justify-content:space-between;align-items:center;margin:0 0 12px;color:#ccd7e7;font-size:14px}
+.recent h2 span{font-size:10px;letter-spacing:1.1px;color:#7086a8}
+.plinko-glass #history{gap:6px;min-height:32px;align-items:center;font-size:13px}
+.plinko-glass #history b{border:1px solid #7393c620;background:#102037;font-size:12px;padding:4px 8px;color:#a5c9de;font-variant-numeric:tabular-nums}
+.plinko-glass #history b:first-child{border-color:#78c8e955;color:#d4f3ff}
+.plinko-glass #history b.reward-high{color:#ffda8a;background:#ffc8570c}
+.plinko-glass details{padding-top:16px;margin-top:17px;border-top:1px solid #7995c51f;font-size:13px;color:#a8b8d0}
+.plinko-glass summary{font-size:14px;color:#c0cee2;min-height:28px}
+.plinko-glass .probability-heading{font-size:12px}
+.plinko-glass .probability-column{font-size:9px}
+.plinko-glass .probability-note{font-size:12px}
+.plinko-glass footer{max-width:1140px;padding:0 24px 15px;font-size:12px;color:#6f85a5;margin:19px auto 0}
+.plinko-glass button:focus-visible,.plinko-glass summary:focus-visible{outline:2px solid #91e7ff;outline-offset:4px}
+@keyframes chamber-catch{0%{transform:translateY(3px)}35%{transform:translateY(-4px);filter:brightness(1.5)}100%{transform:none}}
+@keyframes chamber-win{30%{border-color:#ddbc7e80;box-shadow:0 0 28px #ffc85720}100%{border-color:#6fa8ff29}}
+@keyframes chamber-reward{0%{opacity:0;transform:translate(-50%,12px) scale(.8)}15%,68%{opacity:1;transform:translate(-50%,-8px) scale(1)}100%{opacity:0;transform:translate(-50%,-30px) scale(1)}}
+@keyframes chamber-charge{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media(max-width:850px){
+ .plinko-glass{padding-bottom:112px}
+ .plinko-glass header{max-width:600px;padding:9px 16px;gap:10px;min-height:62px}
+ .plinko-glass .brand{font-size:18px;letter-spacing:2px}
+ .plinko-glass .brand span{display:none}
+ .plinko-glass #volt-sound{width:32px;height:32px;font-size:20px}
+ .plinko-glass .balance{font-size:11px;display:flex;flex-direction:column;line-height:1.3;align-items:flex-end;gap:3px}
+ .plinko-glass .balance b{font-size:16px;margin:0}
+ .plinko-glass main{max-width:600px;padding:0 12px;grid-template-columns:1fr;gap:12px}
+ .plinko-glass .arena{border-radius:18px}
+ .plinko-glass .stage-top{margin:0 14px;padding:13px 0 10px;gap:6px}
+ .stage-title{gap:7px}.stage-title strong{font-size:16px}.stage-title small{font-size:9px;letter-spacing:1.5px}.stage-mark{width:28px;height:32px;font-size:25px}
+ .plinko-glass #status{font-size:12px}
+ .entry-caption{margin:10px auto 3px;padding:0 17px;font-size:12px;letter-spacing:0}
+ .plinko-glass .board-wrap{width:calc(100% - 16px);max-width:none;border-radius:12px}
+ .plinko-glass .lanes button{padding-top:3px;min-height:40px;font-size:12px}
+ .plinko-glass .slots{gap:3px;padding:0 5px 5px}
+ .plinko-glass .slot{font-size:11px;border-radius:1px 1px 5px 5px;border-bottom-width:2px}
+ .plinko-glass #result{min-height:79px;padding:12px 10px 14px}
+ .plinko-glass #result span{font-size:17px}
+ .plinko-glass #result small{font-size:12px;margin-top:4px}
+ .plinko-glass aside{padding:16px 17px;border-radius:16px}
+ .control-title,.plinko-glass aside>.summary{display:none}
+ .plinko-glass .entry-hint{margin:0;font-size:13px;line-height:1.7}
+ .launch-dock{position:fixed;bottom:0;left:0;right:0;z-index:10;padding:12px max(16px,calc((100vw - 568px)/2)) calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:82px minmax(0,1fr);gap:0 13px;background:#0d182bf5;border-top:1px solid #7795c42d;box-shadow:0 -8px 30px #03091650;backdrop-filter:blur(18px)}
+ .dock-cost{display:flex;flex-direction:column;justify-content:center;gap:1px}
+ .dock-cost>span{color:#9aacca;font-size:12px}.dock-cost b{font-size:24px;color:#e2edff;line-height:1.25;font-variant-numeric:tabular-nums}.dock-cost small{font-size:12px;font-weight:400;color:#95a9c8}
+ .plinko-glass .launch{margin:0;min-height:50px;font-size:16px;padding:10px 15px}
+ .plinko-glass #message{grid-column:1/-1;text-align:center;margin:9px 0 0;line-height:1.4;min-height:17px;font-size:11px}
+ .plinko-glass .recent{margin-top:14px;padding-top:13px}
+ .plinko-glass details{margin-top:14px;padding-top:13px}
+ .plinko-glass .probability-column{font-size:11px}
+ .plinko-glass footer{max-width:600px;margin-top:13px;padding:0 20px 16px;font-size:11px}
+}
+@media(max-width:359px){.plinko-glass .brand{display:none}.plinko-glass #back{font-size:13px}.plinko-glass #status{font-size:11px}.plinko-glass .slot{font-size:10px}.launch-dock{grid-template-columns:72px minmax(0,1fr);gap:0 9px}}
+@media(prefers-reduced-motion:reduce){.plinko-glass *,.plinko-glass *:before,.plinko-glass *:after{animation:none!important;transition:none!important}.reward-pop.show{opacity:0}}
