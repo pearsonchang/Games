@@ -1,0 +1,30 @@
+/* Energy follows the real roll, impact and result phases. */
+.dice-glass .stage{background:radial-gradient(ellipse at 50% 60%,#295bbb30,transparent 60%),linear-gradient(160deg,#0c1b36,#111a35);isolation:isolate}
+.dice-glass .dice-row{margin-top:76px;margin-bottom:76px;isolation:isolate}
+.dice-glass .dice-row:before{left:-45px;right:-45px;bottom:-43px;height:98px;border:2px solid #82caff77;background:radial-gradient(ellipse,#5390f02b 5%,#284b814d 56%,#091c3c 74%);box-shadow:inset 0 0 0 8px #0b1d4277,inset 0 0 0 10px #7999ee33,0 7px 0 #112549,0 10px 0 #4267ad55,0 15px 24px #03091999;z-index:-1}
+.dice-glass .dice-row:after{content:'';position:absolute;inset:auto -52px -54px;height:102px;border-radius:50%;border-bottom:2px solid #64cfff55;box-shadow:0 5px 12px #507eff17;pointer-events:none;z-index:-2}
+.dice-glass .die-slot:first-child{transform:translateY(9px) rotate(-7deg)}
+.dice-glass .die-slot:nth-child(2){transform:translateY(-27px) scale(.96)}
+.dice-glass .die-slot:nth-child(3){transform:translateY(15px) rotate(7deg)}
+.dice-glass .spinning:before{animation:table-charge .65s ease-in-out infinite alternate}
+.dice-glass .die-slot:after{border-width:2px;border-style:solid;box-shadow:0 0 9px #65dfff44}
+.dice-glass .spinning .die-slot:after{opacity:.25;border-style:solid;animation:spin-ring .36s linear infinite}
+.dice-glass .impact:after{animation:energy-impact .55s ease-out both}
+.die-sparks{position:absolute;inset:0;pointer-events:none;z-index:3}
+.die-sparks i{position:absolute;left:50%;top:62%;width:4px;height:9px;background:#92eaff;opacity:0;border-radius:1px;box-shadow:0 0 7px #69cfff66}
+.die-sparks i:nth-child(3n){background:#ffda87;box-shadow:0 0 7px #ffbf5e55}
+.impact .die-sparks i{animation:energy-spark .6s cubic-bezier(.1,.55,.2,1) both}
+.dice-glass .result{min-height:114px;padding:12px 22px 18px;border-radius:14px;max-width:90%}
+.dice-glass .result.revealed{background:linear-gradient(110deg,#18335b80,#28285180);border-top:1px solid #83c8ff55;animation:score-arrive .45s ease-out both}
+.dice-glass .result.revealed .result-kicker{display:block;font-size:23px;letter-spacing:1px;font-weight:750;font-style:italic;color:#dcecff;font-variant-numeric:tabular-nums}
+.dice-glass .result-kicker b{font-size:32px;color:#ffda82;margin-inline:3px;text-shadow:0 0 16px #ffcb5d22}
+.dice-glass .result.revealed strong{font-size:17px;margin:4px 0}
+.dice-glass .result.won{border-color:#f2cf794d}
+.dice-glass .hit:before{animation:reward-table .8s ease-out both}
+@keyframes table-charge{to{border-color:#b5ecff;box-shadow:inset 0 0 0 8px #0b1d4277,inset 0 0 0 10px #7999ee55,0 7px 0 #112549,0 10px 0 #4267ad88,0 0 25px #4caaff33}}
+@keyframes energy-impact{0%{opacity:.95;transform:scale(.45)}100%{opacity:0;transform:scale(1.9)}}
+@keyframes energy-spark{0%{opacity:0;transform:translate(0,0) rotate(var(--r)) scale(.3)}15%{opacity:.9}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.5)}}
+@keyframes score-arrive{from{opacity:.2;transform:translateY(12px) scale(.95)}70%{opacity:1;transform:translateY(-2px) scale(1.02)}to{transform:none}}
+@keyframes reward-table{35%{border-color:#ffdc88;filter:brightness(1.35)}to{filter:none}}
+@media(max-width:850px){.dice-glass .dice-row{margin-top:58px;margin-bottom:57px}.dice-glass .dice-row:before{left:-23px;right:-23px;height:76px;bottom:-34px}.dice-glass .dice-row:after{left:-28px;right:-28px;height:80px;bottom:-43px}.dice-glass .die-slot:nth-child(2){transform:translateY(-21px) scale(.96)}.dice-glass .stage{padding-bottom:16px}.dice-glass .result.revealed .result-kicker{font-size:20px}.dice-glass .result-kicker b{font-size:28px}.dice-glass .result{padding:9px 16px 12px}}
+@media(prefers-reduced-motion:reduce){.dice-glass *{animation:none!important}.die-sparks{display:none}}

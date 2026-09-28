@@ -18,6 +18,10 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
  const yaw=Number(canvas.dataset?.yaw??-22);const camera=v=>diceRotate(diceRotate(v,'y',yaw),'x',-24);
  const world=v=>{v=rotate(v);v[1]+=1-support;return camera(v)};
  const project=v=>{const s=size*.255*7/(7-v[2]);return [size/2+v[0]*s,size*.53+v[1]*s]};
+ // Split orbit passes wrap behind and in front of the animated cube.
+ const energy=Math.min(1,pose.tilt),phase=pose.spin*Math.PI/180;
+ const orbit=front=>{if(energy<.01)return;ctx.save();ctx.translate(size/2,size*.54);ctx.rotate(-.22);ctx.globalAlpha=energy;ctx.lineCap='round';for(let k=0;k<2;k++){const a=phase*(k?-.5:.7)+k*2.4;ctx.strokeStyle=k?'#a79bff':'#71e5ff';ctx.lineWidth=k?1.5:2.6;ctx.shadowColor=k?'#8b76ff':'#5bdfff';ctx.shadowBlur=7;ctx.beginPath();ctx.ellipse(0,0,size*(.40-k*.025),size*(.14+k*.035),0,front?0:Math.PI,front?Math.PI:Math.PI*2);ctx.stroke();ctx.strokeStyle='#e0fcff';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,0,size*.405,size*.145,0,a,a+.72);ctx.stroke();}ctx.restore();};
+ orbit(false);
  const polygons=[];
  for(const patch of DiceMesh.patches){const pts=patch.points.map(world),middle=patch.points[0].map((_,i)=>patch.points.reduce((s,v)=>s+v[i],0)/4),q=middle.map(x=>Math.max(-.75,Math.min(.75,x))),normal=camera(rotate(middle.map((x,i)=>x-q[i])));if(normal[2]<-.005)continue;polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/4,normal,face:patch.value});}
  for(const dot of DiceMesh.dots){if(camera(rotate(dot.normal))[2]<=0)continue;const pts=dot.points.map(world);polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/pts.length,pip:true});}
@@ -41,6 +45,7 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
  // A broad, quiet glass reflection, confined to the actual silhouette.
  ctx.save();trace(outline);ctx.clip();const sheen=ctx.createLinearGradient(0,size*.1,size,size*.75);sheen.addColorStop(0,'#ffffff00');sheen.addColorStop(.29,'#ffffff00');sheen.addColorStop(.30,'#ffffff25');sheen.addColorStop(.43,'#ffffff0a');sheen.addColorStop(.44,'#ffffff00');ctx.fillStyle=sheen;ctx.fillRect(0,0,size,size);ctx.restore();
  trace(outline);ctx.strokeStyle='#c6f1ffb0';ctx.lineWidth=1.15;ctx.stroke();
+ orbit(true);
 }
 
 function diceHull(points){points.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const cross=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);const lower=[],upper=[];for(const p of points){while(lower.length>1&&cross(lower.at(-2),lower.at(-1),p)<=0)lower.pop();lower.push(p)}for(let i=points.length-1;i>=0;i--){const p=points[i];while(upper.length>1&&cross(upper.at(-2),upper.at(-1),p)<=0)upper.pop();upper.push(p)}lower.pop();upper.pop();return lower.concat(upper)}
