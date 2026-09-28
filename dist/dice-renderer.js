@@ -28,23 +28,24 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
  // The same rounded mesh keeps the roll and final pip geometry exact.
  const outline=diceHull(polygons.filter(p=>!p.pip).flatMap(p=>p.pts.map(project)));
  const trace=points=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();};
- trace(outline);ctx.save();ctx.shadowColor='#7cdcff';ctx.shadowBlur=size*.035;ctx.strokeStyle='#9eeaff';ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();ctx.restore();
+ trace(outline);ctx.save();ctx.shadowColor='#7cdcff';ctx.shadowBlur=size*.012;ctx.strokeStyle='#6fb6db80';ctx.lineWidth=1.3;ctx.lineJoin='round';ctx.stroke();ctx.restore();
  polygons.sort((a,b)=>(Number(!!a.pip)-Number(!!b.pip))||a.z-b.z);
  for(const p of polygons){const pts=p.pts.map(project);trace(pts);
   if(p.pip){
    const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),x=(Math.min(...xs)+Math.max(...xs))/2,y=(Math.min(...ys)+Math.max(...ys))/2,r=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))/2;
-   const g=ctx.createRadialGradient(x-r*.25,y-r*.35,r*.1,x,y,r);g.addColorStop(0,'#142b72');g.addColorStop(.65,'#2543a3');g.addColorStop(1,'#698de9');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='#b7d8ffb0';ctx.lineWidth=.8;ctx.stroke();
+   const g=ctx.createLinearGradient(x,y-r,x+r*.35,y+r);g.addColorStop(0,'#050d2b');g.addColorStop(.45,'#10244f');g.addColorStop(.8,'#1c4380');g.addColorStop(1,'#5488bd');ctx.fillStyle=g;ctx.fill();const lip=ctx.createLinearGradient(x,y-r,x,y+r);lip.addColorStop(0,'#143b6580');lip.addColorStop(.48,'#3964ac55');lip.addColorStop(1,'#b7f1ffee');ctx.strokeStyle=lip;ctx.lineWidth=.85;ctx.stroke();
   }else{
    const len=Math.hypot(...p.normal)||1,n=p.normal.map(v=>v/len),light=Math.max(0,n[0]*-.4+n[1]*-.6+n[2]*.7);
    const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
-   const top=mix([93,140,231],[221,250,255],light),bottom=mix([113,92,216],[132,214,255],light);
-   const g=ctx.createLinearGradient(size*.22,size*.1,size*.8,size*.88);g.addColorStop(0,`rgb(${top})`);g.addColorStop(.5,`rgb(${mix(top,bottom,.35)})`);g.addColorStop(1,`rgb(${bottom})`);
+   const rim=Math.pow(1-Math.max(0,n[2]),3)*.32,spec=Math.pow(Math.max(0,n[0]*-.31+n[1]*-.48+n[2]*.82),28)*.42;
+   const top=mix(mix([32,81,151],[140,216,240],light),[207,249,255],Math.min(.65,rim+spec)),bottom=mix(mix([48,38,112],[68,126,192],light),[120,163,230],rim);
+   const g=ctx.createLinearGradient(size*.22,size*.1,size*.8,size*.88);g.addColorStop(0,`rgb(${top})`);g.addColorStop(.32,`rgb(${mix(top,bottom,.22)})`);g.addColorStop(.6,`rgb(${mix(top,bottom,.68)})`);g.addColorStop(.87,`rgb(${bottom})`);g.addColorStop(1,`rgb(${mix(bottom,[111,183,224],.25)})`);
    ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=g;ctx.lineWidth=.6;ctx.stroke();
   }
  }
- // A broad, quiet glass reflection, confined to the actual silhouette.
- ctx.save();trace(outline);ctx.clip();const sheen=ctx.createLinearGradient(0,size*.1,size,size*.75);sheen.addColorStop(0,'#ffffff00');sheen.addColorStop(.29,'#ffffff00');sheen.addColorStop(.30,'#ffffff25');sheen.addColorStop(.43,'#ffffff0a');sheen.addColorStop(.44,'#ffffff00');ctx.fillStyle=sheen;ctx.fillRect(0,0,size,size);ctx.restore();
- trace(outline);ctx.strokeStyle='#c6f1ffb0';ctx.lineWidth=1.15;ctx.stroke();
+ // Environment reflections follow each face; fine bright edges imply glass thickness.
+ for(const panel of DiceMesh.panels){const n=camera(rotate(panel.normal));if(n[2]<=.12)continue;const pts=panel.points.map(world).map(project),xs=pts.map(v=>v[0]),ys=pts.map(v=>v[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);ctx.save();trace(pts);ctx.clip();const shift=Math.sin(phase)*size*.02,shine=ctx.createLinearGradient(x0+shift,y0,x1+shift,y1);shine.addColorStop(0,'#c1f4ff00');shine.addColorStop(.35,'#c1f4ff00');shine.addColorStop(.36,'#d3f6ff66');shine.addColorStop(.40,'#b5ecff22');shine.addColorStop(.46,'#d3f6ff00');shine.addColorStop(.78,'#788fff00');shine.addColorStop(1,'#b4c5ff22');ctx.fillStyle=shine;ctx.fillRect(0,0,size,size);ctx.restore();const rim=ctx.createLinearGradient(x0,y0,x1,y1);rim.addColorStop(0,'#c8f6ff66');rim.addColorStop(.45,'#91c7ff08');rim.addColorStop(1,'#bdbeff55');trace(pts);ctx.strokeStyle=rim;ctx.lineWidth=.65;ctx.stroke();}
+ const edge=ctx.createLinearGradient(size*.25,size*.1,size*.7,size*.95);edge.addColorStop(0,'#ddfaff');edge.addColorStop(.28,'#9ee2efb0');edge.addColorStop(.5,'#477bb544');edge.addColorStop(.8,'#a4aeecb0');edge.addColorStop(1,'#d2caff');trace(outline);ctx.strokeStyle=edge;ctx.lineWidth=1.05;ctx.stroke();
  orbit(true);
 }
 
