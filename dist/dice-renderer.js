@@ -32,18 +32,20 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
  for(const p of polygons){const pts=p.pts.map(project);trace(pts);
   if(p.pip){
    const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),x=(Math.min(...xs)+Math.max(...xs))/2,y=(Math.min(...ys)+Math.max(...ys))/2,r=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))/2;
-   // Dark ceramic inlays: shallow recess, without glass rims or specular shine.
-   const g=ctx.createLinearGradient(x,y-r,x,y+r);g.addColorStop(0,'#182641');g.addColorStop(1,'#263653');ctx.fillStyle=g;ctx.fill();const lip=ctx.createLinearGradient(x,y-r,x,y+r);lip.addColorStop(0,'#10223f50');lip.addColorStop(1,'#c9d5e550');ctx.strokeStyle=lip;ctx.lineWidth=.55;ctx.stroke();
+   // Flat, high-contrast ink pips stay readable at arcade sizes.
+   ctx.fillStyle='#142447';ctx.fill();ctx.strokeStyle='#142447';ctx.lineWidth=.35;ctx.stroke();
   }else{
-   // Broad diffuse lighting on one continuous matte ceramic shell.
-   const len=Math.hypot(...p.normal)||1,n=p.normal.map(v=>v/len),up=Math.max(0,-n[1]),side=Math.abs(n[0]);
-   const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
-   let base=mix([186,207,231],[139,152,193],side*.82);base=mix(base,[246,243,237],Math.pow(up,.85)*.98);
-   const shade=.96+Math.max(0,-n[0]*.3-n[1]*.65+n[2]*.55)*.04;
-   base=base.map(v=>Math.round(v*shade));const bottom=base.map(v=>Math.max(0,v-6));
-   const g=ctx.createLinearGradient(0,size*.15,size*.2,size*.9);g.addColorStop(0,`rgb(${base})`);g.addColorStop(1,`rgb(${bottom})`);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=g;ctx.lineWidth=.65;ctx.stroke();
+   // Three cel-shaded color regions, blended only across the rounded bevel.
+   const len=Math.hypot(...p.normal)||1,n=p.normal.map(v=>v/len),up=Math.pow(Math.max(0,-n[1]),6),side=Math.pow(Math.abs(n[0]),6),front=Math.pow(Math.abs(n[2]),6),sum=up+side+front||1;
+   const top=[177,215,249],blue=[65,130,225],violet=[102,85,211];
+   let color=top.map((v,i)=>Math.round((v*up+blue[i]*front+violet[i]*side)/sum));
+   // Tiny corner accents replace broad glossy reflections.
+   const corner=Math.min(Math.abs(n[0]),Math.abs(n[1]),Math.abs(n[2]));
+   if(corner>.24&&n[1]<0)color=[222,240,255];
+   const fill=`rgb(${color})`;ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=fill;ctx.lineWidth=.65;ctx.stroke();
   }
  }
+ trace(outline);ctx.strokeStyle='#203c76';ctx.lineWidth=.85;ctx.stroke();
  orbit(true);
 }
 
