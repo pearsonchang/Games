@@ -1,0 +1,14 @@
+/* A palette shared by the lobby and game controls. */
+:root{--arc-bg:#07111f;--arc-stage:#0c1729;--arc-panel:#101d33;--arc-line:rgba(111,168,255,.18);--arc-gold:#49cfff;--arc-ink:#edf1f7;--arc-muted:#aab4c5;--accent:#49cfff;--reward:#ffc857;--secondary:#a28aff}
+html,body{background:var(--arc-bg);color:var(--arc-ink)}
+.primary,.roll,.launch,#action{background:linear-gradient(110deg,#49cfff,#a28aff);color:#07111f;box-shadow:0 3px 0 #253d64}
+.primary:hover,.roll:hover,.launch:hover,#action:hover:not(:disabled){background:linear-gradient(110deg,#76dcff,#b5a3ff)}
+.primary:active,.roll:active:not(:disabled),.launch:active:not(:disabled),#action:active:not(:disabled){box-shadow:0 1px 0 #253d64}
+.balance b,.wallet b,.payout b#prize,.positive{color:var(--reward)}
+.lane-controls button[aria-pressed=true],.size-options button[aria-pressed=true]{background:#49cfff;color:#07111f;border-color:#49cfff}
+.mode.active,.modes button[aria-pressed=true],.arcade-mines .mode.active{background:#252549;border-color:#8b79cb;color:#dbd1ff}
+.modes button[aria-pressed=true] em{color:#d0bfff}
+.sound,#rocket-sound,.sound[aria-pressed=true],#rocket-sound[aria-pressed=true],.arcade-mines .mine-sound{background:#142c43;border-color:#315c77;color:#8adfff}
+.result.won strong{color:#ffc857}.arena-head i{background:#49cfff}
+.stage-copy .eyebrow,.eyebrow{color:#9eddf4}
+.arena,.space,aside,.controls,.panel,.rows{box-shadow:inset 0 1px 0 #ffffff0d}
