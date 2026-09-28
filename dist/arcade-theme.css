@@ -1,0 +1,38 @@
+/* Shared PLAYROOM arcade language. Gameplay layouts remain game-specific. */
+:root{--arc-bg:#111318;--arc-stage:#171b23;--arc-panel:#20242d;--arc-line:#383e49;--arc-gold:#ffbc45;--arc-ink:#f6f2e9;--arc-muted:#a6aebb;--arc-radius:20px;--bg:var(--arc-bg);--surface:var(--arc-panel);--panel:var(--arc-panel);--line:var(--arc-line);--text:var(--arc-ink);--muted:var(--arc-muted);--accent:var(--arc-gold)}
+html,body{background:var(--arc-bg);color:var(--arc-ink);font-family:Inter,-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif}
+button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--arc-gold);outline-offset:4px}
+body:not(.arcade-mines) header{border-bottom:1px solid var(--arc-line)}
+.primary,.roll,.launch,#action{background:var(--arc-gold);background-image:none;color:#191611;border:0;border-radius:12px;font-weight:750;box-shadow:0 4px 0 #95621e;transition:transform .16s,background-color .16s}
+.primary:hover,.roll:hover,.launch:hover,#action:hover:not(:disabled){background:#ffcd71}
+.primary:active,.roll:active:not(:disabled),.launch:active:not(:disabled),#action:active:not(:disabled){transform:translateY(2px);box-shadow:0 2px 0 #95621e}
+.arena,.space{background-color:var(--arc-stage);border-color:var(--arc-line);border-radius:var(--arc-radius)}
+aside,.controls,.panel,.game-card,.rows,dialog{background-color:var(--arc-panel);border-color:var(--arc-line);border-radius:var(--arc-radius)}
+body:not(.arcade-mines) #back{background:#222630;border:1px solid var(--arc-line);border-radius:10px;padding:9px 12px;min-height:38px;color:#d2d7df;white-space:nowrap;font-size:13px;width:auto}
+.balance b,.wallet b,.payout b#prize{color:var(--arc-gold)}
+.lane-controls button[aria-pressed=true],.size-options button[aria-pressed=true]{background:var(--arc-gold);color:#181713}
+.modes button[aria-pressed=true],.mode.active{background:#332a1c;border-color:var(--arc-gold);color:#ffd88b}
+.sound,#rocket-sound{background:#2f281d;border-color:#775d30;color:#ffd18b}
+.stage-top,.arena-head{font-size:12px;color:var(--arc-muted)}
+.hint,.rule,.notice,.disclaimer,footer{color:var(--arc-muted)}
+.cover,.sweep-cover,.cover-rocket,.cover-dice,.cover-plinko,.cover-2048,.cover-memory,.cover-rhythm{background:#252a33;background-image:none;color:#ffd58c}
+.game-label{background:#151920;border-color:#645136;color:#ffce7a}
+.game-card:disabled{opacity:.6}.game-card:not(:disabled):hover{border-color:var(--arc-gold)}
+.filter[aria-pressed=true]{background:#3b3020;border-color:#a67b35;color:#ffcf7c}
+.continue{background:#25241f;border-color:#514631}.session-chip{color:#ffd18b;background:#28241e;border-color:#59472b}
+.arcade-mines .game,.arcade-mines .stars{background-color:var(--arc-stage)}
+.arcade-mines .game{box-shadow:none;border-inline:1px solid var(--arc-line)}
+.arcade-mines header{background:var(--arc-panel);border-top:1cqw solid var(--arc-gold)}
+.arcade-mines header>div{top:1.1cqw}.arcade-mines header span{font-size:2.2cqw;letter-spacing:.3cqw}
+.arcade-mines .primary{border-radius:2.5cqw;font-size:3.5cqw;height:10cqw}
+.arcade-mines .playing .primary{height:8cqw;font-size:3.2cqw}
+.arcade-mines .intro p{color:#bdc3cf}.arcade-mines .star{opacity:.25;box-shadow:none}
+.arcade-mines .mode{border-color:var(--arc-line);background:var(--arc-panel);border-radius:2cqw}
+.arcade-mines .mode.active{background:#382d1d;border-color:#bb8b38;color:#ffd18b}
+.arcade-mines dialog{border-radius:20px}.arcade-mines #dialogActions button{border-radius:12px}
+.arcade-mines .mine-sound{border-color:#775d30;color:#ffd18b}
+.game-icon{width:112px;height:112px;object-fit:contain;border-radius:24px;filter:drop-shadow(0 7px 0 #10131855)}
+@media(max-width:650px){.game-icon{width:90px;height:90px}.stage-top,.arena-head{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+.brand-game-icon{width:36px;height:36px;vertical-align:middle;border-radius:9px;margin-right:7px}@media(max-width:650px){.brand-game-icon{width:28px;height:28px;margin-right:3px}}
