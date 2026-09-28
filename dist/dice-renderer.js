@@ -19,11 +19,28 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
  const world=v=>{v=rotate(v);v[1]+=1-support;return camera(v)};
  const project=v=>{const s=size*.255*7/(7-v[2]);return [size/2+v[0]*s,size*.53+v[1]*s]};
  const polygons=[];
- for(const patch of DiceMesh.patches){const pts=patch.points.map(world),middle=patch.points[0].map((_,i)=>patch.points.reduce((s,v)=>s+v[i],0)/4),q=middle.map(x=>Math.max(-.75,Math.min(.75,x))),normal=camera(rotate(middle.map((x,i)=>x-q[i])));if(normal[2]<-.005)continue;polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/4,color:['','#edf4ff','#93bde8','#f5f8ff','#8b97cd','#c2dcf3','#b2bde8'][patch.value]});}
- for(const dot of DiceMesh.dots){if(camera(rotate(dot.normal))[2]<=0)continue;const pts=dot.points.map(world);polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/pts.length,color:'#223553',pip:true});}
- // A single outer ink contour keeps the curved shape crisp at every angle.
- const outline=diceHull(polygons.filter(p=>!p.pip).flatMap(p=>p.pts.map(project)));ctx.beginPath();outline.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.strokeStyle='#314464';ctx.lineWidth=3.2;ctx.lineJoin='round';ctx.stroke();
- polygons.sort((a,b)=>((a.panel?1:a.pip?2:0)-(b.panel?1:b.pip?2:0))||a.z-b.z);for(const p of polygons){const pts=p.pts.map(project);ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fillStyle=p.color;ctx.fill();if(p.panel){ctx.strokeStyle='#82868b';ctx.lineWidth=1.1;ctx.stroke();}if(!p.pip){ctx.strokeStyle=p.color;ctx.lineWidth=.65;ctx.stroke();}}
+ for(const patch of DiceMesh.patches){const pts=patch.points.map(world),middle=patch.points[0].map((_,i)=>patch.points.reduce((s,v)=>s+v[i],0)/4),q=middle.map(x=>Math.max(-.75,Math.min(.75,x))),normal=camera(rotate(middle.map((x,i)=>x-q[i])));if(normal[2]<-.005)continue;polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/4,normal,face:patch.value});}
+ for(const dot of DiceMesh.dots){if(camera(rotate(dot.normal))[2]<=0)continue;const pts=dot.points.map(world);polygons.push({pts,z:pts.reduce((s,v)=>s+v[2],0)/pts.length,pip:true});}
+ // The same rounded mesh keeps the roll and final pip geometry exact.
+ const outline=diceHull(polygons.filter(p=>!p.pip).flatMap(p=>p.pts.map(project)));
+ const trace=points=>{ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();};
+ trace(outline);ctx.save();ctx.shadowColor='#7cdcff';ctx.shadowBlur=size*.035;ctx.strokeStyle='#9eeaff';ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();ctx.restore();
+ polygons.sort((a,b)=>(Number(!!a.pip)-Number(!!b.pip))||a.z-b.z);
+ for(const p of polygons){const pts=p.pts.map(project);trace(pts);
+  if(p.pip){
+   const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]),x=(Math.min(...xs)+Math.max(...xs))/2,y=(Math.min(...ys)+Math.max(...ys))/2,r=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))/2;
+   const g=ctx.createRadialGradient(x-r*.25,y-r*.35,r*.1,x,y,r);g.addColorStop(0,'#142b72');g.addColorStop(.65,'#2543a3');g.addColorStop(1,'#698de9');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='#b7d8ffb0';ctx.lineWidth=.8;ctx.stroke();
+  }else{
+   const len=Math.hypot(...p.normal)||1,n=p.normal.map(v=>v/len),light=Math.max(0,n[0]*-.4+n[1]*-.6+n[2]*.7);
+   const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
+   const top=mix([93,140,231],[221,250,255],light),bottom=mix([113,92,216],[132,214,255],light);
+   const g=ctx.createLinearGradient(size*.22,size*.1,size*.8,size*.88);g.addColorStop(0,`rgb(${top})`);g.addColorStop(.5,`rgb(${mix(top,bottom,.35)})`);g.addColorStop(1,`rgb(${bottom})`);
+   ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=g;ctx.lineWidth=.6;ctx.stroke();
+  }
+ }
+ // A broad, quiet glass reflection, confined to the actual silhouette.
+ ctx.save();trace(outline);ctx.clip();const sheen=ctx.createLinearGradient(0,size*.1,size,size*.75);sheen.addColorStop(0,'#ffffff00');sheen.addColorStop(.29,'#ffffff00');sheen.addColorStop(.30,'#ffffff25');sheen.addColorStop(.43,'#ffffff0a');sheen.addColorStop(.44,'#ffffff00');ctx.fillStyle=sheen;ctx.fillRect(0,0,size,size);ctx.restore();
+ trace(outline);ctx.strokeStyle='#c6f1ffb0';ctx.lineWidth=1.15;ctx.stroke();
 }
 
 function diceHull(points){points.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const cross=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);const lower=[],upper=[];for(const p of points){while(lower.length>1&&cross(lower.at(-2),lower.at(-1),p)<=0)lower.pop();lower.push(p)}for(let i=points.length-1;i>=0;i--){const p=points[i];while(upper.length>1&&cross(upper.at(-2),upper.at(-1),p)<=0)upper.pop();upper.push(p)}lower.pop();upper.pop();return lower.concat(upper)}

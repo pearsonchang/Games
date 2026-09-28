@@ -1,0 +1,37 @@
+/* Glass arcade materials shared with the lobby icon family. */
+.glass-game{background:#07111f;color:#edf3ff}
+.glass-game .arena{background:linear-gradient(145deg,#14243b,#101b31 62%,#191e3b);border:1px solid #6c91d333;box-shadow:inset 0 1px 0 #d4eaff13,0 18px 48px #02091655;border-radius:24px}
+.glass-game aside{background:linear-gradient(145deg,#142238,#101c30);border:1px solid #6c91d333;box-shadow:inset 0 1px 0 #d4eaff13}
+.glass-game .arena-head,.glass-game .stage-top{color:#a9bbd5;border-color:#7293d323}
+.glass-game .stage-copy p,.glass-game .result p,.glass-game .hint,.glass-game .rule{color:#adbbcf;font-size:13px}
+.glass-game .eyebrow{color:#a6dfff;letter-spacing:1.2px}
+.glass-game .history,.glass-game .recent,.glass-game .summary,.glass-game .payout{border-color:#7293d326}
+.glass-game .modes button,.glass-game select,.glass-game .lane-controls button,.glass-game .size-options button{background:#0f1c30;border-color:#718cd239;color:#bbcae0}
+.glass-game .modes button[aria-pressed=true]{background:linear-gradient(125deg,#243755,#302950);border-color:#a49bea99;box-shadow:inset 0 1px 0 #e1d9ff1f;color:#f0ecff}
+.glass-game .modes em,.glass-game .modes button[aria-pressed=true] em{color:#ffc857}
+.glass-game .size-options button[aria-pressed=true],.glass-game .lane-controls button[aria-pressed=true]{background:linear-gradient(135deg,#b2eeff,#9da2ff);color:#122441;border-color:#c4eaff;box-shadow:0 3px 12px #4269c533}
+.glass-game .roll,.glass-game .launch{background:linear-gradient(110deg,#87e2ff,#ada0ff);border-top:1px solid #ffffff70;box-shadow:0 4px 0 #354471,0 6px 20px #5c78e21f;border-radius:14px}
+.glass-game .roll:hover,.glass-game .launch:hover{background:linear-gradient(110deg,#a9eeff,#c1b7ff)}
+.glass-game .history b,.glass-game #history b{background:#172b44;border-color:#7d9bd133;color:#c3d2ed}
+.glass-game .history b.hit{background:#3a3020;border-color:#b58b493d;color:#ffdb8a}
+.glass-game .sound,.glass-game #volt-sound{background:#172a43;border-color:#79a6d355;color:#b0eaff}
+.dice-glass .stage{background:radial-gradient(ellipse at 35% 46%,#43cfff15,transparent 47%),radial-gradient(ellipse at 75% 60%,#9a78ff17,transparent 45%)}
+.dice-glass .dice-row:before{height:92px;bottom:-34px;border-radius:50%;background:radial-gradient(ellipse,#6297e526 5%,#30446e37 48%,#15274488 75%);border:1px solid #94b4f233;box-shadow:inset 0 2px 0 #c6ddff18,0 10px 0 #080f211f}
+.dice-glass .die-shadow{background:#050e27;opacity:.48;filter:blur(3px)}
+.dice-glass .die-slot:after,.dice-glass .spinning .die-slot:after{border-color:#94b8ff;box-shadow:0 0 8px #749eff22}
+.dice-glass .result strong{font-size:22px;color:#e9f2ff}
+.dice-glass .result.won strong{color:#ffcf72}
+.plinko-glass .board-wrap{background:radial-gradient(ellipse at 25% 12%,#448de51c,transparent 60%),radial-gradient(ellipse at 84% 85%,#a071ff19,transparent 50%),#0d192d;border:1px solid #8daee126;box-shadow:inset 0 1px 0 #d6e7ff14;border-radius:22px}
+.plinko-glass .stage-top span:first-child{color:#a6dfff}
+.plinko-glass .lanes button{color:#6685ad}
+.plinko-glass .lanes button[aria-pressed=true]{color:#ddf7ff;background:#49cfff1a;border:1px solid #79ccff66;box-shadow:inset 0 1px 0 #c4f3ff33,0 0 12px #68cfff14}
+.plinko-glass .slot{background:linear-gradient(180deg,#28335c33,#465b9844);color:#bacdf3;border:2px solid #8697d766;border-top:0;border-bottom-width:4px;border-radius:0 0 12px 12px;text-shadow:0 1px 2px #071020}
+.plinko-glass .slot.medium{background:linear-gradient(180deg,#3681bd18,#429dd33b);border-color:#87d7f4a6;color:#d1f5ff}
+.plinko-glass .slot.high{background:linear-gradient(180deg,#ffc8570a,#b7883740);border-color:#ffda87cc;color:#ffe1a1;box-shadow:inset 0 -2px 0 #fff0bf33}
+.plinko-glass .slot.hit{background:linear-gradient(180deg,#ffe8a3,#edb749);border-color:#ffefbc;color:#47300e;text-shadow:none;box-shadow:0 0 24px #ffc85755}
+.plinko-glass .summary .gold,.plinko-glass #result.win span{color:#ffcf72}
+.plinko-glass #result{background:linear-gradient(180deg,transparent,#527bbe08)}
+.plinko-glass .big-win #result{background:#ffc8570d}
+.plinko-glass .brand-game-icon{display:none}
+@media(max-width:850px){.dice-glass .dice-row:before{height:72px;bottom:-28px}.glass-game .stage-copy p,.glass-game .result p{font-size:13px}.dice-glass .result strong{font-size:20px}.glass-game .modes b{font-size:13px}.plinko-glass .slot{border-width:1px;border-top:0;border-bottom-width:3px;border-radius:0 0 7px 7px}.plinko-glass .stage-top{letter-spacing:.3px}}
+@media(prefers-reduced-motion:reduce){.glass-game *{animation:none!important;transition:none!important}}
