@@ -1,16 +1,36 @@
 /* Quiet distant planets, quicker foreground rocks; all layers stay behind play. */
-.space{isolation:isolate;background-image:radial-gradient(ellipse at 12% 96%,#254e7540,transparent 55%),radial-gradient(ellipse at 88% 20%,#5f458c20,transparent 45%)}
-.space-grid{opacity:.38}
+.space{
+ --orbit-cyan:var(--accent,#49cfff);--orbit-violet:var(--secondary,#a28aff);
+ --orbit-ice:#9bdaed;--orbit-lilac:#c4b8f2;--orbit-shadow:#101d33;
+ --orbit-planet-light:#306183;--orbit-planet-deep:#132e48;
+ --orbit-ring-light:#7763b5;--orbit-ring-deep:#302c57;
+ --orbit-moon:#456d89;--orbit-moon-crater:#24435d;
+ --orbit-rock:#304864;--orbit-rock-shadow:#1b304b;--orbit-rock-light:#507599;--orbit-rock-edge:#72bfdf;
+ isolation:isolate;background-color:var(--arc-bg,#07111f);
+ background-image:radial-gradient(ellipse at 10% 96%,#49cfff13,transparent 58%),radial-gradient(ellipse at 90% 18%,#886cff10,transparent 48%);
+ border-color:var(--arc-line,rgba(111,168,255,.18));
+}
+.space-grid{opacity:.3;background-image:linear-gradient(#49cfff0a 1px,transparent 1px),linear-gradient(90deg,#49cfff0a 1px,transparent 1px)}
 #space-scenery{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .orbit-scenery-object{position:absolute;top:0;left:0;pointer-events:none;will-change:transform;transition:opacity .6s}
 .scenery-art{position:relative;width:100%;line-height:0}
 .scenery-art svg{display:block;width:100%;height:auto;overflow:visible}
 .orbit-rock .scenery-art{aspect-ratio:1;will-change:transform}
-.meteor-trail{position:absolute;left:45%;top:45%;width:180%;height:2px;transform-origin:0 50%;transform:rotate(-23deg);background:linear-gradient(90deg,#9ebfe255,#7198c21a 42%,transparent);opacity:0;transition:opacity .4s}
+.orbit-rock:nth-of-type(3n){--orbit-rock-light:#69668f;--orbit-rock-edge:#a28aff}
+.meteor-trail{position:absolute;left:45%;top:45%;width:180%;height:2px;transform-origin:0 50%;transform:rotate(-23deg);background:linear-gradient(90deg,#49cfff66,#886cff26 42%,transparent);opacity:0;transition:opacity .4s}
 .flying .orbit-rock .meteor-trail{opacity:.75}
 #stars,#speed-lines,.flight-path{z-index:1}
 #rocket{z-index:2}
 .flight-status{z-index:3;text-shadow:0 2px 20px #07111f}
 .stage-top,.stage-bottom{z-index:3}
+.space .star{background:#a9deed}
+.space .star:nth-child(4n){background:#b7a9ee}
+.space .speed-line{background:linear-gradient(90deg,transparent,#49cfff70,#a28aff30,transparent)}
+.space .plume-shell{background:linear-gradient(90deg,#49cfff00,#49cfffaa 38%,#a6efff 90%,#f2fbff)}
+.space .plume-core{background:linear-gradient(90deg,#a28aff00,#b6b2ff 50%,#eefaff)}
+.space .engine-glow{background:var(--orbit-cyan)}
+.stage-top>span:first-child{color:#8daabd}
+.stage-bottom{color:#778da7}
+.rocket-game #payout{color:var(--reward,#ffc857)}
 @media(max-width:760px){.orbit-ringed{margin-left:-6px}.meteor-trail{height:1px}}
 @media(prefers-reduced-motion:reduce){.meteor-trail{display:none}.orbit-scenery-object{transition:none;will-change:auto}}
