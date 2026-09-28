@@ -1,0 +1,16 @@
+/* Quiet distant planets, quicker foreground rocks; all layers stay behind play. */
+.space{isolation:isolate;background-image:radial-gradient(ellipse at 12% 96%,#254e7540,transparent 55%),radial-gradient(ellipse at 88% 20%,#5f458c20,transparent 45%)}
+.space-grid{opacity:.38}
+#space-scenery{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.orbit-scenery-object{position:absolute;top:0;left:0;pointer-events:none;will-change:transform;transition:opacity .6s}
+.scenery-art{position:relative;width:100%;line-height:0}
+.scenery-art svg{display:block;width:100%;height:auto;overflow:visible}
+.orbit-rock .scenery-art{aspect-ratio:1;will-change:transform}
+.meteor-trail{position:absolute;left:45%;top:45%;width:180%;height:2px;transform-origin:0 50%;transform:rotate(-23deg);background:linear-gradient(90deg,#9ebfe255,#7198c21a 42%,transparent);opacity:0;transition:opacity .4s}
+.flying .orbit-rock .meteor-trail{opacity:.75}
+#stars,#speed-lines,.flight-path{z-index:1}
+#rocket{z-index:2}
+.flight-status{z-index:3;text-shadow:0 2px 20px #07111f}
+.stage-top,.stage-bottom{z-index:3}
+@media(max-width:760px){.orbit-ringed{margin-left:-6px}.meteor-trail{height:1px}}
+@media(prefers-reduced-motion:reduce){.meteor-trail{display:none}.orbit-scenery-object{transition:none;will-change:auto}}
