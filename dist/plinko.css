@@ -16,3 +16,10 @@
 /* Entry buttons use the same board coordinates as the physics launch positions. */
 .lanes{top:0;left:0;width:100%;height:5%;display:block}
 .lanes button{position:absolute;top:0;transform:translateX(-50%);width:12%;height:100%;font-size:12px;font-weight:700;line-height:1;padding:0}
+.probability-heading{display:flex;justify-content:space-between;gap:8px;margin:20px 0 12px;font-size:11px;color:#b9c9df}
+.probability-heading span{color:#93a4bd}
+.probability-chart{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px;align-items:end;padding:12px 4px 8px;background:#07111f70;border:1px solid #6fa8ff20;border-radius:10px}
+.probability-column{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;color:#b7c9df;font-size:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.probability-column i{display:block;width:70%;min-height:2px;border-radius:3px 3px 0 0;background:linear-gradient(#79dcf8,#8877db);opacity:.85}
+.probability-column small{font-size:10px;color:#ffc857}
+.probability-note{font-size:11px;color:#a4b4cb}

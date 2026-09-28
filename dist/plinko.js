@@ -23,6 +23,7 @@ for(const id of ['lanes','lane-controls']){
  };
 }
 $('slots').innerHTML=PLINKO_MULT.map((m,i)=>`<div class="slot ${m>=3?'high':m>=1?'medium':''}" data-slot="${i}">${m}×</div>`).join('');
+$('probability-chart').innerHTML=PLINKO_PROBS.map((p,i)=>`<div class="probability-column" aria-label="第 ${i+1} 槽，${PLINKO_MULT[i]} 倍，概率 ${(p*100).toFixed(2)}%"><span>${(p*100).toFixed(1)}%</span><i style="height:${p/PLINKO_PROBS[4]*64}px" aria-hidden="true"></i><small>${PLINKO_MULT[i]}×</small></div>`).join('');
 $('launch').onclick=()=>{if(!connected||pending||state==='dropping'||balance<50)return;plinkoAudio.unlock();pending=true;select();send({type:'plinko-drop',lane});};
 $('back').onclick=()=>{plinkoAudio.leave();send({type:'game-return'});};
 $('volt-sound').onclick=()=>{plinkoAudio.unlock();const on=plinkoAudio.toggle();$('volt-sound').setAttribute('aria-pressed',on);$('volt-sound').setAttribute('aria-label',on?'关闭音效':'开启音效');$('volt-sound').textContent=on?'♪':'♩';};
