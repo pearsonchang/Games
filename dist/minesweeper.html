@@ -1,3 +1,34 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#000000"><meta name="description" content="A playable coin-themed minesweeper demo. Reveal coins, flag mines and collect simulated rewards."><title>金币扫雷 · PLAYROOM</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffac36' d='M16 2 29 9v15L16 31 3 24V9z'/%3E%3Cpath fill='%23906228' d='m16 16 13-7v15l-13 7z'/%3E%3C/svg%3E"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"></head><body class="arcade-mines">
-<main class="game" aria-label="Coinsweeper game"><div class="stars" aria-hidden="true"></div><header><button id="close" class="plain">← 大厅</button><div><strong>金币扫雷</strong><span>PLAYROOM</span></div><button id="mine-sound" class="mine-sound" aria-pressed="true" aria-label="关闭音效" title="音效开关">♪</button><button id="menu" class="menu" aria-label="Open game menu">•••</button></header><section class="intro"><h1 id="title">Common Patterns</h1><p id="description">This revealed coin in the corner has one bordering block<br class="wide"> left unopened, it must be the bomb. Let's flag it!</p><div id="stats" hidden><span>地雷 <b id="mines">10</b></span><span>时间 <b id="timer">00:00</b></span><span>得分 <b id="coins">0</b></span></div></section><div id="board" role="group" aria-label="Minesweeper board, 9 rows and 6 columns"></div><div class="bottom"><div id="modes" hidden><button id="reveal" class="mode active" aria-pressed="true">◈ 揭开</button><button id="flag" class="mode" aria-pressed="false">⚑ 插旗</button></div><button id="primary" class="primary">Next</button><button id="secondary" class="secondary">Skip tutorial</button><p id="notice" hidden>模拟奖励 · 无真实资金</p></div><dialog id="dialog"><button id="dismiss" aria-label="Close dialog">×</button><span class="eyebrow">COINSWEEPER</span><h2 id="dialogTitle"></h2><p id="dialogText"></p><div id="dialogActions"></div></dialog><div id="toast" role="status" aria-live="polite"></div></main><script src="dice-audio.js"></script><script src="mine-audio.js"></script><script src="game.js"></script></body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f"><meta name="description" content="揭开金币，标记地雷，探索蓝紫晶体棋盘。PLAYROOM 金币扫雷演示。">
+<title>金币扫雷 · PLAYROOM</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffac36' d='M16 2 29 9v15L16 31 3 24V9z'/%3E%3Cpath fill='%23906228' d='m16 16 13-7v15l-13 7z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="mine-chamber.css?v=crystal1">
+</head>
+<body class="arcade-mines">
+<main class="game" aria-label="金币扫雷游戏">
+ <header><button id="close" class="plain">游戏大厅</button><div class="game-brand"><strong>金币扫雷</strong><span>COINSWEEPER</span></div><button id="mine-sound" class="mine-sound" aria-pressed="true" aria-label="关闭音效" title="音效开关">♪</button><button id="menu" class="menu" aria-label="游戏菜单">•••</button></header>
+ <div class="play-layout">
+ <section class="intro"><div class="intro-copy"><h1 id="title">认识棋盘</h1><p id="description">金币数字代表周围的地雷数量。</p></div><div class="reward-note">通关奖励 <b>440</b><span>积分</span></div></section>
+ <div id="stats" hidden><span>剩余旗帜<b id="mines">10</b></span><span>用时<b id="timer">00:00</b></span><span class="score-stat">本局得分<b id="coins">0</b></span></div>
+ <section class="board-panel" aria-label="扫雷棋盘">
+  <div class="board-caption"><span id="board-label">教程演示</span><span id="exploration" hidden>已揭开 <b id="opened">0</b> / 44</span></div>
+  <div class="progress-track" aria-hidden="true"><i id="progress-fill"></i></div>
+  <div class="board-shell"><div id="board" role="group" aria-label="9 行 6 列扫雷棋盘"></div><div id="board-effects" aria-hidden="true"></div></div>
+ </section>
+ <div class="bottom">
+  <div id="modes" hidden role="group" aria-label="选择操作模式"><button id="reveal" class="mode active" aria-pressed="true"><span aria-hidden="true">◈</span> 揭开</button><button id="flag" class="mode" aria-pressed="false"><span aria-hidden="true">⚑</span> 插旗</button></div>
+  <div class="secondary-actions"><button id="primary" class="primary">下一步</button><button id="secondary" class="secondary">跳过教程</button></div>
+  <p id="notice" hidden>本局得分待通关领取 · 踩雷归零</p>
+ </div>
+ </div>
+ <div id="scene-effects" aria-hidden="true"></div>
+ <dialog id="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogText"><button id="dismiss" aria-label="关闭弹窗">×</button><span class="eyebrow">COINSWEEPER</span><h2 id="dialogTitle"></h2><p id="dialogText"></p><div id="dialogActions"></div></dialog>
+ <div id="toast" role="status" aria-live="polite"></div>
+ <div id="round-status" class="sr-only" role="status" aria-live="polite"></div>
+</main>
+<script src="dice-audio.js"></script><script src="mine-audio.js?v=crystal1"></script><script src="mine-effects.js?v=crystal1"></script><script src="game.js?v=crystal1"></script>
+</body>
+</html>
