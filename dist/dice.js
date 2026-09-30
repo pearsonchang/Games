@@ -1,6 +1,6 @@
 'use strict';
 const $=id=>document.getElementById(id),send=d=>parent.postMessage(d,location.origin);
-let mode='size',target='small',state='idle',balance=0,connected=false,pending=false,lastId='',history=[],settling=false;
+let mode='size',target='small',state='idle',balance=0,connected=false,pending=false,lastId='',history=[],settling=false,platformPaused=false;
 const pipPositions={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,3,4,6,7,9]};
 function pipFace(n){return '<span class="pip-face" aria-hidden="true">'+pipPositions[n].map(p=>'<i style="grid-area:'+Math.ceil(p/3)+' / '+((p-1)%3+1)+'"></i>').join('')+'</span>'}
 function targetLabel(m,t){return m==='size'?(t==='small'?'小 · 4–10 点':'大 · 11–17 点'):m==='sum'?'总点数 '+t+' 点':'任意三同号'}
@@ -11,9 +11,10 @@ function makeIcons(){
  $('floating-faces').innerHTML=[4,2,5,6].map((v,i)=>'<span class="floating-face floating-'+i+'">'+pipFace(v)+'</span>').join('');
 }
 const diceVisual=new DiceVisual($('dice-row')),diceAudio=new DiceAudio();
-diceVisual.onLand=i=>{if(!document.hidden)diceAudio.land(i)};
+diceVisual.onLand=i=>{if(!document.hidden&&!platformPaused)diceAudio.land(i)};
 $('sound').onclick=()=>{diceAudio.unlock();const on=diceAudio.toggle();$('sound').textContent='音效 '+(on?'开':'关');$('sound').setAttribute('aria-pressed',on);$('sound').setAttribute('aria-label',on?'关闭音效':'开启音效')};
-document.addEventListener('visibilitychange',()=>{document.body.classList.toggle('motion-paused',document.hidden);if(document.hidden)diceAudio.stop()});
+function updateMotion(){const paused=document.hidden||platformPaused;document.body.classList.toggle('motion-paused',paused);if(paused)diceAudio.stop()}
+document.addEventListener('visibilitychange',updateMotion);
 function options(){
  document.body.dataset.mode=mode;
  document.querySelectorAll('button[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
@@ -35,8 +36,8 @@ $('options').onclick=e=>{if(state==='rolling'||pending||settling)return;const b=
 $('roll').onclick=()=>{if(!connected||pending||settling||state==='rolling'||balance<50)return;diceAudio.unlock();pending=true;controls();send({type:'dice-roll',mode,target});};
 $('back').onclick=()=>{diceAudio.leave();send({type:'game-return'})};
 function showResult(r,roundId){
- settling=false;document.body.classList.remove('is-rolling','is-settling');document.body.classList.toggle('round-won',r.won);
- if(!document.hidden)diceAudio.result(r.won);
+ settling=false;document.body.classList.remove('is-rolling','is-settling');document.body.classList.toggle('round-won',r.won);document.body.classList.toggle('round-lost',!r.won);
+ if(!document.hidden&&!platformPaused)diceAudio.result(r.won);
  $('roll-charge').style.transform='scaleX(1)';$('dice-row').classList.toggle('hit',r.won);
  $('dice-row').setAttribute('aria-label','三颗骰子顶面：'+r.values.join('、')+'，总计 '+r.sum+' 点');
  $('round-label').textContent='第 '+roundId.split('-')[1]+' 局 · 已结算';
@@ -47,14 +48,15 @@ function showResult(r,roundId){
 }
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==parent||!e.data)return;const d=e.data;
+ if(d.type==='platform-pause'){platformPaused=!!d.paused;updateMotion();return}
  if(d.type==='dice-error'){pending=false;controls();$('hint').textContent=d.message;return}if(d.type!=='dice-state')return;
  connected=true;pending=false;balance=d.balance;$('balance').textContent=balance.toLocaleString();
  const changed=d.state!==state||d.roundId!==lastId;state=d.state;lastId=d.roundId;
  if(state==='rolling')$('roll-charge').style.transform='scaleX('+Math.min(.8,Math.max(.05,(d.elapsed||0)/1600*.8))+')';
  if(changed){
   if(state==='rolling'){
-   mode=d.mode;target=d.target;options();if(!document.hidden)diceAudio.roll();diceVisual.roll();
-   document.body.classList.remove('round-won');document.body.classList.add('is-rolling');$('round-label').textContent='第 '+d.roundId.split('-')[1]+' 局 · 掷骰中';
+   mode=d.mode;target=d.target;options();if(!document.hidden&&!platformPaused)diceAudio.roll();diceVisual.roll();
+   document.body.classList.remove('round-won','round-lost');document.body.classList.add('is-rolling');$('round-label').textContent='第 '+d.roundId.split('-')[1]+' 局 · 掷骰中';
    $('result').classList.remove('won','revealed');$('result').innerHTML='<div class="result-idle"><span class="rolling-glyph" aria-hidden="true">'+pipFace(5)+'</span><div><strong>等待三颗骰子落定…</strong><p>'+targetLabel(mode,target)+' · 按顶面点数结算</p></div></div>';
   }else if(d.result){diceAudio.stop();settling=true;document.body.classList.remove('is-rolling');document.body.classList.add('is-settling');$('roll-charge').style.transform='scaleX(.9)';diceVisual.settle(d.result.values,()=>showResult(d.result,d.roundId));}
  }

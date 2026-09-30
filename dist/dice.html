@@ -2,23 +2,51 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f"><title>TRIPLE · 三骰挑战</title>
-<link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="glass-games.css?v=1"><link rel="stylesheet" href="dice-energy.css?v=2"><link rel="stylesheet" href="dice-ui.css?v=arcade55">
+<link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="glass-games.css?v=1"><link rel="stylesheet" href="dice-energy.css?v=2"><link rel="stylesheet" href="dice-ui.css?v=arcade55"><link rel="stylesheet" href="dice-companions.css?v=56">
 </head>
 <body class="glass-game dice-glass" data-mode="size">
 <div class="world-art" aria-hidden="true"><i class="world-orbit"></i><i class="world-orbit orbit-two"></i><i class="world-trace"></i><i class="world-dot"></i></div>
 <header><button id="back" class="back">游戏大厅</button><a class="brand" href="#">TRIPLE<span>三骰挑战</span></a><button id="sound" class="sound" aria-pressed="true" aria-label="关闭音效">音效 开</button><span class="balance">模拟积分 <b id="balance">—</b></span></header>
 <main>
-<section class="arena" aria-label="三骰挑战赛场">
+<section class="arena companion-cabinet" aria-label="三骰挑战赛场">
+ <div class="cabinet-frame" aria-hidden="true"><svg viewBox="0 0 1000 600" preserveAspectRatio="none" focusable="false">
+ <defs><linearGradient id="arena-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#80dffc"/><stop offset=".35" stop-color="#527bb0"/><stop offset=".72" stop-color="#5268a1"/><stop offset="1" stop-color="#9d8be7"/></linearGradient><linearGradient id="arena-surface" x2=".8" y2="1"><stop stop-color="#102641"/><stop offset="1" stop-color="#0c182e"/></linearGradient></defs>
+ <path class="cabinet-shell" fill="url(#arena-surface)" stroke="url(#arena-rim)" d="M42 12H150L167 3H268L285 12H943L988 53V545L945 588H51L12 549V48Z"/>
+ <path class="cabinet-inner" d="M52 22H146L164 13H270L287 22H937L977 59V540L940 578H58L23 543V55Z"/>
+ <path class="cabinet-trim" d="M63 29H934L969 64V538L936 569H64L32 537V62Z"/>
+ <path class="corner-plate plate-a" d="M42 12H122L106 27H61L28 60V95L12 109V48Z"/>
+ <path class="corner-plate plate-b" d="M943 12L988 53V113L974 99V60L936 25H908L894 12Z"/>
+ <path class="corner-plate plate-c" d="M12 480L27 495V539L61 574H109L125 588H51L12 549Z"/>
+ <path class="corner-plate plate-d" d="M988 481V545L945 588H874L889 574H938L974 539V496Z"/>
+ <path class="frame-light light-top" d="M177 9H248M359 18H444"/><path class="frame-light light-left" d="M19 162V204M19 279V314"/>
+ <path class="frame-light light-right" d="M981 142V184M981 271V303"/><path class="frame-light light-bottom" d="M243 582H362M653 582H720"/>
+ <path class="frame-fastener" d="M48 34h5M957 39h5M47 562h5M949 562h5"/>
+ </svg></div>
+ <div class="cat-perch" aria-hidden="true"><img class="space-cat" src="dice-space-cat.png" alt="" draggable="false" width="1942" height="809"><span class="cat-cheers"><i>✦</i><i>✧</i><i>✦</i></span></div>
  <div class="arena-head"><h1>三骰挑战 <span>TRIPLE ARENA</span></h1><span id="round-label">准备就绪</span></div>
  <div class="stage">
   <div class="stage-decor" aria-hidden="true"><div class="dot-field"></div><i class="arena-orbit"></i><i class="arena-orbit secondary-orbit"></i><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div id="floating-faces"></div><span class="stage-meter meter-left"><i></i><i></i><i></i><i></i><i></i></span><span class="stage-meter meter-right"><i></i><i></i><i></i><i></i><i></i></span></div>
   <div class="stage-copy"><span class="target-label">挑战目标</span><strong id="target-label">小 · 4–10 点</strong><span class="target-divider"></span><span>按顶面点数结算</span></div>
   <div class="dice-row" id="dice-row" aria-label="骰子预览"></div>
   <div class="energy-line" aria-hidden="true"><i id="roll-charge"></i><span></span></div>
+  <div class="star-perch" aria-hidden="true"><img class="star-buddy" src="dice-star-buddy.png" alt="" draggable="false" width="1374" height="1145"><i>✧</i></div>
   <div class="result" id="result" role="status" aria-live="polite"><div class="result-idle"><span class="result-emblem" aria-hidden="true">✦</span><div><strong>目标已选好，就等这一掷</strong><p>三颗骰子独立随机 · 落定后自动结算</p></div></div></div>
  </div>
 </section>
-<aside aria-label="本局挑战设置">
+<aside class="companion-controls" aria-label="本局挑战设置">
+ <div class="cabinet-frame" aria-hidden="true"><svg viewBox="0 0 1000 600" preserveAspectRatio="none" focusable="false">
+ <defs><linearGradient id="controls-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#80dffc"/><stop offset=".35" stop-color="#527bb0"/><stop offset=".72" stop-color="#5268a1"/><stop offset="1" stop-color="#9d8be7"/></linearGradient><linearGradient id="controls-surface" x2=".8" y2="1"><stop stop-color="#102641"/><stop offset="1" stop-color="#0c182e"/></linearGradient></defs>
+ <path class="cabinet-shell" fill="url(#controls-surface)" stroke="url(#controls-rim)" d="M42 12H150L167 3H268L285 12H943L988 53V545L945 588H51L12 549V48Z"/>
+ <path class="cabinet-inner" d="M52 22H146L164 13H270L287 22H937L977 59V540L940 578H58L23 543V55Z"/>
+ <path class="cabinet-trim" d="M63 29H934L969 64V538L936 569H64L32 537V62Z"/>
+ <path class="corner-plate plate-a" d="M42 12H122L106 27H61L28 60V95L12 109V48Z"/>
+ <path class="corner-plate plate-b" d="M943 12L988 53V113L974 99V60L936 25H908L894 12Z"/>
+ <path class="corner-plate plate-c" d="M12 480L27 495V539L61 574H109L125 588H51L12 549Z"/>
+ <path class="corner-plate plate-d" d="M988 481V545L945 588H874L889 574H938L974 539V496Z"/>
+ <path class="frame-light light-top" d="M177 9H248M359 18H444"/><path class="frame-light light-left" d="M19 162V204M19 279V314"/>
+ <path class="frame-light light-right" d="M981 142V184M981 271V303"/><path class="frame-light light-bottom" d="M243 582H362M653 582H720"/>
+ <path class="frame-fastener" d="M48 34h5M957 39h5M47 562h5M949 562h5"/>
+ </svg></div><span class="frame-badge" aria-hidden="true">✦</span>
  <div class="control-heading"><h2>选择挑战</h2><span>三种玩法</span></div>
  <div class="modes" id="modes">
   <button data-mode="size" aria-pressed="true"><span class="mode-art" data-mode-art="size" aria-hidden="true"></span><div><b>大 / 小</b><small>选择点数范围</small></div><em>2×</em></button>
@@ -32,5 +60,5 @@
 <section class="history" aria-label="最近七局战报"><div class="history-heading"><h2>最近战报</h2><span>仅记录本次体验</span></div><div id="history"><span class="history-empty">完成第一掷，这里会留下你的点数。</span></div></section>
 </main>
 <footer>PLAYROOM <span>仅使用模拟积分，无货币价值 · 返回大厅不影响结算</span></footer>
-<script src="dice-engine.js"></script><script src="dice-renderer.js?v=cel39b"></script><script src="dice-visual.js?v=top40"></script><script src="dice-audio.js"></script><script src="dice.js?v=arcade55"></script>
+<script src="dice-engine.js"></script><script src="dice-renderer.js?v=cel39b"></script><script src="dice-visual.js?v=top40"></script><script src="dice-audio.js"></script><script src="dice.js?v=companions56"></script>
 </body></html>
