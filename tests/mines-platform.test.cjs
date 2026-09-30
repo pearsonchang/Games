@@ -1,0 +1,34 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const {MinesRound}=require('../dist/mines-engine.js');
+const {RocketRound}=require('../dist/rocket-engine.js');
+const {DiceRound}=require('../dist/dice-engine.js');
+const {PlinkoRound}=require('../dist/plinko-engine.js');
+const elements=new Map(),listeners={};
+function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},setAttribute(){},removeAttribute(){},close(){},showModal(){}});return elements.get(id)}
+const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,setInterval(){},Date,console});
+vm.runInContext(fs.readFileSync('dist/platform.js','utf8'),context);
+const run=code=>vm.runInContext(code,context),read=()=>JSON.parse(run('JSON.stringify({points:session.points,ledger:session.ledger,rounds:session.rounds})'));
+function send(type,extra={},source=el('game-frame').contentWindow,origin='https://test.local'){listeners.message({origin,source,data:{type,...extra}})}
+run("minesRound.random=()=>0;play('minesweeper')");
+send('mines-ready');assert.equal(read().points,1000);
+send('mines-start',{roundId:''});assert.equal(read().points,950);assert.equal(read().ledger.length,2);
+send('mines-start',{roundId:''});send('mines-collect',{roundId:'mines-1'});assert.equal(read().points,950);
+send('mines-reveal',{roundId:'mines-1',index:20});
+assert.equal(el('game-frame').contentWindow.messages.at(-1).payout,59.52);
+run("showPage('games');play('rocket');showPage('games');play('minesweeper')");
+assert.equal(read().points,950);assert.equal(run('minesRound.opened'),1);assert.equal(run('minesRound.state'),'playing');
+send('mines-collect',{roundId:'mines-1'},el('rocket-frame').contentWindow);
+send('mines-collect',{roundId:'mines-1'},el('game-frame').contentWindow,'https://wrong.local');
+send('game-reward',{amount:999999,id:'injected'});assert.equal(read().points,950);
+send('mines-collect',{roundId:'mines-1'});send('mines-collect',{roundId:'mines-1'});
+assert.equal(read().points,1009.52);assert.equal(read().rounds.length,1);assert.equal(read().rounds[0].amount,59.52);assert.equal(read().ledger.length,3);
+run("showPage('rewards')");assert.match(el('content').innerHTML,/1,009\.52/);assert.match(el('content').innerHTML,/59\.52/);
+run("play('rocket');rocketRound.random=()=>.5");send('rocket-launch',{},el('rocket-frame').contentWindow);
+assert.equal(read().points,959.52);send('rocket-collect',{},el('rocket-frame').contentWindow);
+assert.equal(Math.round(read().points*100)/100,read().points);
+run("play('minesweeper')");send('mines-start',{roundId:'mines-1'});const afterStart=read().points;
+send('mines-reveal',{roundId:'mines-2',index:0});assert.equal(read().points,afterStart);assert.equal(read().rounds.at(-1).amount,0);assert.equal(read().rounds.at(-1).state,'lost');
+send('mines-collect',{roundId:'mines-1'});assert.equal(read().points,afterStart);
+run('session.points=49.99');send('mines-start',{roundId:'mines-2'});assert.equal(read().points,49.99);assert.equal(run('minesRound.state'),'lost');
+assert.equal(el('game-frame').contentWindow.messages.at(-1).balance,49.99);
+console.log('Passed: platform message validation, one debit/credit, no legacy reward injection, lobby persistence, fractional-point ledger, cross-game balance, mine loss and insufficient balance.');

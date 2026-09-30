@@ -5,23 +5,25 @@
 <meta name="theme-color" content="#07111f"><meta name="description" content="逐格揭开金币，避开固定雷区。无数字提示，第一格也可能踩雷。PLAYROOM 金币扫雷演示。">
 <title>金币扫雷 · PLAYROOM</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffac36' d='M16 2 29 9v15L16 31 3 24V9z'/%3E%3Cpath fill='%23906228' d='m16 16 13-7v15l-13 7z'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="mine-chamber.css?v=prism2">
+<link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="mine-chamber.css?v=cash6">
 </head>
 <body class="arcade-mines">
-<main class="game" aria-label="金币扫雷游戏">
+<main class="game playing cash-mode" aria-label="金币扫雷游戏">
  <header><button id="close" class="plain">游戏大厅</button><div class="game-brand"><strong>金币扫雷</strong><span>COINSWEEPER</span></div><button id="mine-sound" class="mine-sound" aria-pressed="true" aria-label="关闭音效" title="音效开关">♪</button><button id="menu" class="menu" aria-label="游戏菜单">•••</button></header>
  <div class="play-layout">
- <section class="intro"><div class="intro-copy"><h1 id="title">认识棋盘</h1><p id="description">54 格藏着 10 颗雷，逐格揭开金币。</p></div><div class="reward-note">通关奖励 <b>440</b><span>积分</span></div></section>
- <div id="stats" hidden><span>剩余旗帜<b id="mines">10</b></span><span>用时<b id="timer">00:00</b></span><span class="score-stat">本局得分<b id="coins">0</b></span></div>
+ <section class="intro"><div class="intro-copy"><h1 id="title">发现下一枚金币</h1><p id="description">每局 50 积分，成功揭开后可随时收取。</p></div><div class="reward-note">可用积分 <b id="balance-value">—</b><span>积分</span></div></section>
+ <div id="stats"><span>剩余旗帜<b id="mines">10</b></span><span>用时<b id="timer">00:00</b></span><span class="score-stat"><span id="payout-label">可收取 · 含投入</span><b id="coins">0</b></span></div>
  <section class="board-panel" aria-label="扫雷棋盘">
-  <div class="board-caption"><span id="board-label">教程演示</span><span id="exploration" hidden>已揭开 <b id="opened">0</b> / 44</span></div>
+  <div class="board-caption"><span id="board-label">54 格 · 10 颗雷</span><span id="exploration">已揭开 <b id="opened">0</b> / 44</span></div>
   <div class="progress-track" aria-hidden="true"><i id="progress-fill"></i></div>
   <div class="board-shell"><div id="board" role="group" aria-label="9 行 6 列扫雷棋盘"></div><div id="board-effects" aria-hidden="true"></div></div>
  </section>
  <div class="bottom">
-  <div id="modes" hidden role="group" aria-label="选择操作模式"><button id="reveal" class="mode active" aria-pressed="true"><span aria-hidden="true">◈</span> 揭开</button><button id="flag" class="mode" aria-pressed="false"><span aria-hidden="true">⚑</span> 插旗</button></div>
-  <div class="secondary-actions"><button id="primary" class="primary">下一步</button><button id="secondary" class="secondary">跳过教程</button></div>
-  <p id="notice" hidden>本局得分待通关领取 · 踩雷归零</p>
+  <div id="modes" role="group" aria-label="选择操作模式"><button id="reveal" class="mode active" aria-pressed="true"><span aria-hidden="true">◈</span> 揭开</button><button id="flag" class="mode" aria-pressed="false"><span aria-hidden="true">⚑</span> 插旗</button></div>
+  <div id="next-step" class="next-step"><span>再揭开一格<b id="next-payout">—</b></span><span>下一次踩雷概率<b id="next-risk">18.52%</b></span></div>
+  <button id="primary" class="primary" disabled>载入中…</button>
+  <div class="sub-actions"><button id="round-end" class="secondary" hidden>结束本局</button><button id="secondary" class="secondary">玩法与奖励</button></div>
+  <p id="notice">模拟积分 · 收取金额含本局投入</p>
  </div>
  </div>
  <div id="scene-effects" aria-hidden="true"></div>
@@ -29,6 +31,6 @@
  <div id="toast" role="status" aria-live="polite"></div>
  <div id="round-status" class="sr-only" role="status" aria-live="polite"></div>
 </main>
-<script src="dice-audio.js"></script><script src="mine-audio.js?v=crystal1"></script><script src="mine-effects.js?v=crystal1"></script><script src="game.js?v=blind3"></script>
+<script src="dice-audio.js"></script><script src="mine-audio.js?v=crystal1"></script><script src="mine-effects.js?v=cash5"></script><script src="mines-engine.js?v=cash5"></script><script src="game.js?v=cash5"></script>
 </body>
 </html>
