@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07111f"><meta name="description" content="揭开金币，标记地雷，探索蓝紫晶体棋盘。PLAYROOM 金币扫雷演示。">
+<meta name="theme-color" content="#07111f"><meta name="description" content="逐格揭开金币，避开固定雷区。无数字提示，第一格也可能踩雷。PLAYROOM 金币扫雷演示。">
 <title>金币扫雷 · PLAYROOM</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffac36' d='M16 2 29 9v15L16 31 3 24V9z'/%3E%3Cpath fill='%23906228' d='m16 16 13-7v15l-13 7z'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="mine-chamber.css?v=prism2">
@@ -11,7 +11,7 @@
 <main class="game" aria-label="金币扫雷游戏">
  <header><button id="close" class="plain">游戏大厅</button><div class="game-brand"><strong>金币扫雷</strong><span>COINSWEEPER</span></div><button id="mine-sound" class="mine-sound" aria-pressed="true" aria-label="关闭音效" title="音效开关">♪</button><button id="menu" class="menu" aria-label="游戏菜单">•••</button></header>
  <div class="play-layout">
- <section class="intro"><div class="intro-copy"><h1 id="title">认识棋盘</h1><p id="description">金币数字代表周围的地雷数量。</p></div><div class="reward-note">通关奖励 <b>440</b><span>积分</span></div></section>
+ <section class="intro"><div class="intro-copy"><h1 id="title">认识棋盘</h1><p id="description">54 格藏着 10 颗雷，逐格揭开金币。</p></div><div class="reward-note">通关奖励 <b>440</b><span>积分</span></div></section>
  <div id="stats" hidden><span>剩余旗帜<b id="mines">10</b></span><span>用时<b id="timer">00:00</b></span><span class="score-stat">本局得分<b id="coins">0</b></span></div>
  <section class="board-panel" aria-label="扫雷棋盘">
   <div class="board-caption"><span id="board-label">教程演示</span><span id="exploration" hidden>已揭开 <b id="opened">0</b> / 44</span></div>
@@ -29,6 +29,6 @@
  <div id="toast" role="status" aria-live="polite"></div>
  <div id="round-status" class="sr-only" role="status" aria-live="polite"></div>
 </main>
-<script src="dice-audio.js"></script><script src="mine-audio.js?v=crystal1"></script><script src="mine-effects.js?v=crystal1"></script><script src="game.js?v=crystal1"></script>
+<script src="dice-audio.js"></script><script src="mine-audio.js?v=crystal1"></script><script src="mine-effects.js?v=crystal1"></script><script src="game.js?v=blind3"></script>
 </body>
 </html>
