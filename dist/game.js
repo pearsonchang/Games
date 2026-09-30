@@ -13,7 +13,7 @@ function cancelResult(){clearTimeout(resultTimer);resultTimer=0;pendingResult=nu
 function flushResult(){if(!pendingResult||paused||document.hidden)return;const show=pendingResult;cancelResult();show();}
 function presentResult(show,delay){cancelResult();const id=model.roundId;pendingResult=()=>{if(model.roundId===id)show()};if(reducedMotion?.matches)flushResult();else resultTimer=setTimeout(flushResult,delay);}
 function setPaused(value){paused=value;game.classList.toggle('motion-paused',value);if(value){mineAudio.leave();mineFX.clear();clearTimeout(resultTimer);resultTimer=0;}else flushResult();}
-function resetIdle(){lastInteraction=Date.now();document.querySelectorAll('.idle-hint').forEach(n=>n.classList.remove('idle-hint'));}
+function resetIdle(){lastInteraction=Date.now();game.classList.remove('awaiting-pick');document.querySelectorAll('.idle-hint').forEach(n=>n.classList.remove('idle-hint'));}
 function request(type,index){
  if(busy)return;resetIdle();busy=true;updateHUD();
  const data={type,roundId:model?.roundId||'',...(index===undefined?{}:{index})};
@@ -36,7 +36,7 @@ function receive(next){
   presentResult(()=>{showDialog('踩到地雷了','本局奖励归零，已消耗 50 积分。\n每局雷区固定，第一格也可能踩雷。',[['再玩一局 · 50 积分',start],['查看棋盘',()=>{}],['返回大厅',returnToLobby]]);mineFX.dialog(false)},680);
  }else if(next.state==='collected'){
   mineAudio.win();mineFX.win();$('round-status').textContent='已收取 '+points(next.payout)+' 积分，已到账。';
-  presentResult(()=>{showDialog(next.autoCollected?'全部揭开，已自动收取':'积分已收取','已到账 '+points(next.payout)+' 积分（含本局投入）。\n本局净收益 '+(next.payout>=50?'+':'')+points(next.payout-50)+' 积分。',[['再玩一局 · 50 积分',start],['查看棋盘',()=>{}],['返回大厅',returnToLobby]]);mineFX.dialog(true)},next.autoCollected?800:240);
+  presentResult(()=>{showDialog(next.autoCollected?'全部揭开，已自动收取':'积分已收取','已到账 '+points(next.payout)+' 积分（含本局投入）。\n本局净收益 '+(next.payout>=50?'+':'')+points(next.payout-50)+' 积分。',[['再玩一局 · 50 积分',start],['查看棋盘',()=>{}],['返回大厅',returnToLobby]]);mineFX.dialog(true)},next.autoCollected?900:720);
  }else if(next.state==='forfeited'){toast('本局已结束，50 积分开局消耗不退还。');}
 }
 function render(old){
@@ -61,7 +61,7 @@ function updateHUD(){
  $('opened').textContent=model.opened;$('progress-fill').style.width=model.opened/44*100+'%';
  $('next-payout').textContent=model.nextPayout===null?'已全部揭开':compact(model.nextPayout)+' 积分';$('next-risk').textContent=model.nextRisk===null?'—':(model.nextRisk*100).toFixed(2)+'%';
  $('next-step').hidden=!active&&model.state!=='idle';
- $('title').textContent=model.state==='lost'?'踩到地雷了':model.state==='collected'?'奖励已到账':model.state==='forfeited'?'本局已结束':'发现下一枚金币';
+ $('title').textContent=model.state==='lost'?'踩到地雷了':model.state==='collected'?'奖励已到账':model.state==='forfeited'?'本局已结束':collectible?'宝藏已发现，随时收取':'揭开封印，发现宝藏';
  $('description').textContent=active?'逐格揭开，随时收取。第一格也可能踩雷。':model.state==='idle'?'每局 50 积分，成功揭开后可随时收取。':model.state==='collected'?'本局已收取 '+points(model.payout)+' 积分。':'本局奖励为 0，开局消耗 50 积分。';
  $('board-label').textContent=active?(mode==='flag'?'插旗模式 · 再点取消':'揭开模式'):'54 格 · 10 颗雷';
  for(const m of ['reveal','flag']){$(m).classList.toggle('active',mode===m);$(m).setAttribute('aria-pressed',String(mode===m));$(m).disabled=busy||!active;}
@@ -87,6 +87,6 @@ $('mine-sound').onclick=()=>{const on=mineAudio.toggle();$('mine-sound').setAttr
 game.addEventListener('pointerdown',()=>{resetIdle();mineAudio.unlock()});game.addEventListener('keydown',()=>{resetIdle();mineAudio.unlock()});
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==window.parent)return;const d=e.data;if(d?.type==='platform-pause')setPaused(!!d.paused);else if(d?.type==='mines-state')receive(d);else if(d?.type==='mines-error'){busy=false;updateHUD();toast(d.message)}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){mineAudio.stop();mineFX.clear();clearTimeout(resultTimer);resultTimer=0;}else flushResult()});
-setInterval(()=>{if(!embedded&&model)receive(localRound.snapshot(localBalance));if(model?.state==='playing'&&model.opened===0&&!paused&&!document.hidden&&!reducedMotion?.matches&&!$('dialog').open&&Date.now()-lastInteraction>3000)$('board').children[14]?.classList.add('idle-hint')},1000);
+setInterval(()=>{if(!embedded&&model)receive(localRound.snapshot(localBalance));if(model?.state==='playing'&&model.opened===0&&!paused&&!document.hidden&&!reducedMotion?.matches&&!$('dialog').open&&Date.now()-lastInteraction>3000)game.classList.add('awaiting-pick')},1000);
 request('mines-ready');
 if(document.modelContext?.registerTool){try{document.modelContext.registerTool({name:'read_game',description:'Read only visible cash-out values and cells. No hidden mines or adjacency clues.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>model?{state:model.state,opened:model.opened,payout:model.payout,balance:model.balance,nextPayout:model.nextPayout,nextRisk:model.nextRisk,cells:model.cells}:{state:'loading'}})}catch{}}
