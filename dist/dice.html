@@ -1,1 +1,36 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>TRIPLE · 三骰挑战</title><link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="glass-games.css?v=1"><link rel="stylesheet" href="dice-energy.css?v=2"></head><body class="glass-game dice-glass"><header><button id="back" class="back">← 游戏大厅</button><a class="brand" href="#">TRIPLE<span>三骰挑战</span></a><button id="sound" class="sound" aria-pressed="true" aria-label="关闭音效">音效 开</button><span class="balance">可用积分 <b id="balance">—</b></span></header><main><section class="arena"><div class="arena-head"><span><i></i> THREE DICE / ONE SHOT</span><span id="round-label">准备就绪</span></div><div class="stage"><div class="orbit"></div><div class="stage-copy"><span class="eyebrow">ROLL YOUR MOMENT</span><h1>三颗骰子，一掷揭晓。</h1><p>按三颗骰子的顶面点数结算。</p></div><div class="dice-row" id="dice-row" aria-label="骰子预览"></div><div class="result" id="result" role="status" aria-live="polite"><span class="result-kicker">准备好了吗？</span><strong>你的下一掷，会是什么？</strong><p>每局 50 积分 · 三颗骰子独立随机</p></div></div><div class="history"><span>最近点数</span><div id="history">结果将在这里显示</div></div></section><aside><span class="eyebrow">01 / CHOOSE YOUR MODE</span><h2>选择挑战</h2><div class="modes" id="modes"><button data-mode="size" aria-pressed="true"><span>01</span><div><b>大 / 小</b><small>判断总点数范围</small></div><em>2×</em></button><button data-mode="sum" aria-pressed="false"><span>02</span><div><b>指定总点数</b><small>精准命中三骰之和</small></div><em>3.6–100×</em></button><button data-mode="triple" aria-pressed="false"><span>03</span><div><b>任意三同号</b><small>三颗骰子完全相同</small></div><em>30×</em></button></div><div id="options"></div><p class="rule" id="rule"></p><div class="payout"><span>命中到账 <b id="prize">100</b><small>积分</small></span><p>含本局投入 · 净赚 <b id="net">50</b> 积分</p></div><button id="roll" class="roll" disabled>连接中…</button><p id="hint" class="hint" role="status">每局消耗 50 积分，未命中则无奖励。</p></aside></main><footer>DEMO POINTS ONLY <span>仅使用模拟积分，无货币价值 · 返回大厅不影响结算</span></footer><script src="dice-engine.js"></script><script src="dice-renderer.js?v=cel39b"></script><script src="dice-visual.js?v=top40"></script><script src="dice-audio.js"></script><script src="dice.js?v=top40"></script></body></html>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f"><title>TRIPLE · 三骰挑战</title>
+<link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="glass-games.css?v=1"><link rel="stylesheet" href="dice-energy.css?v=2"><link rel="stylesheet" href="dice-ui.css?v=arcade55">
+</head>
+<body class="glass-game dice-glass" data-mode="size">
+<div class="world-art" aria-hidden="true"><i class="world-orbit"></i><i class="world-orbit orbit-two"></i><i class="world-trace"></i><i class="world-dot"></i></div>
+<header><button id="back" class="back">游戏大厅</button><a class="brand" href="#">TRIPLE<span>三骰挑战</span></a><button id="sound" class="sound" aria-pressed="true" aria-label="关闭音效">音效 开</button><span class="balance">模拟积分 <b id="balance">—</b></span></header>
+<main>
+<section class="arena" aria-label="三骰挑战赛场">
+ <div class="arena-head"><h1>三骰挑战 <span>TRIPLE ARENA</span></h1><span id="round-label">准备就绪</span></div>
+ <div class="stage">
+  <div class="stage-decor" aria-hidden="true"><div class="dot-field"></div><i class="arena-orbit"></i><i class="arena-orbit secondary-orbit"></i><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div id="floating-faces"></div><span class="stage-meter meter-left"><i></i><i></i><i></i><i></i><i></i></span><span class="stage-meter meter-right"><i></i><i></i><i></i><i></i><i></i></span></div>
+  <div class="stage-copy"><span class="target-label">挑战目标</span><strong id="target-label">小 · 4–10 点</strong><span class="target-divider"></span><span>按顶面点数结算</span></div>
+  <div class="dice-row" id="dice-row" aria-label="骰子预览"></div>
+  <div class="energy-line" aria-hidden="true"><i id="roll-charge"></i><span></span></div>
+  <div class="result" id="result" role="status" aria-live="polite"><div class="result-idle"><span class="result-emblem" aria-hidden="true">✦</span><div><strong>目标已选好，就等这一掷</strong><p>三颗骰子独立随机 · 落定后自动结算</p></div></div></div>
+ </div>
+</section>
+<aside aria-label="本局挑战设置">
+ <div class="control-heading"><h2>选择挑战</h2><span>三种玩法</span></div>
+ <div class="modes" id="modes">
+  <button data-mode="size" aria-pressed="true"><span class="mode-art" data-mode-art="size" aria-hidden="true"></span><div><b>大 / 小</b><small>选择点数范围</small></div><em>2×</em></button>
+  <button data-mode="sum" aria-pressed="false"><span class="mode-art" data-mode-art="sum" aria-hidden="true"></span><div><b>指定点数</b><small>命中目标总点数</small></div><em>3.6–100×</em></button>
+  <button data-mode="triple" aria-pressed="false"><span class="mode-art" data-mode-art="triple" aria-hidden="true"></span><div><b>三同号</b><small>三颗顶面完全相同</small></div><em>30×</em></button>
+ </div>
+ <div id="options"></div><p class="rule" id="rule"></p>
+ <div class="payout"><span>命中到账 <b id="prize">100</b><small>积分</small></span><p>含本局投入 · 净收益 <b id="net">+50</b> 积分</p></div>
+ <div class="action-bar"><div class="action-cost"><span id="action-target">小 · 4–10 点</span><strong>50 <small>积分 / 局</small></strong></div><button id="roll" class="roll" disabled>连接中…</button><p id="hint" class="hint" role="status">未命中则无奖励</p></div>
+</aside>
+<section class="history" aria-label="最近七局战报"><div class="history-heading"><h2>最近战报</h2><span>仅记录本次体验</span></div><div id="history"><span class="history-empty">完成第一掷，这里会留下你的点数。</span></div></section>
+</main>
+<footer>PLAYROOM <span>仅使用模拟积分，无货币价值 · 返回大厅不影响结算</span></footer>
+<script src="dice-engine.js"></script><script src="dice-renderer.js?v=cel39b"></script><script src="dice-visual.js?v=top40"></script><script src="dice-audio.js"></script><script src="dice.js?v=arcade55"></script>
+</body></html>
