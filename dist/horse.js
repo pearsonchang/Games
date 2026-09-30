@@ -6,7 +6,7 @@ const points=n=>Number(n||0).toLocaleString('zh-CN',{maximumFractionDigits:2});
 const options=[],lanes=[],runners=[];
 HORSES.forEach((h,i)=>{
  const css='--accent:'+h.color+';--hue:'+h.hue+'deg;--delay:-'+(i*.11)+'s';
- const lane=document.createElement('div');lane.className='lane';lane.style.cssText=css;lane.innerHTML='<span class="lane-label">0'+(i+1)+'<small>'+h.name+'</small></span><div class="runway"><div class="runner"><span class="horse-sprite" aria-hidden="true"></span></div></div>';$('lanes').append(lane);lanes.push(lane);runners.push(lane.querySelector('.runner'));
+ const lane=document.createElement('div');lane.className='lane';lane.style.cssText=css;lane.innerHTML='<span class="lane-label">0'+(i+1)+'<small>'+h.name+'</small></span><div class="runway"><div class="runner" aria-hidden="true"><span class="horse-aura"></span><span class="star-trail"><i></i><i></i><i></i><i></i></span><span class="hoof-dust"><i></i><i></i><i></i></span><span class="horse-sprite"></span><span class="finish-burst"><i></i><i></i><i></i><i></i><i></i></span><span class="finish-badge"></span></div></div>';$('lanes').append(lane);lanes.push(lane);runners.push(lane.querySelector('.runner'));
  const button=document.createElement('button');button.className='horse-option';button.style.cssText=css;button.setAttribute('aria-label','选择 '+(i+1)+' 号 '+h.name+'，夺冠概率 25%');button.innerHTML='<span class="number">0'+(i+1)+'</span><strong>'+h.name+'</strong><small>'+h.code+'</small><span class="mini-horse" aria-hidden="true"><span class="horse-sprite"></span></span>';button.onclick=()=>{if(busy||model?.state==='racing')return;selected=i;audio.tone(420+i*80,.07,0,'sine',.25);updateSelection()};$('horses').append(button);options.push(button);
 });
 $('prizes').innerHTML=HORSE_PRIZES.map((n,i)=>'<div class="prize"><span>第 '+(i+1)+' 名</span><b>'+n+'</b></div>').join('');
@@ -35,11 +35,11 @@ function updateButton(){
 }
 function showError(message){busy=false;$('message').textContent=message;updateSelection();updateButton()}
 function renderPositions(){
- if(!model)return;model.positions.forEach((p,i)=>{const runner=runners[i],distance=Math.max(0,runner.parentElement.clientWidth-runner.clientWidth);runner.style.transform='translateX('+(p*distance).toFixed(2)+'px)';runner.classList.toggle('arrived',model.finished.includes(i));lanes[i].classList.toggle('winner',model.state==='finished'&&model.result.order[0]===i)});
+ if(!model)return;model.positions.forEach((p,i)=>{const runner=runners[i],distance=Math.max(0,runner.parentElement.clientWidth-runner.clientWidth),rank=model.finished.indexOf(i);runner.style.transform='translateX('+(p*distance).toFixed(2)+'px)';runner.classList.toggle('arrived',rank!==-1);runner.querySelector('.finish-badge').textContent=rank===0?'★ 1':rank>0?String(rank+1):'';lanes[i].classList.toggle('winner',rank===0);});
 }
 function celebrate(){
  if(paused||document.hidden||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- $('finish-flash').replaceChildren();for(let i=0;i<16;i++){const p=document.createElement('i');p.style.cssText='--spark:'+['#59d8f5','#b29aff','#ffc857'][i%3]+';--dx:'+(-20-Math.random()*220)+'px;--dy:'+(-150+Math.random()*300)+'px;animation-delay:'+(Math.random()*.12)+'s';$('finish-flash').append(p)}
+ $('finish-flash').replaceChildren();for(let i=0;i<22;i++){const p=document.createElement('i');p.style.cssText='--spark:'+['#59d8f5','#b29aff','#ffc857','#ffb8a0'][i%4]+';--dx:'+(-20-Math.random()*250)+'px;--dy:'+(-150+Math.random()*300)+'px;animation-delay:'+(Math.random()*.12)+'s';p.addEventListener('animationend',()=>p.remove(),{once:true});$('finish-flash').append(p)}
 }
 function receive(next){
  if(next.type!=='horse-state'||!Array.isArray(next.positions)||next.positions.length!==4)return;
@@ -48,6 +48,8 @@ function receive(next){
  if(newRound){if(next.state==='racing')window.scrollTo(0,0);$('result').dataset.view='';lastCount=-1;lastPhase='';lastResult='';$('finish-flash').replaceChildren();$('result').classList.remove('win');}
  const active=next.state==='racing',running=active&&next.countdown===0,phase=active?(running?'race':'count'):'idle';
  document.body.classList.toggle('sprint',running&&next.elapsed>12500);$('circuit').classList.toggle('is-racing',running&&!paused&&!document.hidden);
+ $('circuit').classList.toggle('kickoff',running&&next.elapsed<3700&&!paused&&!document.hidden);
+ $('circuit').classList.toggle('race-done',next.state==='finished');
  $('balance').textContent=points(next.balance);$('phase').textContent=active?(running?(next.elapsed>12500?'最后冲刺':'正在竞速'):'发车倒计时'):next.state==='finished'?'比赛结束':'等待开赛';
  $('countdown').hidden=phase!=='count';if(phase==='count'&&lastCount!==next.countdown){$('countdown').textContent=next.countdown;$('countdown').classList.remove('pop');void $('countdown').offsetWidth;$('countdown').classList.add('pop')}
  syncAudio(phase,next.countdown);
@@ -61,7 +63,7 @@ function receive(next){
  const prizeNodes=$('prizes').children;for(let i=0;i<4;i++)prizeNodes[i].classList.toggle('hit',!!next.result&&next.result.rank===i+1);
  updateSelection();updateButton();renderPositions();
 }
-function visibility(){stopSound();lastPhase='';document.body.classList.toggle('motion-paused',paused||document.hidden);if(model)receive(model)}
+function visibility(){stopSound();lastPhase='';document.body.classList.toggle('motion-paused',paused||document.hidden);if(paused||document.hidden)$('finish-flash').replaceChildren();if(model)receive(model)}
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==window.parent)return;const d=e.data;if(d?.type==='horse-state')receive(d);else if(d?.type==='horse-error')showError(d.message);else if(d?.type==='platform-pause'){paused=!!d.paused;visibility()}});
 $('start').onclick=()=>{if(!busy&&model&&model.state!=='racing'&&model.balance>=50)send('horse-start')};
 $('back').onclick=()=>{paused=true;stopSound();audio.leave();if(embedded)window.parent.postMessage({type:'game-return'},location.origin);else location.href='./'};
