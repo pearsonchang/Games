@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f"><title>TRIPLE · 三骰挑战</title>
-<link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="glass-games.css?v=1"><link rel="stylesheet" href="dice-energy.css?v=2"><link rel="stylesheet" href="dice-ui.css?v=arcade55"><link rel="stylesheet" href="dice-companions.css?v=56">
+<link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css?v=blue30b"><link rel="stylesheet" href="theme-a.css?v=1"><link rel="stylesheet" href="glass-games.css?v=1"><link rel="stylesheet" href="dice-energy.css?v=2"><link rel="stylesheet" href="dice-ui.css?v=arcade55"><link rel="stylesheet" href="dice-companions.css?v=aurora57">
 </head>
 <body class="glass-game dice-glass" data-mode="size">
 <div class="world-art" aria-hidden="true"><i class="world-orbit"></i><i class="world-orbit orbit-two"></i><i class="world-trace"></i><i class="world-dot"></i></div>
@@ -10,7 +10,7 @@
 <main>
 <section class="arena companion-cabinet" aria-label="三骰挑战赛场">
  <div class="cabinet-frame" aria-hidden="true"><svg viewBox="0 0 1000 600" preserveAspectRatio="none" focusable="false">
- <defs><linearGradient id="arena-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#80dffc"/><stop offset=".35" stop-color="#527bb0"/><stop offset=".72" stop-color="#5268a1"/><stop offset="1" stop-color="#9d8be7"/></linearGradient><linearGradient id="arena-surface" x2=".8" y2="1"><stop stop-color="#102641"/><stop offset="1" stop-color="#0c182e"/></linearGradient></defs>
+ <defs><linearGradient id="arena-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#49d9ff"/><stop offset=".35" stop-color="#498cec"/><stop offset=".72" stop-color="#7962dd"/><stop offset="1" stop-color="#ad7bff"/></linearGradient><linearGradient id="arena-surface" x2=".8" y2="1"><stop stop-color="#0b2350"/><stop offset="1" stop-color="#0b1633"/></linearGradient></defs>
  <path class="cabinet-shell" fill="url(#arena-surface)" stroke="url(#arena-rim)" d="M42 12H150L167 3H268L285 12H943L988 53V545L945 588H51L12 549V48Z"/>
  <path class="cabinet-inner" d="M52 22H146L164 13H270L287 22H937L977 59V540L940 578H58L23 543V55Z"/>
  <path class="cabinet-trim" d="M63 29H934L969 64V538L936 569H64L32 537V62Z"/>
@@ -25,7 +25,7 @@
  <div class="cat-perch" aria-hidden="true"><img class="space-cat" src="dice-space-cat.png" alt="" draggable="false" width="1942" height="809"><span class="cat-cheers"><i>✦</i><i>✧</i><i>✦</i></span></div>
  <div class="arena-head"><h1>三骰挑战 <span>TRIPLE ARENA</span></h1><span id="round-label">准备就绪</span></div>
  <div class="stage">
-  <div class="stage-decor" aria-hidden="true"><div class="dot-field"></div><i class="arena-orbit"></i><i class="arena-orbit secondary-orbit"></i><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div id="floating-faces"></div><span class="stage-meter meter-left"><i></i><i></i><i></i><i></i><i></i></span><span class="stage-meter meter-right"><i></i><i></i><i></i><i></i><i></i></span></div>
+  <div class="stage-decor" aria-hidden="true"><div class="dot-field"></div><div class="scene-stars"><i>✦</i><i>✧</i><i>✦</i><i>✦</i></div><i class="arena-orbit"></i><i class="arena-orbit secondary-orbit"></i><div class="corner corner-tl"></div><div class="corner corner-tr"></div><div class="corner corner-bl"></div><div class="corner corner-br"></div><div id="floating-faces"></div><span class="stage-meter meter-left"><i></i><i></i><i></i><i></i><i></i></span><span class="stage-meter meter-right"><i></i><i></i><i></i><i></i><i></i></span></div>
   <div class="stage-copy"><span class="target-label">挑战目标</span><strong id="target-label">小 · 4–10 点</strong><span class="target-divider"></span><span>按顶面点数结算</span></div>
   <div class="dice-row" id="dice-row" aria-label="骰子预览"></div>
   <div class="energy-line" aria-hidden="true"><i id="roll-charge"></i><span></span></div>
@@ -35,7 +35,7 @@
 </section>
 <aside class="companion-controls" aria-label="本局挑战设置">
  <div class="cabinet-frame" aria-hidden="true"><svg viewBox="0 0 1000 600" preserveAspectRatio="none" focusable="false">
- <defs><linearGradient id="controls-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#80dffc"/><stop offset=".35" stop-color="#527bb0"/><stop offset=".72" stop-color="#5268a1"/><stop offset="1" stop-color="#9d8be7"/></linearGradient><linearGradient id="controls-surface" x2=".8" y2="1"><stop stop-color="#102641"/><stop offset="1" stop-color="#0c182e"/></linearGradient></defs>
+ <defs><linearGradient id="controls-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#49d9ff"/><stop offset=".35" stop-color="#498cec"/><stop offset=".72" stop-color="#7962dd"/><stop offset="1" stop-color="#ad7bff"/></linearGradient><linearGradient id="controls-surface" x2=".8" y2="1"><stop stop-color="#0b2350"/><stop offset="1" stop-color="#0b1633"/></linearGradient></defs>
  <path class="cabinet-shell" fill="url(#controls-surface)" stroke="url(#controls-rim)" d="M42 12H150L167 3H268L285 12H943L988 53V545L945 588H51L12 549V48Z"/>
  <path class="cabinet-inner" d="M52 22H146L164 13H270L287 22H937L977 59V540L940 578H58L23 543V55Z"/>
  <path class="cabinet-trim" d="M63 29H934L969 64V538L936 569H64L32 537V62Z"/>
@@ -60,5 +60,5 @@
 <section class="history" aria-label="最近七局战报"><div class="history-heading"><h2>最近战报</h2><span>仅记录本次体验</span></div><div id="history"><span class="history-empty">完成第一掷，这里会留下你的点数。</span></div></section>
 </main>
 <footer>PLAYROOM <span>仅使用模拟积分，无货币价值 · 返回大厅不影响结算</span></footer>
-<script src="dice-engine.js"></script><script src="dice-renderer.js?v=cel39b"></script><script src="dice-visual.js?v=top40"></script><script src="dice-audio.js"></script><script src="dice.js?v=companions56"></script>
+<script src="dice-engine.js"></script><script src="dice-renderer.js?v=aurora57"></script><script src="dice-visual.js?v=top40"></script><script src="dice-audio.js"></script><script src="dice.js?v=companions56"></script>
 </body></html>

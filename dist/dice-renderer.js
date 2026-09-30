@@ -45,19 +45,19 @@ function drawDice(canvas,angles,pose){const ctx=canvas.getContext('2d'),ratio=Ma
   if(p.pip){
    const outer=p.pts,inner=p.inner,xs=outer.map(v=>v[0]),ys=outer.map(v=>v[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
    // A beveled opening plus a recessed inner disk creates a shallow, readable well.
-   trace(outer);const rim=ctx.createLinearGradient(x0,y0,x1,y1);rim.addColorStop(0,'#26355d');rim.addColorStop(.42,'#334a7d');rim.addColorStop(1,'#aec5ff');ctx.fillStyle=rim;ctx.fill();
-   trace(inner);const well=ctx.createLinearGradient(x0,y0,x0,y1);well.addColorStop(0,'#10203d');well.addColorStop(1,'#1b2b4b');ctx.fillStyle=well;ctx.fill();
+   trace(outer);const rim=ctx.createLinearGradient(x0,y0,x1,y1);rim.addColorStop(0,'#153b76');rim.addColorStop(.42,'#2d56a4');rim.addColorStop(1,'#a9dbff');ctx.fillStyle=rim;ctx.fill();
+   trace(inner);const well=ctx.createLinearGradient(x0,y0,x0,y1);well.addColorStop(0,'#071b43');well.addColorStop(1,'#102653');ctx.fillStyle=well;ctx.fill();
   }else{
    const n=p.normal,fn=p.faceNormal,up=Math.pow(Math.max(0,-fn[1]),6),side=Math.pow(Math.abs(fn[0]),6),front=Math.pow(Math.abs(fn[2]),6),sum=up+side+front||1;
-   const top=[176,214,250],blue=[61,126,225],violet=[103,82,213];
+   const top=[201,237,255],blue=[37,146,248],violet=[125,78,236];
    let color=top.map((v,i)=>Math.round((v*up+blue[i]*front+violet[i]*side)/sum));
    // Highlight the continuous curved bevel, with no threshold-generated white corner patches.
    const edge=Math.min(1,p.bevel/.28),light=Math.max(0,-n[0]*.36-n[1]*.62+n[2]*.69);
-   color=mix(color,[222,240,255],edge*(.22+.60*Math.pow(light,2)));
-   const pts=p.pts.map(project);trace(pts);const g=ctx.createLinearGradient(size*.2,size*.15,size*.8,size*.86);g.addColorStop(0,`rgb(${mix(color,[219,236,255],.075)})`);g.addColorStop(.55,`rgb(${color})`);g.addColorStop(1,`rgb(${mix(color,[42,64,157],.07)})`);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=g;ctx.lineWidth=.55;ctx.stroke();
+   color=mix(color,[228,249,255],edge*(.22+.60*Math.pow(light,2)));
+   const pts=p.pts.map(project);trace(pts);const g=ctx.createLinearGradient(size*.2,size*.15,size*.8,size*.86);g.addColorStop(0,`rgb(${mix(color,[220,245,255],.075)})`);g.addColorStop(.55,`rgb(${color})`);g.addColorStop(1,`rgb(${mix(color,[35,62,174],.07)})`);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=g;ctx.lineWidth=.55;ctx.stroke();
   }
  }
- trace(outline);ctx.strokeStyle='#24427c99';ctx.lineWidth=.7;ctx.stroke();
+ trace(outline);ctx.strokeStyle='#9cdbff73';ctx.lineWidth=.7;ctx.stroke();
  orbit(true);
 }
 
