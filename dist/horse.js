@@ -4,8 +4,11 @@ let model=null,selected=0,busy=false,paused=false,lastCount=-1,lastPhase='',last
 const localRound=embedded?null:new HorseRound({charge:n=>{if(localBalance<n)return false;localBalance=(Math.round(localBalance*100)-n*100)/100;return true},credit:n=>{localBalance=(Math.round(localBalance*100)+n*100)/100}});
 const points=n=>Number(n||0).toLocaleString('zh-CN',{maximumFractionDigits:2});
 const options=[],lanes=[],runners=[];
+const horseArtwork=['horse-cyan-run.png','horse-violet-run.png','horse-coral-run.png','horse-mint-run.png'];
 HORSES.forEach((h,i)=>{
- const css='--accent:'+h.color+';--hue:'+h.hue+'deg;--delay:-'+(i*.11)+'s';
+ // Shift violet's sampling windows 14 px to retain its nose and exclude adjacent-frame pixels.
+ const alignment=i===1?';--frame-a:.967%;--frame-b:50.967%;--frame-c:100.967%':'';
+ const css='--accent:'+h.color+';--horse-art:url("'+horseArtwork[i]+'");--delay:-'+(i*.11)+'s'+alignment;
  const lane=document.createElement('div');lane.className='lane';lane.style.cssText=css;lane.innerHTML='<span class="lane-label">0'+(i+1)+'<small>'+h.name+'</small></span><div class="runway"><div class="runner" aria-hidden="true"><span class="horse-aura"></span><span class="star-trail"><i></i><i></i><i></i><i></i></span><span class="hoof-dust"><i></i><i></i><i></i></span><span class="horse-sprite"></span><span class="finish-burst"><i></i><i></i><i></i><i></i><i></i></span><span class="finish-badge"></span></div></div>';$('lanes').append(lane);lanes.push(lane);runners.push(lane.querySelector('.runner'));
  const button=document.createElement('button');button.className='horse-option';button.style.cssText=css;button.setAttribute('aria-label','选择 '+(i+1)+' 号 '+h.name+'，夺冠概率 25%');button.innerHTML='<span class="number">0'+(i+1)+'</span><strong>'+h.name+'</strong><small>'+h.code+'</small><span class="mini-horse" aria-hidden="true"><span class="horse-sprite"></span></span>';button.onclick=()=>{if(busy||model?.state==='racing')return;selected=i;audio.tone(420+i*80,.07,0,'sine',.25);updateSelection()};$('horses').append(button);options.push(button);
 });
