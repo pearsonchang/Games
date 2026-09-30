@@ -1,11 +1,12 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const {HorseRound}=require('../dist/horse-engine.js');
 const {MinesRound}=require('../dist/mines-engine.js');
 const {RocketRound}=require('../dist/rocket-engine.js');
 const {DiceRound}=require('../dist/dice-engine.js');
 const {PlinkoRound}=require('../dist/plinko-engine.js');
 const elements=new Map(),listeners={};
 function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},setAttribute(){},removeAttribute(){},close(){},showModal(){}});return elements.get(id)}
-const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,setInterval(){},Date,console});
+const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,HorseRound,setInterval(){},Date,console});
 vm.runInContext(fs.readFileSync('dist/platform.js','utf8'),context);
 const run=code=>vm.runInContext(code,context),read=()=>JSON.parse(run('JSON.stringify({points:session.points,ledger:session.ledger,rounds:session.rounds})'));
 function send(type,extra={},source=el('game-frame').contentWindow,origin='https://test.local'){listeners.message({origin,source,data:{type,...extra}})}

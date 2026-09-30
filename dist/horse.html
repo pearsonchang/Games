@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+ <meta name="theme-color" content="#07111f"><meta name="description" content="选择你的赛马，观看四马竞速，按最终名次领取模拟积分。">
+ <title>星际赛马 · PLAYROOM</title>
+ <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307111f'/%3E%3Cpath d='M8 25V7m1 1h15v12H9' fill='none' stroke='%2359d8f5' stroke-width='2'/%3E%3Cpath d='M10 9h6v5h-6m6 0h7v5h-7' fill='%23b29aff'/%3E%3C/svg%3E">
+ <link rel="stylesheet" href="horse.css?v=derby2">
+</head>
+<body>
+ <div class="app">
+ <header><button id="back" class="quiet">游戏大厅</button><div class="brand"><strong>星际赛马</strong><span>ORBIT DERBY</span></div><button id="sound" class="quiet sound" aria-pressed="true" aria-label="关闭音效">♪</button><div class="wallet"><span>模拟积分</span><b id="balance">—</b></div></header>
+ <main>
+  <section class="arena" aria-label="四马竞速赛场">
+   <div class="arena-head"><div><p class="eyebrow">PLAYROOM CIRCUIT / 01</p><h1>星际赛马</h1></div><span id="phase" class="phase">等待开赛</span></div>
+   <div class="circuit" id="circuit">
+    <div class="track-header"><span>START</span><span id="race-caption">选一匹，一起冲线</span><span>FINISH</span></div>
+    <div id="track" class="track" aria-label="四条赛道"><div class="finish-line" aria-hidden="true"></div><div id="lanes"></div><div class="countdown" id="countdown" hidden aria-live="polite"></div><div id="finish-flash" aria-hidden="true"></div></div>
+    <div class="track-footer"><span id="chosen-label">你的赛马 · 01 流星</span><span id="race-clock">00.0 s</span></div>
+    <div class="race-progress" aria-hidden="true"><i id="progress"></i></div>
+   </div>
+   <div class="positions"><span id="order-label">参赛阵容</span><ol id="live-order" aria-label="当前比赛排名"></ol></div>
+   <div id="result" class="result" role="status" aria-live="polite"><div><span class="result-label">准备就绪</span><strong>谁会率先冲线？</strong></div><p>四匹赛马的夺冠概率均为 25%。</p></div>
+  </section>
+  <aside>
+   <div class="selection-title"><div><span class="eyebrow">YOUR CONTENDER</span><h2>选择你的赛马</h2></div><span id="selection-state">4 选 1</span></div>
+   <div id="horses" class="horse-options" role="group" aria-label="选择参赛马匹"></div>
+   <section class="prizes" aria-label="按名次到账的积分"><div class="section-heading"><h2>名次奖励</h2><span>包含本局投入</span></div><div id="prizes" class="prize-grid"></div></section>
+   <div class="launch-panel"><div class="entry"><span>本局消耗</span><b>50 <small>积分</small></b></div><button id="start" class="primary" disabled>连接中…</button><p id="message">倒计时后自动竞速，冲线后自动到账。</p></div>
+   <details><summary>玩法与奖励规则</summary><p>选一匹赛马，点击开赛消耗 50 模拟积分。3 秒倒计时后四马竞速，比赛约 13 秒。中途不能换马或收取。</p><p>每匹马获得任意名次的概率均为 25%。第 1–4 名分别到账 140、40、14、0 积分，含本局投入；第 2–4 名的净收益为负。理论返还率 97%，长期每局净收益期望为 −1.5 积分，单局结果会波动。</p><p>名次在开赛时随机决定，赛道动画用于展示比赛。返回大厅仍会继续比赛并自动结算；刷新大厅会重置模拟积分和记录。</p></details>
+  </aside>
+ </main>
+ <footer>PLAYROOM · 仅供体验的模拟积分</footer>
+ </div>
+ <script src="horse-engine.js?v=derby2"></script><script src="dice-audio.js"></script><script src="horse.js?v=derby2"></script>
+</body>
+</html>

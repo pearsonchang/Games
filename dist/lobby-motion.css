@@ -34,3 +34,9 @@
  .game-card .icon-motion,.game-card:hover .icon-motion,.game-card:focus-visible .icon-motion,.game-card:active .icon-motion{transform:none;transition:none}
  .game-card:hover,.game-card:active{transform:none}
 }
+
+/* Orbit Derby shares the same palette and quiet idle motion. */
+#horse-frame{display:block;width:100%;height:100%;border:0}
+.game-card[data-play=horse]{--game-accent:#83d9ee;--icon-time:4.8s;--icon-delay:-1.5s;--icon-glow:114,170,255}
+.game-card .art-horse{background-image:url('horse-gallop.png');background-size:200% 200%;background-position:100% 100%;mask-image:none;clip-path:polygon(0 0,100% 0,100% 100%,12% 100%,12% 62%,0 62%);width:145px;height:145px}
+@media(max-width:650px){.game-card .art-horse{width:110px;height:110px}}
