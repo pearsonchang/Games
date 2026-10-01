@@ -6,15 +6,18 @@
  <title>星际赛马 · PLAYROOM</title>
  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2307111f'/%3E%3Cpath d='M8 25V7m1 1h15v12H9' fill='none' stroke='%2359d8f5' stroke-width='2'/%3E%3Cpath d='M10 9h6v5h-6m6 0h7v5h-7' fill='%23b29aff'/%3E%3C/svg%3E">
  <link rel="stylesheet" href="horse.css?v=orbit-pony1">
+ <link rel="stylesheet" href="horse-park.css?v=park60">
 </head>
-<body>
+<body class="orbit-park">
+ <div class="park-backdrop" aria-hidden="true"></div>
  <div class="app">
  <header><button id="back" class="quiet">游戏大厅</button><div class="brand"><strong>星际赛马</strong><span>ORBIT DERBY</span></div><button id="sound" class="quiet sound" aria-pressed="true" aria-label="关闭音效">♪</button><div class="wallet"><span>模拟积分</span><b id="balance">—</b></div></header>
  <main>
   <section class="arena" aria-label="四马竞速赛场">
-   <div class="arena-head"><div><p class="eyebrow">PLAYROOM CIRCUIT / 01</p><h1>星际赛马</h1></div><span id="phase" class="phase">等待开赛</span></div>
-   <div class="circuit" id="circuit">
-    <div class="track-header"><span>START</span><span id="race-caption">选一匹，一起冲线</span><span>FINISH</span></div>
+   <div class="arena-head"><div><p class="eyebrow">ORBIT PARK / 01</p><h1>星际赛马</h1></div><span id="phase" class="phase">等待开赛</span></div>
+   <div class="circuit" id="circuit" data-scene="ready" data-count="0">
+    <div class="park-scene" aria-hidden="true"><img class="park-panorama" src="horse-stadium.png" alt="" draggable="false"><div class="park-sign"><span>星环乐园</span><small>ORBIT PARK</small></div><div class="park-marquee"><span id="scene-caption">准备出发</span></div></div>
+    <div class="track-header"><span class="start-signal" aria-hidden="true"><i></i><i></i><i></i></span><span id="race-caption">选一匹，一起冲线</span><span class="finish-label">终点</span></div>
     <div id="track" class="track" aria-label="四条赛道"><div class="finish-line" aria-hidden="true"></div><div id="lanes"></div><div class="race-cue" aria-hidden="true">GO!</div><div class="countdown" id="countdown" hidden aria-live="polite"></div><div id="finish-flash" aria-hidden="true"></div></div>
     <div class="track-footer"><span id="chosen-label">你的赛马 · 01 流星</span><span id="race-clock">00.0 s</span></div>
     <div class="race-progress" aria-hidden="true"><i id="progress"></i></div>
@@ -32,6 +35,6 @@
  </main>
  <footer>PLAYROOM · 仅供体验的模拟积分</footer>
  </div>
- <script src="horse-engine.js?v=orbit-pony1"></script><script src="dice-audio.js"></script><script src="horse.js?v=orbit-pony1"></script>
+ <script src="horse-engine.js?v=orbit-pony1"></script><script src="dice-audio.js"></script><script src="horse.js?v=park60"></script>
 </body>
 </html>

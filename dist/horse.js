@@ -51,6 +51,11 @@ function receive(next){
  if(newRound){if(next.state==='racing')window.scrollTo(0,0);$('result').dataset.view='';lastCount=-1;lastPhase='';lastResult='';$('finish-flash').replaceChildren();$('result').classList.remove('win');}
  const active=next.state==='racing',running=active&&next.countdown===0,phase=active?(running?'race':'count'):'idle';
  document.body.classList.toggle('sprint',running&&next.elapsed>12500);$('circuit').classList.toggle('is-racing',running&&!paused&&!document.hidden);
+ const scene=running?(next.elapsed>12500?'sprint':'race'):active?'count':next.state==='finished'?'finished':'ready';
+ $('circuit').dataset.scene=scene;$('circuit').dataset.count=phase==='count'?String(next.countdown):'0';
+ // Scenery reflects only public race progress; it never changes the race outcome.
+ const sceneCaption=scene==='finished'?'冠军 · '+HORSES[next.order[0]].name:scene==='sprint'?'冲线时刻':scene==='race'?'为 '+HORSES[selected].name+' 加油':scene==='count'?'即将出发':'准备出发';
+ if($('scene-caption').textContent!==sceneCaption)$('scene-caption').textContent=sceneCaption;
  $('circuit').classList.toggle('kickoff',running&&next.elapsed<3700&&!paused&&!document.hidden);
  $('circuit').classList.toggle('race-done',next.state==='finished');
  $('balance').textContent=points(next.balance);$('phase').textContent=active?(running?(next.elapsed>12500?'最后冲刺':'正在竞速'):'发车倒计时'):next.state==='finished'?'比赛结束':'等待开赛';
