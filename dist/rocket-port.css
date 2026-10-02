@@ -38,3 +38,11 @@
 /* Keep the companion clear of the stage footer. */
 #port-caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .rocket-game .stage-bottom{justify-content:flex-end}
+/* Each skiff engine is anchored to its own nozzle; both follow the same round thrust. */
+.rocket-game #rocket.twin-skiff img{display:block}
+.twin-skiff .engine-far{--nozzle-x:11.621%;--nozzle-y:28.906%}
+.twin-skiff .engine-near{--nozzle-x:11.589%;--nozzle-y:72.217%}
+.rocket-game #rocket.twin-skiff .engine-plume{left:var(--nozzle-x);top:var(--nozzle-y);width:38%;height:9%;transform:translate(-98%,-50%) scaleX(calc(.18 + var(--thrust,0)*.82)) scaleY(calc(.45 + var(--thrust,0)*.55))}
+.twin-skiff .engine-far .plume-shell{animation-delay:-.09s}
+.twin-skiff .engine-far .plume-core{animation-delay:-.06s}
+.twin-skiff .plume-shell,.twin-skiff .plume-core{transform-origin:100% 50%}
