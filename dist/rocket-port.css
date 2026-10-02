@@ -46,3 +46,5 @@
 .twin-skiff .engine-far .plume-shell{animation-delay:-.09s}
 .twin-skiff .engine-far .plume-core{animation-delay:-.06s}
 .twin-skiff .plume-shell,.twin-skiff .plume-core{transform-origin:100% 50%}
+
+.rocket-game .disclaimer br{display:block}
