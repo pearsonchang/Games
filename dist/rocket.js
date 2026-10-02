@@ -53,9 +53,9 @@ function render(d){
  }
  root.style.setProperty('--flight-energy',flying?String(Math.min(1,d.elapsed/1.2)):'0');
  root.style.setProperty('--danger',thrust.phase==='weakening'?String(1-thrust.power):'0');
- const x=reduce.matches?55:27+39*(1-Math.exp(-d.elapsed/1.8)),y=reduce.matches?65:70-12*(1-Math.exp(-d.elapsed/2.2));
+ const x=reduce.matches?53:38+24*(1-Math.exp(-d.elapsed/1.65)),y=reduce.matches?68:73-7*(1-Math.exp(-d.elapsed/2));
  for(const id of ['rocket','burst','recovery']){$(id).style.left=x+'%';$(id).style.top=y+'%';}
- $('route').setAttribute('d',`M 170 480 Q 420 440 ${x*10} ${y*6}`);
+ $('route').setAttribute('d',`M 240 455 Q 420 425 ${x*10} ${y*6}`);
  if(justCrashed&&presented)explode();if(justCollected&&presented)celebrate();
  if(returnAfter&&!flying){returnAfter=false;send('game-return');}
 }
