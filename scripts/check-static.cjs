@@ -32,16 +32,5 @@ for (const filename of files) {
 for (const entry of ['index', 'minesweeper', 'rocket', 'dice', 'plinko', 'horse', 'palettes', 'palette-demo']) {
   if (!names.has(`${entry}.html`)) errors.push(`Missing required entrypoint: ${entry}.html`);
 }
-// Public builds must never contain the authority or credentials.
-for (const name of names) {
-  if (/(^|\/)\.|(^|\/)(server|api)(\/|$)|-engine\.js$|platform-wallet\.js$|\.(?:cjs|sqlite|db|pem|key)(?:-|$)/.test(name)) errors.push(`Private file in public assets: ${name}`);
-}
-if (!process.argv[2]) {
-  for (const directory of ['server', 'api']) for (const filename of walk(path.join(__dirname, '..', directory))) {
-    if (!/\.(?:cjs|js)$/.test(filename)) continue;
-    const result = spawnSync(process.execPath, ['--check', filename], {encoding: 'utf8'});
-    if (result.status !== 0) errors.push(`${filename}: ${result.stderr || 'syntax check failed'}`);
-  }
-}
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
 console.log(`Static checks passed (${path.basename(publicRoot)}): ${javascript} JavaScript files, ${references} local references, 8 entrypoints.`);

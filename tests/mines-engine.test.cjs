@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {MinesRound}=require('../server/engines/mines.cjs');
+const {MinesRound}=require('../src/mines-engine.js');
 function setup(balance=1000,random=()=>0){let clock=0,credits=[],charges=[],rounds=[];const engine=new MinesRound({now:()=>clock,random,charge(n){if(balance<n)return false;balance=(Math.round(balance*100)-n*100)/100;charges.push(n);return true},credit(n){balance=(Math.round(balance*100)+Math.round(n*100))/100;credits.push(n)},onFinish:r=>rounds.push(r)});return {engine,charges,credits,rounds,balance:()=>balance,time:n=>clock=n};}
 assert.equal(MinesRound.quote(0),0);assert.equal(MinesRound.quote(1),59.52);assert.equal(MinesRound.quote(5),141.23);assert.equal(MinesRound.quote(10),467.76);assert.equal(MinesRound.quote(44),1160639588745);
 let survival=1;for(let k=1;k<=44;k++){survival*=(45-k)/(55-k);const gross=survival*MinesRound.quote(k);assert.ok(gross<=48.5+1e-10);assert.ok(gross>=48.49-1e-10);}

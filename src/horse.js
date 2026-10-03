@@ -1,6 +1,7 @@
 'use strict';
 const $=id=>document.getElementById(id),embedded=window.parent!==window,audio=new DiceAudio();
-let model=null,selected=0,busy=false,paused=false,lastCount=-1,lastPhase='',lastResult='',hoofTimer=0;
+let model=null,selected=0,busy=false,paused=false,lastCount=-1,lastPhase='',lastResult='',hoofTimer=0,localBalance=1000;
+const localRound=embedded?null:new HorseRound({charge:n=>{if(localBalance<n)return false;localBalance=(Math.round(localBalance*100)-n*100)/100;return true},credit:n=>{localBalance=(Math.round(localBalance*100)+n*100)/100}});
 const points=n=>Number(n||0).toLocaleString('zh-CN',{maximumFractionDigits:2});
 const options=[],lanes=[],runners=[];
 const horseArtwork=['horse-cyan-run.webp','horse-violet-run.webp','horse-coral-run.webp','horse-mint-run.webp'];
@@ -29,7 +30,7 @@ function send(type){
  if(busy)return;busy=true;updateSelection();updateButton();
  const d={type,selected,roundId:model?.roundId||''};
  if(embedded)window.parent.postMessage(d,location.origin);
- else showError('请从游戏大厅进入。');
+ else{if(type==='horse-start'&&!localRound.start(selected,d.roundId))showError('积分不足或本局尚未结束。');localRound.tick();receive(localRound.snapshot(localBalance));}
 }
 function updateButton(){
  const active=model?.state==='racing';$('start').disabled=busy||!model||active||model.balance<50;
@@ -71,9 +72,10 @@ function receive(next){
  updateSelection();updateButton();renderPositions();
 }
 function visibility(){stopSound();lastPhase='';document.body.classList.toggle('motion-paused',paused||document.hidden);if(paused||document.hidden)$('finish-flash').replaceChildren();if(model)receive(model)}
-window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==window.parent)return;const d=e.data;if(d?.type==='platform-offline'){busy=true;updateButton();updateSelection();$('message').textContent=d.message||'连接中断。'}else if(d?.type==='horse-state')receive(d);else if(d?.type==='horse-error')showError(d.message);else if(d?.type==='platform-pause'){paused=!!d.paused;visibility()}});
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==window.parent)return;const d=e.data;if(d?.type==='horse-state')receive(d);else if(d?.type==='horse-error')showError(d.message);else if(d?.type==='platform-pause'){paused=!!d.paused;visibility()}});
 $('start').onclick=()=>{if(!busy&&model&&model.state!=='racing'&&model.balance>=50)send('horse-start')};
 $('back').onclick=()=>{paused=true;stopSound();audio.leave();if(embedded)window.parent.postMessage({type:'game-return'},location.origin);else location.href='./'};
 $('sound').onclick=()=>{const enabled=audio.toggle();$('sound').setAttribute('aria-pressed',enabled);$('sound').setAttribute('aria-label',enabled?'关闭音效':'开启音效');$('sound').textContent=enabled?'♪':'♩';lastPhase='';if(model)receive(model)};
 document.addEventListener('pointerdown',()=>audio.unlock());document.addEventListener('keydown',()=>audio.unlock());document.addEventListener('visibilitychange',visibility);window.addEventListener('resize',renderPositions);
+setInterval(()=>{if(!embedded){localRound.tick();receive(localRound.snapshot(localBalance))}},100);
 updateSelection();send('horse-ready');

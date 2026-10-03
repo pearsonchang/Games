@@ -48,7 +48,6 @@ function showResult(r,roundId){
 }
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==parent||!e.data)return;const d=e.data;
- if(d.type==='platform-offline'){connected=false;pending=true;controls();return}
  if(d.type==='platform-pause'){platformPaused=!!d.paused;updateMotion();return}
  if(d.type==='dice-error'){pending=false;controls();$('hint').textContent=d.message;return}if(d.type!=='dice-state')return;
  connected=true;pending=false;balance=d.balance;$('balance').textContent=balance.toLocaleString();

@@ -10,8 +10,3 @@ coverage/
 
 /dist/
 /.dist-build-*/
-
-.local/
-*.sqlite
-*.sqlite-wal
-*.sqlite-shm

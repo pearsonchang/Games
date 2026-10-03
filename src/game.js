@@ -3,6 +3,8 @@ const $=id=>document.getElementById(id),game=document.querySelector('.game');
 const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)'),mineFX=new MineEffects(game,$('board'),reducedMotion);
 let model=null,paused=false,busy=false,mode='reveal',pendingResult=null,resultTimer=0,toastTimeout=0,lastInteraction=Date.now();
 const embedded=window.parent!==window;
+let localBalance=1000;
+const localRound=embedded?null:new MinesRound({charge(cost){if(localBalance<cost)return false;localBalance=(Math.round(localBalance*100)-cost*100)/100;return true},credit(amount){localBalance=(Math.round(localBalance*100)+Math.round(amount*100))/100}});
 function points(n){return Number(n||0).toLocaleString('zh-CN',{maximumFractionDigits:2});}
 function compact(n){if(n>=1e12)return (n/1e12).toFixed(2)+'万亿';if(n>=1e8)return (n/1e8).toFixed(2)+'亿';if(n>=1e5)return (n/1e4).toFixed(2)+'万';return points(n);}
 function coinType(i){return i%3===1?'green':'gold';}
@@ -14,9 +16,10 @@ function setPaused(value){paused=value;game.classList.toggle('motion-paused',val
 function resetIdle(){lastInteraction=Date.now();game.classList.remove('awaiting-pick');document.querySelectorAll('.idle-hint').forEach(n=>n.classList.remove('idle-hint'));}
 function request(type,index){
  if(busy)return;resetIdle();busy=true;updateHUD();
- const data={type,roundId:model?.roundId||'',revision:model?.revision||0,...(index===undefined?{}:{index})};
+ const data={type,roundId:model?.roundId||'',...(index===undefined?{}:{index})};
  if(embedded){window.parent.postMessage(data,location.origin);return;}
- toast('请从游戏大厅进入。');
+ let ok=true;switch(type){case 'mines-start':ok=localRound.start(data.roundId);break;case 'mines-reveal':ok=localRound.reveal(index,data.roundId);break;case 'mines-flag':ok=localRound.flag(index,data.roundId);break;case 'mines-collect':ok=localRound.collect(data.roundId);break;case 'mines-forfeit':ok=localRound.forfeit(data.roundId);break;}
+ if(!ok)toast(localBalance<50&&type==='mines-start'?'积分不足，开局需要 50 积分。':'本次操作未生效。');receive(localRound.snapshot(localBalance));
 }
 function receive(next){
  if(next.type!=='mines-state'||!Array.isArray(next.cells)||next.cells.length!==54)return;
@@ -67,14 +70,14 @@ function updateHUD(){
  $('primary').textContent=busy?'处理中…':active?(collectible?'收取 '+compact(model.payout)+' 积分':'先揭开一格'):(model.balance<50?'积分不足 · 需 50 积分':(model.state==='idle'?'开始游戏':'再玩一局')+' · 50 积分');
  $('primary').setAttribute('aria-label',active&&collectible?'收取 '+points(model.payout)+' 积分':$('primary').textContent);
  $('round-end').hidden=!active;$('round-end').disabled=busy;
- $('notice').textContent=active?'收取金额含投入 · 踩雷奖励归零':'模拟积分 · 刷新后可恢复';
+ $('notice').textContent=active?'收取金额含投入 · 踩雷奖励归零':'模拟积分 · 刷新大厅后重置';
 }
 function start(){if(model?.state==='playing')return;cancelResult();mineFX.clear();mineAudio.stop();request('mines-start');}
 function collect(){if(model?.state==='playing'&&model.opened>0)request('mines-collect');}
 function returnToLobby(){mineAudio.leave();if(embedded){setPaused(true);window.parent.postMessage({type:'game-return'},location.origin)}else location.href='./';}
 function showDialog(title,body,actions){cancelResult();mineFX.clear();$('dialogTitle').textContent=title;$('dialogText').textContent=body;$('dialogActions').replaceChildren();for(const [label,fn] of actions){const b=document.createElement('button');b.textContent=label;b.onclick=()=>{$('dialog').close();fn()};$('dialogActions').append(b)}if(!$('dialog').open)$('dialog').showModal();}
 function toast(text){clearTimeout(toastTimeout);$('toast').textContent=text;$('toast').classList.add('show');toastTimeout=setTimeout(()=>$('toast').classList.remove('show'),2400);}
-function rules(){showDialog('玩法与奖励','每局消耗 50 模拟积分，54 格中固定随机放置 10 颗雷。没有数字提示或首次保护，每次只揭开一格。金币颜色和旗帜不提供雷区线索。\n\n成功揭开至少一格后可随时收取；收取金额包含本局投入。踩雷则本局奖励归零，50 积分开局消耗不退还。全部 44 个安全格揭开后自动收取。\n\n奖励按 97% 理论返还率计算，保留两位小数并向下取整，实际返还率略低。以收取或踩雷结束时，长期平均每局净消耗约 1.5 积分；主动放弃会增加损耗，短期结果会波动。\n\n返回大厅会保留当前局；刷新会恢复当前游客的积分和进度；清除浏览器数据或会话过期会重建体验。',[['知道了',()=>{}]]);}
+function rules(){showDialog('玩法与奖励','每局消耗 50 模拟积分，54 格中固定随机放置 10 颗雷。没有数字提示或首次保护，每次只揭开一格。金币颜色和旗帜不提供雷区线索。\n\n成功揭开至少一格后可随时收取；收取金额包含本局投入。踩雷则本局奖励归零，50 积分开局消耗不退还。全部 44 个安全格揭开后自动收取。\n\n奖励按 97% 理论返还率计算，保留两位小数并向下取整，实际返还率略低。以收取或踩雷结束时，长期平均每局净消耗约 1.5 积分；主动放弃会增加损耗，短期结果会波动。\n\n返回大厅会保留当前局；刷新大厅会重置本次 Demo 的积分和进度。',[['知道了',()=>{}]]);}
 $('board').onclick=e=>{const b=e.target.closest('[data-i]');if(!b||paused||!model||model.state!=='playing')return;request(mode==='flag'?'mines-flag':'mines-reveal',Number(b.dataset.i));};
 $('board').oncontextmenu=e=>{const b=e.target.closest('[data-i]');if(b){e.preventDefault();if(model?.state==='playing'&&!paused)request('mines-flag',Number(b.dataset.i));}};
 for(const m of ['reveal','flag'])$(m).onclick=()=>{mode=m;resetIdle();updateHUD();};
@@ -82,8 +85,8 @@ $('primary').onclick=()=>model?.state==='playing'?collect():start();$('secondary
 $('round-end').onclick=()=>{const actions=model.opened>0?[['收取并结束',collect],['放弃奖励，结束本局',()=>request('mines-forfeit')],['继续游戏',()=>{}]]:[['结束本局',()=>request('mines-forfeit')],['继续游戏',()=>{}]];showDialog('结束当前局？','开局已消耗 50 积分，不会退还。'+(model.opened>0?'\n当前可以收取 '+points(model.payout)+' 积分；放弃则归零。':''),actions);};
 $('mine-sound').onclick=()=>{const on=mineAudio.toggle();$('mine-sound').setAttribute('aria-pressed',on);$('mine-sound').setAttribute('aria-label',on?'关闭音效':'开启音效');$('mine-sound').textContent=on?'♪':'♩';};
 game.addEventListener('pointerdown',()=>{resetIdle();mineAudio.unlock()});game.addEventListener('keydown',()=>{resetIdle();mineAudio.unlock()});
-window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==window.parent)return;const d=e.data;if(d?.type==='platform-offline'){busy=true;updateHUD();toast(d.message||'连接中断，请重新连接。')}else if(d?.type==='platform-pause')setPaused(!!d.paused);else if(d?.type==='mines-state')receive(d);else if(d?.type==='mines-error'){busy=false;updateHUD();toast(d.message)}});
+window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==window.parent)return;const d=e.data;if(d?.type==='platform-pause')setPaused(!!d.paused);else if(d?.type==='mines-state')receive(d);else if(d?.type==='mines-error'){busy=false;updateHUD();toast(d.message)}});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){mineAudio.stop();mineFX.clear();clearTimeout(resultTimer);resultTimer=0;}else flushResult()});
-setInterval(()=>{if(model?.state==='playing'&&model.opened===0&&!paused&&!document.hidden&&!reducedMotion?.matches&&!$('dialog').open&&Date.now()-lastInteraction>3000)game.classList.add('awaiting-pick')},1000);
+setInterval(()=>{if(!embedded&&model)receive(localRound.snapshot(localBalance));if(model?.state==='playing'&&model.opened===0&&!paused&&!document.hidden&&!reducedMotion?.matches&&!$('dialog').open&&Date.now()-lastInteraction>3000)game.classList.add('awaiting-pick')},1000);
 request('mines-ready');
 if(document.modelContext?.registerTool){try{document.modelContext.registerTool({name:'read_game',description:'Read only visible cash-out values and cells. No hidden mines or adjacency clues.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>model?{state:model.state,opened:model.opened,payout:model.payout,balance:model.balance,nextPayout:model.nextPayout,nextRisk:model.nextRisk,cells:model.cells}:{state:'loading'}})}catch{}}

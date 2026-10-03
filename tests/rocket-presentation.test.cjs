@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const {RocketRound}=require('../server/engines/rocket.cjs');
+const {RocketRound}=require('../src/rocket-engine.js');
 function harness(reduced=false,randomValue=.2){
  let now=0,balance=1000,sequence=0;const nodes=new Map(),listeners={},timers=new Map(),sounds=[],effects=[];
  const make=()=>({children:[],style:{setProperty(k,v){this[k]=v}},classList:{toggle(){}},textContent:'',innerHTML:'',disabled:false,open:false,

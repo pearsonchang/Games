@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const {MinesRound}=require('../server/engines/mines.cjs');
+const {MinesRound}=require('../src/mines-engine.js');
 function harness(reduce=false){
  const nodes=new Map(),messages=[],timeouts=new Map(),listeners={},tools={};let sequence=0,balance=1000;
  const classes=()=>{const set=new Set();return {add:(...xs)=>xs.forEach(x=>set.add(x)),remove:(...xs)=>xs.forEach(x=>set.delete(x)),toggle:(x,on)=>on?set.add(x):set.delete(x),contains:x=>set.has(x)}};

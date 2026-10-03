@@ -1,5 +1,5 @@
 const fs=require('node:fs');
-const enginePath=require.resolve('../server/engines/plinko.cjs');
+const enginePath=require.resolve('../src/plinko-engine.js');
 const {plinkoSimulate,plinkoRandom,PLINKO_LANES,PLINKO_MULT}=require(enginePath);
 const bank=PLINKO_LANES.map(()=>PLINKO_MULT.map(()=>[]));
 for(let lane=0;lane<bank.length;lane++){

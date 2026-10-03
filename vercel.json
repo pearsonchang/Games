@@ -5,11 +5,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "functions": {
-    "api/playroom.js": {
-      "includeFiles": "server/**",
-      "maxDuration": 30
-    }
-  }
+  "trailingSlash": false
 }

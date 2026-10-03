@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { DICE_TOP_ORIENTATIONS } = require('../src/dice-visual.js');
-const { DiceRound } = require('../server/engines/dice.cjs');
+const { DiceRound } = require('../src/dice-engine.js');
 const { dots, rotate } = vm.runInNewContext(
   fs.readFileSync(path.join(__dirname, '../src/dice-renderer.js'), 'utf8') +
   '\n({dots: DiceMesh.dots, rotate: diceRotate})'

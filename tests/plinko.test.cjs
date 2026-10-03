@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {PlinkoRound,plinkoPath,plinkoBallAt,plinkoSimulate,plinkoSampleSlot,plinkoRandom,PLINKO_PEGS,PLINKO_LANES,PLINKO_DROP_Y,PLINKO_MULT,PLINKO_PROBS,PLINKO_PATH_SEEDS}=require('../server/engines/plinko.cjs');
+const {PlinkoRound,plinkoPath,plinkoBallAt,plinkoSimulate,plinkoSampleSlot,plinkoRandom,PLINKO_PEGS,PLINKO_LANES,PLINKO_DROP_Y,PLINKO_MULT,PLINKO_PROBS,PLINKO_PATH_SEEDS}=require('../src/plinko-engine.js');
 function seeded(seed){return ()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);}
 for(const peg of PLINKO_PEGS){
  assert.ok(PLINKO_PEGS.some(other=>other.x===700-peg.x&&other.y===peg.y),'Every peg must have a mirrored counterpart');

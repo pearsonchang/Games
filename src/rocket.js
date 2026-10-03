@@ -61,7 +61,6 @@ function render(d){
 }
 window.addEventListener('message',e=>{
  if(e.source!==window.parent||e.origin!==location.origin||!e.data)return;
- if(e.data.type==='platform-offline'){connected=false;pending=true;$('action').disabled=true;$('message').textContent=e.data.message||'连接中断。';rocketAudio.stop();return;}
  if(e.data.type==='platform-pause'){setPaused(e.data.paused);return;}
  if(e.data.type==='rocket-state')render(e.data);
  if(e.data.type==='rocket-error'){pending=false;$('message').textContent=e.data.message;$('action').disabled=current.state!=='flying'&&current.balance<(current.cost||50);}
