@@ -58,6 +58,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden){buddyMotio
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==parent||!e.data)return;
  const d=e.data;
+ if(d.type==='platform-offline'){connected=false;cancelCharge();select();$('message').textContent=d.message||'连接中断。';return;}
  if(d.type==='plinko-error'){cancelCharge();pending=false;select();$('message').textContent=d.message;return;}
  if(d.type!=='plinko-state')return;
  connected=true;if(d.state==='dropping')pending=false;balance=d.balance;$('balance').textContent=balance.toLocaleString();

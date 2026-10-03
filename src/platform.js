@@ -6,26 +6,25 @@ const surface = document.getElementById('play-surface');
 const frames = Object.fromEntries(Object.keys(gameRoutes).map(id => [id,
   document.getElementById(id === 'minesweeper' ? 'game-frame' : `${id}-frame`)
 ]));
-const wallet = new PointsWallet();
-const session = {
-  visited: false, activeGame: 'minesweeper', loadedGames: new Set(), rounds: [],
-  get points() { return wallet.points; },
-  get ledger() { return wallet.ledger; }
-};
+const session = {visited: false, activeGame: 'minesweeper', loadedGames: new Set(), rounds: [], points: 0, ledger: []};
 let page = 'games', filter = '全部';
-const bridge = new GameBridge({
-  engines: {minesweeper: MinesRound, rocket: RocketRound, dice: DiceRound, plinko: PlinkoRound, horse: HorseRound},
-  frames, loadedGames: session.loadedGames, wallet, origin: location.origin,
-  onFinish(result) {
-    session.rounds.push({...result, time: wallet.clock()});
-    if (!platform.hidden) render();
+const api = new PlatformAPI({
+  onState(data) {
+    const changed = session.points !== data.points || JSON.stringify(session.rounds) !== JSON.stringify(data.rounds) || session.ledger.length !== data.ledger.length;
+    session.points = data.points; session.rounds = data.rounds; session.ledger = data.ledger;
+    bridge.syncAll();
+    if (changed && !platform.hidden) render();
   },
-  onReturn() { showPage('games'); },
-  onUpdate() { if (!platform.hidden) render(); }
+  onStatus(online, message) {
+    document.getElementById('connection-status').hidden = online;
+    document.getElementById('connection-note').textContent = message || '正在连接游戏服务…';
+    if (!online) bridge.offline(message);
+  }
 });
+const bridge = new GameBridge({api, frames, loadedGames: session.loadedGames, origin: location.origin, onReturn() { showPage('games'); }});
 
 function render() {
-  document.getElementById('header-points').textContent = formatPoints(wallet.points);
+  document.getElementById('header-points').textContent = api.online ? formatPoints(session.points) : '—';
   content.innerHTML = renderPlatformPage({page, session, filter});
 }
 function pauseFrames(activeGame) {
@@ -66,12 +65,22 @@ document.addEventListener('click', event => {
   else if (button.dataset.help) help(button.dataset.help);
 });
 for (const id of ['help-close', 'help-ok']) document.getElementById(id).onclick = () => document.getElementById('help').close();
-window.addEventListener('hashchange', () => showPage(location.hash.slice(1)));
+function followRoute() {
+  if (location.hash.startsWith('#play=')) play(location.hash.slice(6));
+  else showPage(location.hash.slice(1));
+}
+window.addEventListener('hashchange', followRoute);
 window.addEventListener('message', event => bridge.handle(event));
+document.getElementById('connection-retry').onclick = () => api.connect().catch(() => {});
+let lastPoll = 0;
 setInterval(() => {
-  if (!surface.hidden && session.activeGame === 'minesweeper') bridge.sync('minesweeper');
-}, 1000);
-setInterval(() => {
-  for (const id of ['rocket', 'dice', 'plinko', 'horse']) bridge.sync(id);
-}, 100);
-showPage(location.hash.slice(1));
+  if (api.pending) return;
+  const states = Object.values(api.games).map(game => game.state);
+  const moving = states.some(state => ['flying', 'racing', 'rolling', 'dropping'].includes(state));
+  const interval = document.hidden ? 5000 : moving ? 500 : states.includes('playing') ? 1000 : 5000;
+  if (Date.now() - lastPoll < interval) return;
+  lastPoll = Date.now();
+  api.refresh().catch(() => {});
+}, 500);
+followRoute();
+api.connect().catch(() => {});

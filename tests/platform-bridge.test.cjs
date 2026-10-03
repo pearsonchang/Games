@@ -1,21 +1,20 @@
+'use strict';
 const assert = require('node:assert/strict');
 const {test} = require('node:test');
-const {PointsWallet} = require('../src/platform-wallet.js');
+const {PointsWallet} = require('../server/wallet.cjs');
 const {GameBridge} = require('../src/platform-bridge.js');
-const {MinesRound} = require('../src/mines-engine.js');
-const {RocketRound} = require('../src/rocket-engine.js');
-const {DiceRound} = require('../src/dice-engine.js');
-const {PlinkoRound} = require('../src/plinko-engine.js');
-const {HorseRound} = require('../src/horse-engine.js');
+const {PlatformAPI} = require('../src/platform-api.js');
+const {initialState, evolve} = require('../server/service.cjs');
+const {randomUUID} = require('node:crypto');
 
-test('wallet rejects invalid values, protects the ledger, and applies each transaction once', () => {
-  const wallet = new PointsWallet(1000, () => 'test');
+test('server wallet validates amounts, ledger copies and transaction identity across restore', () => {
+  let wallet = new PointsWallet(1000, () => 'test');
   for (const amount of [NaN, Infinity, -1, '50', null, Number.MAX_SAFE_INTEGER]) {
-    assert.equal(wallet.charge(amount, 'bad'), false);
-    assert.equal(wallet.credit(amount, 'bad'), false);
+    assert.equal(wallet.charge(amount, 'bad'), false); assert.equal(wallet.credit(amount, 'bad'), false);
   }
   assert.equal(wallet.charge(1001, 'too much', 'retry'), false);
   assert.equal(wallet.charge(50, 'round', 'retry'), true);
+  wallet = PointsWallet.restore(JSON.parse(JSON.stringify(wallet.export())), () => 'test');
   assert.equal(wallet.charge(50, 'round', 'retry'), false);
   assert.equal(wallet.credit(59.52, 'reward', 'reward-1'), true);
   assert.equal(wallet.credit(59.52, 'reward', 'reward-1'), false);
@@ -24,53 +23,40 @@ test('wallet rejects invalid values, protects the ledger, and applies each trans
   assert.equal(wallet.ledger.length, 3);
   assert.equal(wallet.ledger.reduce((sum, e) => sum + Math.round(e.amount * 100), 0), Math.round(wallet.points * 100));
 });
-
-const engines = {minesweeper: MinesRound, rocket: RocketRound, dice: DiceRound, plinko: PlinkoRound, horse: HorseRound};
-const requests = {
-  minesweeper: {type: 'mines-start'}, rocket: {type: 'rocket-launch'},
-  dice: {type: 'dice-roll', mode: 'size', target: 'small'},
-  plinko: {type: 'plinko-drop', lane: 4}, horse: {type: 'horse-start', selected: 0}
-};
-for (const gameId of Object.keys(engines)) test(`${gameId}: stale, duplicate, foreign and missing-ID requests never start or settle another round`, () => {
-  const wallet = new PointsWallet();
-  const frames = Object.fromEntries(Object.keys(engines).map(id => [id, {contentWindow: {messages: [], postMessage(d) { this.messages.push(d); }}}]));
-  const loadedGames = new Set();
-  let now = 0, finishes = 0;
-  const bridge = new GameBridge({engines, frames, wallet, loadedGames, origin: 'https://test.local', onFinish() { finishes++; }});
-  const round = bridge.rounds[gameId]; round.now = () => now; round.random = () => .5;
-  const send = (extra = {}, source = frames[gameId].contentWindow, origin = 'https://test.local') => bridge.handle({source, origin, data: {...requests[gameId], ...extra}});
-  send({roundId: ''}); assert.equal(wallet.points, 1000); // Not loaded yet.
-  loadedGames.add(gameId);
-  send(); send({roundId: 0}); send({roundId: ''}, {}, 'https://test.local');
-  send({roundId: ''}, frames[gameId].contentWindow, 'https://foreign.local');
-  send({type: 'game-reward', amount: 100000, roundId: ''}); send({type: {}});
-  assert.equal(wallet.points, 1000);
-  send({roundId: ''}); assert.equal(wallet.points, 950);
-  const firstId = round.id;
-  send({roundId: ''}); assert.equal(round.id, firstId); assert.equal(wallet.points, 950);
-  if (gameId === 'minesweeper') send({type: 'mines-forfeit', roundId: firstId});
-  else { now = 999999; bridge.sync(gameId); }
-  assert.equal(finishes, 1);
-  const settled = wallet.points;
-  send({roundId: ''}); bridge.sync(gameId);
-  assert.equal(wallet.points, settled); assert.equal(round.id, firstId); assert.equal(finishes, 1);
-  send({roundId: firstId}); assert.equal(wallet.points, settled - 50);
-  const secondId = round.id;
-  if (gameId === 'rocket') {
-    send({type: 'rocket-collect', roundId: firstId}); assert.equal(round.state, 'flying');
-    send({type: 'rocket-collect', roundId: secondId});
-    const collected = wallet.points;
-    send({type: 'rocket-collect', roundId: secondId}); assert.equal(wallet.points, collected);
-  }
-  send({roundId: firstId}); assert.equal(round.id, secondId);
-  assert.equal(wallet.ledger.filter(e => e.amount < 0).length, 2);
+test('bridge only forwards allowed intents from a loaded same-origin game frame', async () => {
+  const source = {messages: [], postMessage(d) {this.messages.push(d);}}, calls = [];
+  const api = {online: true, games: {minesweeper: {type: 'mines-state', balance: 1000}}, async act(...args) {calls.push(args); return {action: {ok: true}};}};
+  const loadedGames = new Set(), frames = {minesweeper: {contentWindow: source}};
+  const bridge = new GameBridge({api, loadedGames, frames, origin: 'https://test.local'});
+  const event = {source, origin: 'https://test.local', data: {type: 'mines-start', roundId: '', revision: 0}};
+  await bridge.handle(event); loadedGames.add('minesweeper');
+  await bridge.handle({...event, origin: 'https://other.local'}); await bridge.handle({...event, source: {}});
+  for (const type of ['game-reward', 'wallet-credit', 'horse-start', '__proto__', {}]) await bridge.handle({...event, data: {...event.data, type}});
+  assert.equal(calls.length, 0);
+  await bridge.handle({...event, data: {type: 'mines-ready'}}); assert.equal(source.messages.at(-1).balance, 1000);
+  await bridge.handle({...event, data: {...event.data, amount: 99999, board: []}});
+  assert.deepEqual(calls, [['minesweeper', event.data]]);
+  assert.equal('rounds' in bridge, false); assert.equal('wallet' in bridge, false);
+  api.online = false; await bridge.handle(event); assert.equal(calls.length, 1); assert.equal(source.messages.at(-1).type, 'platform-offline');
 });
-
-test('an immediate rocket crash cannot turn a repeated launch into a second debit', () => {
-  const wallet = new PointsWallet(), source = {postMessage() {}};
-  const bridge = new GameBridge({engines: {rocket: RocketRound}, wallet, frames: {rocket: {contentWindow: source}}, loadedGames: new Set(['rocket']), origin: 'https://test.local'});
-  bridge.rounds.rocket.random = () => .99;
-  const event = {origin: 'https://test.local', source, data: {type: 'rocket-launch', roundId: ''}};
-  bridge.handle(event); bridge.handle(event);
-  assert.equal(bridge.rounds.rocket.state, 'crashed'); assert.equal(wallet.points, 950);
+test('client retries an uncertain response with the same request ID, never double-debits or invents credits', async () => {
+  let state = initialState(), loseNext = false;
+  const sent = [], observed = [], status = [];
+  const api = new PlatformAPI({uuid: randomUUID, onState: r => observed.push(r), onStatus: online => status.push(online), fetcher: async (_, options) => {
+    const body = JSON.parse(options.body); sent.push(body);
+    const r = evolve(state, body, {now: 1000, random: () => 0}); state = r.data;
+    if (loseNext) {loseNext = false; throw new Error('Response lost after commit');}
+    return {ok: true, json: async () => r.response};
+  }});
+  await api.connect(); loseNext = true;
+  await api.act('minesweeper', {type: 'mines-start', roundId: '', revision: 0});
+  assert.equal(sent.length, 3); assert.equal(sent[1].requestId, sent[2].requestId);
+  assert.equal(observed.at(-1).points, 950); assert.equal(state.wallet.entries.length, 2);
+  assert.equal('board' in api.games.minesweeper, false); assert.equal(typeof api.credit, 'undefined');
+  const version = api.version;
+  api.fetcher = async () => ({ok: true, json: async () => ({version: 0, games: {}, points: 999999})});
+  await api.refresh(); assert.equal(api.version, version); assert.equal(observed.at(-1).points, 950);
+  api.fetcher = async () => {throw new Error('offline');};
+  await assert.rejects(api.act('minesweeper', {type: 'mines-collect', roundId: 'mines-1', revision: 1}), /offline/);
+  assert.equal(api.online, false); assert.equal(status.at(-1), false); assert.equal(observed.at(-1).points, 950);
 });

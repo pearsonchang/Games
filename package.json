@@ -2,13 +2,15 @@
   "name": "playroom-gamefi-demo",
   "version": "0.1.0",
   "private": true,
-  "description": "PLAYROOM five-game static demo with simulated points",
+  "description": "PLAYROOM five-game server-authoritative demo with simulated points",
   "engines": {
-    "node": ">=22"
+    "node": "24.x"
   },
   "scripts": {
     "check": "node scripts/check-static.cjs",
     "test": "node --test",
-    "build": "node scripts/build.cjs"
+    "build": "node scripts/build.cjs",
+    "start": "node scripts/dev-server.cjs",
+    "dev": "node scripts/dev-server.cjs"
   }
 }

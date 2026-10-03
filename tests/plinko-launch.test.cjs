@@ -11,7 +11,7 @@ function harness(){
  const document={getElementById:el,body:el('body'),hidden:false,querySelectorAll:s=>s==='[data-lane]'?entries:slots,querySelector:s=>s==='.arena'?el('arena'):slots[Number(s.match(/\d+/)[0])],addEventListener:(name,f)=>listeners[name]=f};
  const parent={postMessage:d=>sent.push(d)};
  const context=vm.createContext({document,parent,location:{origin:'https://test.local'},window:{addEventListener:(name,f)=>listeners[name]=f},performance:{now:()=>now},matchMedia:()=>({matches:false}),requestAnimationFrame:()=>{},setTimeout:f=>{timers.set(++seq,f);return seq},clearTimeout:id=>timers.delete(id),plinkoAudio:new Proxy({toggle:()=>false},{get:(o,k)=>o[k]||(()=>{})})});
- vm.runInContext(fs.readFileSync('src/plinko-engine.js','utf8'),context);
+ vm.runInContext(fs.readFileSync('src/plinko-rules.js','utf8'),context);
  vm.runInContext(fs.readFileSync('src/plinko.js','utf8'),context);
  const snapshot=(data={})=>listeners.message({origin:'https://test.local',source:parent,data:{type:'plinko-state',state:'idle',roundId:'',balance:1000,elapsed:0,lane:2,...data}});
  return {el,sent,entries,document,listeners,snapshot,error:()=>listeners.message({origin:'https://test.local',source:parent,data:{type:'plinko-error',message:'Try again'}}),click:()=>el('launch').onclick(),dropCount:()=>sent.filter(d=>d.type==='plinko-drop').length,advance:()=>{now+=220;for(const [id,fn] of [...timers]){timers.delete(id);fn()}},timerCount:()=>timers.size};

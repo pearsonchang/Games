@@ -30,11 +30,11 @@
    <div id="horses" class="horse-options" role="group" aria-label="选择参赛马匹"></div>
    <section class="prizes" aria-label="按名次到账的积分"><div class="section-heading"><h2>名次奖励</h2><span>包含本局投入</span></div><div id="prizes" class="prize-grid"></div></section>
    <div class="launch-panel"><div class="entry"><span>本局消耗</span><b>50 <small>积分</small></b></div><button id="start" class="primary" disabled>连接中…</button><p id="message">倒计时后自动竞速，冲线后自动到账。</p></div>
-   <details><summary>玩法与奖励规则</summary><p>选一匹赛马，点击开赛消耗 50 模拟积分。3 秒倒计时后四马竞速，比赛约 13 秒。中途不能换马或收取。</p><p>每匹马获得任意名次的概率均为 25%。第 1–4 名分别到账 140、40、14、0 积分，含本局投入；第 2–4 名的净收益为负。理论返还率 97%，长期每局净收益期望为 −1.5 积分，单局结果会波动。</p><p>名次在开赛时随机决定，赛道动画用于展示比赛。返回大厅仍会继续比赛并自动结算；刷新大厅会重置模拟积分和记录。</p></details>
+   <details><summary>玩法与奖励规则</summary><p>选一匹赛马，点击开赛消耗 50 模拟积分。3 秒倒计时后四马竞速，比赛约 13 秒。中途不能换马或收取。</p><p>每匹马获得任意名次的概率均为 25%。第 1–4 名分别到账 140、40、14、0 积分，含本局投入；第 2–4 名的净收益为负。理论返还率 97%，长期每局净收益期望为 −1.5 积分，单局结果会波动。</p><p>名次在开赛时随机决定，赛道动画用于展示比赛。返回大厅仍会继续比赛并自动结算；刷新大厅可恢复当前游客的模拟积分和记录。</p></details>
   </aside>
  </main>
  <footer>PLAYROOM · 仅供体验的模拟积分</footer>
  </div>
- <script src="horse-engine.js"></script><script src="dice-audio.js"></script><script src="horse.js"></script>
+ <script src="game-host.js" data-game="horse"></script><script src="horse-rules.js"></script><script src="dice-audio.js"></script><script src="horse.js"></script>
 </body>
 </html>
