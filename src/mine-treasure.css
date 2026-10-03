@@ -1,0 +1,107 @@
+/* A restrained expedition cabinet: the board stays the brightest working surface. */
+.arcade-mines{overflow-x:clip}
+.arcade-mines .treasure-mode{background:none;border:0}
+.treasure-mode .intro{position:relative;min-height:88px;margin-bottom:12px}
+.expedition-label{display:block;font-size:10px;letter-spacing:2px;color:#83abcf;margin-bottom:4px}
+.treasure-mode h1{font-size:27px;letter-spacing:1px;margin-bottom:4px;color:#eef6ff}
+.treasure-mode #title{font-size:14px;color:#b8d4eb;line-height:1.5}
+.treasure-mode #description{font-size:12px;color:#9caec9;line-height:1.6;max-width:290px}
+.treasure-mode #stats{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:70px;margin:0 0 10px;padding:12px 16px;background:linear-gradient(110deg,#152c47,#151c39);border:1px solid #4779b36b;border-radius:12px;box-shadow:inset 0 1px #b2e9ff12}
+.treasure-mode #stats .score-stat{text-align:left;min-width:0}
+.treasure-mode #payout-label{font-size:12px;color:#b0c5dd;display:block}
+.treasure-mode .treasure-amount{display:flex;align-items:baseline;gap:6px}
+.treasure-mode #stats #coins{font-size:27px;line-height:1.2;letter-spacing:-.3px;color:#ffd27a;overflow-wrap:anywhere}
+.treasure-amount small{font-size:12px;color:#d6bc8b}
+.treasure-mode #stats #exploration{white-space:nowrap;text-align:right;font-size:12px;color:#adc0da;border-left:1px solid #6581a636;padding-left:15px}
+.treasure-mode #stats #opened{display:inline;font-size:18px;color:#72dbe9;letter-spacing:0}
+.treasure-mode .board-caption{font-size:12px;color:#9db3cf;letter-spacing:0;margin-bottom:6px}
+.board-instruments{display:flex;gap:11px;font-size:11px}.board-instruments b{font-weight:500;color:#bbcee8;font-variant-numeric:tabular-nums}
+.treasure-mode .board-shell{border-radius:14px;padding:5px;background:linear-gradient(145deg,#227b99,#193053 35%,#253461 75%,#624d9b);border-color:#609ab875;box-shadow:inset 0 1px #c1f5ff4f,0 5px 0 #050e22,0 12px 26px #03081766}
+.treasure-mode #board{border-radius:9px;background:#09172a;gap:5px}
+.treasure-mode .art-cube{border-color:hsl(var(--tile-h) 70% 70% / .55);background:linear-gradient(160deg,hsl(var(--tile-h) 54% 42%),hsl(var(--tile-h) 49% 30%));box-shadow:inset 0 1px #cbecff3b,0 3px 0 hsl(var(--tile-h) 48% 18%);border-radius:6px}
+.treasure-mode .art-cube:before{inset:4px;border-color:#b8dfff17;background:none;border-radius:3px}
+.treasure-mode .cell{border-radius:6px}.treasure-mode .cell.is-open{background:#0b2135;box-shadow:inset 0 1px 4px #0006,0 1px #4c73962b}
+.treasure-mode .art-gold,.treasure-mode .art-green{box-shadow:0 2px 0 var(--coin-edge),0 3px 5px #0004,inset 0 1px #fff4c860}
+.arcade-mines .treasure-mode .primary,.arcade-mines .treasure-mode.can-claim .primary{background:linear-gradient(110deg,#49cfff,#9477f5);border:1px solid #beeaffaa;color:#0a1b35;box-shadow:0 3px 0 #34336d,inset 0 1px #fff4;font-weight:750;font-size:16px;min-height:46px}
+.treasure-mode .next-step{font-size:12px;color:#adbfda}.treasure-mode .next-step b{font-size:15px}
+.treasure-mode .bottom{background:none}.treasure-mode #notice{font-size:12px;color:#91a9c5}
+@media(min-width:851px){.treasure-mode .play-layout{grid-template-rows:auto 1fr;column-gap:34px}.treasure-mode .intro{grid-area:1/2;margin:0;padding-top:18px}.treasure-mode .board-panel{grid-area:1/1/3/2;width:min(100%,410px)}.treasure-mode .bottom{grid-area:2/2}.treasure-mode #description{font-size:14px;margin-top:8px}.treasure-mode h1{font-size:30px}.treasure-mode .board-panel #stats{padding:12px 16px}.treasure-mode #board{grid-template-rows:repeat(9,minmax(32px,1fr))}}
+@media(max-width:850px){.treasure-mode .board-panel{width:min(100%,340px)}.treasure-mode .bottom{width:min(100%,340px);padding-top:15px}.treasure-mode .intro{max-width:340px;margin-inline:auto}.treasure-mode #board{grid-template-rows:repeat(9,minmax(29px,1fr));aspect-ratio:6/7.8}.treasure-mode .reward-note{font-size:11px}.treasure-mode .reward-note b{font-size:19px}.treasure-mode .mode{min-height:39px}.treasure-mode .next-step{padding-block:8px 10px}}
+/* Background art stays quiet; the interaction layer is independent of the illustration. */
+.expedition-scenery{position:fixed;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(#07111f22,#07111f44),url('mine-ruins.webp') center bottom/cover no-repeat;opacity:.64}
+.arcade-mines .treasure-mode header{margin-bottom:10px;background:#07111f75;gap:8px}
+.treasure-mode header .reward-note{display:block!important;flex-shrink:0;text-align:right;font-size:11px;line-height:1.4;margin:0 5px 0 0;padding:0;border:0;color:#a8bad2}
+.treasure-mode header .reward-note b{display:block;margin:0;font-size:18px;line-height:1.3;color:#ffd27a;text-shadow:none}
+.treasure-mode .intro-copy{position:relative;z-index:2;max-width:65%}
+.treasure-mode .intro{min-height:102px;margin-bottom:8px;align-items:flex-start}
+.treasure-mode #title{font-size:13px;color:#bcd9e9}
+.treasure-mode #description{margin-top:5px;font-size:12px;line-height:1.6;color:#a2b6cd}
+.explorer-perch{position:absolute;right:-11px;bottom:-13px;width:137px;z-index:3;pointer-events:none;user-select:none;transform-origin:50% 95%}
+#explorer-cat{display:block;width:100%;height:auto;transform-origin:50% 90%}
+.treasure-mode #stats{position:relative;gap:9px;padding:10px 12px;min-height:72px;background:linear-gradient(110deg,#142c46f5,#121d37f5);border-color:#5789b267;margin-bottom:8px}
+#treasure-chest{display:block;width:57px;height:57px;object-fit:contain;flex-shrink:0;transform-origin:50% 90%;pointer-events:none;user-select:none}
+.treasure-mode #stats .score-stat{flex:1}
+.treasure-mode #stats #coins{font-size:25px}
+.treasure-mode #stats #exploration{padding-left:9px;max-width:85px;white-space:normal;line-height:1.7;font-size:11px}
+.treasure-mode #stats #opened{font-size:17px}
+.treasure-mode .board-shell:before,.treasure-mode .board-shell:after{animation:none;box-shadow:none;opacity:.7;width:36px;height:3px}
+.treasure-mode .board-shell:before{border-radius:0 0 3px 3px;left:18px}.treasure-mode .board-shell:after{border-radius:3px 3px 0 0;right:18px}
+.treasure-mode .progress-track{height:2px;margin-bottom:7px;opacity:.85}
+.treasure-mode .art-cube:after{width:17%;height:17%;left:41.5%;top:41.5%;border-color:#c0e9ff70;background:#83cfff0c}
+.treasure-mode .cell:nth-child(n){--tile-h:218}
+.treasure-mode .cell:nth-child(n+19){--tile-h:226}.treasure-mode .cell:nth-child(n+37){--tile-h:236}
+.treasure-mode .art-gold{--coin-face:#ffce68;--coin-rim:#ffe8a4;--coin-edge:#bc803b;--coin-ink:#955719}
+.treasure-mode .art-green{--coin-face:#5be0b9;--coin-rim:#b3ffe4;--coin-edge:#298775;--coin-ink:#126750}
+.treasure-mode .coin-value{font-size:21px;color:var(--coin-ink);font-weight:600}
+.treasure-mode .score-flight{font-size:15px;color:#ffe0a0;text-shadow:0 2px 5px #081526}
+.treasure-mode .score-light{width:4px;height:4px;box-shadow:none}
+.treasure-mode .claim-spark{position:absolute;font-size:15px;line-height:1;color:#ffd576;text-shadow:0 1px 4px #051327;pointer-events:none}
+.treasure-mode.awaiting-pick .board-shell:before{animation:rail-glimmer 3.6s ease-in-out infinite}
+.treasure-mode.is-lost #stats{border-color:#c97a8570}.treasure-mode.is-lost #coins{color:#ee9daa}
+.treasure-mode.is-won #stats{border-color:#edc879a3;background:linear-gradient(110deg,#273349,#19233c)}
+.arcade-mines .treasure-mode .primary:disabled{background:#273b60;border-color:#6483ad65;color:#c1d3e8;opacity:.7;box-shadow:none}
+.treasure-mode .sub-actions .secondary{font-size:12px;min-height:32px}
+@media(min-width:851px){
+ .expedition-scenery{background-size:100% 100%;opacity:.58}
+ .arcade-mines .treasure-mode{width:min(100%,1000px)}
+ .treasure-mode .play-layout{grid-template-columns:minmax(0,1fr)290px;column-gap:38px}
+ .treasure-mode .intro{min-height:0;padding-top:140px;margin-bottom:2px}
+ .treasure-mode .intro-copy{max-width:none}.treasure-mode .explorer-perch{top:5px;bottom:auto;left:28px;right:auto;width:208px}
+ .treasure-mode #description{font-size:14px;margin-top:6px}.treasure-mode #title{font-size:14px}
+ .treasure-mode .board-panel{width:min(100%,max(325px,calc((100svh - 208px)*.77)));max-width:430px}
+ .treasure-mode #stats #coins{font-size:28px}.treasure-mode #stats #exploration{font-size:12px;max-width:none}
+ .treasure-mode .bottom{padding:18px;background:#0d1c32e8;border:1px solid #4779a74a;border-radius:14px}
+ .treasure-mode .next-step{font-size:12px;padding:11px 2px 14px}.treasure-mode #notice{margin-top:3px;line-height:1.6}
+ .treasure-mode h1{margin-bottom:7px}.treasure-mode #modes{margin:0}
+}
+@media(max-width:850px){
+ .arcade-mines .treasure-mode{padding-inline:16px;padding-bottom:10px}
+ .treasure-mode .intro,.treasure-mode .board-panel,.treasure-mode .bottom{width:min(100%,320px);max-width:320px}
+ .treasure-mode .intro{padding-top:0}.treasure-mode .intro-copy{max-width:210px;padding-right:8px}
+ .treasure-mode .bottom{padding-top:13px}.treasure-mode #board{aspect-ratio:6/7.8;gap:5px;padding:8px}
+ .treasure-mode .board-caption{font-size:11px}.treasure-mode .board-instruments{font-size:10px;gap:7px}
+ .treasure-mode .mode{min-height:38px;padding-block:6px}.treasure-mode .next-step{font-size:11px;padding:7px 2px 9px}.treasure-mode .next-step b{font-size:14px}
+ .treasure-mode h1{font-size:26px}.treasure-mode #notice{font-size:11px;line-height:1.5}
+ .arcade-mines .treasure-mode header{height:56px}.treasure-mode header .game-brand{margin:0}.treasure-mode header .plain{font-size:12px;padding:6px 9px}
+}
+@media(max-width:359px){
+ .arcade-mines .treasure-mode{padding-inline:12px}.treasure-mode header{gap:6px!important}.treasure-mode header strong{font-size:13px}.treasure-mode header .reward-note{font-size:10px;margin-right:0}.treasure-mode header .reward-note b{font-size:16px}
+ .treasure-mode header .plain{font-size:11px;padding-inline:6px}.treasure-mode header .menu,.treasure-mode header .mine-sound{width:28px;height:28px}
+ .treasure-mode .intro-copy{max-width:185px}.treasure-mode .explorer-perch{width:119px;right:-4px;bottom:-11px}
+ .treasure-mode #stats{gap:6px;padding:9px}#treasure-chest{width:47px;height:47px}.treasure-mode #payout-label{font-size:11px}.treasure-mode #stats #coins{font-size:23px}
+ .treasure-mode #stats #exploration{font-size:10px;max-width:67px;padding-left:7px}.treasure-mode .treasure-amount{gap:4px}.treasure-amount small{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){.treasure-mode.awaiting-pick .board-shell:before{animation:none!important}}
+.expedition-scenery{z-index:0;background-size:100% 100%}
+.arcade-mines .treasure-mode{z-index:1}
+@media(max-width:850px){
+ .treasure-mode .expedition-label{display:none}.treasure-mode .intro{min-height:89px}.treasure-mode .intro h1{margin-bottom:4px}.treasure-mode #description{margin-top:3px}
+ .treasure-mode #stats{min-height:64px;padding-block:6px}.treasure-mode #treasure-chest{width:50px;height:50px}
+ .treasure-mode #board{aspect-ratio:6/7.2}
+ .arcade-mines .treasure-mode .mode{min-height:34px;padding:5px 12px;font-size:14px;line-height:22px}
+ .treasure-mode .next-step{padding-block:5px 7px;line-height:1.4}.treasure-mode .next-step b{line-height:1.4}
+}
+
+.treasure-mode #stats #exploration{min-width:61px;max-width:none;white-space:nowrap;font-size:11px}
+.exploration-label,.exploration-count{display:block}.exploration-count{font-variant-numeric:tabular-nums}
+.treasure-mode .board-shell{box-shadow:inset 0 1px #c1f5ff4f,0 5px 0 #050e22,0 8px 20px #03081766}

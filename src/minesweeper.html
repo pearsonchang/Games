@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f"><meta name="description" content="逐格揭开金币，避开固定雷区。无数字提示，第一格也可能踩雷。PLAYROOM 金币扫雷演示。">
+<title>金币扫雷 · PLAYROOM</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffac36' d='M16 2 29 9v15L16 31 3 24V9z'/%3E%3Cpath fill='%23906228' d='m16 16 13-7v15l-13 7z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="arcade-theme.css"><link rel="stylesheet" href="theme-a.css"><link rel="stylesheet" href="mine-chamber.css"><link rel="stylesheet" href="mine-treasure.css">
+</head>
+<body class="arcade-mines">
+<div class="expedition-scenery" aria-hidden="true"></div>
+<main class="game playing cash-mode treasure-mode" aria-label="金币扫雷游戏">
+ <header><button id="close" class="plain">游戏大厅</button><div class="game-brand"><strong>金币扫雷</strong><span>COINSWEEPER</span></div><div class="reward-note">模拟积分 <b id="balance-value">—</b></div><button id="mine-sound" class="mine-sound" aria-pressed="true" aria-label="关闭音效" title="音效开关">♪</button><button id="menu" class="menu" aria-label="游戏菜单">•••</button></header>
+ <div class="play-layout">
+ <section class="intro"><div class="intro-copy"><span class="expedition-label">COIN EXPEDITION</span><h1>星际寻宝</h1><p id="title">揭开封印，发现宝藏</p><p id="description">每局 50 积分，成功揭开后可随时收取。</p></div><div class="explorer-perch" aria-hidden="true"><img id="explorer-cat" src="mine-explorer.webp" alt="" width="1536" height="1024" draggable="false"></div></section>
+ <section class="board-panel" aria-label="扫雷棋盘">
+  <div id="stats"><img id="treasure-chest" src="mine-treasure-chest.webp" alt="" width="1254" height="1254" aria-hidden="true" draggable="false"><span class="score-stat"><span id="payout-label">可收取 · 含投入</span><span class="treasure-amount"><b id="coins">0</b><small>积分</small></span></span><span id="exploration"><span class="exploration-label">已揭开</span><span class="exploration-count"><b id="opened">0</b> / 44</span></span></div>
+  <div class="board-caption"><span id="board-label">54 格 · 10 颗雷</span><span class="board-instruments"><span>旗帜 <b id="mines">10</b></span><span>用时 <b id="timer">00:00</b></span></span></div>
+  <div class="progress-track" aria-hidden="true"><i id="progress-fill"></i></div>
+  <div class="board-shell"><div id="board" role="group" aria-label="9 行 6 列扫雷棋盘"></div><div id="board-effects" aria-hidden="true"></div></div>
+ </section>
+ <div class="bottom">
+  <div id="modes" role="group" aria-label="选择操作模式"><button id="reveal" class="mode active" aria-pressed="true"><span aria-hidden="true">◈</span> 揭开</button><button id="flag" class="mode" aria-pressed="false"><span aria-hidden="true">⚑</span> 插旗</button></div>
+  <div id="next-step" class="next-step"><span>再揭开一格<b id="next-payout">—</b></span><span>下一次踩雷概率<b id="next-risk">18.52%</b></span></div>
+  <button id="primary" class="primary" disabled>载入中…</button>
+  <div class="sub-actions"><button id="round-end" class="secondary" hidden>结束本局</button><button id="secondary" class="secondary">玩法与奖励</button></div>
+  <p id="notice">模拟积分 · 收取金额含本局投入</p>
+ </div>
+ </div>
+ <div id="scene-effects" aria-hidden="true"></div>
+ <dialog id="dialog" aria-labelledby="dialogTitle" aria-describedby="dialogText"><button id="dismiss" aria-label="关闭弹窗">×</button><span class="eyebrow">COINSWEEPER</span><h2 id="dialogTitle"></h2><p id="dialogText"></p><div id="dialogActions"></div></dialog>
+ <div id="toast" role="status" aria-live="polite"></div>
+ <div id="round-status" class="sr-only" role="status" aria-live="polite"></div>
+</main>
+<script src="dice-audio.js"></script><script src="mine-audio.js"></script><script src="mine-effects.js"></script><script src="mines-engine.js"></script><script src="game.js"></script>
+</body>
+</html>

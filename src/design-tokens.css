@@ -1,0 +1,12 @@
+/* PLAYROOM palette A: shared by the lobby and game controls. */
+:root {
+  --pr-background: #07111f;
+  --pr-stage: #0c1729;
+  --pr-surface: #101d33;
+  --pr-border: rgba(111, 168, 255, .18);
+  --pr-primary: #49cfff;
+  --pr-secondary: #a28aff;
+  --pr-reward: #ffc857;
+  --pr-text: #edf1f7;
+  --pr-muted: #aab4c5;
+}

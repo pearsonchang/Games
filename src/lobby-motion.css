@@ -1,0 +1,44 @@
+/* Small, staggered movements keep the game art lively without moving the UI. */
+.game-card{--icon-time:5.8s;--icon-delay:-1.2s;--icon-glow:70,217,255}
+.game-card[data-play=rocket]{--icon-time:4.6s;--icon-delay:-2.1s;--icon-glow:149,118,255}
+.game-card[data-play=dice]{--icon-time:6.4s;--icon-delay:-3.3s;--icon-glow:180,135,255}
+.game-card[data-play=plinko]{--icon-time:5.2s;--icon-delay:-.6s;--icon-glow:73,218,199}
+.game-card .cover{isolation:isolate}
+.game-card .cover::before{content:'';position:absolute;inset:4% 9% 0;border-radius:50%;background:radial-gradient(ellipse,rgba(var(--icon-glow),.22),rgba(var(--icon-glow),.07) 42%,transparent 70%);opacity:.65;pointer-events:none;animation:icon-aura var(--icon-time) ease-in-out var(--icon-delay) infinite}
+.game-card .cover::after{content:'';position:absolute;bottom:9%;left:25%;width:50%;height:8%;border-radius:50%;background:radial-gradient(ellipse,rgba(var(--icon-glow),.17),transparent 72%);pointer-events:none;animation:icon-ground var(--icon-time) ease-in-out var(--icon-delay) infinite}
+.icon-motion{position:relative;z-index:1;display:grid;place-items:center;pointer-events:none;transition:transform .3s ease}
+.icon-motion .lobby-art{animation:icon-float var(--icon-time) ease-in-out var(--icon-delay) infinite;transform-origin:50% 65%;transition:filter .3s ease}
+.game-card .card-category{z-index:3;pointer-events:none}
+.game-card .art-rocket{background-image:url('rocket-icon-orbit.webp');background-size:100% auto;background-position:center;mask-image:none;animation-name:icon-boost}
+.game-card[data-play=rocket] .icon-spark{display:none}
+.game-card .art-dice{position:relative;top:6px}
+.icon-spark{position:absolute;z-index:2;width:3px;height:3px;border-radius:1px;background:var(--game-accent);box-shadow:0 0 7px rgba(var(--icon-glow),.55);opacity:0;animation:icon-spark 5.8s ease-in-out var(--icon-delay) infinite}
+.icon-spark:first-child{left:9%;top:54%}
+.icon-spark:last-child{right:12%;top:25%;width:2px;height:2px;animation-delay:calc(var(--icon-delay) - 2.8s)}
+.game-card[data-play=rocket] .icon-spark:first-child{background:#ffc16c;box-shadow:0 0 7px #ffac6166;left:16%;top:71%}
+.game-card:focus-visible .icon-motion{transform:translateY(-3px) scale(1.045)}
+.game-card:focus-visible .lobby-art{filter:brightness(1.1)}
+@media(hover:hover) and (pointer:fine){
+ .game-card:hover .icon-motion{transform:translateY(-3px) scale(1.045)}
+ .game-card:hover .lobby-art{filter:brightness(1.1)}
+}
+.game-card:active .icon-motion{transform:scale(.97)}
+@keyframes icon-float{0%,100%{transform:translateY(2px) rotate(-1deg)}50%{transform:translateY(-4px) rotate(1deg)}}
+@keyframes icon-boost{0%,100%{transform:translate(-1px,2px) rotate(-1deg)}50%{transform:translate(2px,-4px) rotate(1deg)}}
+@keyframes icon-aura{0%,100%{opacity:.5;transform:scale(.94)}50%{opacity:.85;transform:scale(1.06)}}
+@keyframes icon-ground{0%,100%{opacity:.8;transform:scaleX(1)}50%{opacity:.45;transform:scaleX(.85)}}
+@keyframes icon-spark{0%,24%,76%,100%{opacity:0;transform:translateY(2px) rotate(45deg) scale(.6)}45%,55%{opacity:.7;transform:translateY(-3px) rotate(45deg) scale(1)}}
+@media(prefers-reduced-motion:reduce){
+ .game-card .lobby-art,.game-card .cover::before,.game-card .cover::after,.icon-spark{animation:none;transform:none}
+ .icon-spark{opacity:.3}
+ .game-card .icon-motion,.game-card:hover .icon-motion,.game-card:focus-visible .icon-motion,.game-card:active .icon-motion{transform:none;transition:none}
+ .game-card:hover,.game-card:active{transform:none}
+}
+
+/* Orbit Derby shares the same palette and quiet idle motion. */
+#horse-frame{display:block;width:100%;height:100%;border:0}
+.game-card[data-play=horse]{--game-accent:#83d9ee;--icon-time:4.8s;--icon-delay:-1.5s;--icon-glow:114,170,255}
+.game-card .art-horse{background-image:url('orbit-horse-icon.webp');background-size:contain;background-position:center;mask-image:none;clip-path:none;width:156px;height:156px}
+@media(max-width:650px){.game-card .art-horse{width:118px;height:118px}}
+
+.game-card[data-play=horse] .icon-spark{display:none}

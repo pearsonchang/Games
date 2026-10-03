@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const {MinesRound}=require('../dist/mines-engine.js');
+const {MinesRound}=require('../src/mines-engine.js');
 function harness(reduce=false){
  const nodes=new Map(),messages=[],timeouts=new Map(),listeners={},tools={};let sequence=0,balance=1000;
  const classes=()=>{const set=new Set();return {add:(...xs)=>xs.forEach(x=>set.add(x)),remove:(...xs)=>xs.forEach(x=>set.delete(x)),toggle:(x,on)=>on?set.add(x):set.delete(x),contains:x=>set.has(x)}};
@@ -10,7 +10,7 @@ function harness(reduce=false){
  const parent={postMessage(d){messages.push(d);switch(d.type){case 'mines-start':engine.start(d.roundId);break;case 'mines-reveal':engine.reveal(d.index,d.roundId);break;case 'mines-flag':engine.flag(d.index,d.roundId);break;case 'mines-collect':engine.collect(d.roundId);break;case 'mines-forfeit':engine.forfeit(d.roundId);break;}if(d.type!=='game-return')listeners.message({origin:'https://test.local',source:parent,data:engine.snapshot(balance)})}};
  const fx={};for(const name of ['play','clear','flag','reveal','explode','win','dialog'])fx[name]=()=>{};
  const ctx=vm.createContext({document,window:{parent,matchMedia:()=>({matches:reduce}),addEventListener:(n,f)=>listeners[n]=f},location:{origin:'https://test.local'},MinesRound,MineEffects:class{constructor(){Object.assign(this,fx)}},mineAudio:new Proxy({toggle:()=>true},{get:(o,k)=>o[k]||(()=>{})}),setTimeout:f=>{timeouts.set(++sequence,f);return sequence},clearTimeout:id=>timeouts.delete(id),setInterval:()=>{},Date,console});
- vm.runInContext(fs.readFileSync('dist/game.js','utf8'),ctx);const run=s=>vm.runInContext(s,ctx);
+ vm.runInContext(fs.readFileSync('src/game.js','utf8'),ctx);const run=s=>vm.runInContext(s,ctx);
  return {el,document,messages,engine,balance:()=>balance,run,tools,flush:()=>{for(const [id,fn] of [...timeouts]){timeouts.delete(id);fn()}},visibility:()=>listeners.visibilitychange(),pause:value=>listeners.message({origin:'https://test.local',source:parent,data:{type:'platform-pause',paused:value}}),click:i=>el('board').onclick({target:{closest:()=>({dataset:{i:String(i)}})}})};
 }
 {

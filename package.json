@@ -9,6 +9,6 @@
   "scripts": {
     "check": "node scripts/check-static.cjs",
     "test": "node --test",
-    "build": "npm run check && npm test"
+    "build": "node scripts/build.cjs"
   }
 }

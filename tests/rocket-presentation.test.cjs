@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const {RocketRound}=require('../dist/rocket-engine.js');
+const {RocketRound}=require('../src/rocket-engine.js');
 function harness(reduced=false,randomValue=.2){
  let now=0,balance=1000,sequence=0;const nodes=new Map(),listeners={},timers=new Map(),sounds=[],effects=[];
  const make=()=>({children:[],style:{setProperty(k,v){this[k]=v}},classList:{toggle(){}},textContent:'',innerHTML:'',disabled:false,open:false,
@@ -13,7 +13,7 @@ function harness(reduced=false,randomValue=.2){
  const ctx=vm.createContext({document,window:{parent,matchMedia:()=>({matches:reduced,addEventListener(){}}),addEventListener:(n,f)=>listeners[n]=f},location:{origin:'https://test.local'},rocketAudio:audio,rocketScenery:{setFlight(){},setPaused(){}},setTimeout:f=>{timers.set(++sequence,f);return sequence},clearTimeout:n=>timers.delete(n),console});
  const message=data=>listeners.message({origin:'https://test.local',source:parent,data});
  function sync(){message(engine.snapshot(balance))}
- vm.runInContext(fs.readFileSync('dist/rocket.js','utf8'),ctx);
+ vm.runInContext(fs.readFileSync('src/rocket.js','utf8'),ctx);
  return {el,engine,document,sounds,effects,sync,balance:()=>balance,advance:t=>{now+=t;sync()},pause:p=>message({type:'platform-pause',paused:p}),flush(){for(const f of [...timers.values()])f();timers.clear()},untrusted(){listeners.message({origin:'https://other.local',source:parent,data:{type:'rocket-state',state:'crashed'}})},visibility:()=>listeners.visibilitychange()};
 }
 {

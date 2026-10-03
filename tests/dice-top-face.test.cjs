@@ -2,10 +2,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const { DICE_TOP_ORIENTATIONS } = require('../dist/dice-visual.js');
-const { DiceRound } = require('../dist/dice-engine.js');
+const { DICE_TOP_ORIENTATIONS } = require('../src/dice-visual.js');
+const { DiceRound } = require('../src/dice-engine.js');
 const { dots, rotate } = vm.runInNewContext(
-  fs.readFileSync(path.join(__dirname, '../dist/dice-renderer.js'), 'utf8') +
+  fs.readFileSync(path.join(__dirname, '../src/dice-renderer.js'), 'utf8') +
   '\n({dots: DiceMesh.dots, rotate: diceRotate})'
 );
 

@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
-const {HorseRound,HORSE_PRIZES}=require('../dist/horse-engine.js');
+const {HorseRound,HORSE_PRIZES}=require('../src/horse-engine.js');
 // The 4 × 3 × 2 equally likely shuffle branches exhaust all 24 rankings.
 const seen=new Set(),ranks=Array.from({length:4},()=>[0,0,0,0]);
 for(let a=0;a<4;a++)for(let b=0;b<3;b++)for(let c=0;c<2;c++){
@@ -22,16 +22,16 @@ assert.equal(seen.size,24);for(const row of ranks){assert.deepEqual(row,[6,6,6,6
 }
 {
  const elements=new Map(),listeners={};function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},close(){},showModal(){}});return elements.get(id)}
- const ctx=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(n,f)=>listeners[n]=f},location:{origin:'https://test.local',hash:''},HorseRound,...require('../dist/mines-engine.js'),...require('../dist/rocket-engine.js'),...require('../dist/dice-engine.js'),...require('../dist/plinko-engine.js'),setInterval(){},Date,console});
- vm.runInContext(fs.readFileSync('dist/platform.js','utf8'),ctx);const run=code=>vm.runInContext(code,ctx);
+ const ctx=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(n,f)=>listeners[n]=f},location:{origin:'https://test.local',hash:''},HorseRound,...require('../src/mines-engine.js'),...require('../src/rocket-engine.js'),...require('../src/dice-engine.js'),...require('../src/plinko-engine.js'),setInterval(){},Date,console});
+ vm.runInContext(['platform-catalog','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),ctx);const run=code=>vm.runInContext(code,ctx);
  const send=(data,source=el('horse-frame').contentWindow,origin='https://test.local')=>listeners.message({data,source,origin});
- run("let testTime=0;horseRound.now=()=>testTime;horseRound.random=()=>.999;play('horse')");
+ run("let testTime=0;bridge.rounds.horse.now=()=>testTime;bridge.rounds.horse.random=()=>.999;play('horse')");
  send({type:'horse-ready'});assert.equal(run('session.points'),1000);
  send({type:'horse-start',selected:0,roundId:''},el('game-frame').contentWindow);send({type:'horse-start',selected:0,roundId:''},el('horse-frame').contentWindow,'https://wrong.local');assert.equal(run('session.points'),1000);
- send({type:'horse-start',selected:0,roundId:''});send({type:'horse-start',selected:1,roundId:''});assert.equal(run('session.points'),950);assert.equal(run('horseRound.selected'),0);
- run("showPage('games');testTime=17000;syncHorse()");assert.equal(run('session.points'),1090);assert.equal(run('session.rounds.length'),1);assert.equal(run('session.ledger.length'),3);assert.equal(el('horse-frame').contentWindow.messages.at(-1).balance,1090);
- run("play('horse');syncHorse()");assert.equal(run('session.points'),1090);send({type:'game-reward',amount:999999});assert.equal(run('session.points'),1090);
+ send({type:'horse-start',selected:0,roundId:''});send({type:'horse-start',selected:1,roundId:''});assert.equal(run('session.points'),950);assert.equal(run('bridge.rounds.horse.selected'),0);
+ run("showPage('games');testTime=17000;bridge.sync('horse')");assert.equal(run('session.points'),1090);assert.equal(run('session.rounds.length'),1);assert.equal(run('session.ledger.length'),3);assert.equal(el('horse-frame').contentWindow.messages.at(-1).balance,1090);
+ run("play('horse');bridge.sync('horse')");assert.equal(run('session.points'),1090);send({type:'game-reward',amount:999999});assert.equal(run('session.points'),1090);
  run("showPage('me')");assert.match(el('content').innerHTML,/星际赛马/);assert.match(el('content').innerHTML,/第 1 名 · 140/);
- run("session.points=49.99;play('horse')");send({type:'horse-start',selected:2,roundId:'horse-1'});assert.equal(run('session.points'),49.99);assert.equal(run('horseRound.state'),'finished');
+ run("wallet.charge(wallet.points-49.99, 'test spend');play('horse')");send({type:'horse-start',selected:2,roundId:'horse-1'});assert.equal(run('session.points'),49.99);assert.equal(run('bridge.rounds.horse.state'),'finished');
 }
 console.log('Passed: all 24 rankings × 4 selections, exact 97% expected return, visible order/finish agreement, monotonic motion, one-time charge/credit, invalid/stale requests, insufficient points, parent message guards and background settlement.');

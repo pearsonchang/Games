@@ -1,0 +1,56 @@
+/* Orbit Park: a quiet illustrated horizon around a readable, live race. */
+.orbit-park{position:relative;isolation:isolate;background:#07111f;--line:#658cbd38;--muted:#a1b3cc}
+.park-backdrop{position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#07111f66,#07111f 65%),url('horse-stadium.webp') center top/auto 70vh no-repeat;opacity:.32}
+.orbit-park header{border-color:#7ba0ca30}.orbit-park .quiet{background:#14243b;border-color:#7597c447}.orbit-park .wallet b{color:#ffd17a}
+.orbit-park main{gap:25px;padding-top:22px}.orbit-park h1{font-size:28px}.orbit-park .arena-head{margin-bottom:17px}.orbit-park .eyebrow{color:#99b1d0}.orbit-park .phase{border-radius:8px;background:#142b40;border-color:#63bddb55;color:#b0e9f3}
+.orbit-park .circuit{padding-top:0;border:1px solid #638fc475;border-radius:18px;background:#13233c;box-shadow:inset 0 1px #c2e5ff30,0 5px 0 #050d20,0 16px 32px #02081740}
+.park-scene{height:132px;position:relative;overflow:hidden;background:#111f36;border-bottom:1px solid #79aad34d}
+.park-panorama{display:block;width:100%;height:100%;object-fit:cover;object-position:center 62%;transform:scale(1.035);transform-origin:50% 80%;user-select:none;transition:filter .5s ease}
+.park-scene:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#09162e0d 45%,#0c1e35a8)}
+.park-sign{position:absolute;top:12px;left:14px;z-index:1;display:flex;flex-direction:column;padding:5px 9px;border:1px solid #97bce747;border-radius:6px;background:#0b1c35d9;box-shadow:0 2px 0 #091227;transform:rotate(-3deg)}
+.park-sign span{font-size:14px;letter-spacing:1px;font-weight:700;color:#d2eff9}.park-sign small{font-size:9px;letter-spacing:1.8px;color:#a5b4df}
+.park-marquee{position:absolute;right:13px;bottom:10px;z-index:1;border-left:2px solid #89dded;background:#0b1b31df;padding:4px 9px;border-radius:3px;font-size:12px;color:#c7e8f5;transition:border-color .3s,color .3s}
+.orbit-park .track-header{height:37px;padding:0 16px;position:relative;background:#152944;border-bottom:1px solid #89aad024;color:#a6b9d6}
+.orbit-park .track-header:after{content:'';position:absolute;bottom:0;left:15px;right:15px;height:2px;background:repeating-linear-gradient(90deg,#59cde38c 0 20px,transparent 20px 42px);opacity:.6}
+.orbit-park .track-header #race-caption{font-size:13px;color:#b7d1ea}.orbit-park .finish-label{font-size:11px;letter-spacing:1px}
+.start-signal{display:flex;gap:5px;border:1px solid #6b8bb645;border-radius:20px;padding:5px 7px;background:#08182b}
+.start-signal i{width:7px;height:7px;border-radius:50%;background:#293c57;border:1px solid #405773;transition:background .18s,box-shadow .18s}
+[data-scene=count] .start-signal i:first-child,[data-count="2"] .start-signal i:nth-child(2),[data-count="1"] .start-signal i{background:#ffd084;border-color:#ffe4ac;box-shadow:0 0 6px #ffc96a60}
+[data-scene=race] .start-signal i,[data-scene=sprint] .start-signal i{background:#80e1c4;border-color:#b2f3db;box-shadow:0 0 6px #65d4b950}
+.orbit-park .track{margin:0 10px;border:1px solid #6488b450;border-top:0;background:#10223a;border-radius:0 0 8px 8px}
+.orbit-park .lane{height:82px;border-bottom:1px solid #7196bd29;background:linear-gradient(180deg,#ffffff03,transparent 45%),linear-gradient(90deg,color-mix(in srgb,var(--accent) 7%,#14233d),#122239 68%)}
+.orbit-park .lane.selected{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 18%,#14243c),color-mix(in srgb,var(--accent) 5%,#122239));box-shadow:inset 3px 0 var(--accent)}
+.orbit-park .lane-label{left:7px;top:10px;min-width:28px;padding:2px 3px;border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);border-radius:6px;background:#0c1b2d9e;text-align:center;font-size:13px;line-height:1.45}
+.orbit-park .lane-label small{font-size:10px;color:#adc0d8}
+.orbit-park .lane:after{left:47px;right:35px;background:repeating-linear-gradient(90deg,#819abb50 0 10px,transparent 10px 46px);bottom:9px}
+.orbit-park .runway{left:39px;right:22px}.orbit-park .runner{width:103px;height:82px}.orbit-park .runner:after{background:#030c1a;opacity:.6;height:6px;filter:blur(2px)}
+.orbit-park .finish-line{right:30px;width:10px;background:conic-gradient(#cadcf1a8 25%,#193955 0 50%,#cadcf1a8 0 75%,#193955 0) 0 0/10px 10px;border-inline:1px solid #bfd6ee4d}
+.orbit-park .lane.winner{background:linear-gradient(90deg,#344041,#263348);box-shadow:inset 3px 0 #ffce76}.orbit-park .track-footer{padding:10px 16px;color:#b2c9e2}.orbit-park .track-footer span:last-child{color:#c2edf2}
+.orbit-park .race-progress{height:4px;background:#223952}.orbit-park .race-progress i{background:linear-gradient(90deg,#4cd3e7,#b99bff)}
+.orbit-park .positions{margin:16px 0;gap:10px}.orbit-park .positions li{background:#14253f;border-color:#7e9ed046}.orbit-park .positions li.picked{border-color:#a8c8e58c;background:#1d3550}
+.orbit-park .result{background:linear-gradient(120deg,#192d47,#172139);border-color:#6d96c35e;border-radius:12px}.orbit-park .result-label{color:#b1c6df}.orbit-park .result p{color:#adc0d9}.orbit-park .result.win{background:linear-gradient(110deg,#393440,#1b2940);border-color:#d2b16a7d}
+.orbit-park aside{align-self:start;padding:20px;border:1px solid #7398c74a;border-radius:16px;background:#112039f2;box-shadow:inset 0 1px #c2deff14}.orbit-park .horse-options{gap:9px}.orbit-park .horse-option{background:#15253d;border-color:#7398c742}.orbit-park .horse-option[aria-pressed=true]{background:linear-gradient(150deg,color-mix(in srgb,var(--accent) 20%,#15253d),#17263e);border-color:var(--accent)}
+.orbit-park .horse-option strong{font-size:16px}.orbit-park .horse-option .mini-horse{width:66px;height:66px;right:0;bottom:0}.orbit-park .prize{background:#162941;border-color:#6a8ab53d}.orbit-park .prize:first-child{background:#353040;border-color:#b49c6259}.orbit-park .primary{background:linear-gradient(110deg,#63d4ef,#a58bf2);box-shadow:0 3px 0 #363868,inset 0 1px #e9fbff55}.orbit-park .primary:disabled{background:#253e59;box-shadow:none;color:#a8c3da}
+/* Scene motion only runs during a race. All decoration stays outside the lanes. */
+.is-racing .park-panorama{animation:park-drift 8s ease-in-out infinite alternate}
+.is-racing .track-header:after{animation:park-rail .9s linear infinite}
+.sprint .is-racing .track-header:after{animation-duration:.42s;background:repeating-linear-gradient(90deg,#ffd084 0 20px,transparent 20px 42px)}
+[data-scene=sprint] .park-marquee,[data-scene=finished] .park-marquee{border-color:#ffd084;color:#ffe3a7}
+.orbit-park.sprint .phase{background:#332c3c;border-color:#c2a06d66;color:#ffdc94}
+.race-done .park-marquee{animation:park-catch .6s ease-out}
+@keyframes park-drift{from{transform:scale(1.035) translateX(-.6%)}to{transform:scale(1.035) translateX(.6%)}}
+@keyframes park-rail{to{background-position:-42px 0}}
+@keyframes park-catch{0%{transform:translateY(4px);opacity:.5}60%{transform:translateY(-3px)}100%{transform:none;opacity:1}}
+@media(max-width:900px) and (min-width:701px){.orbit-park main{grid-template-columns:minmax(0,1fr)265px;gap:18px}.orbit-park aside{padding:15px}.park-scene{height:112px}.orbit-park .runner{width:93px}}
+@media(max-width:700px){
+ .orbit-park .app{padding-inline:14px;padding-bottom:110px}.orbit-park main{padding-top:15px}.orbit-park .arena-head{margin-bottom:12px}.orbit-park h1{font-size:24px}.orbit-park .phase{font-size:12px}.orbit-park .circuit{border-radius:14px}
+ .park-scene{height:98px}.park-panorama{object-position:center 64%}.park-sign{top:9px;left:11px;padding:3px 7px}.park-sign span{font-size:12px}.park-sign small{font-size:8px;letter-spacing:1.4px}.park-marquee{right:10px;bottom:8px;font-size:11px;padding:3px 7px}
+ .orbit-park .track-header{height:31px;padding-inline:12px}.orbit-park .track-header #race-caption{font-size:12px}.start-signal{padding:4px 6px;gap:4px}.start-signal i{width:6px;height:6px}.orbit-park .track-header:after{left:10px;right:10px}
+ .orbit-park .track{margin-inline:7px}.orbit-park .lane{height:63px}.orbit-park .lane-label{min-width:24px;left:5px;top:9px;font-size:11px}.orbit-park .lane-label small{font-size:9px}.orbit-park .runway{left:28px;right:16px}.orbit-park .runner{width:80px;height:63px}.orbit-park .lane:after{left:34px;right:26px;bottom:7px}.orbit-park .finish-line{right:22px;width:8px;background-size:8px 8px}
+ .orbit-park .track-footer{font-size:12px;padding:9px 12px}.orbit-park .positions{margin:12px 0;gap:7px}.orbit-park .positions li{font-size:12px;padding:5px 3px}.orbit-park .result{min-height:69px;padding:10px 12px}.orbit-park .result p{font-size:12px;max-width:136px}.orbit-park .result strong{font-size:17px}
+ .orbit-park aside{margin-top:16px;padding:13px 12px;border-radius:13px}.orbit-park .selection-title{margin:0 0 10px}.orbit-park .selection-title h2{font-size:16px}.orbit-park .horse-options{gap:6px}.orbit-park .horse-option{padding:7px 6px;min-height:100px}.orbit-park .horse-option strong{font-size:14px}.orbit-park .horse-option .mini-horse{width:63px;height:63px}.orbit-park .horse-option .number{margin-bottom:1px}
+ .orbit-park .launch-panel{position:fixed;bottom:0;left:0;right:0;z-index:10;margin:0;padding:11px max(14px,calc((100vw - 568px)/2)) calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:70px minmax(0,1fr);gap:0 12px;background:#0e2037f5;border-top:1px solid #6e98c36b;box-shadow:0 -4px 18px #06112470;backdrop-filter:blur(10px)}
+ .orbit-park .entry{display:block;margin:0;font-size:11px;align-self:center}.orbit-park .entry>span{display:block}.orbit-park .entry b{font-size:21px}.orbit-park .entry small{font-size:11px}.orbit-park .primary{font-size:15px;min-height:46px}.orbit-park .launch-panel p{grid-column:1/-1;margin-top:7px;font-size:11px;line-height:1.5}.orbit-park footer{font-size:10px}
+}
+@media(max-width:359px){.orbit-park .app{padding-inline:10px}.park-scene{height:86px}.orbit-park .lane{height:59px}.orbit-park .runner{height:59px;width:73px}.orbit-park .result strong{font-size:16px}.orbit-park .result p{max-width:115px;font-size:11px}.orbit-park .horse-options{gap:5px}.orbit-park .horse-option .mini-horse{width:55px;height:55px}.orbit-park .horse-option{min-height:95px}}
+@media(prefers-reduced-motion:reduce){.orbit-park .park-panorama,.orbit-park .track-header:after,.orbit-park .park-marquee{animation:none!important;transition:none!important}}

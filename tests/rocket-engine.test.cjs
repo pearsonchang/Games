@@ -1,5 +1,5 @@
 const assert=require('node:assert/strict');
-const {RocketRound}=require('../dist/rocket-engine.js');
+const {RocketRound}=require('../src/rocket-engine.js');
 function setup(u=.2,initial=1000){
  let now=0,balance=initial,draws=0;const charges=[],credits=[],finished=[];
  const round=new RocketRound({now:()=>now,random:()=>{draws++;return u;},charge:n=>{if(balance<n)return false;balance-=n;charges.push(n);return true;},credit:n=>{balance+=n;credits.push(n);},onFinish:r=>finished.push(r)});
