@@ -1,0 +1,59 @@
+/* Effects stay local to the cabinet; all outcome cues use the settled result. */
+.sky:after{content:'';position:absolute;inset:12% 4% 8%;background:radial-gradient(ellipse at 30% 40%,#37cfff12,transparent 47%),radial-gradient(ellipse at 64% 62%,#9675ff14,transparent 42%);animation:ambient-breathe 8s ease-in-out infinite alternate}
+.sky .star{animation:star-drift 6s ease-in-out infinite alternate}.sky .s2{animation-delay:-3s}.sky .s3{animation-delay:-1.5s}
+.sky-orbit{position:absolute;width:520px;height:180px;left:-190px;top:28%;border:1px solid #7abcef26;border-radius:50%;transform:rotate(-32deg)}
+.sky-orbit:before{content:'';position:absolute;width:7px;height:7px;top:10px;right:117px;border-radius:50%;background:#78d6f5;box-shadow:0 0 16px #62d5ff8c;animation:orbit-dot 6s ease-in-out infinite alternate}
+.shooting-star{position:absolute;top:15%;left:65%;width:92px;height:1px;background:linear-gradient(90deg,transparent,#a4dfff);opacity:0;transform:rotate(-35deg);animation:meteor-pass 13s linear infinite}.shooting-star.second{left:86%;top:50%;animation-delay:6s;width:65px}
+.machine{background:radial-gradient(ellipse at 0 0,#3e60884d,transparent 54%),linear-gradient(150deg,#28365c,#182644 65%,#302f56);box-shadow:inset 0 2px 0 #d6d9ff2e,0 16px 36px #02081677,0 0 38px #716fff0a}
+.frame-circuit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:3;fill:none}
+.circuit-track{stroke:#93b9f136;stroke-width:1.3;vector-effect:non-scaling-stroke}
+.circuit-beam{stroke:#74e5ff;stroke-width:2;stroke-linecap:round;stroke-dasharray:58 942;vector-effect:non-scaling-stroke;opacity:.7;filter:drop-shadow(0 0 3px #50cfff);animation:circuit-orbit 16s linear infinite}
+.circuit-beam.violet{stroke:#b197ff;filter:drop-shadow(0 0 3px #a580ff);animation-delay:-8s}
+.machine[data-state=spinning] .circuit-beam{animation-duration:1.8s;opacity:1;stroke-dasharray:140 860}.machine[data-state=spinning] .circuit-beam.violet{animation-delay:-.9s}
+.machine-star{position:relative;animation:marquee-star 5s ease-in-out infinite}.machine-star:after{content:'';position:absolute;inset:3px -4px;border:1px solid #90dcf83b;border-radius:50%;transform:rotate(-25deg) scaleY(.38)}
+.marquee strong{background:linear-gradient(105deg,#f0eeff 25%,#c5edff 43%,#fff 49%,#d9cfff 59%,#f0eeff 75%);background-size:230% 100%;background-clip:text;-webkit-background-clip:text;color:transparent;animation:marquee-sheen 7s ease-in-out infinite;text-shadow:0 3px #9b9fd72b}
+.rim i{box-shadow:0 0 6px #a9b9ee35}.machine[data-state=spinning] .rim i{background:#83e5ff;animation:lamp-chase 1.2s linear infinite!important;animation-delay:calc(var(--lamp)*.1s)!important}
+.rim i:nth-child(1){--lamp:0}.rim i:nth-child(2){--lamp:1}.rim i:nth-child(3){--lamp:2}.rim i:nth-child(4){--lamp:3}.rim i:nth-child(5){--lamp:4}.rim i:nth-child(6){--lamp:5}.rim i:nth-child(7){--lamp:6}.rim i:nth-child(8){--lamp:7}.rim i:nth-child(9){--lamp:8}.rim i:nth-child(10){--lamp:9}.rim i:nth-child(11){--lamp:10}.rim i:nth-child(12){--lamp:11}
+.window-shell{border:1px solid #7193c444;box-shadow:0 2px 0 #b5c7f52b,inset 0 2px 6px #050b1b,0 0 15px #5c9aff0d}
+.machine[data-state=spinning] .window-shell{border-color:#78d8f788;box-shadow:0 0 20px #53c7fa25,inset 0 2px 6px #050b1b}
+.reel-speed{display:none;position:absolute;inset:-100% 0;z-index:2;pointer-events:none;opacity:.7;background:linear-gradient(transparent 10%,#e8faffcc 18%,transparent 31%) 10% 0/2px 42% repeat-y,linear-gradient(transparent 40%,#6ccbffa6 50%,transparent 65%) 85% 0/3px 64% repeat-y}
+.reel.spinning .reel-speed{display:block;animation:reel-speed .3s linear infinite}.reel:nth-child(2) .reel-speed{animation-delay:-.1s}.reel:nth-child(3) .reel-speed{animation-delay:-.2s}
+.reel-impact{position:absolute;z-index:3;pointer-events:none;inset:calc(50% - var(--cell)/2) 2px;border-radius:9px;border:2px solid #eaffff;box-shadow:inset 0 0 24px #65d9ff66,0 0 10px #92e7ff;opacity:0}
+.reel.stopped .reel-impact{animation:reel-impact .55s ease-out forwards}
+.reel.winner .reel-cell:nth-child(2) .symbol{animation:none;filter:drop-shadow(0 2px 5px #82e7ec55)}
+.reel.win-motion .reel-cell:nth-child(2) .symbol{animation:symbol-win .7s ease-in-out 2}
+.payline{transition:border-color .25s,box-shadow .25s}.payline:after{content:'';position:absolute;left:0;right:0;top:-1px;height:2px;background:linear-gradient(90deg,transparent,#9bebff,white,#b9a0ff,transparent);transform:scaleX(0);transform-origin:left;opacity:0}
+.machine[data-state=spinning] .payline:after{animation:line-sweep 1.3s ease-in-out infinite}
+.machine[data-outcome=triple] .payline{border-color:#ffde91;box-shadow:inset 0 0 25px #ffcd571c,0 0 0 100px #12274422,0 0 12px #ffc96350}
+.machine[data-outcome=pair] .payline{border-color:#94dcd2;box-shadow:0 0 0 100px #12274422}.machine[data-outcome=triple] .payline-marker{color:#ffe6a6;text-shadow:0 0 9px #ffc963}
+.machine.celebrating .payline:after{opacity:1;transform:scaleX(1);background:linear-gradient(90deg,#ffc76b,#fff3c8,#ffc76b);animation:win-line .8s ease-out 2}
+.spin-progress{height:2px;position:absolute;bottom:-1px;left:14px;right:14px;overflow:hidden;opacity:0;pointer-events:none}.spin-progress i{display:block;width:100%;height:100%;background:linear-gradient(90deg,#66dff3,#b195ff);transform:scaleX(0);transform-origin:left}
+.machine[data-state=spinning] .spin-progress{opacity:1}.machine[data-state=spinning] .spin-progress i{animation:spin-progress 3s linear forwards}
+.spin{position:relative;overflow:hidden;isolation:isolate}.spin:after{content:'';position:absolute;inset:-30% auto -30% -45%;width:28%;background:linear-gradient(90deg,transparent,#fff8,transparent);transform:skewX(-23deg);animation:button-sheen 6s ease-in-out infinite;pointer-events:none}.spin:disabled:after{animation:none;opacity:0}
+.machine[data-state=spinning] .result-icon{animation:spin 1.5s linear infinite}.machine[data-state=spinning] .round-tag{color:#8de5ff}
+.result[data-kind=triple]{background:linear-gradient(115deg,#443748,#272c4c);border-color:#e9bd7880;box-shadow:inset 0 1px #ffdfa520}.machine.celebrating .result{animation:reward-panel .55s ease-out}
+.win-burst{position:absolute;z-index:7;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;max-width:90%;text-align:center;pointer-events:none;opacity:0;border:1px solid #ffe5a899;border-radius:16px;padding:12px 25px;background:linear-gradient(130deg,#1b294cf7,#343253f7);box-shadow:0 8px 30px #06102966,0 0 26px #e6bd7330}
+.win-burst>span{display:block;font-size:10px;letter-spacing:2px;color:#d5daef}.win-burst>strong{display:block;font-size:clamp(36px,5vw,56px);font-weight:900;letter-spacing:-2px;line-height:1.18;color:#ffe2a0;text-shadow:0 3px #98734155}.win-burst>small{font-size:10px;color:#bacce6;letter-spacing:1px}
+.machine.celebrating .win-burst{animation:reward-burst 2.1s cubic-bezier(.2,.8,.2,1) both}
+.win-ring{position:absolute;inset:8%;z-index:4;border:2px solid #ffe5a8;border-radius:50%;opacity:0;pointer-events:none}.machine.celebrating .win-ring{animation:reward-ring .9s ease-out both}
+.confetti i{top:40%;animation:prize-spark 1.65s cubic-bezier(.15,.7,.35,1) var(--delay,0s) both}.confetti .spark-star{width:12px;height:12px;clip-path:polygon(50% 0,64% 35%,100% 50%,64% 64%,50% 100%,35% 64%,0 50%,35% 35%);box-shadow:0 0 10px var(--color)}
+@keyframes ambient-breathe{to{opacity:.4;transform:translateY(12px)}}
+@keyframes star-drift{to{opacity:.45;transform:translateY(-8px) rotate(12deg)}}
+@keyframes orbit-dot{to{transform:translate(20px,12px);opacity:.4}}
+@keyframes meteor-pass{0%,86%{opacity:0;transform:translate(0,0) rotate(-35deg)}88%{opacity:.55}100%{opacity:0;transform:translate(-160px,112px) rotate(-35deg)}}
+@keyframes circuit-orbit{to{stroke-dashoffset:-1000}}
+@keyframes marquee-star{50%{transform:rotate(-4deg) scale(1.06)}}
+@keyframes marquee-sheen{0%,55%{background-position:100% 0}85%,100%{background-position:0 0}}
+@keyframes lamp-chase{0%,18%{opacity:1;box-shadow:0 0 9px #89e5ff;transform:scale(1.35)}40%,100%{opacity:.35;box-shadow:none;transform:scale(1)}}
+@keyframes reel-speed{to{transform:translateY(33.333%)}}
+@keyframes reel-impact{0%{opacity:0;transform:scale(.87)}22%{opacity:.85}100%{opacity:0;transform:scale(1.08)}}
+@keyframes line-sweep{0%{transform:scaleX(0);opacity:0}30%{opacity:.8}85%,100%{transform:scaleX(1);opacity:0}}
+@keyframes win-line{0%{transform:scaleX(.1);opacity:.1}45%{opacity:1}100%{transform:scaleX(1);opacity:.35}}
+@keyframes spin-progress{to{transform:scaleX(1)}}
+@keyframes button-sheen{0%,72%{left:-45%}90%,100%{left:130%}}
+@keyframes reward-panel{0%{transform:translateY(4px) scale(.98)}65%{transform:translateY(-2px)}100%{transform:none}}
+@keyframes reward-burst{0%{opacity:0;transform:translate(-50%,-40%) scale(.62)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}27%,78%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-68%) scale(.98)}}
+@keyframes reward-ring{0%{opacity:0;transform:scale(.5)}15%{opacity:.75}100%{opacity:0;transform:scale(1.32)}}
+@keyframes prize-spark{0%{opacity:0;transform:translate(0,0) scale(.4)}12%{opacity:1}75%{opacity:.9}100%{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(.6);opacity:0}}
+@media(max-width:740px){.win-burst{padding:9px 22px}.win-burst>strong{font-size:38px}.win-burst>span{font-size:8px}.sky-orbit{left:-310px}.circuit-beam{filter:none}}
+@media(prefers-reduced-motion:reduce){.sky:after,.sky .star,.sky-orbit:before,.shooting-star,.circuit-beam,.machine-star,.marquee strong,.rim i,.reel-speed,.reel-impact,.payline:after,.spin:after,.result,.result-icon,.spin-progress i,.win-burst,.win-ring,.confetti i,.reel.win-motion .symbol{animation:none!important;transition:none!important}.reel-speed,.reel-impact,.shooting-star,.win-burst,.win-ring,.confetti,.payline:after{display:none}.circuit-beam{opacity:.35}.spin-progress{display:none}.spin:after{opacity:0}}

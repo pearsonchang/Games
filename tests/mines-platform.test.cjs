@@ -1,3 +1,5 @@
+const {MatrixRound}=require('../src/matrix-engine.js');
+const {SlotsRound}=require('../src/slots-engine.js');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {HorseRound}=require('../src/horse-engine.js');
 const {MinesRound}=require('../src/mines-engine.js');
@@ -6,18 +8,21 @@ const {DiceRound}=require('../src/dice-engine.js');
 const {PlinkoRound}=require('../src/plinko-engine.js');
 const elements=new Map(),listeners={};
 function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},setAttribute(){},removeAttribute(){},close(){},showModal(){}});return elements.get(id)}
-const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,HorseRound,setInterval(){},Date,console});
-vm.runInContext(['platform-catalog','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),context);
+const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},SlotsRound,MatrixRound,location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,HorseRound,setInterval(){},setTimeout(){return 1},clearTimeout(){},Date,console});
+vm.runInContext(['platform-catalog','lobby-preferences','game-load-guard','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),context);
 const run=code=>vm.runInContext(code,context),read=()=>JSON.parse(run('JSON.stringify({points:session.points,ledger:session.ledger,rounds:session.rounds})'));
 function send(type,extra={},source=el('game-frame').contentWindow,origin='https://test.local'){listeners.message({origin,source,data:{type,...extra}})}
 run("bridge.rounds.minesweeper.random=()=>0;play('minesweeper')");
-send('mines-ready');assert.equal(read().points,1000);
+send('mines-ready',{},el('game-frame').contentWindow,'https://wrong.local');assert.equal(el('game-loading').hidden,false);
+send('mines-ready');assert.equal(el('game-loading').hidden,true);assert.equal(read().points,1000);
 send('mines-start',{roundId:''});assert.equal(read().points,950);assert.equal(read().ledger.length,2);
 send('mines-start',{roundId:''});send('mines-collect',{roundId:'mines-1'});assert.equal(read().points,950);
 send('mines-reveal',{roundId:'mines-1',index:20});
 assert.equal(el('game-frame').contentWindow.messages.at(-1).payout,59.52);
 run("showPage('games');play('rocket');showPage('games');play('minesweeper')");
 assert.equal(read().points,950);assert.equal(run('bridge.rounds.minesweeper.opened'),1);assert.equal(run('bridge.rounds.minesweeper.state'),'playing');
+run('retryGame()');assert.equal(el('game-loading').hidden,false);assert.match(el('game-frame').src,/retry=/);
+send('mines-ready');assert.equal(el('game-loading').hidden,true);assert.equal(read().points,950);assert.equal(run('bridge.rounds.minesweeper.opened'),1);
 send('mines-collect',{roundId:'mines-1'},el('rocket-frame').contentWindow);
 send('mines-collect',{roundId:'mines-1'},el('game-frame').contentWindow,'https://wrong.local');
 send('game-reward',{amount:999999,id:'injected'});assert.equal(read().points,950);

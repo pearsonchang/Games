@@ -19,6 +19,8 @@ function buildStatic(sourceRoot, outputRoot) {
     const extension = path.extname(name);
     if (['.html', '.css', '.js'].includes(extension)) {
       output = mapReferences(buffer.toString('utf8'), extension, value => {
+        // A template expression is resolved by the browser, not the asset builder.
+        if (value.includes('${')) return value;
         const target = resourcePath(name, value);
         if (!target || !sources.has(target) || !path.extname(value.split(/[?#]/)[0])) return value;
         const match = value.match(/^([^?#]+)(?:\?([^#]*))?(#.*)?$/);

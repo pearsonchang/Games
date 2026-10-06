@@ -29,8 +29,9 @@ for (const filename of files) {
     return value;
   });
 }
-for (const entry of ['index', 'minesweeper', 'rocket', 'dice', 'plinko', 'horse', 'palettes', 'palette-demo']) {
+const entrypoints = ['index', 'minesweeper', 'rocket', 'dice', 'plinko', 'horse', 'slots', 'matrix', 'palettes', 'palette-demo', 'lobby-designs', 'lobby-demo', 'lobby-a-themes'];
+for (const entry of entrypoints) {
   if (!names.has(`${entry}.html`)) errors.push(`Missing required entrypoint: ${entry}.html`);
 }
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-console.log(`Static checks passed (${path.basename(publicRoot)}): ${javascript} JavaScript files, ${references} local references, 8 entrypoints.`);
+console.log(`Static checks passed (${path.basename(publicRoot)}): ${javascript} JavaScript files, ${references} local references, ${entrypoints.length} entrypoints.`);

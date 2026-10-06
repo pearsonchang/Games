@@ -42,3 +42,13 @@
 @media(max-width:650px){.game-card .art-horse{width:118px;height:118px}}
 
 .game-card[data-play=horse] .icon-spark{display:none}
+
+/* A vector arcade cabinet for Lucky Orbit. */
+#slots-frame{display:block;width:100%;height:100%;border:0}
+.game-card[data-play=slots]{--game-accent:#bba7f3;--icon-time:5.6s;--icon-delay:-2.7s;--icon-glow:158,154,238}
+.game-card .art-slots{background-image:url('slots-icon.svg');background-size:contain;background-position:center;mask-image:none;clip-path:none;width:175px;height:160px}
+@media(max-width:650px){.game-card .art-slots{width:133px;height:122px}}
+#matrix-frame{display:block;width:100%;height:100%;border:0}
+.game-card[data-play=matrix]{--game-accent:#83dfe5;--icon-time:6s;--icon-delay:-1.8s;--icon-glow:116,187,228}
+.game-card .art-matrix{background-image:url('matrix-icon.svg');background-size:contain;background-position:center;mask-image:none;clip-path:none;width:192px;height:158px}
+@media(max-width:650px){.game-card .art-matrix{width:145px;height:122px}}

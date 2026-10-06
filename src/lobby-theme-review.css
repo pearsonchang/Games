@@ -1,0 +1,10 @@
+.theme-review .letter{width:39px;flex:none;font-size:16px}
+.theme-review .panel-header{gap:9px}.theme-review .panel-header h2{font-size:18px}.theme-review .panel-header p{font-size:9px}
+.panel-festival .letter{background:#83e8ff;border-color:#67bfde;color:#25395b}.panel-festival .open-demo{background:#4732a5;border-color:#4732a5;color:#f4f6ff}
+.panel-depot .letter{background:#daeeeb;border-color:#b4d4ce;color:#447c7a}.panel-depot .open-demo{background:#dbebe8;border-color:#b9d1cd;color:#447b73}
+.panel-portal .letter{background:#e2e6ff;border-color:#c5ceef;color:#6575b3}.panel-portal .open-demo{background:#e3e7fa;border-color:#c4cdec;color:#6475b1}
+.theme-review .review-intro h1 em{color:#8170b7}.theme-review .review-note:hover{background:#ede8f8;color:#7561a1}
+.theme-review .demo-window iframe{height:880px}
+.theme-review .design-detail p{font-size:10px}
+@media(max-width:1150px) and (min-width:761px){.theme-review .panel-header h2{font-size:16px}.theme-review .panel-header p{font-size:8px}.theme-review .demo-window iframe{height:815px}}
+@media(max-width:760px){.theme-review .review-intro h1{font-size:28px;letter-spacing:-1.5px}.theme-review .review-note{display:inline-block;margin-top:9px;font-size:10px}.theme-review .intro-bottom{display:block}.theme-review .demo-window iframe{height:780px}.theme-review .concept-jump b{font-size:12px}.theme-review .design-detail p{font-size:11px}}

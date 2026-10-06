@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#98c4ff"/><stop offset=".23" stop-color="#596eff"/><stop offset=".7" stop-color="#7037dc"/><stop offset="1" stop-color="#283e98"/></linearGradient>
+  <linearGradient id="screen" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#173777"/><stop offset=".5" stop-color="#231966"/><stop offset="1" stop-color="#091731"/></linearGradient>
+  <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9ffff"/><stop offset=".5" stop-color="#64f7ff"/><stop offset="1" stop-color="#26aaff"/></linearGradient>
+  <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffc4ff"/><stop offset=".45" stop-color="#c683ff"/><stop offset="1" stop-color="#6951eb"/></linearGradient>
+  <linearGradient id="gold" x2=".5" y2="1"><stop stop-color="#fff5bd"/><stop offset=".5" stop-color="#ffde69"/><stop offset="1" stop-color="#ec9b2b"/></linearGradient>
+  <linearGradient id="rail"><stop stop-color="#44edff"/><stop offset=".48" stop-color="#8d86ff"/><stop offset="1" stop-color="#c354ff"/></linearGradient>
+  <radialGradient id="aura"><stop stop-color="#5479ff" stop-opacity=".4"/><stop offset="1" stop-color="#5965ff" stop-opacity="0"/></radialGradient>
+  <filter id="bloom" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5"/></filter>
+  <g id="diamond"><path d="m0-13 11 13L0 15-11 0Z" fill="url(#cyan)" stroke="#c6fcff" stroke-width="1.3"/><path d="M0-11 1 13M-9 0H9" fill="none" stroke="#498dcc" stroke-width="1" opacity=".6"/></g>
+  <g id="gem"><path d="m-11-6 10-7 11 7 1 14-12 7-11-7Z" fill="url(#violet)" stroke="#ead7ff" stroke-width="1.3"/><path d="m-10-5 10 6 11-6M0 1v12" fill="none" stroke="#6c4bc6" stroke-width="1"/></g>
+  <g id="coin"><circle r="11" fill="url(#gold)" stroke="#fff3b6" stroke-width="1.3"/><circle r="7.2" fill="none" stroke="#a77735" stroke-width="1.1"/><path d="M-2-5 3-1-2 4" fill="none" stroke="#fff0aa" stroke-width="2"/></g>
+  <g id="bolt"><path d="m5-14-16 17H-1l-4 14L12-3H2Z" fill="#9aeaff" stroke="#e8fbff" stroke-width="1.2"/></g>
+ </defs>
+ <symbol id="matrix" viewBox="0 0 520 360">
+  <ellipse cx="263" cy="278" rx="222" ry="68" fill="url(#aura)"/>
+  <path d="M43 282 339 340l144-74-290-49Z" fill="#121945" opacity=".75"/>
+  <path d="m64 280 276 49 130-65" stroke="url(#rail)" stroke-width="2" fill="none" opacity=".7"/>
+  <g transform="translate(70 45) rotate(-9 185 115)">
+   <path d="m17 45 19 203 340 5 10-19V35l-11-9Z" fill="#1c225a" stroke="#6252bb" stroke-width="2"/>
+   <rect x="12" y="21" width="357" height="213" rx="17" fill="url(#shell)" stroke="#b9b8ff" stroke-width="2"/>
+   <path d="M30 26h316q17 0 17 17" fill="none" stroke="#e4ddff" stroke-width="2"/>
+   <rect x="28" y="39" width="325" height="168" rx="10" fill="url(#screen)" stroke="#151d50" stroke-width="5"/>
+   <path d="M38 50h298" stroke="#7e7aff" stroke-width="1"/>
+   <g fill="#35468a" fill-opacity=".4" stroke="#7280d5" stroke-opacity=".46">
+    <rect x="39" y="50" width="52" height="143" rx="5"/><rect x="99" y="50" width="52" height="143" rx="5"/><rect x="159" y="50" width="52" height="143" rx="5"/><rect x="219" y="50" width="52" height="143" rx="5"/><rect x="279" y="50" width="62" height="143" rx="5"/>
+   </g>
+   <g opacity=".9"><use href="#diamond" x="65" y="76"/><use href="#gem" x="65" y="122"/><use href="#coin" x="65" y="167"/>
+    <use href="#coin" x="125" y="76"/><use href="#diamond" x="125" y="122"/><use href="#gem" x="125" y="167"/>
+    <use href="#gem" x="185" y="76"/><use href="#coin" x="185" y="122"/><use href="#diamond" x="185" y="167"/>
+    <use href="#bolt" x="245" y="76"/><use href="#diamond" x="245" y="122"/><use href="#gem" x="245" y="167"/>
+    <use href="#diamond" x="310" y="76"/><use href="#gem" x="310" y="122"/><use href="#coin" x="310" y="167"/></g>
+   <path d="m65 76 60 46 60 45 60-45 65-46" fill="none" stroke="#28e8ff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" filter="url(#bloom)"/>
+   <path d="m65 76 60 46 60 45 60-45 65-46" fill="none" stroke="#99ffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+   <g fill="#f3ffff"><circle cx="65" cy="76" r="4"/><circle cx="125" cy="122" r="4"/><circle cx="185" cy="167" r="4"/><circle cx="245" cy="122" r="4"/><circle cx="310" cy="76" r="4"/></g>
+   <rect x="143" y="218" width="95" height="4" rx="2" fill="#68eaff"/><path d="M39 220h19m264 0h13" stroke="#bfa9ff" stroke-width="3"/>
+  </g>
+  <g transform="translate(449 214) rotate(15)"><use href="#diamond" transform="scale(2.5)"/></g>
+  <g transform="translate(88 256) rotate(-15)"><use href="#bolt" transform="scale(2)"/></g>
+  <path d="m452 46 3 10 10 3-10 3-3 10-3-10-10-3 10-3Z" fill="#b8ffed"/>
+  <path d="M69 102H21m34 10H9m371 187h51m-22 11h35" stroke="#52dfff" stroke-width="2" opacity=".65"/>
+ </symbol>
+ <symbol id="slots" viewBox="0 0 200 180">
+  <path d="m27 145 117 18 33-21-117-17Z" fill="#181a4a"/>
+  <g transform="rotate(-9 100 90)">
+   <path d="m40 33 111 3 5 111-10 10-111-3Z" fill="#1c245f" stroke="#938bfa" stroke-width="2"/>
+   <rect x="28" y="25" width="116" height="121" rx="12" fill="url(#shell)" stroke="#c0b9ff" stroke-width="2"/>
+   <rect x="37" y="50" width="98" height="66" rx="4" fill="url(#screen)" stroke="#9598f0"/>
+   <path d="M69 54v58m33-58v58" stroke="#aaa4ff" stroke-opacity=".5"/>
+   <use href="#diamond" x="53" y="81"/><use href="#diamond" x="86" y="81"/><use href="#diamond" x="119" y="81"/>
+   <path d="M42 103h88" stroke="#a7fffa" stroke-width="2"/><path d="M52 38h22m8 0h36" stroke="#9aeaff" stroke-width="3"/>
+   <rect x="62" y="128" width="57" height="5" rx="2.5" fill="#7cfbff"/>
+   <path d="M146 108h17V56" fill="none" stroke="#7460d1" stroke-width="7"/><circle cx="163" cy="47" r="10" fill="url(#violet)" stroke="#efcdff" stroke-width="2"/>
+  </g>
+  <path d="m172 115 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z" fill="#71eeff"/>
+ </symbol>
+</svg>

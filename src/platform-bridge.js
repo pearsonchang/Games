@@ -15,6 +15,10 @@ class GameBridge {
         actions: {'dice-roll': (r, d) => r.start(d.mode, d.target)}},
       plinko: {prefix: 'plinko', debit: '闪电跑道 · 落球消耗', credit: '闪电跑道 · 落袋奖励',
         actions: {'plinko-drop': (r, d) => r.start(d.lane)}},
+      slots: {prefix: 'slots', debit: '星际老虎机 · 转动消耗', credit: '星际老虎机 · 转轴奖励', loss: () => '星际老虎机 · 未命中',
+        actions: {'slots-spin': (r, d) => r.start(d.roundId)}},
+      matrix: {prefix: 'matrix', debit: '星际矩阵 · 转动消耗', credit: '星际矩阵 · 连线奖励', loss: () => '星际矩阵 · 未命中',
+        actions: {'matrix-spin': (r, d) => r.start(d.roundId)}},
       horse: {prefix: 'horse', debit: '星际赛马 · 参赛消耗', credit: '星际赛马 · 名次奖励', loss: () => '星际赛马 · 第 4 名，奖励 0',
         actions: {'horse-start': (r, d) => r.start(d.selected, d.roundId)}}
     };

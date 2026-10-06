@@ -1,0 +1,41 @@
+/* Space-terminal art direction. Reward values and round timing live in the engine. */
+.sky{background:radial-gradient(ellipse at 7% 12%,#23447144,transparent 48%),radial-gradient(ellipse at 90% 65%,#4d2d6529,transparent 42%),#07111f}
+.planet{width:230px;height:230px;left:-140px;top:175px;background:radial-gradient(circle at 28% 24%,#648db6,#294767 49%,#14263e 75%);border:1px solid #8cbee944;box-shadow:inset -24px -15px 0 #050f2929,0 0 42px #82c8ff0e}
+.planet:after{inset:92px -50px;border:8px solid #749ecc36;border-top-color:#749ecc18;box-shadow:0 0 0 1px #86bbdf13}
+.star-chart{position:absolute;right:-30px;top:55px;width:360px;height:520px;stroke:#85b8e028;stroke-width:1}.chart-nodes{fill:#83cce277;stroke:none}
+.sky-path{border-color:#90b9e233}.sky .star{color:#98ceef88}
+.machine{background:radial-gradient(ellipse at 6% 0,#2d4c6855,transparent 58%),linear-gradient(155deg,#1e3049,#131f37 64%,#24213e);border-color:#759cc069;border-bottom-color:#1a2940;box-shadow:inset 0 2px 0 #b2d5f330,0 20px 45px #01081288}
+.machine-top{min-height:48px}.machine-star{width:50px;height:50px;flex:0 0 50px;font-size:0;transform:none;text-shadow:none}.machine-star svg{width:100%;height:100%;display:block}.machine-star:after{display:none}
+.marquee>span{color:#84bbd1;letter-spacing:2.3px;font-size:8px}.marquee strong{letter-spacing:.2px;font-weight:850}
+.jackpot-label{border-color:#829eb330}.jackpot-label>small{color:#a9bad4}
+.rim{padding-top:2px}.rim i{width:15px;height:3px;border-radius:1px;background:#739cba}.rim i:nth-child(3n+1){background:#7be5ed}.rim i:nth-child(3n+2){background:#a18bd4}
+.window-shell{background:#071223;border-color:#496f956e;box-shadow:inset 0 0 0 3px #223b5644,0 2px 0 #769ac439;padding:8px}
+.window-shell:before,.window-shell:after{content:'';position:absolute;left:13px;right:13px;height:10px;z-index:4;pointer-events:none;border-left:2px solid #8bcae6;border-right:2px solid #8bcae6;opacity:.65}
+.window-shell:before{top:13px;border-top:2px solid #8bcae6;clip-path:polygon(0 0,14px 0,14px 3px,calc(100% - 14px) 3px,calc(100% - 14px) 0,100% 0,100% 100%,0 100%)}
+.window-shell:after{bottom:13px;border-bottom:2px solid #8bcae6;clip-path:polygon(0 0,100% 0,100% 100%,calc(100% - 14px) 100%,calc(100% - 14px) calc(100% - 3px),14px calc(100% - 3px),14px 100%,0 100%)}
+.reels{background:#071322;gap:7px;padding:0 3px}
+.reel{background:radial-gradient(ellipse at 50% 50%,#273c5c 0%,#152944 47%,#0e1b30 100%);box-shadow:inset 1px 0 #75b8db30,inset -1px 0 #667ea93b}
+.reel:nth-child(2){background:radial-gradient(ellipse at 50% 50%,#343959,#202640 50%,#111b31 100%)}
+.reel:before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,#86c2df88 0 1px,transparent 1.5px),radial-gradient(circle,#a999e866 0 .7px,transparent 1.3px);background-size:51px 67px,73px 89px;background-position:13px 16px,33px 47px;opacity:.28;pointer-events:none}
+.reel:after{background:linear-gradient(#061125bd 0%,#0d1a3544 22%,transparent 36%,transparent 66%,#0c183544 80%,#061125bd 100%)}
+.reel-glint{background:linear-gradient(#9bceff22,transparent);height:35%;opacity:.5}
+.reel .symbol{width:calc(var(--cell)*.92);height:calc(var(--cell)*.92);max-width:94%;filter:drop-shadow(0 4px 5px #01071677)}
+.reel-cell{position:relative}.reel-cell:after{content:'';position:absolute;bottom:4%;left:28%;right:28%;height:2px;border-radius:50%;background:#8db7f01b;pointer-events:none}
+.reel.winner{background:radial-gradient(ellipse at 50% 50%,#274859,#182f44 53%,#10213a)}
+.machine[data-outcome=triple] .reel.winner{background:radial-gradient(ellipse at 50% 50%,#544453,#292b47 53%,#142039)}
+.reel.winner .reel-cell:nth-child(2) .symbol{filter:drop-shadow(0 0 8px #89dbef33)}
+.payline{border-color:#84dafa88;box-shadow:0 0 0 100px #05112655,inset 0 1px #97e8fc18,inset 0 -1px #97e8fc18}
+.payline>span{color:#a8d7e8;font-size:6px;letter-spacing:1.4px;top:4px;opacity:.8}
+.payline-marker{color:#8edfed;text-shadow:0 0 8px #55c8ff66}
+.machine[data-outcome=pair] .payline{box-shadow:0 0 0 100px #05112655; border-color:#8bdad2}
+.machine[data-outcome=triple] .payline{box-shadow:0 0 0 100px #05112655,inset 0 0 25px #ffcd5714,0 0 12px #ffc96350}
+.result{background:#0a172bc9;border-color:#789dcf29}.result-icon{color:#84dcea}.result strong{letter-spacing:.1px}.machine-foot{color:#758db0;letter-spacing:1.4px}
+.spin:not(:disabled){background:linear-gradient(110deg,#74d9e8,#a291eb);border-top-color:#ddfaffad;box-shadow:inset 0 1px #d9f9ff66,0 4px #06112580}
+.paytable{background:linear-gradient(150deg,#122237,#101a30);border-color:#6993be3d;box-shadow:inset 0 1px #b9daff0a}
+.paytable-heading h2{font-size:18px}.paytable .mini-star{color:#91d7e8}.prize-row{padding:9px 0}.prize-row .symbol{width:30px;height:36px;filter:none}.prize-row .symbols{gap:0}.prize-row>span{font-size:11px;color:#bdcde2;white-space:nowrap}.prize-row>b{font-size:17px}
+.prize-row:first-child{background:linear-gradient(90deg,#d58db200, #aa629b12)}.lucky-note{background:#162841}.lucky-note svg{width:48px;height:48px;flex:none}
+@media(max-width:960px){.machine-top{min-height:42px}.machine-star{width:40px;height:40px;flex-basis:40px}.marquee>span{font-size:6px;letter-spacing:1.5px}.prize-row .symbol{width:24px;height:32px}.prize-row{gap:6px}.prize-row>span{font-size:10px}.prize-row>b{font-size:16px}}
+@media(max-width:740px){.machine-star{width:40px;height:40px;flex-basis:40px}.marquee strong{font-size:25px;letter-spacing:0}.machine-top{gap:6px}.marquee>span{font-size:6px;letter-spacing:1.2px}.jackpot-label{padding-left:9px}.window-shell{padding:6px}.reels{gap:5px;padding:0 2px}.payline>span{font-size:5px;letter-spacing:.8px}.planet{width:180px;height:180px;left:-140px;top:150px}.planet:after{inset:70px -35px}.star-chart{width:245px;right:-120px;top:65px;opacity:.7}.prize-list{column-gap:16px}.prize-row .symbol{width:28px;height:34px}.prize-row{gap:5px}.paytable-heading h2{font-size:17px}.machine-foot{font-size:6px}}
+@media(max-width:380px){.machine-star{width:30px;height:30px;flex-basis:30px}.marquee strong{font-size:22px}.marquee>span{letter-spacing:.7px}.prize-list{column-gap:10px}.prize-row>span{font-size:9px}.prize-row>b{font-size:15px}.prize-row .symbol{width:25px}.jackpot-label b{font-size:23px}}
+@media(min-width:741px) and (max-height:800px){.machine-top{min-height:40px}.machine-star{width:40px;height:40px;flex-basis:40px}}
+@media(max-width:740px) and (max-height:760px){.machine-top{min-height:38px}.machine-star{width:35px;height:35px;flex-basis:35px}.marquee strong{font-size:23px}}

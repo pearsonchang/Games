@@ -1,0 +1,177 @@
+/* A1 / Energy arcade. Scoped to the demo's selected theme. */
+[data-concept=festival] { color-scheme:dark; --canvas:#101430; --sheet:#20294d; --ink:#f5f8ff; --quiet:#bdcbe7; --edge:#6674b342; --action:#83e8ff; --action-ink:#172236; --soft:#303766; --reward:#ffe19a; --nav:#161d3bf5; --pr-background:var(--canvas); --pr-surface:var(--sheet); --pr-text:var(--ink); --pr-muted:var(--quiet); --pr-primary:#65eaff; --pr-secondary:#a97cff; --pr-reward:var(--reward); }
+[data-concept=festival] #platform:before { background:radial-gradient(ellipse at 75% 14%,#4c33bf3b,transparent 47%),radial-gradient(ellipse at -10% 45%,#00739929,transparent 48%),linear-gradient(125deg,#151b3a,#10132e); height:100%; }
+[data-concept=festival] #platform:after { display:none; }
+[data-concept=festival] #content { position:relative; isolation:isolate; padding-top:27px; }
+/* A quieter preview strip keeps the product header in the foreground. */
+[data-concept=festival] .concept-switcher { min-height:48px; padding-block:3px; background:#0d1229; border-color:#6b78a523; gap:12px; font-size:11px; }
+[data-concept=festival] .concept-switcher>a { min-height:40px; display:flex; align-items:center; color:#9daecd; }
+[data-concept=festival] .concept-switcher>a:hover { color:#e4f2ff; }
+[data-concept=festival] .concept-switcher>span { display:flex; align-items:center; gap:8px; color:#d1d8f2; font-size:11px; font-weight:550; letter-spacing:.3px; }
+[data-concept=festival] .concept-switcher>span>i { width:5px; height:5px; border-radius:50%; background:#90deef; box-shadow:0 0 8px #7bcfff30; }
+[data-concept=festival] .concept-switcher>span>span { padding-left:8px; border-left:1px solid #717ca03b; color:#8996b7; font-size:10px; }
+[data-concept=festival] .concept-switcher nav { gap:0; padding:0 3px; border:1px solid #7586b330; border-radius:11px; background:#161d37; }
+[data-concept=festival] .concept-switcher nav a { position:relative; isolation:isolate; width:40px; height:40px; border-radius:7px; color:#9aa9cd; font:600 11px Inter,sans-serif; background:none; transition:color .2s; }
+[data-concept=festival] .concept-switcher nav a:before { content:''; position:absolute; z-index:-1; inset:5px 2px; border-radius:6px; transition:background .2s; }
+[data-concept=festival] .concept-switcher nav a:hover:before { background:#647fa51f; }
+[data-concept=festival] .concept-switcher nav a[aria-current] { background:none; color:#b2f0ff; }
+[data-concept=festival] .concept-switcher nav a[aria-current]:before { background:#3a4b74; box-shadow:inset 0 1px #9cb9ed33,0 2px 5px #05091735; }
+[data-concept=festival] .topbar { position:relative; height:88px; border-bottom:0!important; gap:16px; }
+[data-concept=festival] .topbar:after { content:''; position:absolute; bottom:0; left:40px; right:40px; height:1px; background:linear-gradient(90deg,#80b7ed45,#9589d735 60%,#7584b218); }
+[data-concept=festival] .brand { min-height:44px; gap:9px; flex-shrink:0; letter-spacing:0; }
+[data-concept=festival] .energy-brand-mark { display:block; width:36px; height:36px; flex:none; }
+[data-concept=festival] .energy-brand-wordmark { font:800 18px/1 Inter,-apple-system,BlinkMacSystemFont,sans-serif; letter-spacing:.45px; color:#f5f8ff; }
+[data-concept=festival] .energy-brand-wordmark>span { color:#c4c7fa; }
+[data-concept=festival] .brand .demo { background:#35416c52; border:1px solid #7c8db32b; padding:4px 5px; margin:0 0 0 3px; font:550 8px/1 Inter,sans-serif; letter-spacing:1px; color:#a6b6d5; }
+[data-concept=festival] .header-actions { gap:12px; flex-shrink:0; }
+[data-concept=festival] .header-wallet { display:flex; align-items:center; gap:10px; min-height:50px; padding:7px 11px; background:linear-gradient(120deg,#293659b3,#222c4cb3); border:1px solid #8c9bca38; border-radius:13px; box-shadow:inset 0 1px #f3e7b70a,0 3px 9px #040a2118; transition:border-color .2s,background .2s; }
+[data-concept=festival] .header-wallet:hover { border-color:#9fc3e880; background:#304064; }
+[data-concept=festival] .energy-credit-icon { display:block; width:29px; height:29px; flex:none; }
+[data-concept=festival] .header-wallet .energy-wallet-copy { display:flex; flex-direction:column; align-items:flex-start; gap:2px; }
+[data-concept=festival] .header-wallet .energy-wallet-label { display:block; color:#b7c3de; font:500 10px/1.1 Inter,sans-serif; letter-spacing:.3px; }
+[data-concept=festival] .header-wallet strong { color:#f8dfaa; font:700 19px/1.05 Inter,sans-serif; font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+[data-concept=festival] .energy-wallet-arrow { width:13px; height:13px; color:#98aaca; margin-left:4px; }
+[data-concept=festival] .guest { min-height:50px; width:auto; padding:5px 12px 5px 5px; gap:9px; border:1px solid #879acf32; border-radius:13px; background:#26315380; box-shadow:inset 0 1px #ccd6ff09; transition:border-color .2s,background .2s; }
+[data-concept=festival] .guest:hover { border-color:#a59bda80; background:#30385d; }
+[data-concept=festival] .energy-pilot-avatar { display:grid; place-items:center; width:36px; height:36px; border-radius:10px; background:radial-gradient(ellipse at 70% 0,#7468b947,transparent 75%),#34456e; border:1px solid #a3b6e527; flex:none; }
+[data-concept=festival] .energy-pilot-avatar svg { display:block; width:31px; height:31px; }
+[data-concept=festival] .energy-guest-copy { display:flex; flex-direction:column; align-items:flex-start; gap:3px; font:550 11px/1.2 Inter,sans-serif; color:#e0e6fb; }
+[data-concept=festival] .energy-guest-copy small { font-size:9px; font-weight:400; color:#99a8c7; }
+[data-concept=festival] .avatar { background:#354372; color:#c6edff; }
+[data-concept=festival] .navigation { background:#151d39f5; border:1px solid #7587be55; border-radius:14px; box-shadow:0 14px 40px #03051880; padding:6px; }
+[data-concept=festival] .navigation button { color:#b8c4e1; border-radius:9px; }
+[data-concept=festival] .navigation button[aria-current=page] { background:#303d6b; color:#9ff2ff; box-shadow:inset 0 -2px #6de4ff; }
+.energy-background { position:absolute; inset:0; overflow:hidden; z-index:-1; pointer-events:none; }
+.energy-background>span { position:absolute; top:220px; right:-220px; width:430px; height:770px; background:linear-gradient(155deg,#665dff16,transparent 70%); transform:skew(-24deg); border-left:1px solid #b6aaff12; }
+.energy-background>i { position:absolute; top:740px; left:-250px; width:460px; height:480px; border:1px solid #6edcfe0f; transform:rotate(38deg); }
+.energy-welcome { display:flex; align-items:center; justify-content:space-between; margin:0 0 25px; gap:18px; }
+.energy-welcome-copy { min-width:0; }
+.energy-welcome .energy-welcome-kicker { display:flex; align-items:center; gap:10px; margin:0 0 10px; color:#94a9cc; font:500 10px/1.2 Inter,sans-serif; letter-spacing:1.5px; }
+.energy-welcome-kicker>span { color:#a9d8ee; letter-spacing:1px; font-size:11px; }
+.energy-welcome-kicker>i { width:21px; height:1px; background:#8da5cc55; }
+.energy-welcome h1 { font-size:29px; font-weight:750; margin:0; line-height:1.35; letter-spacing:-.8px; }
+.energy-welcome h1>span { color:#d6dcfa; }
+.energy-game-count { position:relative; isolation:isolate; flex:none; display:grid; align-content:center; justify-items:center; gap:3px; width:65px; height:65px; margin-right:9px; padding:0; border:1px solid #8f9bd129; border-radius:50%; background:radial-gradient(ellipse at 30% 0,#7385d51f,#2630571a); color:#d4e4ff; transition:background .2s,border-color .2s; }
+.energy-game-count strong { font:650 23px/1 Orbit,sans-serif; letter-spacing:-1px; }
+.energy-game-count>span:not(.energy-count-orbit) { font:500 9px/1.1 Inter,sans-serif; color:#9cafce; }
+.energy-count-orbit { position:absolute; inset:6px -8px; border:1px solid #8ea2f477; border-right-color:#8bdfffc9; border-left-color:transparent; border-radius:50%; transform:rotate(-34deg); pointer-events:none; }
+.energy-count-orbit:after { content:''; position:absolute; top:5px; right:6px; width:4px; height:4px; border-radius:50%; background:#a1eaff; box-shadow:0 0 7px #9ae3ff4d; }
+.energy-game-count>.ui-glyph { position:absolute; top:-2px; right:-4px; width:15px; height:15px; padding:1px; background:#202849; border-radius:3px; color:#b5b7ff; transform:rotate(-45deg); }
+.energy-game-count:hover { background:#36457370; border-color:#9bc7eb88; }
+.energy-hero { position:relative; isolation:isolate; overflow:hidden; display:grid; grid-template-columns:48% 52%; min-height:357px; border:1px solid #817bfb73; border-radius:20px; background:radial-gradient(ellipse at 92% 10%,#9b51f8a3,transparent 65%),linear-gradient(114deg,#262558 0%,#332c90 46%,#5842e6 76%,#415fd9); box-shadow:0 17px 45px #03071948,inset 0 1px #c9bdff33; }
+.energy-hero:before { content:''; position:absolute; inset:0; background:linear-gradient(124deg,transparent 0 49%,#8589ff1a 49.1% 56%,transparent 56.1% 69%,#c7a8ff16 69.1% 70%,transparent 70.1%); pointer-events:none; z-index:-1; }
+.energy-hero:after { content:''; position:absolute; top:0; left:27px; width:74px; height:3px; background:#a6edff; box-shadow:0 0 15px #86dfff45; }
+.energy-hero-copy { position:relative; padding:30px 0 71px 35px; z-index:3; }
+.energy-feature-label { display:flex; align-items:center; gap:7px; font-size:11px; color:#f0f7ff; }
+.energy-feature-label>i { height:5px; width:5px; background:#b5eaff; transform:rotate(45deg); }.energy-feature-label b { font:600 8px Orbit,sans-serif; color:#b4b9ff; margin-left:8px; letter-spacing:1.3px; }
+.energy-hero-word { position:absolute; z-index:-1; left:90px; bottom:44px; color:#c7d9ff0a; font:850 italic 84px/1 Orbit,sans-serif; white-space:nowrap; letter-spacing:-6px; pointer-events:none; }
+.energy-hero h2 { color:#fff; margin:18px 0 15px; font-size:47px; font-weight:850; line-height:1.13; letter-spacing:-1.3px; }
+.energy-hero h2>span { display:block; color:#e2e6ff; font-size:22px; letter-spacing:0; margin-top:12px; font-weight:600; white-space:nowrap; }.energy-hero h2>span>span { color:#83e8ff; }
+.energy-hero-copy>p { font-size:12px; color:#c5cef8; line-height:1.7; }
+.energy-hero-actions { display:flex; align-items:center; gap:18px; margin-top:23px; }
+.energy-main-cta.primary { display:inline-flex; align-items:center; justify-content:center; gap:25px; min-height:46px; padding:11px 17px; background:#83e8ff; color:#1a2840; border:1px solid #bcf5ff; border-radius:8px; box-shadow:0 4px #3566a5,0 0 22px #66dbff1a; font-size:13px; font-weight:800; transition:transform .2s,box-shadow .2s; }
+.energy-main-cta.primary:hover { background:#b1f1ff; filter:none; transform:translateY(-2px); box-shadow:0 6px #3566a5,0 0 25px #66dbff30; }.energy-main-cta.primary:active { transform:translateY(2px); box-shadow:0 2px #3566a5; }
+.energy-main-cta .ui-glyph { width:18px; height:18px; }.energy-hero-cost { color:#dfdffd; font-size:10px; white-space:nowrap; }
+.energy-hero-scene { position:relative; min-width:0; pointer-events:none; perspective:650px; }
+.energy-art { display:block; position:relative; pointer-events:none; }
+.energy-art>img, .energy-art>svg { width:100%; height:100%; display:block; object-fit:contain; overflow:visible; }
+.energy-feature-art { position:absolute; width:475px; height:329px; left:44%; top:45%; transform:translate(-50%,-50%); filter:drop-shadow(0 18px 13px #0b123d4a); z-index:3; }
+.energy-feature-art>svg { animation:energy-hover 7.5s ease-in-out infinite; }
+.energy-portal { position:absolute; width:329px; height:269px; left:47%; top:46%; border:2px solid #bf94ff; border-radius:50%; transform:translate(-50%,-50%) rotate(-23deg); box-shadow:0 0 20px #9b77ff68,inset 0 0 18px #ac63ff25; }
+.portal-back { width:329px; height:276px; border:17px solid #7970ff40; outline:1px solid #c1b0ff61; transform:translate(-50%,-50%) rotate(-30deg); }
+.portal-back:before { content:''; position:absolute; inset:15px; border:1px dashed #bac3ff6e; border-radius:50%; }
+.portal-front { width:450px; height:107px; top:54%; left:43%; border:3px solid #67f5ff; border-top-color:transparent; border-left-color:transparent; z-index:4; box-shadow:5px 4px 7px #39deff28; transform:translate(-50%,-50%) rotate(-21deg); }
+.energy-hero-speed { position:absolute; width:200px; height:1px; background:linear-gradient(90deg,transparent,#8af1ff 80%,transparent); transform:rotate(-33deg); opacity:.7; }.speed-one { top:58px; right:9px; }.speed-two { bottom:79px; left:-58px; width:151px; }
+.energy-floating-code { position:absolute; display:flex; align-items:center; gap:6px; padding:7px 10px; bottom:65px; right:6%; color:#e9edff; border:1px solid #8999ff; background:#252c70c9; transform:rotate(-7deg); z-index:5; font:700 7px Orbit,sans-serif; letter-spacing:1px; }.energy-floating-code b { color:#c8b9ff; font-size:24px; line-height:1; letter-spacing:-2px; }
+.energy-scene-cross { position:absolute; top:34px; left:7%; color:#c5faff; font-size:26px; text-shadow:0 0 18px #37d8ff; }
+.energy-hero-foot { position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; gap:20px; height:41px; padding:0 23px; background:#19215a80; border-top:1px solid #a9acff3a; font:600 8px Orbit,sans-serif; letter-spacing:1.2px; color:#b9cafa; }.energy-hero-foot>span:nth-child(2) { margin-left:auto; font:11px Inter,sans-serif; letter-spacing:.2px; color:#d2d5f8; }.energy-hero-foot i { margin:0 10px; font-style:normal; color:#6e7cae; }.energy-hero-foot b { font-size:20px; color:#a1e8ff; }
+[data-concept=festival] .energy-hero-favorite { color:#edebff; top:7px; right:7px; }.energy-hero-favorite:before { background:#23295870!important; }
+.energy-rail { display:flex; align-items:center; gap:23px; margin:21px 0 28px; color:#a6b7da; font-size:11px; }
+.energy-rail>span:first-child { white-space:nowrap; }.energy-rail b { font:650 15px Orbit,sans-serif; color:#bcaaff; margin-right:6px; }
+.energy-rail-line { flex:1; height:5px; background:repeating-linear-gradient(120deg,transparent 0 7px,#7887c435 7px 9px); opacity:.7; }
+.energy-rail button { display:flex; align-items:center; gap:7px; border:0; border-bottom:1px solid #7694bb78; background:none; color:#bddfee; padding:8px 0; font-size:11px; }.energy-rail .ui-glyph { width:14px; height:14px; transform:rotate(90deg); }
+.energy-collection { scroll-margin-top:23px; }
+[data-concept=festival] .shelf-heading h2 { font-size:21px; font-weight:700; letter-spacing:-.5px; }[data-concept=festival] .shelf-heading>span { color:#94a4c7; font-size:8px; letter-spacing:1.2px; }
+[data-concept=festival] .filters { gap:8px; margin-bottom:20px; padding:3px 0 5px; }
+[data-concept=festival] .filter { display:flex; align-items:center; gap:7px; min-height:40px; padding:8px 13px; border:1px solid #7081b24d; background:#20294d; border-radius:8px; color:#c0cce5; font-size:11px; }
+[data-concept=festival] .filter .ui-glyph { width:14px; height:14px; }[data-concept=festival] .filter:hover { background:#303d67; }
+[data-concept=festival] .filter[aria-pressed=true] { background:#91efff; border-color:#bdffff; color:#153449; box-shadow:none; }[data-concept=festival] .filter b { font-size:9px; background:#8695c026; border-radius:4px; padding:1px 4px; }
+[data-concept=festival] .catalog { gap:20px; }
+[data-concept=festival] .energy-card { --energy:#58eaff; --field:#087fa8; --field-deep:#174772; background:#202849; border:1px solid #8191c74a; border-radius:16px; overflow:hidden; box-shadow:0 8px 23px #0308202b; isolation:isolate; }
+[data-concept=festival] .energy-card[data-play=rocket] { --energy:#b18bff; --field:#783bea; --field-deep:#39267f; }
+[data-concept=festival] .energy-card[data-play=dice] { --energy:#ee90ff; --field:#8b39ab; --field-deep:#562274; }
+[data-concept=festival] .energy-card[data-play=plinko] { --energy:#62e6f6; --field:#068f9b; --field-deep:#074b67; }
+[data-concept=festival] .energy-card[data-play=horse] { --energy:#ffcb78; --field:#ad466d; --field-deep:#583373; }
+[data-concept=festival] .energy-card[data-play=slots] { --energy:#aaadff; --field:#5556d5; --field-deep:#2a3377; }
+[data-concept=festival] .energy-card[data-play=matrix] { --energy:#84efff; --field:#3965dc; --field-deep:#2b2a7a; }
+[data-concept=festival] .energy-card:before { display:block; content:''; position:absolute; top:0; left:20px; right:auto; width:45px; height:2px; z-index:5; opacity:1; background:var(--energy); }
+[data-concept=festival] .energy-card:not(:disabled):hover { transform:translateY(-4px); border-color:var(--energy); box-shadow:0 12px 30px #07122c66; }
+[data-concept=festival] .energy-card:focus-within { border-color:var(--energy); }
+[data-concept=festival] .energy-card .cover { margin:0; width:100%; height:201px; border-radius:0; background:radial-gradient(ellipse at 72% 30%,var(--field),transparent 90%),var(--field-deep); overflow:hidden; position:relative; }
+[data-concept=festival] .energy-card .cover:before { content:''; position:absolute; inset:-100px -60px 20px auto; width:270px; height:330px; background:linear-gradient(130deg,#d2c9ff1f,transparent); border:0; border-radius:0; transform:rotate(30deg); opacity:1; animation:none; }
+[data-concept=festival] .energy-card .cover:after { content:''; inset:auto 0 0; height:45px; width:100%; border-radius:0; background:linear-gradient(transparent,#20284966); opacity:1; transform:none; }
+.energy-card-grid { position:absolute; width:130%; height:55%; bottom:-20%; left:-15%; transform:perspective(130px) rotateX(50deg); background:linear-gradient(#afffff20 1px,transparent 1px) 0 0/30px 30px,linear-gradient(90deg,#afffff20 1px,transparent 1px) 0 0/30px 30px; }
+[data-concept=festival] .energy-card .card-category { top:15px; left:16px; padding:0; background:none; border:0; color:#edf9ff; font-size:10px; font-weight:500; }
+[data-concept=festival] .energy-card .favorite-button { top:3px; right:5px; color:#e0f3ff; }.energy-card .favorite-button:before { background:#161b4659!important; }.energy-card .favorite-button[aria-pressed=true] { color:#ffe19a!important; }.energy-card .favorite-button[aria-pressed=true]:before { background:#292d66!important; }
+.energy-card .energy-art { width:188px; height:184px; z-index:2; margin-top:15px; filter:drop-shadow(0 8px 9px #09173845); transition:transform .25s; }
+.energy-card .energy-art>img, .energy-card .energy-art>svg { animation:energy-hover 8s var(--icon-delay) ease-in-out infinite; }
+.energy-sprite { display:block; width:100%; height:100%; background-image:url('lobby-icons-glass.webp'); background-size:200% 200%; background-repeat:no-repeat; mix-blend-mode:screen; mask-image:radial-gradient(ellipse 67% 66%,#000 46%,transparent 82%); }
+.sprite-minesweeper { background-position:0 0; }.sprite-dice { background-position:0 100%; }.sprite-plinko { background-position:100% 100%; }
+.energy-card .energy-art:has(.energy-sprite) { mix-blend-mode:screen; filter:none; animation:energy-hover 8s var(--icon-delay) ease-in-out infinite; }
+.energy-card .sprite-plinko { background-size:200% 200%; }.energy-card[data-play=plinko] .energy-art { width:176px; height:176px; }
+.energy-card[data-play=horse] .energy-art { width:165px; height:174px; }.energy-card[data-play=rocket] .energy-art { width:176px; height:172px; }
+.energy-card-orbit { position:absolute; width:173px; height:47px; left:50%; bottom:18px; transform:translateX(-50%) rotate(-16deg); border:1px solid var(--energy); border-top-color:transparent; border-right-color:transparent; border-radius:50%; opacity:.75; z-index:3; pointer-events:none; }
+.energy-card-code { position:absolute; left:15px; bottom:13px; font:600 6px Orbit,sans-serif; letter-spacing:1px; color:#d5e3ff; z-index:4; }.energy-card-mark { position:absolute; right:16px; bottom:10px; font-size:22px; color:var(--energy); z-index:4; }
+[data-concept=festival] .energy-card .game-details { padding:15px 18px 17px; }[data-concept=festival] .energy-card .game-name { color:#f3f6ff; font-size:19px; font-weight:750; }.energy-card .game-title-row>.ui-glyph { display:none; }
+[data-concept=festival] .energy-card .game-description { color:#b0bedb; font-size:12px; min-height:39px; line-height:1.65; margin-top:5px; }
+[data-concept=festival] .energy-card .card-bottom { border-top:1px solid #879ac62b; padding-top:11px; margin-top:9px; gap:6px; }
+[data-concept=festival] .energy-card .entry-cost { color:#f4d79b; font-size:10px; }[data-concept=festival] .energy-card .entry-cost i { display:none; }
+[data-concept=festival] .energy-card .play-label { display:inline-flex; align-items:center; gap:7px; width:auto; padding:6px 8px; color:var(--energy); background:#6472981c; border:1px solid #8096c035; border-radius:6px; font-size:10px; font-weight:650; }.energy-card .play-label .ui-glyph { width:13px; height:13px; }
+[data-concept=festival] .recent-game { background:#202949; border-color:#8191c73d; border-radius:10px; color:#eef6ff; }[data-concept=festival] .recent-game:hover { background:#303b65; }[data-concept=festival] .recent-game small { color:#b5c4e0; }
+[data-concept=festival] .recent-art { width:51px; height:49px; }.recent-art>.energy-art { width:51px; height:49px; }.recent-art .energy-sprite { mix-blend-mode:screen; }
+.energy-endcap { margin-top:26px; padding-top:16px; border-top:1px solid #7184ae33; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.energy-endcap>span { font:600 8px Orbit,sans-serif; letter-spacing:1.8px; color:#95a5c9; }.energy-motion-toggle { min-height:42px; padding:9px 11px; border:1px solid #6a7ca84d; border-radius:6px; background:#253051; color:#bdcce6; font-size:10px; }
+[data-concept=festival] .catalog-footer { text-align:left; color:#8d9fc3; font-size:10px; }
+.festival-click-burst { position:fixed; z-index:100; width:1px; height:1px; pointer-events:none; }.festival-click-burst i { position:absolute; width:5px; height:7px; background:#63eaff; color:#d3b8ff; font-size:13px; line-height:1; animation:energy-burst .8s ease-out both; }.festival-click-burst i:nth-child(2n) { background:none; }.festival-click-burst i:nth-child(3n) { color:#c59aff; }
+@keyframes energy-hover { 0%,100%{transform:translateY(2px)}50%{transform:translateY(-5px)} }
+@keyframes energy-burst { 0%{opacity:0;transform:translate(0,0) scale(.6)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--spin)) scale(.7)} }
+@media(hover:hover) { .energy-card .game-open:hover .energy-art { translate:0 -4px; scale:1.035; }.energy-card .game-open:hover .play-label { color:#fff; border-color:var(--energy); background:#ffffff14; } }
+@media(max-width:1050px) { .energy-feature-art { width:421px; height:292px; left:46%; }.energy-portal { width:285px; height:242px; }.portal-front { width:390px; height:90px; }.energy-hero h2 { font-size:43px; }.energy-hero h2>span { font-size:20px; }.energy-hero-copy { padding-left:28px; }.energy-card .energy-art { width:173px; height:176px; } }
+@media(max-width:760px) { .energy-feature-art { width:335px; height:232px; left:49%; }.energy-portal { width:242px; height:214px; }.portal-front { width:307px; height:78px; }.energy-hero-actions { align-items:flex-start; flex-direction:column; gap:10px; }.energy-hero { min-height:335px; }.energy-hero h2 { font-size:38px; }.energy-hero h2>span { font-size:17px; }.energy-floating-code { right:2%; bottom:70px; } }
+@media(max-width:650px) {
+ [data-concept=festival] #content { padding:24px 17px 112px; }[data-concept=festival] .topbar { height:78px; padding-inline:17px; gap:10px; }[data-concept=festival] .topbar:after { left:17px; right:17px; }
+ [data-concept=festival] .concept-switcher { padding-inline:17px; gap:8px; font-size:10px; }[data-concept=festival] .concept-switcher>span { font-size:10px; }[data-concept=festival] .concept-switcher>span>span { display:none; }[data-concept=festival] .concept-switcher nav a { width:33px; font-size:10px; }
+ [data-concept=festival] .energy-brand-wordmark { font-size:15px; letter-spacing:.2px; }[data-concept=festival] .energy-brand-mark { width:31px; height:31px; }[data-concept=festival] .brand { gap:6px; }
+ [data-concept=festival] .header-actions { gap:8px; }[data-concept=festival] .header-wallet { min-height:46px; padding:6px 9px; gap:7px; border-radius:12px; }[data-concept=festival] .energy-credit-icon { width:25px; height:25px; }[data-concept=festival] .header-wallet strong { font-size:17px; }[data-concept=festival] .header-wallet .energy-wallet-label { font-size:9px; }[data-concept=festival] .energy-wallet-arrow { display:none; }
+ [data-concept=festival] .guest { width:44px; min-height:46px; padding:4px; border-radius:12px; }[data-concept=festival] .energy-pilot-avatar { width:34px; height:36px; border-radius:8px; }[data-concept=festival] .energy-guest-copy { display:none; }
+ [data-concept=festival] .navigation { bottom:max(12px,env(safe-area-inset-bottom)); }
+ .energy-welcome { margin-bottom:24px; gap:10px; }.energy-welcome .energy-welcome-kicker { font-size:8px; letter-spacing:1px; gap:8px; margin-bottom:9px; }.energy-welcome-kicker>span { font-size:10px; }.energy-welcome-kicker>i { width:16px; }.energy-welcome h1 { font-size:23px; letter-spacing:-.7px; }
+ .energy-game-count { width:53px; height:53px; margin-right:7px; }.energy-game-count strong { font-size:20px; }.energy-game-count>span:not(.energy-count-orbit) { font-size:8px; }.energy-count-orbit { inset:6px -6px; }.energy-count-orbit:after { top:2px; right:6px; width:3px; height:3px; }.energy-game-count>.ui-glyph { width:13px; height:13px; }
+ .energy-hero { grid-template-columns:51% 49%; min-height:299px; border-radius:16px; }.energy-hero-copy { padding:23px 0 56px 20px; }.energy-feature-label { font-size:9px; gap:5px; }.energy-feature-label b { font-size:5px; letter-spacing:.6px; margin-left:3px; }
+ .energy-hero h2 { font-size:32px; margin:18px 0 10px; line-height:1.15; letter-spacing:-1px; white-space:nowrap; }.energy-hero h2>span { font-size:15px; line-height:1.5; margin-top:10px; white-space:normal; }.energy-hero h2>span>span { display:block; font-size:20px; font-weight:750; white-space:nowrap; }
+ .energy-hero-copy>p { font-size:9px; max-width:139px; line-height:1.7; }.energy-hero-actions { margin-top:18px; gap:9px; }.energy-main-cta.primary { min-height:42px; font-size:11px; padding:9px 12px; gap:16px; }.energy-main-cta .ui-glyph { width:15px; height:15px; }.energy-hero-cost { font-size:8px; }
+ .energy-hero-word { font-size:61px; left:37px; bottom:70px; letter-spacing:-4px; }
+ .energy-feature-art { width:258px; height:179px; left:44%; top:47%; }.energy-portal { width:193px; height:198px; top:45%; left:57%; }.portal-back { border-width:10px; }.portal-front { width:248px; height:73px; left:43%; top:52%; border-width:2px; }.energy-scene-cross { font-size:19px; top:36px; left:19%; }
+ .speed-one { width:130px; top:72px; right:-19px; }.speed-two { width:114px; left:-31px; bottom:98px; }.energy-floating-code { bottom:66px; right:12%; padding:5px 7px; font-size:5px; letter-spacing:.5px; gap:5px; }.energy-floating-code b { font-size:20px; }
+ .energy-hero-foot { height:34px; padding:0 13px; gap:9px; font-size:6px; letter-spacing:.5px; }.energy-hero-foot>span:nth-child(2) { font-size:8px; }.energy-hero-foot i { margin-inline:5px; }.energy-hero-foot b { font-size:16px; }
+ .energy-rail { margin:17px 0 24px; gap:13px; font-size:9px; }.energy-rail b { font-size:12px; margin-right:4px; }.energy-rail button { font-size:9px; gap:4px; }.energy-rail .ui-glyph { width:12px; height:12px; }
+ [data-concept=festival] .shelf-heading h2 { font-size:18px; letter-spacing:-.2px; }[data-concept=festival] .shelf-heading>span { font-size:6px; letter-spacing:.6px; }
+ [data-concept=festival] .filters { gap:6px; margin-bottom:15px; }[data-concept=festival] .filter { font-size:10px; padding:7px 10px; min-height:37px; gap:5px; flex-shrink:0; border-radius:6px; }[data-concept=festival] .filter .ui-glyph { width:12px; height:12px; }
+ [data-concept=festival] .catalog { gap:14px 12px; }[data-concept=festival] .energy-card { border-radius:12px; }[data-concept=festival] .energy-card .cover { height:153px; }[data-concept=festival] .energy-card .card-category { font-size:8px; top:11px; left:11px; }[data-concept=festival] .energy-card .favorite-button { right:0; top:0; }[data-concept=festival] .energy-card:before { left:13px; width:31px; }
+ .energy-card .energy-art { width:143px; height:143px; margin-top:15px; }.energy-card[data-play=rocket] .energy-art { width:128px; height:131px; }.energy-card[data-play=plinko] .energy-art { width:136px; height:136px; }.energy-card[data-play=horse] .energy-art { width:127px; height:134px; }
+ .energy-card-code { left:11px; bottom:8px; font-size:5px; letter-spacing:.4px; }.energy-card-mark { font-size:16px; right:11px; bottom:6px; }.energy-card-orbit { width:125px; height:34px; bottom:12px; }
+ [data-concept=festival] .energy-card .game-details { padding:12px 11px 13px; }[data-concept=festival] .energy-card .game-name { font-size:16px; }[data-concept=festival] .energy-card .game-description { font-size:11px; min-height:37px; text-wrap:pretty; }
+ [data-concept=festival] .energy-card .card-bottom { margin-top:8px; padding-top:9px; gap:3px; }[data-concept=festival] .energy-card .entry-cost { font-size:9px; }[data-concept=festival] .energy-card .play-label { font-size:9px; padding:5px 5px; gap:3px; }.energy-card .play-label .ui-glyph { width:10px; height:10px; }
+ .energy-endcap>span { font-size:6px; letter-spacing:1px; }.energy-motion-toggle { font-size:9px; }.energy-endcap { margin-top:23px; }[data-concept=festival] .catalog-footer { font-size:8px; }
+}
+@media(max-width:370px) {
+ [data-concept=festival] #content { padding-inline:13px; }[data-concept=festival] .topbar { padding-inline:13px; gap:8px; }[data-concept=festival] .topbar:after { left:13px; right:13px; }[data-concept=festival] .concept-switcher { padding-inline:13px; }[data-concept=festival] .concept-switcher>span>i { display:none; }
+ [data-concept=festival] .energy-brand-wordmark { font-size:13px; }[data-concept=festival] .brand { gap:4px; }[data-concept=festival] .energy-brand-mark { width:28px; height:28px; }[data-concept=festival] .header-actions { gap:6px; }[data-concept=festival] .header-wallet { padding-inline:7px; gap:5px; }[data-concept=festival] .energy-credit-icon { width:22px; height:22px; }
+ .energy-welcome h1 { font-size:20px; letter-spacing:-.7px; }.energy-welcome .energy-welcome-kicker { font-size:7.5px; letter-spacing:.75px; }.energy-game-count { width:48px; height:48px; }.energy-game-count strong { font-size:18px; }
+ .energy-hero-copy { padding-left:15px; }.energy-hero h2 { font-size:28px; }.energy-hero h2>span { font-size:14px; }.energy-hero h2>span>span { font-size:18px; }.energy-feature-label b { display:none; }.energy-hero-copy>p { font-size:8px; max-width:117px; }
+ .energy-feature-art { width:222px; height:154px; left:45%; }.energy-portal { width:177px; height:184px; left:60%; }.portal-front { width:209px; height:61px; left:49%; }.energy-floating-code { right:2%; bottom:68px; }.energy-hero-foot>span:nth-child(2) { font-size:7px; }
+ [data-concept=festival] .energy-card .cover { height:140px; }.energy-card .energy-art { width:128px; height:128px; }.energy-card[data-play=rocket] .energy-art,.energy-card[data-play=horse] .energy-art { width:115px; height:122px; }.energy-card[data-play=plinko] .energy-art { width:123px; height:123px; }
+ [data-concept=festival] .energy-card .game-details { padding-inline:9px; }[data-concept=festival] .energy-card .game-name { font-size:15px; }[data-concept=festival] .energy-card .play-label .ui-glyph { display:none; }
+}
+[data-concept=festival][data-festival-motion=off] #platform *,[data-concept=festival][data-festival-motion=off] #platform *:before,[data-concept=festival][data-festival-motion=off] #platform *:after { animation:none!important; transition:none!important; }
+[data-concept=festival][data-festival-motion=off] .energy-card:hover { transform:none; }[data-concept=festival][data-festival-motion=off] .energy-card .game-open:hover .energy-art { translate:none; scale:1; }

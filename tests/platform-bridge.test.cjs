@@ -1,3 +1,4 @@
+const {MatrixRound}=require('../src/matrix-engine.js');
 const assert = require('node:assert/strict');
 const {test} = require('node:test');
 const {PointsWallet} = require('../src/platform-wallet.js');
@@ -6,6 +7,7 @@ const {MinesRound} = require('../src/mines-engine.js');
 const {RocketRound} = require('../src/rocket-engine.js');
 const {DiceRound} = require('../src/dice-engine.js');
 const {PlinkoRound} = require('../src/plinko-engine.js');
+const {SlotsRound} = require('../src/slots-engine.js');
 const {HorseRound} = require('../src/horse-engine.js');
 
 test('wallet rejects invalid values, protects the ledger, and applies each transaction once', () => {
@@ -25,9 +27,9 @@ test('wallet rejects invalid values, protects the ledger, and applies each trans
   assert.equal(wallet.ledger.reduce((sum, e) => sum + Math.round(e.amount * 100), 0), Math.round(wallet.points * 100));
 });
 
-const engines = {minesweeper: MinesRound, rocket: RocketRound, dice: DiceRound, plinko: PlinkoRound, horse: HorseRound};
+const engines = {minesweeper: MinesRound, rocket: RocketRound, dice: DiceRound, plinko: PlinkoRound, horse: HorseRound, slots: SlotsRound, matrix: MatrixRound};
 const requests = {
-  minesweeper: {type: 'mines-start'}, rocket: {type: 'rocket-launch'},
+  matrix: {type: 'matrix-spin'}, slots: {type: 'slots-spin'}, minesweeper: {type: 'mines-start'}, rocket: {type: 'rocket-launch'},
   dice: {type: 'dice-roll', mode: 'size', target: 'small'},
   plinko: {type: 'plinko-drop', lane: 4}, horse: {type: 'horse-start', selected: 0}
 };

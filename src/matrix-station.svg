@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1100" fill="none">
+ <defs><radialGradient id="nebula"><stop stop-color="#264d74" stop-opacity=".5"/><stop offset="1" stop-color="#0a1628" stop-opacity="0"/></radialGradient><linearGradient id="planet" x2=".6" y2="1"><stop stop-color="#416489"/><stop offset=".6" stop-color="#1c314e"/><stop offset="1" stop-color="#111e33"/></linearGradient></defs>
+ <ellipse cx="1230" cy="400" rx="550" ry="470" fill="url(#nebula)"/>
+ <circle cx="1380" cy="360" r="176" fill="url(#planet)"/><path d="M1208 325a176 176 0 0 1 342-30" stroke="#82c7e4" stroke-opacity=".4" stroke-width="2"/>
+ <g transform="translate(142 320) rotate(-16)" stroke="#83b9d8" stroke-opacity=".36">
+  <ellipse rx="175" ry="43" stroke-width="8"/><ellipse rx="157" ry="34"/><path d="M-122-30 122 30M-122 30 122-30M0-65V65" stroke-width="5"/>
+  <path d="M-30-26-21-46H20L31-27V27L21 43H-22L-30 26Z" fill="#1d3651"/><path d="M-17-19H17V20H-17Z" fill="#37566c"/>
+  <path d="M-212-65H-80V-33h-132zm292 0h132v32H80z" fill="#203f5b" stroke-width="2"/><path d="M-185-63v28m26-28v28m26-28v28m26-28v28m26-28v28m25-28v28m26-28v28m26-28v28m26-28v28m26-28v28" stroke-opacity=".6"/>
+  <path d="M-28 0H-75m103 0h47" stroke="#83dded" stroke-width="4"/>
+ </g>
+ <g fill="#a9d6e6" opacity=".5"><circle cx="120" cy="140" r="1.5"/><circle cx="470" cy="180" r="1"/><circle cx="880" cy="125" r="1.4"/><circle cx="1100" cy="260" r="2"/><circle cx="1490" cy="100" r="1"/><circle cx="1520" cy="690" r="1.4"/><circle cx="85" cy="670" r="1.7"/><circle cx="345" cy="780" r="1"/></g>
+ <path d="M-60 970Q800 400 1660 970L1660 1130H-60Z" fill="#0b1729" stroke="#5e8dae" stroke-opacity=".22" stroke-width="2"/>
+ <path d="M-60 1008Q800 438 1660 1008" stroke="#678bad" stroke-opacity=".13" stroke-width="18"/>
+ <path d="M120 1015 465 790m1030 225-352-225" stroke="#79aaca" stroke-opacity=".2" stroke-width="3"/>
+</svg>

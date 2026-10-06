@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+ <defs>
+  <radialGradient id="planet" cx=".23" cy=".15" r=".88"><stop stop-color="#406ca0"/><stop offset=".44" stop-color="#203a63"/><stop offset="1" stop-color="#09152c"/></radialGradient>
+  <linearGradient id="rim" x1="110" y1="90" x2="350" y2="400" gradientUnits="userSpaceOnUse"><stop stop-color="#85e7fa"/><stop offset=".43" stop-color="#7b91e5"/><stop offset="1" stop-color="#263c66" stop-opacity="0"/></linearGradient>
+  <linearGradient id="horizon" x1="800" y1="600" x2="800" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#376b97" stop-opacity=".25"/><stop offset="1" stop-color="#07111f" stop-opacity="0"/></linearGradient>
+  <linearGradient id="rail" x1="0" y1="200" x2="0" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#67dff9" stop-opacity="0"/><stop offset=".45" stop-color="#67dff9" stop-opacity=".65"/><stop offset="1" stop-color="#8e77e8" stop-opacity=".08"/></linearGradient>
+  <linearGradient id="moon" x1="1370" y1="190" x2="1460" y2="290" gradientUnits="userSpaceOnUse"><stop stop-color="#9d708d"/><stop offset="1" stop-color="#242449"/></linearGradient>
+ </defs>
+ <!-- Sparse stars leave the central play surface calm. -->
+ <g fill="#96c1e9" opacity=".65">
+  <circle cx="64" cy="98" r="1.6"/><circle cx="140" cy="39" r="1"/><circle cx="395" cy="93" r="1.5"/><circle cx="474" cy="182" r="1"/><circle cx="558" cy="53" r="1.7"/>
+  <circle cx="778" cy="101" r="1"/><circle cx="1060" cy="62" r="1.4"/><circle cx="1229" cy="112" r="1"/><circle cx="1490" cy="75" r="2"/>
+  <circle cx="46" cy="358" r="1.4"/><circle cx="125" cy="528" r="1"/><circle cx="318" cy="472" r="1.5"/><circle cx="1530" cy="367" r="1.5"/><circle cx="1324" cy="437" r="1"/>
+  <circle cx="1436" cy="560" r="1.7"/><circle cx="89" cy="692" r="1.5"/><circle cx="288" cy="744" r="1"/><circle cx="1306" cy="705" r="1.2"/><circle cx="1540" cy="685" r="1.8"/>
+ </g>
+ <g stroke="#8ccbf0" opacity=".42"><path d="M441 60v12m-6-6h12M1320 326v12m-6-6h12M107 608v10m-5-5h10M1532 180v8m-4-4h8"/></g>
+ <!-- A graphic ringed planet, drawn with a few clean surfaces. -->
+ <g transform="rotate(-28 200 270)">
+  <ellipse cx="200" cy="270" rx="263" ry="71" stroke="#5b7db5" stroke-width="16" opacity=".15"/>
+  <ellipse cx="200" cy="270" rx="276" ry="83" stroke="#8abce5" stroke-width="1" opacity=".3"/>
+  <circle cx="200" cy="270" r="148" fill="url(#planet)" stroke="url(#rim)" stroke-width="2"/>
+  <path d="M83 180c67 21 150 17 231-7M56 222c82 20 185 17 286-9M57 269c91 19 201 14 287-8" stroke="#80a6d6" stroke-width="12" opacity=".045"/>
+  <path d="M-60 265c-23 41 95 83 260 83s283-42 260-83" stroke="#8197d1" stroke-width="13" opacity=".38"/>
+  <path d="M-73 267c-15 43 101 90 273 90s288-47 273-90" stroke="#86d6f6" stroke-width="1.5" opacity=".6"/>
+  <path d="M119 148a148 148 0 0 1 126-19" stroke="#a3ebff" stroke-width="3" opacity=".55" stroke-linecap="round"/>
+ </g>
+ <circle cx="1410" cy="240" r="51" fill="url(#moon)"/>
+ <path d="M1384 196a51 51 0 0 1 64 12" stroke="#e3aac0" stroke-opacity=".6" stroke-width="2" stroke-linecap="round"/>
+ <circle cx="1391" cy="223" r="8" fill="#303252" opacity=".35"/><circle cx="1424" cy="252" r="13" fill="#303252" opacity=".4"/>
+ <!-- Planet horizon and orbital survey marks. -->
+ <path d="M-100 898Q800 390 1700 898V1000H-100Z" fill="url(#horizon)"/>
+ <path d="M-100 898Q800 390 1700 898" stroke="#67b5de" stroke-width="2" opacity=".38"/>
+ <path d="M-100 881Q800 373 1700 881" stroke="#75bfe3" opacity=".08" stroke-width="8"/>
+ <g stroke="#7898c8" opacity=".12"><path d="M1060 105h329l65 65M49 414h96l70 70M1269 482h216l75 75"/><circle cx="1389" cy="105" r="4"/><circle cx="215" cy="484" r="3"/><circle cx="1269" cy="482" r="3"/></g>
+ <!-- The station aperture frames the game rather than sitting on its controls. -->
+ <path d="M0 188h39l78 74v336L0 763" fill="#0d1c30" fill-opacity=".9" stroke="#29486b"/>
+ <path d="M1600 188h-39l-78 74v336l117 165" fill="#0d1c30" fill-opacity=".9" stroke="#29486b"/>
+ <path d="M0 210h28l68 64v317L0 726M1600 210h-28l-68 64v317l96 135" stroke="url(#rail)" stroke-width="3"/>
+ <path d="M0 268h15l53 52v192L0 600M1600 268h-15l-53 52v192l68 88" stroke="#42638a" stroke-opacity=".25" stroke-width="12"/>
+ <g stroke="#74c9e7" stroke-width="4" stroke-linecap="round" opacity=".4"><path d="M36 339v30m0 12v12M1564 339v30m0 12v12"/></g>
+ <path d="M0 910h247l107-46h892l107 46h247v90H0Z" fill="#0c192c" fill-opacity=".45" stroke="#5882aa" stroke-opacity=".14"/>
+ <path d="M0 931h255l107-45h876l107 45h255" stroke="#6097c9" stroke-opacity=".15"/>
+</svg>

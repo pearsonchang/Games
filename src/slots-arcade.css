@@ -1,0 +1,114 @@
+/* Local OFL fonts: Chinese display lettering for the title, Oxanium for the
+   cabinet and numeric readouts. Rules and instructions keep the body face. */
+@font-face{font-family:Orbit Display;src:url('fonts/orbit-title.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Oxanium;src:url('fonts/oxanium-variable.ttf') format('truetype');font-weight:200 800;font-style:normal;font-display:swap}
+:root{--font-game:Oxanium,'Avenir Next',sans-serif;--font-body:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;font-family:var(--font-body)}
+body{background:#07111f}
+.wordmark,.eyebrow,.marquee,.balance b,.jackpot-label b,.stake strong,.prize-row>b,.pair-rule>strong,.win-burst>strong,.win-burst:before,.example-equation b,.history b,.machine-meta span:last-child,.machine-foot>span:first-child,.machine-foot>span:last-child,footer>span{font-family:var(--font-game)}
+.wordmark{font-weight:700;letter-spacing:1.2px;gap:7px}
+.eyebrow{font-size:10px;letter-spacing:2.4px;color:#8baad0;font-weight:500}
+.intro{position:relative;min-height:76px;margin-bottom:20px}
+.intro:before{content:'';position:absolute;left:0;bottom:-10px;width:40px;height:2px;background:#60d6ed;box-shadow:45px 0 #876fe8,54px 0 #876fe8}
+h1{line-height:1.14}
+h1 .game-title{display:inline-block;font-family:Orbit Display,var(--font-body);font-size:46px;line-height:1.12;letter-spacing:3px;font-style:normal;font-weight:400;transform:skewX(-7deg);transform-origin:left bottom;color:#ecf6ff;text-shadow:0 2px #356b9e,0 4px #152c4d}
+h1>span{display:block;margin:9px 0 0;font-size:12px;letter-spacing:.8px;color:#adbed6}
+.balance b{font-size:23px;font-weight:700;letter-spacing:.3px;line-height:1.15}
+.balance span{margin-bottom:3px;color:#a4b8cf}
+.balance{padding:5px 0 5px 16px;border-left:1px solid #789fc82b}
+.round-tag{border-radius:5px;background:#10233b9e;border-color:#74bade40;color:#a5d4e2}
+.round-tag:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:6px;background:#72dbdf;box-shadow:0 0 6px #72dbdf50;vertical-align:2px}
+
+/* The panorama is a crisp, small vector asset; only small foreground accents move. */
+.sky{background:radial-gradient(ellipse at 25% 24%,#214d783d,transparent 49%),radial-gradient(ellipse at 87% 55%,#5541922b,transparent 45%),#07111f}
+.orbital-panorama{position:absolute;inset:0;background:url('slots-station.svg') center top/cover no-repeat;opacity:.88}
+.sky:after{background:radial-gradient(ellipse at 12% 37%,#499edd19,transparent 40%),radial-gradient(ellipse at 85% 56%,#9070ee19,transparent 40%);animation:ambient-breathe 12s ease-in-out infinite alternate}
+.orbital-grid{position:absolute;left:-25%;right:-25%;height:260px;bottom:-115px;background:linear-gradient(#6489bd18 1px,transparent 1px),linear-gradient(90deg,#6489bd18 1px,transparent 1px);background-size:74px 54px;transform:perspective(360px) rotateX(54deg);mask-image:linear-gradient(transparent,#000 50%);opacity:.6}
+.orbital-halo{position:absolute;left:calc(50% - 645px);top:130px;width:420px;height:420px;border:1px solid #78cde52b;border-radius:50%;transform:rotate(-26deg) scaleY(.54)}
+.orbital-halo:before{content:'';position:absolute;inset:12px;border:1px dashed #8c9edc30;border-radius:50%}
+.orbital-halo i{position:absolute;inset:-2px;border:2px solid transparent;border-top-color:#84d8ef55;border-radius:50%;animation:station-orbit 45s linear infinite}
+.sky-gate{position:absolute;width:80px;height:420px;top:32%;border:1px solid #79adf11c;background:linear-gradient(135deg,#20385c28,transparent);clip-path:polygon(0 0,60% 0,100% 12%,100% 82%,45% 100%,0 100%)}
+.sky-gate:after{content:'';position:absolute;top:20%;right:5px;width:2px;height:40%;background:linear-gradient(transparent,#71d9f4,#846ce0,transparent);opacity:.45;animation:station-signal 9s ease-in-out infinite}
+.gate-left{left:0}.gate-right{right:0;transform:scaleX(-1)}.gate-right:after{animation-delay:-4.5s}
+.sky .s1{top:10%;right:17%;font-size:13px}.sky .s2{top:54%;left:8%;font-size:12px}.sky .s3{top:78%;right:6%;font-size:18px!important}.sky .s4{top:24%;right:4%}
+header{background:linear-gradient(90deg,#08132122,#08132180 45%,#08132122);border-color:#8ab0d02b}
+.quiet{background:#14263b;border-color:#6da0c33b;border-radius:8px}
+
+/* Cut-panel cabinet, illuminated only around the active play area. */
+#machine{background:linear-gradient(115deg,#284260bd,#162b43e8 42%,#252949ec),#102035;border:1px solid #85b8dc66;border-bottom:6px solid #1d3453;border-radius:22px 38px 22px 22px;box-shadow:inset 0 2px #b8e3ff30,inset 0 -1px #759dc21c,0 16px 35px #01081380,0 0 35px #2f9ecc0b}
+.cabinet-inlay{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:-1;pointer-events:none;background:linear-gradient(146deg,transparent 0 18%,#9cd3ef04 18.1% 25%,transparent 25.1%),linear-gradient(0deg,#769ede08 1px,transparent 1px);background-size:auto,100% 28px}
+.cabinet-inlay:before{content:'';position:absolute;inset:0 0 auto;height:105px;background:linear-gradient(105deg,#244e6c55,#5a518423);border-bottom:1px solid #91b6db18;clip-path:polygon(0 0,100% 0,100% 80%,72% 80%,69% 100%,19% 100%,15% 80%,0 80%)}
+.cabinet-inlay:after{content:'';position:absolute;inset:auto 18px 11px;height:55px;border-bottom:1px solid #90b9e320;border-left:1px solid #90b9e320;border-right:1px solid #90b9e320;border-radius:0 0 13px 13px}
+.cabinet-orbit{position:absolute;top:-100px;left:7%;width:370px;height:190px;border:1px solid #86cce71f;border-radius:50%;transform:rotate(-22deg);box-shadow:0 0 0 14px #7cc3ed04,0 0 0 15px #7cc3ed0a}
+.cabinet-rail{position:absolute;top:19%;bottom:22%;width:3px;border-radius:2px;background:linear-gradient(transparent,#69d7ee66 22%,#75cbf180 55%,#9384d933,transparent)}
+.rail-left{left:8px}.rail-right{right:8px;background:linear-gradient(transparent,#a491ed66 22%,#8aacee80 55%,#8ce7df33,transparent)}
+#machine:before,#machine:after{width:15px;height:3px;top:11px;background:#99c5df80;border:0;border-radius:1px}
+#machine:before{left:26px;box-shadow:21px 0 #99c5df30}#machine:after{right:30px;background:#bba1ec66}
+.frame-circuit{opacity:.6}.circuit-track{stroke:#a5cbe927;stroke-width:1}.circuit-beam{stroke-width:1.6;stroke-dasharray:28 972;opacity:.7}
+#machine .machine-top{position:relative;min-height:59px;margin-bottom:16px}
+.machine-star{width:46px;height:46px;flex-basis:46px;border:1px solid #8bd1ef44;border-radius:12px;background:linear-gradient(145deg,#38597a70,#162b4755);padding:5px;box-shadow:inset 0 1px #cef4ff20;animation:none;transform:rotate(-6deg)}
+.marquee{min-width:0}
+.marquee>span{font-size:8px;letter-spacing:2px;color:#a3c6e1;margin-bottom:5px}
+.marquee strong{display:block;font-family:var(--font-game);font-size:clamp(26px,3vw,39px);font-weight:800;letter-spacing:-1.3px;line-height:1.05;transform:skewX(-8deg);background:linear-gradient(120deg,#f2fcff 25%,#81d9f1 50%,#d2c1ff 75%);background-clip:text;-webkit-background-clip:text;color:transparent;text-shadow:0 3px #6b97d51c;animation:none;white-space:nowrap}
+.jackpot-label{padding-left:13px;flex:none}.jackpot-label>small{font-size:10px;color:#c5c9de;letter-spacing:1px}
+.jackpot-label b{display:block;line-height:1.12;font-size:36px;font-weight:700;letter-spacing:-1.8px;text-shadow:0 2px #65463855}.jackpot-label b span{font-size:20px;letter-spacing:0}
+.rim{padding:0 9px 12px}.rim i{width:18px;height:3px;background:#497590;box-shadow:none}.rim i:nth-child(3n+1){background:#7ee9ef;box-shadow:0 0 7px #72e8ef33}.rim i:nth-child(3n+2){background:#ab91e2}
+#machine>.window-shell{border-radius:13px;background:#08162a;box-shadow:0 0 0 4px #08122255,inset 0 1px #b2e9ff3b,0 7px 16px #020a1766}
+.reel{background:radial-gradient(ellipse at 50% 48%,#314d73,#182e4b 50%,#0c1b30);border-radius:7px}
+.reel:nth-child(2){background:radial-gradient(ellipse at 50% 48%,#414568,#222c4d 50%,#101c31)}
+.payline>span{font-family:var(--font-game);font-weight:600;letter-spacing:1px}
+.machine-meta{color:#b4d2e5}.machine-meta span:last-child{letter-spacing:1px;color:#a1bad5}
+.result{position:relative;background:linear-gradient(100deg,#0e2139f0,#192940de);border:1px solid #7eaad039;border-radius:9px;padding:13px 15px;box-shadow:inset 3px 0 #6bcae05e,inset -3px 0 #a18bd440}
+.result strong{font-size:19px;letter-spacing:.8px}.result p{font-size:12px;line-height:1.6;color:#bacbdf}.result b{font-family:var(--font-game);font-size:14px}
+.result-icon{width:35px;height:35px;display:grid;place-items:center;border:1px solid #8ddaea39;border-radius:50%;font-size:23px;background:#4babc011;flex:none}
+.stake strong{font-size:31px;font-weight:650;letter-spacing:-.5px}.stake small{font-family:var(--font-body);font-size:11px;margin-left:2px}.stake>span{font-size:11px;letter-spacing:1px;color:#b7cbe0}
+.spin{border-radius:10px;font-size:18px;letter-spacing:1.5px;font-weight:750}.spin:not(:disabled){background:linear-gradient(110deg,#8ce6ef,#9dc4f7 48%,#b49bf2);border-color:#d2efffa8;border-bottom-color:#6669ae;box-shadow:inset 0 1px #efffff73,0 4px #07142790,0 0 16px #92a9ed15}
+.spin-symbol{font-size:29px}.spin kbd{font-family:var(--font-game);font-weight:600;letter-spacing:1px}
+.examples-open{font-size:12px;padding:11px 0;margin-top:13px}.examples-open>span:last-child{font-family:var(--font-game),var(--font-body);font-size:11px;color:#b7cae1}
+.machine-foot{font-size:9px;letter-spacing:1px;color:#8cabc5}.machine-foot>span:nth-of-type(2){font-size:8px}
+.paytable{position:relative;margin-top:96px;border-radius:14px 28px 14px 14px;background:linear-gradient(135deg,#1d334be8,#102034f5 65%,#262744cf);border-color:#7aa6d247;box-shadow:inset 0 1px #c0e6ff18,0 12px 30px #020a1733}
+.paytable:before{content:'';position:absolute;top:-1px;left:24px;width:45px;height:3px;background:#9a8ce8;box-shadow:51px 0 #917be844;border-radius:2px}
+.paytable-heading h2{font-size:20px;letter-spacing:1px;font-weight:750}.paytable-heading .eyebrow{font-size:9px;letter-spacing:2px}
+.prize-row{padding:12px 0}.prize-row>b{font-weight:700;font-size:21px;letter-spacing:-.5px}.prize-row>span{color:#c5d5e7}.prize-row:first-child{background:linear-gradient(90deg,transparent,#ffd3860c);border-bottom-color:#eac58030}.prize-row:first-child>b{color:#ffda8b}
+.pair-rule>strong{font-size:24px}.pair-rule strong small{font-family:var(--font-body)}
+.paytable-intro,.payout-note,details p{color:#a7bbd4}.paytable-intro{font-size:12px}.payout-note{font-size:11px}
+.history-heading h2{font-size:14px;color:#bdcfe4;letter-spacing:1px}.history-heading h2:before{content:'';display:inline-block;width:4px;height:10px;background:#9f91e2;margin-right:9px;border-radius:1px}.history-heading span{font-size:11px;color:#9bafca}
+.history li:not(.history-empty){background:#12233bdd;border-color:#779bc33b}.history b{font-size:12px}.history-empty{background:#0c1c3099;color:#9bb4d0;border-color:#7babc339}
+#fx-preview{background:linear-gradient(130deg,#1a3048,#101e33 60%,#22213e);border-color:#84b8df59;border-radius:16px 30px 16px 16px;box-shadow:inset 0 1px #c2eaff22,0 25px 90px #010715b3}
+.fx-dialog-head h2{letter-spacing:1px}.example-equation b{font-size:27px;font-weight:700}.example-profit b{font-family:var(--font-game),var(--font-body);font-size:13px}.win-burst>strong{font-weight:800;letter-spacing:-2px}.win-burst:before{letter-spacing:-.5px}
+footer{color:#879dbb}
+@keyframes station-orbit{to{transform:rotate(360deg)}}
+@keyframes station-signal{0%,100%{opacity:.25;transform:translateY(-15px)}50%{opacity:.7;transform:translateY(30px)}}
+
+@media(min-width:741px) and (max-width:1100px){
+ .marquee strong{font-size:27px}.marquee>span{letter-spacing:1px;font-size:7px}.machine-star{width:34px;height:34px;flex-basis:34px;padding:3px}.jackpot-label b{font-size:29px}.jackpot-label{padding-left:8px}
+}
+@media(max-width:740px){
+ .app{padding-inline:17px}.wordmark{font-size:12px;gap:4px;letter-spacing:.6px}.balance{padding-left:10px}.balance b{font-size:21px}
+ .intro{min-height:0;margin-bottom:23px}.intro:before{bottom:-10px;width:28px;box-shadow:33px 0 #876fe8,42px 0 #876fe8}.eyebrow{font-size:8px;letter-spacing:2px}
+ h1 .game-title{font-size:39px;letter-spacing:2px}h1>span{font-size:11px;margin-top:7px;letter-spacing:.4px}.round-tag{font-size:9px;padding:5px 7px}
+ .orbital-panorama{background-size:auto 840px;background-position:28% 0;opacity:.9}.orbital-halo{width:300px;height:300px;left:-110px;top:10px}.orbital-grid{height:160px;bottom:-55px}.sky-gate{width:25px;height:320px;top:32%}
+ #machine{border-radius:19px 29px 19px 19px;padding:18px 20px 0}#machine .machine-top{min-height:45px;margin-bottom:15px}.machine-star{width:35px;height:35px;flex-basis:35px;padding:4px;border-radius:9px}
+ .marquee strong{font-size:28px;letter-spacing:-1px}.marquee>span{font-size:6px;letter-spacing:1.1px;margin-bottom:4px}.jackpot-label{padding-left:9px}.jackpot-label>small{font-size:9px;letter-spacing:.5px}.jackpot-label b{font-size:30px}.jackpot-label b span{font-size:16px}
+ .cabinet-inlay:before{height:88px}.cabinet-rail{width:2px}.rail-left{left:6px}.rail-right{right:6px}.cabinet-orbit{width:260px;left:0;top:-110px}
+ .rim i{width:12px}.rim{padding-bottom:10px}.machine-meta{font-size:9px}.machine-meta span:last-child{font-size:8px;letter-spacing:.5px}
+ .result{min-height:67px;padding:10px;gap:10px}.result strong{font-size:16px;letter-spacing:.3px}.result p{font-size:10px}.result b{font-size:12px}.result-icon{width:28px;height:28px;font-size:20px}
+ .spin{font-size:17px;letter-spacing:1px;gap:7px;min-height:55px}.stake strong{font-size:28px}.stake{min-width:64px}.stake>span{font-size:10px}.stake small{font-size:10px}.action-panel{gap:12px}
+ .examples-open{font-size:11px;padding:10px 0;margin-top:11px}.examples-open>span:last-child{font-size:10px}.machine-foot{font-size:7px;min-height:29px}.machine-foot>span:nth-of-type(2){font-size:7px;letter-spacing:1px}
+ .paytable{margin-top:24px}.paytable-heading h2{font-size:19px}.prize-row{padding:10px 0}.prize-row>b{font-size:20px}.prize-row>span{font-size:10px}.paytable .eyebrow{font-size:8px}
+ .example-equation b{font-size:24px}.history-heading{margin-top:22px}
+}
+@media(max-width:380px){
+ .app{padding-inline:12px}header{gap:9px}.wordmark{font-size:11px;letter-spacing:.4px;gap:3px}.balance b{font-size:19px}.balance{padding-left:8px}
+ h1 .game-title{font-size:36px}.round-tag{font-size:8px}.round-tag:before{width:4px;height:4px;margin-right:4px}
+ #machine{padding-inline:17px}.machine-star{width:29px;height:29px;flex-basis:29px;padding:3px}.marquee strong{font-size:24px;letter-spacing:-1px}.marquee>span{font-size:5px;letter-spacing:.9px}.jackpot-label{padding-left:7px}.jackpot-label b{font-size:27px}.jackpot-label>small{font-size:8px}
+ .result strong{font-size:15px}.result p{font-size:9px}.result b{font-size:11px}.machine-meta span:last-child{font-size:7px}.spin{font-size:16px}
+}
+@media(min-width:741px) and (max-height:800px){
+ .intro{min-height:0;margin-bottom:20px}h1 .game-title{font-size:37px}h1>span{margin-top:6px}#machine{padding-top:17px}#machine .machine-top{min-height:43px;margin-bottom:14px}.marquee strong{font-size:32px}.result{min-height:64px}.paytable{margin-top:97px}
+}
+@media(max-width:740px) and (max-height:760px){
+ header{height:57px}main{padding-top:14px}.intro{margin-bottom:20px}h1 .game-title{font-size:35px}h1>span{margin-top:5px}#machine{padding-top:16px}#machine .machine-top{min-height:38px;margin-bottom:12px}.marquee strong{font-size:26px}.result{min-height:60px;margin:10px 0}.spin{min-height:52px}.examples-open{margin-top:10px;padding:8px 0}.machine-foot{min-height:27px}
+}
+@media(max-width:380px) and (max-height:760px){.marquee strong{font-size:23px}.jackpot-label b{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.orbital-halo i,.sky-gate:after{animation:none}.sky-gate:after{opacity:.4}}
+.motion-paused *:before{animation-play-state:paused!important}

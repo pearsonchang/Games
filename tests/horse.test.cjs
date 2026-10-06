@@ -1,3 +1,5 @@
+const {MatrixRound}=require('../src/matrix-engine.js');
+const {SlotsRound}=require('../src/slots-engine.js');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {HorseRound,HORSE_PRIZES}=require('../src/horse-engine.js');
 // The 4 × 3 × 2 equally likely shuffle branches exhaust all 24 rankings.
@@ -21,9 +23,9 @@ assert.equal(seen.size,24);for(const row of ranks){assert.deepEqual(row,[6,6,6,6
  for(const value of [-1,4,.5,'1',null,NaN])assert.equal(low.start(value,''),false);assert.equal(charges,0);assert.equal(low.start(0,''),false);assert.equal(low.state,'idle');assert.equal(charges,1);
 }
 {
- const elements=new Map(),listeners={};function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},close(){},showModal(){}});return elements.get(id)}
- const ctx=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(n,f)=>listeners[n]=f},location:{origin:'https://test.local',hash:''},HorseRound,...require('../src/mines-engine.js'),...require('../src/rocket-engine.js'),...require('../src/dice-engine.js'),...require('../src/plinko-engine.js'),setInterval(){},Date,console});
- vm.runInContext(['platform-catalog','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),ctx);const run=code=>vm.runInContext(code,ctx);
+ const elements=new Map(),listeners={};function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},setAttribute(){},removeAttribute(){},close(){},showModal(){}});return elements.get(id)}
+ const ctx=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(n,f)=>listeners[n]=f},SlotsRound,MatrixRound,location:{origin:'https://test.local',hash:''},HorseRound,...require('../src/mines-engine.js'),...require('../src/rocket-engine.js'),...require('../src/dice-engine.js'),...require('../src/plinko-engine.js'),setInterval(){},setTimeout(){return 1},clearTimeout(){},Date,console});
+ vm.runInContext(['platform-catalog','lobby-preferences','game-load-guard','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),ctx);const run=code=>vm.runInContext(code,ctx);
  const send=(data,source=el('horse-frame').contentWindow,origin='https://test.local')=>listeners.message({data,source,origin});
  run("let testTime=0;bridge.rounds.horse.now=()=>testTime;bridge.rounds.horse.random=()=>.999;play('horse')");
  send({type:'horse-ready'});assert.equal(run('session.points'),1000);

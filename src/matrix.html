@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f">
+ <title>ORBIT MATRIX · 星际矩阵</title><meta name="description" content="五列三行，十条星轨。连线、百搭与全盘徽章奖励的星际老虎机 Demo。">
+ <link rel="preload" href="fonts/oxanium-variable.ttf" as="font" type="font/ttf" crossorigin>
+ <link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="slots.css"><link rel="stylesheet" href="slots-fx.css"><link rel="stylesheet" href="slots-space.css"><link rel="stylesheet" href="slots-rewards.css"><link rel="stylesheet" href="slots-arcade.css"><link rel="stylesheet" href="matrix.css"><link rel="stylesheet" href="matrix-effects.css"><link rel="stylesheet" href="matrix-cabinet.css">
+</head>
+<body class="matrix-page">
+ <div class="matrix-scene" aria-hidden="true"><div class="station-view"></div><div class="viewport-strut strut-left"></div><div class="viewport-strut strut-right"></div><div class="station-caption">ORBITAL STATION <b>07</b> · OBSERVATION DECK</div></div>
+ <div class="app">
+  <header><button class="quiet" id="back">‹ <span>游戏大厅</span></button><a class="wordmark" href="#">ORBIT<span>MATRIX</span></a><button class="quiet sound" id="sound" aria-pressed="true" aria-label="关闭音效">音效 开</button><div class="balance"><span>模拟积分</span><b id="balance">—</b></div></header>
+  <main>
+   <section class="game-column" aria-label="星际矩阵游戏区">
+    <div class="machine matrix-machine" id="machine" data-state="idle">
+     <div class="cabinet-armor" aria-hidden="true"><i class="armor-corner top-left"></i><i class="armor-corner top-right"></i><i class="armor-corner bottom-left"></i><i class="armor-corner bottom-right"></i><i class="energy-rail energy-left"></i><i class="energy-rail energy-right"></i></div>
+     <div class="cabinet-heading">
+      <div class="cabinet-title"><p>SECTOR 07 <span>/ ORBIT MATRIX</span></p><h1>星际矩阵 <small>10 线全开</small></h1></div>
+      <div class="orbit-pilot" aria-hidden="true">
+       <svg viewBox="0 0 120 100" fill="none">
+        <ellipse cx="60" cy="90" rx="27" ry="4" fill="#040d20" opacity=".45"/>
+        <g class="pilot-float">
+         <g class="pilot-antenna antenna-left"><path d="M37 33 24 23V14" stroke="#879dce" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="12" r="4" fill="#9aeff0"/></g>
+         <g class="pilot-antenna antenna-right"><path d="M83 33 96 23V14" stroke="#879dce" stroke-width="4" stroke-linecap="round"/><circle cx="96" cy="12" r="4" fill="#bba6ff"/></g>
+         <path d="m30 57-13 6 4 13 13-6m52-14 16 7-4 13-14-6" fill="#728bbb" stroke="#c0dcea" stroke-width="2"/>
+         <path d="M36 26h48l11 15-4 32-19 10H48L29 73l-4-32z" fill="#d3e7ef" stroke="#eefbff" stroke-width="2" stroke-linejoin="round"/>
+         <path d="m29 65 19 10h24l20-10-1 8-19 10H48L29 73Z" fill="#8b9dd2"/>
+         <rect x="32" y="35" width="56" height="29" rx="13" fill="#142945" stroke="#6685ad" stroke-width="2"/>
+         <path d="M41 38h37" stroke="#95bed0" stroke-opacity=".4" stroke-linecap="round"/>
+         <g class="pilot-eyes"><g class="pilot-gaze"><rect x="44" y="44" width="8" height="11" rx="4" fill="#89f0e5"/><rect x="68" y="44" width="8" height="11" rx="4" fill="#89f0e5"/></g></g>
+         <path d="M55 69h10" stroke="#65819f" stroke-width="3" stroke-linecap="round"/>
+         <path d="m54 81 6 8 6-8" fill="#93e8ef"/>
+        </g>
+       </svg><span>PIP / 领航员</span>
+      </div>
+     </div>
+     <div class="matrix-instruments">
+      <div id="reel-status" class="reel-status" role="img" aria-label="等待启动，0 列落定"><span>星轨</span><div id="reel-lights" class="reel-lights" aria-hidden="true"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div></div>
+      <div id="crest-meter" class="crest-meter" role="img" aria-label="本局徽章 0 枚，3 枚起奖励"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="slots-symbols.svg#crest"></use></svg><span>本局徽章</span><b id="crest-count">0 / 3</b><div id="crest-lights" class="crest-lights" aria-hidden="true"><i></i><i></i><i></i></div></div>
+     </div>
+     <div class="matrix-window">
+      <div id="matrix-board" class="matrix-board" aria-label="五列三行转轴"></div>
+      <svg id="matrix-lines" class="matrix-lines" viewBox="0 0 500 300" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div id="matrix-fx" class="matrix-fx-layer" aria-hidden="true"></div><span class="matrix-origin" aria-hidden="true">START ›</span>
+     </div>
+     <div class="matrix-track"><span id="line-caption">从左向右 · 相同图案 3 个起连</span><div id="line-tour-controls" class="line-tour-controls" hidden><span id="line-tour-position"></span><button id="line-tour-toggle" type="button">重播明细</button></div></div>
+     <div id="matrix-result" class="matrix-result" role="status" aria-live="polite"><div class="matrix-result-top"><span id="result-label">星轨已就绪</span><strong id="result-total">—<small>积分</small></strong></div><p id="result-detail">50 积分开启全部 10 条线，每条线投入 5 积分。</p></div>
+     <div id="winning-lines" class="winning-lines" aria-label="本局中奖明细"></div>
+     <div class="action-panel"><div class="stake"><span>本局投入</span><strong>50 <small>积分</small></strong></div><button class="spin" id="spin" disabled><span class="spin-symbol" aria-hidden="true">↻</span><span id="spin-label">准备中…</span><kbd>SPACE</kbd></button></div>
+     <div class="cabinet-tools"><span class="round-tag" id="round-tag">准备就绪</span><button id="guide-open" type="button">连线与奖励图鉴 ↗</button><button id="rules-open" type="button">倍率与规则 ☷</button></div>
+     <div class="console-vents" aria-hidden="true"><i></i><span>ORBIT CONTROL / 07</span><i></i></div>
+    </div>
+    <div class="history-heading"><h2>最近的矩阵记录</h2><span>最近 6 局</span></div><ol class="history matrix-history" id="history"><li class="history-empty">让第一条星轨，在这里交汇。</li></ol>
+    <a class="classic-link" href="slots.html">‹ 体验经典三列版</a>
+   </section>
+   <div id="rules-home" class="rules-home"><aside id="matrix-paytable" class="paytable matrix-paytable" aria-label="矩阵奖励表">
+    <div class="paytable-heading"><span class="mini-star" aria-hidden="true">✦</span><div><span class="eyebrow">PATTERN ARCHIVE</span><h2>连起你的星轨</h2></div></div>
+    <p class="paytable-intro">同一条线上，从最左列起连续 3、4 或 5 个同图案，即可获得奖励。</p>
+    <div class="mini-patterns" id="mini-patterns" aria-label="十条固定中奖线"></div>
+    <p class="pattern-hint">点亮一条线，查看它在转轴中的路径。</p>
+    <div class="matrix-pay-head"><span>图案</span><span>3 连</span><span>4 连</span><span>5 连</span></div><div id="matrix-payrows"></div>
+    <p class="line-bet-note">上表倍率 × <b>单线投入 5</b> = 该线奖励。<br>星晶或卫星单线三连返还 50，正好回本。</p>
+    <div class="special-rule"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="slots-symbols.svg#portal"></use></svg><div><b>跃迁百搭 <em>WILD</em></b><p>替代任意普通图案；同一条线只取最高奖励。</p></div></div>
+    <div class="special-rule bonus-rule"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="slots-symbols.svg#crest"></use></svg><div><b>星际徽章 <em>BONUS</em></b><p>任意位置出现 3 / 4 / 5+ 个，额外奖励 <strong>100 / 250 / 1,000</strong> 积分。</p></div></div>
+    <button id="examples-open" class="fx-open" type="button">查看中奖示例 <span>不扣积分 ↗</span></button>
+    <details><summary>完整规则与概率</summary><p>每局投入 50 积分，固定开启 10 条线，每线 5 积分。只从最左列起计算连续命中；两连不奖励，右侧才开始的三连也不奖励。不同中奖线可叠加，共用格子不影响结算，同一条线只取最高奖励。</p><p>每格独立抽样：环星 30%、推进器 25%、星晶 20%、卫星 15%、百搭 7%、徽章 3%。徽章不参与普通连线，百搭不能替代徽章。徽章奖励按全盘数量取一档，可与连线奖励相加。</p><p>理论返还率约 97.02%，平均每局净收益约 −1.49 积分。所有奖励均为总返还，净收益还需减去本局投入。结果在开局生成，动画不改变结果；返回大厅后仍自动结算。没有免费旋转、保底或消除重落。</p></details>
+   </aside></div>
+  </main>
+  <footer><span>PLAYROOM</span>仅供 Demo 体验的模拟积分 · 无充值、提现或真实资产交易</footer>
+ </div>
+ <dialog id="matrix-rules" aria-labelledby="rules-title"><div class="rules-drawer-head"><div><span>FLIGHT MANUAL</span><h2 id="rules-title">倍率与规则</h2></div><button id="rules-close" class="quiet" type="button" aria-label="关闭倍率与规则">×</button></div><div id="rules-drawer-body"></div></dialog>
+ <dialog id="matrix-guide" aria-labelledby="guide-title">
+  <div class="fx-dialog-head"><div><span class="eyebrow">PATTERN LAB</span><h2 id="guide-title">连线与奖励图鉴</h2></div><button class="quiet" id="guide-close" aria-label="关闭连线图鉴">×</button></div>
+  <p class="fx-intro">这些是固定示例，不扣分、不发放积分，也不代表实际中奖频率。</p>
+  <div id="guide-stage" class="matrix-window guide-window"><div id="guide-board" class="matrix-board"></div><svg id="guide-lines" class="matrix-lines" viewBox="0 0 500 300" preserveAspectRatio="none" aria-hidden="true"></svg><div id="guide-fx" class="matrix-fx-layer" aria-hidden="true"></div></div>
+  <div class="guide-line-readout"><span id="guide-line-caption"></span><button id="guide-tour-toggle" type="button" hidden>重播明细</button></div>
+  <div class="guide-result"><span id="guide-caption"></span><strong id="guide-total"></strong></div><p id="guide-detail" class="guide-detail"></p>
+  <div id="guide-options" class="guide-options" aria-label="选择中奖示例"></div>
+  <div class="guide-replay-row"><span>切换示例，体验不同命中特效</span><button id="guide-replay" type="button">↻ 重播特效</button></div>
+  <p class="guide-foot">单线奖励 = 5 × 连线倍率。总返还 = 各中奖线奖励之和 + 徽章奖励。</p>
+ </dialog>
+ <script src="matrix-engine.js"></script><script src="platform-wallet.js"></script><script src="slots-audio.js"></script><script src="matrix-examples.js"></script><script src="matrix-effects.js"></script><script src="matrix-interface.js"></script><script src="matrix.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+/* Finite, board-local effects: controls and score remain unobstructed. */
+.matrix-fx-layer{position:absolute;inset:0;z-index:6;overflow:hidden;border-radius:inherit;pointer-events:none;--fx-color:#82edff;--fx-secondary:#7c8aff;contain:paint}
+[data-fx=bonus] .matrix-fx-layer{--fx-color:#ffe09a;--fx-secondary:#ffb951}
+[data-fx=five] .matrix-fx-layer{--fx-color:#c2a5ff;--fx-secondary:#61deff}
+[data-fx=multi] .matrix-fx-layer{--fx-color:#83f5ee;--fx-secondary:#b19aff}
+.matrix-fx-layer>i{position:absolute;display:block;pointer-events:none}
+.matrix-fx-active .matrix-window,.matrix-window.matrix-fx-active{box-shadow:0 0 0 1px #a2e6ff77,0 0 26px #59bfff35,inset 0 0 28px #529fee20}
+.matrix-fx-circuit{position:absolute;inset:0;width:100%;height:100%;overflow:visible;fill:none;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 4px var(--fx-color))}
+.fx-wire{stroke:var(--fx-secondary);stroke-width:2;opacity:.4;animation:matrix-fx-wire 3.8s ease-out var(--delay) both;vector-effect:non-scaling-stroke}
+.fx-runner{stroke:#f0feff;stroke-width:3;stroke-dasharray:9 91;animation:matrix-fx-run 1.05s cubic-bezier(.25,.4,.5,1) var(--delay) 3 both;vector-effect:non-scaling-stroke}
+.matrix-fx-node{left:var(--px);top:var(--py);width:34px;height:34px;margin:-17px;border:1px solid var(--fx-color);box-shadow:0 0 9px var(--fx-secondary),inset 0 0 6px var(--fx-secondary);border-radius:25%;animation:matrix-fx-node 1s ease-out var(--delay) 2 both}
+.matrix-fx-shard,.matrix-fx-stop-spark{left:var(--px);top:var(--py);width:4px;height:10px;background:var(--fx-color);box-shadow:0 0 7px var(--fx-color);animation:matrix-fx-shard 1.3s cubic-bezier(.08,.6,.25,1) var(--delay) both}
+.matrix-fx-shard.fx-star{width:14px;height:14px;background:#ebfcff;clip-path:polygon(50% 0,62% 36%,100% 50%,62% 64%,50% 100%,38% 64%,0 50%,38% 36%);box-shadow:none}
+.matrix-fx-aura{inset:0;background:radial-gradient(ellipse at 50% 80%,transparent 25%,#54b8ff12 60%,#96eaff52);animation:matrix-fx-aura 3.8s ease-out both;mix-blend-mode:screen}
+.matrix-fx-sweep{inset:-60% -20%;background:linear-gradient(115deg,transparent 40%,#d2f9ff24 48%,#e9fcff7a 50%,transparent 53%);animation:matrix-fx-sweep 1s ease-out .12s both}
+.matrix-fx-ring{width:68%;height:80%;left:16%;top:10%;border:2px solid var(--fx-color);border-radius:50%;box-shadow:0 0 12px var(--fx-secondary),inset 0 0 10px var(--fx-secondary);animation:matrix-fx-ring 1.9s cubic-bezier(.08,.55,.2,1) var(--delay) both}
+[data-fx=five] .matrix-fx-ring{border-width:3px;border-style:dashed;transform:rotate(-24deg)}
+[data-fx=bonus] .matrix-fx-ring{border-radius:22%;width:48%;height:88%;left:26%;top:6%}
+.matrix-fx-ray{left:50%;top:50%;width:55%;height:2px;transform-origin:left;background:linear-gradient(90deg,transparent 25%,var(--fx-color),transparent);animation:matrix-fx-ray 1.05s ease-out var(--delay) both}
+.matrix-fx-banner{position:absolute;left:50%;top:44%;min-width:180px;max-width:88%;text-align:center;padding:11px 24px 12px;background:linear-gradient(110deg,#09152700,#112541f5 15%,#151f46f5 85%,#09152700);border-block:1px solid var(--fx-color);color:#f0fdff;transform:translate(-50%,-50%);animation:matrix-fx-banner 2.15s cubic-bezier(.12,.8,.24,1) .12s both;filter:drop-shadow(0 4px 12px #021026bb)}
+.matrix-fx-banner:before,.matrix-fx-banner:after{content:'';position:absolute;width:12px;height:12px;background:var(--fx-color);top:calc(50% - 6px);transform:rotate(45deg);box-shadow:0 0 12px var(--fx-secondary)}
+.matrix-fx-banner:before{left:0}.matrix-fx-banner:after{right:0}
+.matrix-fx-banner>span{display:block;font:600 8px var(--font-game);letter-spacing:3px;color:var(--fx-color);margin-bottom:4px;white-space:nowrap}
+.matrix-fx-banner>b{display:block;font-size:clamp(22px,3vw,34px);font-style:italic;letter-spacing:3px;white-space:nowrap;text-shadow:0 2px #4c529c,0 0 15px var(--fx-secondary)}
+.matrix-fx-ignition{inset:0;border:2px solid #b1f5ff;background:radial-gradient(ellipse,transparent 45%,#9ce9ff66);animation:matrix-fx-ignite .9s ease-out both}
+.matrix-fx-warp{left:var(--lane);top:-65%;height:var(--length);width:2px;background:linear-gradient(transparent,#a1faff,transparent);box-shadow:0 0 8px #a1cfff;animation:matrix-fx-warp .44s cubic-bezier(.5,0,1,1) var(--delay) 2 both}
+.matrix-fx-stop{left:calc(var(--column)*20%);top:0;width:20%;height:100%;border-inline:1px solid #b4f5ff;background:linear-gradient(transparent 18%,#aeecff22 70%,#aeeeff88);box-shadow:inset 0 0 15px #bcf7ff44;animation:matrix-fx-stop .55s ease-out both}
+.matrix-fx-stop-spark{height:3px;width:13px;animation-duration:.5s}
+.matrix-column.spinning:before{background:linear-gradient(transparent,#adf5ffcc,transparent) 15% 0/2px 80% no-repeat,linear-gradient(transparent,#ac95ffaa,transparent) 85% -90px/1px 60% no-repeat;animation-duration:.19s}
+.matrix-fx-active[data-fx=multi] .matrix-result,.matrix-fx-active[data-fx=five] .matrix-result,.matrix-fx-active[data-fx=bonus] .matrix-result{animation:matrix-fx-score .7s ease-out 2}
+.matrix-fx-active[data-fx=return] .fx-wire{opacity:.2}.matrix-fx-active[data-fx=return] .fx-runner{animation-iteration-count:1;stroke-width:2}.matrix-fx-active[data-fx=return] .matrix-fx-node{animation-iteration-count:1;box-shadow:none}
+.guide-replay-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 0;color:#99bad5;font-size:10px}
+.guide-replay-row button{background:#254364;border:1px solid #8ee4fa75;color:#d5f8ff;border-radius:6px;padding:8px 12px;font:600 11px var(--font-body);min-height:36px;white-space:nowrap}
+.guide-replay-row button:hover{background:#316086}.guide-replay-row button:focus-visible{outline:2px solid #c2f6ff;outline-offset:3px}
+@keyframes matrix-fx-wire{0%{opacity:0}12%,65%{opacity:.45}100%{opacity:0}}
+@keyframes matrix-fx-run{0%{stroke-dashoffset:9;opacity:0}12%{opacity:1}85%{opacity:1}100%{stroke-dashoffset:-100;opacity:0}}
+@keyframes matrix-fx-node{0%{transform:scale(.4) rotate(0);opacity:0}15%{opacity:.9}100%{transform:scale(2.1) rotate(90deg);opacity:0}}
+@keyframes matrix-fx-shard{0%{transform:translate(0,0) scale(0);opacity:0}12%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(var(--twist,35deg)) scale(.3);opacity:0}}
+@keyframes matrix-fx-aura{0%{opacity:0}13%{opacity:.85}65%{opacity:.35}100%{opacity:0}}
+@keyframes matrix-fx-sweep{0%{transform:translateX(-80%);opacity:0}25%{opacity:.8}100%{transform:translateX(80%);opacity:0}}
+@keyframes matrix-fx-ring{0%{transform:scale(.3) rotate(-20deg);opacity:0}12%{opacity:.8}100%{transform:scale(1.8) rotate(25deg);opacity:0}}
+@keyframes matrix-fx-ray{0%{transform:rotate(var(--angle)) scaleX(.2);opacity:0}22%{opacity:.8}100%{transform:rotate(var(--angle)) scaleX(1.8);opacity:0}}
+@keyframes matrix-fx-banner{0%{transform:translate(-50%,-50%) scale(1.35) skew(-8deg);opacity:0}12%,62%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-66%) scale(.97);opacity:0}}
+@keyframes matrix-fx-ignite{0%{opacity:0;transform:scale(.96)}20%{opacity:.8}100%{opacity:0;transform:scale(1.04)}}
+@keyframes matrix-fx-warp{to{transform:translateY(520%)}}
+@keyframes matrix-fx-stop{0%{opacity:0;transform:translateY(-12px)}15%{opacity:.9}100%{opacity:0;transform:translateY(8px)}}
+@keyframes matrix-fx-score{35%{box-shadow:inset 3px 0 #ffe19c,0 0 18px #e6c38645}100%{box-shadow:inset 3px 0 #f4cc7a}}
+@media(max-width:740px){.matrix-fx-banner{padding:10px 17px;min-width:165px}.matrix-fx-banner>b{font-size:24px}.matrix-fx-banner>span{font-size:7px;letter-spacing:2px}.matrix-fx-node{width:25px;height:25px;margin:-12.5px}}
+@media(prefers-reduced-motion:reduce){.matrix-fx-layer{display:none}.guide-replay-row>span{font-size:0}.guide-replay-row>span:after{content:'已跟随系统减少动态效果';font-size:10px}}
