@@ -1,5 +1,5 @@
 'use strict';
-// This renderer is loaded only by the concept demo; the selected lobby is untouched.
+// Shared lobby shell for the homepage and design previews; the selected theme overrides its renderer.
 const conceptSprite = 'lobby-concept-icons.svg';
 gameArt = function(id, extra = '') {
   return `<span class="icon-motion ${extra}" aria-hidden="true"><svg class="concept-symbol" viewBox="0 0 200 180"><use href="${conceptSprite}#${id}"/></svg></span>`;

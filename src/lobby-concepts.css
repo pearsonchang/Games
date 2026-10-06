@@ -1,4 +1,4 @@
-/* Isolated, playable art directions. Only lobby-demo.html loads this file. */
+/* Shared lobby styling for the homepage and playable design previews. */
 :root {
   color-scheme: dark;
   --canvas: #242450; --sheet: #353365; --ink: #fffaff; --quiet: #c5c7e9;

@@ -8,7 +8,8 @@ const lobbyConcepts = {
   portal: {letter:'A3', family:'aurora', name:'虫洞游乐场', eyebrow:'PLAYROOM / THE PORTAL PARK', welcome:'嘿，要去哪颗星球？', headline:'穿过虫洞，', highlight:'换个世界。', category:'挑一扇传送门', detail:'跟着弹珠，探索新的落点。', featured:'plinko', featureLabel:'传送推荐 · 闪电跑道', action:'跃入闪电跑道', sceneLabel:'ANOTHER WORLD AWAITS', cardLabel:'WORLD', ribbon:['7 个小宇宙','轻轻一点','快乐跃迁']}
 };
 const conceptQuery = new URLSearchParams(location.search);
-const conceptKey = Object.hasOwn(lobbyConcepts, conceptQuery.get('look')) ? conceptQuery.get('look') : 'aurora';
+const defaultConcept = document.documentElement.dataset.defaultConcept || 'aurora';
+const conceptKey = Object.hasOwn(lobbyConcepts, conceptQuery.get('look')) ? conceptQuery.get('look') : Object.hasOwn(lobbyConcepts, defaultConcept) ? defaultConcept : 'aurora';
 const concept = lobbyConcepts[conceptKey];
 document.documentElement.dataset.concept = conceptKey;
 if (concept.family) document.documentElement.dataset.family = concept.family;

@@ -11,7 +11,7 @@ npm run build
 python3 -m http.server 8765 --bind 127.0.0.1 --directory dist
 ```
 
-打开 `http://127.0.0.1:8765/`，从大厅进入游戏。不要双击 HTML 用 `file://` 打开；积分管理和 iframe 通信依赖同源 HTTP 页面。单独打开游戏 HTML 不会创建大厅的积分会话。
+打开 `http://127.0.0.1:8765/`，默认进入已选定的 A1 高能街机大厅（冰蓝按钮、亮紫主舞台、太空头像与七款游戏）。`/index.html` 使用同一首页；`/lobby-demo.html?look=festival` 保留为设计预览，两者共用同一套样式和呈现。不要双击 HTML 用 `file://` 打开；积分管理和 iframe 通信依赖同源 HTTP 页面。单独打开游戏 HTML 不会创建大厅的积分会话。
 
 修改源码后重新运行构建并刷新预览。仅做快速开发预览时可把服务器目录改为 `src`；最终验证使用 `dist`。
 
@@ -23,7 +23,7 @@ npm test
 npm run build
 ```
 
-`check` 检查 JavaScript 语法、HTML/CSS 与控制器里直接引用的本地资源、文件名大小写，以及十个入口（七款游戏、大厅、配色对比和配色体验）。它不是完整的 HTML/CSS 解析器，也不代替浏览器交互检查。`test` 自动执行 `tests/` 中的全部 Node 测试。`build` 先检查源码并运行全部测试，再生成带自动资源版本号的静态文件，检查产物后替换 `dist/`。检查失败会保留上一次可用的预览；部署会失败。`dist/` 已从 Git 跟踪中移除，不要直接编辑。
+`check` 检查 JavaScript 语法、HTML/CSS 与控制器里直接引用的本地资源、文件名大小写，以及十三个入口（七款游戏、大厅、配色对比和配色体验、三种大厅设计预览页面）。它不是完整的 HTML/CSS 解析器，也不代替浏览器交互检查。`test` 自动执行 `tests/` 中的全部 Node 测试。`build` 先检查源码并运行全部测试，再生成带自动资源版本号的静态文件，检查产物后替换 `dist/`。检查失败会保留上一次可用的预览；部署会失败。`dist/` 已从 Git 跟踪中移除，不要直接编辑。
 
 构建无第三方依赖，`node scripts/build.cjs` 与 `npm run build` 等价。版本号由完整源码和转换逻辑计算；相同源码重复构建的内容一致。资源路径保持原文件名，用自动生成的 `?v=` 更新缓存；这不是文件名哈希方案。
 
@@ -72,9 +72,9 @@ Vercel 构建时从 `src/` 生成 `dist/`，最终仅发布 `dist/`。源码说�
 
 ## 本次完成与下一阶段
 
-2026-10-06 大厅视觉探索：`/lobby-designs.html` 并排展示三套可交互方案；`/lobby-demo.html?look=aurora` 是 A 星际嘉年华，`?look=arcade` 是 B 街机俱乐部，`?look=cloud` 是 C 云上游乐岛。独立页面复用现有分类、收藏、足迹、游戏加载和积分逻辑，仅替换大厅呈现，未改变 `/index.html` 的选定样式。新插画保存在 `src/lobby-concept-icons.svg`，可在浅色背景上清晰显示；动画遵循减少动态效果偏好。预览间共享本机收藏和足迹，每次页面会话的模拟积分独立初始化。
+2026-10-06 大厅视觉探索：`/lobby-designs.html` 并排展示三套可交互方案；`/lobby-demo.html?look=aurora` 是 A 星际嘉年华，`?look=arcade` 是 B 街机俱乐部，`?look=cloud` 是 C 云上游乐岛。预览页面复用现有分类、收藏、足迹、游戏加载和积分逻辑；选定的 A1 高能街机现已应用到 `/index.html` 默认首页。新插画保存在 `src/lobby-concept-icons.svg`，可在浅色背景上清晰显示；动画遵循减少动态效果偏好。预览间共享本机收藏和足迹，每次页面会话的模拟积分独立初始化。
 
-选定 A 为探索基础后，新增 `/lobby-a-themes.html`：A1 `?look=festival` 星际电玩节（彩旗舞台、灯泡和游乐摊位）、A2 `?look=depot` 银河补给站（货运舱、停靠台、机器人站长）、A3 `?look=portal` 虫洞游乐场（传送门、浮岛和外星伙伴）。三套分别突出矩阵、火箭与弹珠，完整提供其余游戏入口，沿用同一会话与结算逻辑。场景为 `lobby-theme-scenes.svg`，呈现及样式分别为 `lobby-theme-view.js`、`lobby-theme-worlds.css`；仅由设计 Demo 加载，未自动应用到主大厅。
+选定 A 为探索基础后，新增 `/lobby-a-themes.html`：A1 `?look=festival` 高能街机（亮紫矩阵舞台、冰蓝交互）、A2 `?look=depot` 银河补给站（货运舱、停靠台、机器人站长）、A3 `?look=portal` 虫洞游乐场（传送门、浮岛和外星伙伴）。三套分别突出矩阵、火箭与弹珠，完整提供其余游戏入口，沿用同一会话与结算逻辑。场景为 `lobby-theme-scenes.svg`，呈现及样式分别为 `lobby-theme-view.js`、`lobby-theme-worlds.css`；A1 使用下述独立呈现，并由首页默认加载。
 
 A1 当前版转为高能街机：靛蓝背景、亮紫主舞台、电光青轨道与冰蓝 CTA，积分使用浅金色，辅助数字以浅紫点缀。品牌采用独立的 P / 播放键负形标志（`playroom-mark.svg`）和清晰的双色字标，浏览器图标同步更新。移除奶油白卡片、彩旗棚顶与拟人角色，卡片以游戏专属高饱和色场呈现已有玻璃图标和太空火箭，新矩阵主视觉保存在 `lobby-energy-art.svg`。概率、积分与游戏页面保持原逻辑。
 
