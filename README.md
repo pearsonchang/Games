@@ -1,131 +1,142 @@
 # PLAYROOM
 
-一个面向手机与桌面浏览器的小游戏前端 Demo，包含九款游戏、共享模拟积分钱包、音效与动效，以及独立的骰子记录验证工具。使用 HTML、CSS 和 JavaScript，构建无需安装 npm 依赖。
+A browser-based mini-game demo for mobile and desktop, with nine games, a shared demo-points wallet, sound and visual effects, and a standalone dice-receipt verifier. Built with HTML, CSS and JavaScript; no npm dependency installation is required to build the frontend.
 
-## 用途声明
+## Permitted use
 
-> **本程序仅用于个人娱乐和软件开发练习，禁止用于任何商业用途及其他违法、不法用途。**
+> **This software is intended solely for personal entertainment and software development practice. Commercial use and any unlawful use are prohibited.**
 
-游戏积分、倍率与奖励仅用于交互、概率算法和软件开发演示，不代表真实货币或可兑换资产。本项目不提供真实资金充值、提现或交易服务，不得将其用于真实资金博彩或其他违法活动。
+Points, multipliers and rewards demonstrate interaction design, probability algorithms and software development. They are not real money or redeemable assets. This project does not provide real-money deposits, withdrawals or trading, and must not be used for real-money gambling or other unlawful activities.
 
-上述用途限制针对本项目自有内容。第三方代码与素材仍适用各自的许可，原有版权与许可声明应予保留；例如随前端提供的 ethers 许可见 [ethers-LICENSE.md](src/vendor/ethers-LICENSE.md)。
+These restrictions apply to original project content. Third-party code and assets remain subject to their respective licenses; retain their copyright and license notices. For example, the bundled ethers license is available in [ethers-LICENSE.md](src/vendor/ethers-LICENSE.md).
 
-## 游戏与功能
+## Games and features
 
-| 游戏 | 入口 | 玩法 |
+| Game | Route | Gameplay |
 | --- | --- | --- |
-| 金币扫雷 | `/minesweeper.html` | 逐格探索，选择收取时机，踩雷清空本局未收取奖励 |
-| 小火箭 | `/rocket.html` | 随飞行增长奖励，坠毁前主动收取 |
-| 三骰挑战 | `/dice.html` | 大小、指定总点数、三同号，按骰子顶面点数结算 |
-| 闪电跑道 | `/plinko.html` | 选择落球入口，观察碰撞与落槽结果 |
-| 星际赛马 | `/horse.html` | 选择小马，观看竞速并按名次结算 |
-| 星际老虎机 | `/slots.html` | 经典三列图案、奖励图鉴和分级声光反馈 |
-| 星际矩阵 | `/matrix.html` | 五列三行、十条奖励线、百搭与额外图案奖励 |
-| 星际方块 | `/blocks.html` | 8×8 棋盘、30 步放置挑战、行列消除与连击 |
-| 星际 2048 | `/2048.html` | 滑动合并数字，随局势升级生成池，按最高数字结算 |
+| Coin Sweeper | `/minesweeper.html` | Reveal tiles and choose when to collect; hitting a mine clears the round's uncollected reward |
+| Rocket Run | `/rocket.html` | Rewards grow during flight; collect before the rocket crashes |
+| Triple Dice | `/dice.html` | Choose Big / Small, an exact total or triples; results use the dice's top faces |
+| Lightning Plinko | `/plinko.html` | Choose a drop entrance and watch the ball bounce into a reward pocket |
+| Star Derby | `/horse.html` | Pick a horse, watch the race and receive points based on its finishing position |
+| Cosmic Slots | `/slots.html` | Classic three-reel symbols, a payout guide and tiered audiovisual feedback |
+| Orbit Matrix | `/matrix.html` | Five reels, three rows, ten paylines, wilds and bonus-symbol rewards |
+| Block Flow | `/blocks.html` | An 8×8 board, a 30-placement challenge, row and column clears, and combos |
+| Cosmic 2048 | `/2048.html` | Swipe to merge numbers; the spawn pool evolves with progress and rewards use the highest tile |
 
-默认首页为 A1 高能街机大厅，包含游戏介绍轮播、分类、收藏、最近游玩与探索足迹。九款游戏均已接入大厅；手机端提供安全区适配、较大的操作按钮、规则与设置面板。方块支持拖拽、点选和键盘操作，2048 支持滑动、方向键与辅助按钮。音效可关闭，动画适配系统的减少动态效果偏好。
+The default homepage is the A1 Neon Arcade lobby, with a game showcase carousel, categories, favorites, recently played games and exploration history. All nine games are accessible from the lobby. Mobile layouts include safe-area support, larger controls, and rules and settings panels. Block Flow supports dragging, tap-to-place and keyboard controls; Cosmic 2048 supports swipes, arrow keys and optional direction buttons. Sound can be muted, and animations respect the system's reduced-motion preference.
 
-普通大厅无需账户或区块链钱包即可试玩。每局投入和到账均为模拟积分；大厅共享本次页面会话的积分钱包，刷新会重置。收藏、最近游玩、部分最佳纪录与验证记录可保存在本机浏览器，**不代表积分或进行中的对局可以跨刷新、跨设备保存**。独立游戏页面的体验状态与大厅会话相互独立。
+The regular lobby requires no account or blockchain wallet. Entry costs and payouts use demo points, shared within the current lobby page session and reset on refresh. Favorites, recent games, some best scores and verification receipts can be saved locally. **This does not make point balances or active rounds persistent across refreshes or devices.** Standalone game pages have their own demo state, separate from the lobby session.
 
-星际方块与 2048 的奖励有封顶，但其演示参数未经玩家水平分布校准，不代表固定返还率，也不能保证熟练玩家的长期收益一定为负。
+Block Flow and Cosmic 2048 have capped rewards, but their demo parameters have not been calibrated against player-skill distributions. They do not imply a fixed return rate or guarantee negative long-term returns for skilled players.
 
-## 本地运行
+## Interface languages
 
-需要 **Node.js 22 或更高版本**。在仓库根目录执行：
+Use the globe control at the top of a page to switch between **Chinese and English (EN)**. Chinese is the default. The selected preference is saved locally, and the lobby, embedded games and same-origin previews synchronize without reloading, restarting a round or changing points. Switching still works within the current page and its embedded games when browser storage is unavailable. Use `?lang=en` or `?lang=zh-CN` to choose the language when opening a page.
+
+English covers the lobby, all nine games, rules and rewards, dynamic results, accessibility labels and standalone verification pages. Mobile layouts accommodate longer English text, and the document's `lang` attribute updates with the selection. Imported JSON, rules hashes, blockchain addresses and raw verification receipts remain unchanged.
+
+Translations live in `src/i18n-en-*.js`; shared terminology belongs in `i18n-en-common.js`. Add an English translation whenever introducing interface copy, and use whole-message matching for sentences with variables. `i18n.js` updates only text and descriptive attributes, not animation styles or game state. Chinese mode does not observe DOM mutations. English mode handles changed text incrementally rather than scanning the page on every drag or animation frame.
+
+## Run locally
+
+Requires **Node.js 22 or later**. From the repository root:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-打开 <http://127.0.0.1:8765/>。源码位于 `src/`，构建产物位于 `dist/`；修改源码后重新构建并刷新。
+Open <http://127.0.0.1:8765/>. Source files are in `src/`; generated files are in `dist/`. Rebuild and refresh after editing the source.
 
 ```sh
-npm run check                       # 语法、资源引用与入口检查
-npm test                            # 前端逻辑与回归测试
-npm run build                       # 检查、测试并生成 dist
-npm run preview -- --source          # 可选：直接预览 src
+npm run check                       # Check syntax, resource references and entrypoints
+npm test                            # Run frontend logic and regression tests
+npm run build                       # Validate, test and generate dist
+npm run preview -- --source          # Optional: preview src directly
 node scripts/verify-receipt.cjs /path/to/playroom-dice-receipt.json
 ```
 
-- 不需要先运行 `npm install`；ethers 为固定版本的本地前端文件，仅独立测试网页面加载。
-- 预览服务只监听 `127.0.0.1`，默认端口为 `8765`；可通过 `PLAYROOM_PREVIEW_PORT` 修改端口。
-- 请使用 HTTP 预览，不要双击 HTML 通过 `file://` 打开；大厅与游戏之间的通信依赖同源页面。
-- 预览禁用缓存，构建自动为资源添加版本号，减少更新后大厅与游戏加载旧文件的问题。
-- `build` 通过检查与测试后才替换 `dist/`，失败时保留上一次可用产物。不要直接编辑或提交 `dist/`。
+- No preliminary `npm install` is needed. A pinned local copy of ethers is loaded only by the standalone testnet pages.
+- The preview server listens only on `127.0.0.1`, using port `8765` by default. Set `PLAYROOM_PREVIEW_PORT` to choose another port.
+- Use an HTTP preview rather than opening HTML through `file://`; lobby-to-game communication relies on same-origin pages.
+- Preview responses disable caching, and builds add resource version identifiers to reduce stale-page and asset mismatches.
+- The build replaces `dist/` only after validation and tests pass. A failed build preserves the last working output. Do not edit or commit `dist/` directly.
 
-静态检查覆盖 18 个入口、JavaScript 语法及本地资源引用；它不替代实际浏览器交互测试。前端测试覆盖概率与结算、钱包去重、iframe 消息隔离、方块边界和拖动、2048 输入、手机布局相关逻辑、大厅轮播、验证记录以及构建与预览服务。
+Static checks cover 18 entrypoints, JavaScript syntax and local resource references. They do not replace browser interaction testing. Automated tests cover probability and settlement, wallet deduplication, iframe message isolation, block placement and drag boundaries, 2048 input, mobile presentation logic, the lobby carousel, language switching and synchronization, verification receipts, and build and preview behavior.
 
-## Vercel 构建配置
+## Vercel configuration
 
-仓库内的 `vercel.json` 已声明静态构建配置：
+The repository's `vercel.json` declares the static build settings:
 
-| 设置 | 值 |
+| Setting | Value |
 | --- | --- |
 | Framework Preset | Other |
-| Root Directory | 仓库根目录 `./` |
+| Root Directory | Repository root: `./` |
 | Build Command | `npm run build` |
 | Output Directory | `dist` |
-| Install Command | 跳过安装，对应配置中的空字符串 |
-| 环境变量 | 普通前端 Demo 不需要 |
+| Install Command | Skip installation; configured as an empty string |
+| Environment variables | None required for the regular frontend demo |
 
-不要把 Root Directory 设为 `dist`，也不要使用本地工作区路径 `outputs/coinsweeper`；它不是 GitHub 仓库内的子目录。
+Do not set Root Directory to `dist` or to the local workspace path `outputs/coinsweeper`; that workspace path is not a subdirectory of the GitHub repository.
 
-发布内容由 `src/` 构建生成，仅输出 `dist/`。保留独立游戏页面，勿添加把所有路径重写到首页的 SPA 通配规则。当前配置启用 `cleanUrls`，支持 `/palettes` 等无扩展名路径。
+Deploy the output built from `src/` into `dist/`. Keep the standalone game pages; do not add a catch-all SPA rewrite that sends every route to the homepage. The current configuration enables `cleanUrls`, including extensionless routes such as `/palettes`.
 
-已关联 GitHub 的部署项目是否自动构建、使用哪个生产分支及访问权限，以 Vercel 项目设置为准。推送成功不等于线上部署已经完成；应另行检查部署结果、首页、九款游戏入口和资源加载。
+Automatic builds, the production branch and access settings depend on the connected Vercel project. A successful Git push does not establish that a deployment has finished. Check deployment status, the homepage, all nine game entries and asset loading separately.
 
-## 骰子记录验证与测试网状态
+## Dice verification and testnet status
 
-### 本地验证
+### Local verification
 
-普通骰子游戏提供“验证记录”入口，`/fairness.html` 可载入本机最近 30 局、导入单局 JSON 或粘贴记录，复算规则摘要、承诺、随机推导、三个顶面点数与奖励。文件在本机处理，不上传。
+The regular dice game includes a verification-receipt panel. At `/fairness.html`, users can load the last 30 locally saved rounds, import a single-round JSON file or paste a receipt. The verifier recalculates the rules hash, commitment, random derivation, three top-face values and reward. Files are processed locally and are not uploaded.
 
-当前本地承诺和随机种子仍由同一浏览器产生。验证通过只能证明记录内部一致，**不能证明运营方未挑选结果，也不等于链上公平认证**。其他游戏仍使用各自的前端演示逻辑。
+The local commitment and random seeds are still generated in the same browser. A successful verification establishes only internal consistency. **It does not prove that an operator did not select a result, and it is not an onchain fairness certification.** Other games continue to use their own frontend demo logic.
 
-### Sepolia 旧版恢复入口
+### Sepolia legacy recovery
 
-`/fairness-setup.html` 与 `/fairness-testnet.html` 是独立实验页面，不影响普通大厅。目前处于 **旧版恢复模式**：
+`/fairness-setup.html` and `/fairness-testnet.html` are separate experimental pages and do not affect regular lobby play. They currently operate in **legacy recovery mode**:
 
-- 网页暂停旧版部署、添加消费者、免费领分与新局入口。
-- 可以载入原合约，核对代码与不可变参数，查看原对局；随机值已返回时可复算并结算。
-- 资金读取失败不阻止恢复旧局；余额、预留参考和实际手续费分别展示，不再把“余额大于零”当成可以开局。
-- 结算预估与提交使用相同费率参数；钱包若更改费用，以钱包最终确认和链上回执为准。
-- 旧合约本身不能被网页升级或暂停，也没有超时退款入口。网页关闭新局不能阻止外部直接调用旧合约。
+- The web interface disables legacy deployment, consumer registration, free point claims and new rounds.
+- Existing contracts can be loaded to check code and immutable parameters and inspect prior rounds. Once randomness has returned, a round can be recalculated and settled.
+- A failed funding read does not block recovery of an existing round. Balances, reserve estimates and actual fees are shown separately; a nonzero balance alone does not indicate readiness for a new round.
+- Settlement estimation and submission use the same fee parameters. If the wallet changes them, its final confirmation and the onchain receipt take precedence.
+- The legacy contract cannot be upgraded or paused by changing the webpage, and it has no timeout-refund function. Disabling new rounds in the interface does not prevent direct external calls to the contract.
 
-旧版已完成 Sepolia 部署，完整真实 VRF 回调与结算仍未验收。不得把部署成功、本地模拟通过或预留估算当作生产安全、公平性认证或实际收费承诺。普通游戏的模拟积分不会自动变成链上积分。
+The legacy contract has been deployed to Sepolia, but the complete live VRF callback and settlement flow has not yet passed acceptance testing. Deployment success, local simulations and reserve estimates are not evidence of production safety, fairness certification or guaranteed fees. Regular demo points do not automatically become onchain points.
 
-**本次发布范围为前端。** 为核对旧合约，前端包含旧版 DiceVRF 的 ABI、字节码和源码验证快照（`src/dice-vrf-deployment.js`、`src/dice-vrf-standard-input.json`，含相应上游依赖源码）。新版 DiceVRFv2、合约开发工具、部署记录和费用实验仍保留本地，未包含在这次前端提交中；前端构建和测试不依赖 `contracts/`。
+**This release contains the frontend.** To verify the legacy contract, it includes the original DiceVRF ABI, bytecode and source-verification snapshot in `src/dice-vrf-deployment.js` and `src/dice-vrf-standard-input.json`, including the relevant upstream dependency sources. DiceVRFv2, contract-development tools, deployment records and cost experiments remain local and are not included in this frontend release. Frontend builds and tests do not depend on `contracts/`.
 
-## 目录说明
+## Repository layout
 
 ```text
-src/                         页面、样式、游戏逻辑与素材
-  platform-*.js              游戏目录、模拟钱包、消息桥接与大厅呈现
-  *-engine.js                游戏状态、随机与积分结算
-  blocks-input.js            方块拖动、边界与落点处理
-  2048-input.js              滑动和方向输入
-  lobby-showcase.*           大厅游戏介绍轮播
-  mobile-games.*             共享手机端呈现
-  fairness-*.js              本地验证、旧测试网恢复与费用检查
-  vendor/                    固定版本 ethers 及许可与来源记录
-scripts/                     构建、静态检查、本地预览、记录复算
-tests/                       前端自动化测试
-docs/                        概率模型说明
-vercel.json                  静态构建与路由配置
+src/                         Pages, styles, game logic and assets
+  platform-*.js              Game catalog, demo wallet, messaging and lobby views
+  *-engine.js                Game state, randomness and point settlement
+  blocks-input.js            Block dragging, boundaries and placement
+  2048-input.js              Swipe and directional input
+  lobby-showcase.*           Lobby game carousel
+  mobile-games.*             Shared mobile presentation
+  i18n.js / i18n.css          Language selection, synchronization and English layout
+  i18n-en-*.js                English dictionaries grouped by interface area
+  fairness-*.js              Local verification, legacy recovery and fee checks
+  vendor/                    Pinned ethers bundle, license and provenance
+scripts/                     Build, static checks, preview and receipt verification
+tests/                       Automated frontend tests
+docs/                        Probability-model documentation
+vercel.json                  Static build and routing configuration
 ```
 
-游戏规则与赔率以对应引擎、规则文件和测试为准。小火箭的概率推导另见 [rocket-probability.md](docs/rocket-probability.md)。
+The corresponding engines, rules files and tests define each game's rules and payouts. The Rocket Run probability derivation is documented separately in [rocket-probability.md](docs/rocket-probability.md).
 
-## 当前版本范围
+## Current release scope
 
-更新日期：**2026-10-15**。
+Updated: **2026-10-15**.
 
-- 九款游戏已接入默认大厅，新增星际方块和星际 2048。
-- 更新大厅轮播、手机操作区、游戏场景素材与骰子布局。
-- 优化方块拖动与边界反馈，补齐输入、结算及加载回归测试。
-- 增加本地骰子验证、测试网旧局恢复与费用检查。
-- 前端与合约实验分开发布，保留第三方许可和用途限制。
+- Nine games in the default lobby, including Block Flow and Cosmic 2048.
+- Updated lobby carousel, mobile controls, game scenery and dice layout.
+- Chinese and English interfaces, saved language preferences, synchronized embedded games and English mobile layouts.
+- Improved block dragging and boundary feedback, with input, settlement and loading regression tests.
+- Local dice verification, legacy testnet recovery and fee checks.
+- Separate frontend and contract-experiment releases, with third-party notices and use restrictions retained.
 
-项目仍是个人娱乐与开发练习 Demo。前端轮次校验和去重用于防止程序误结算，不能阻止用户修改自己的客户端；没有可信服务端账本或真实资产结算能力。
+This remains a personal entertainment and software development practice demo. Client-side round validation and deduplication help prevent accidental duplicate settlement; they cannot prevent users from modifying their own clients. The project does not provide a trusted server-side ledger or real-asset settlement.

@@ -1,0 +1,77 @@
+/* Compact language control; no overlays on playfields or mobile action bars. */
+.language-control{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 auto;gap:5px;min-height:44px;margin:0;padding:0 9px;border:1px solid #9ab9e744;border-radius:12px;background:#192640;color:#d9edff;font:600 12px/1.2 system-ui,sans-serif;letter-spacing:0;position:relative;order:5;box-sizing:border-box}
+.language-control>svg{display:block;width:17px;height:17px;flex-shrink:0}
+.language-control .language-select{appearance:auto;display:block;width:49px;min-width:0;min-height:42px;padding:0;border:0;background:transparent;color:inherit;font:inherit;cursor:pointer;box-shadow:none;margin:0}
+.language-select option{background:#192640;color:#eaf4ff}
+.language-control:focus-within{outline:2px solid #91eaff;outline-offset:3px}
+.language-standalone{float:right;margin:0 0 12px 12px}
+html[lang=en] .mobile-audio-row>button::after{content:'On'}
+html[lang=en] .mobile-audio-row>button[aria-pressed=false]::after{content:'Off'}
+html[lang=en] button,html[lang=en] summary{overflow-wrap:normal;word-break:normal}
+html[lang=en] .game-name{font-size:clamp(17px,2vw,23px)}
+html[lang=en] .game-description{line-height:1.5;min-height:3em}
+html[lang=en] .game-title-row,html[lang=en] .shelf-heading{min-width:0}
+html[lang=en] .energy-hero h2{font-size:clamp(30px,5.2vw,58px);line-height:1.12;letter-spacing:-1px}
+html[lang=en] .filters{overflow-x:auto;flex-wrap:nowrap}
+html[lang=en] .filters button{flex-shrink:0;white-space:nowrap}
+html[lang=en] dialog{overflow-wrap:break-word}
+@media(max-width:740px){
+ .language-control{gap:3px;padding:0 5px;border-radius:10px;min-height:44px}
+ .language-control>svg{width:15px;height:15px}
+ .language-control .language-select{width:43px;font-size:11px}
+ .topbar .header-actions,.game-header .header-tools,.header .header-tools{gap:6px}
+ .topbar .brand{font-size:16px;letter-spacing:.3px;gap:6px}
+ .topbar .guest{display:none}
+ .topbar .header-wallet{padding:5px 8px}
+ .topbar .header-wallet strong{font-size:20px}
+ body[data-mobile-game] header .language-control{order:4;margin-left:0}
+ html[lang=en] body[data-mobile-game] header .brand{font-size:14px;letter-spacing:.2px;min-width:0}
+ html[lang=en] body[data-mobile-game] header .brand span{font-size:8px;letter-spacing:.2px}
+ html[lang=en] .mobile-wordmark{font-size:13px;white-space:nowrap}
+ html[lang=en] .balance-badge,html[lang=en] .header-tools .wallet{font-size:9px}
+ html[lang=en] .energy-hero h2{font-size:clamp(27px,7.6vw,40px)}
+ html[lang=en] .energy-tagline{font-size:clamp(19px,5vw,27px);line-height:1.2}
+ html[lang=en] .game-card .game-name{font-size:17px}
+ html[lang=en] .game-card .entry-cost{font-size:10px}
+ html[lang=en] .game-card .play-label{font-size:11px}
+ html[lang=en] .payout,html[lang=en] .round-summary{gap:6px;flex-wrap:wrap}
+ html[lang=en] .action-bar .payout{font-size:11px}
+ html[lang=en] .action-bar #roll{font-size:18px}
+ html[lang=en] .modes button{font-size:12px;padding-inline:4px}
+ html[lang=en] .hud-stat>span,html[lang=en] .reward-stat>span{font-size:9px;letter-spacing:0}
+ html[lang=en] .board-bottomline{font-size:9px;gap:12px}
+ html[lang=en] .tray-heading{align-items:flex-start;gap:10px;font-size:9px}
+ html[lang=en] .tray-heading>span:last-child{max-width:55%;text-align:right}
+ html[lang=en] .slot-note{font-size:9px;line-height:1.2;white-space:normal;padding-inline:4px}
+ html[lang=en] .game-actions{gap:6px;flex-wrap:wrap}
+ html[lang=en] .game-actions .primary{font-size:12px}
+ html[lang=en] .game-actions .utility-button{font-size:10px}
+ html[lang=en] .horse-option strong{font-size:11px}
+ html[lang=en] .navigation button{font-size:13px;gap:7px}
+}
+@media(max-width:380px){
+ .topbar .brand{font-size:14px}
+ .topbar .brand-icon{width:26px;height:26px}
+ .topbar .header-wallet>span{font-size:9px}
+ .topbar .header-wallet strong{font-size:17px}
+ .language-control>svg{display:none}
+ html[lang=en] .mobile-wordmark{font-size:11px}
+}
+
+html[lang=en] .energy-welcome h1>span{display:block}
+html[lang=en] .energy-hero h2>span{white-space:normal;line-height:1.3}
+html[lang=en] .energy-hero-copy{padding-right:10px}
+@media(max-width:740px){html[lang=en] .energy-hero h2{font-size:29px;letter-spacing:-.7px}html[lang=en] .energy-hero h2>span{font-size:17px}html[lang=en] .energy-hero-copy>p{font-size:11px}html[lang=en] .energy-welcome h1{font-size:24px;line-height:1.25}}
+
+@media(prefers-reduced-motion:reduce){html[lang=en] .guide-replay-row>span:after{content:'Reduced motion follows your system'}}
+@media(max-width:740px){
+ html[lang=en] body[data-mobile-game=dice] header #back,html[lang=en] body[data-mobile-game=mines] header #close{width:44px;min-width:44px;font-size:0;display:grid;place-items:center;padding:0}
+ html[lang=en] body[data-mobile-game=dice] header #back::before,html[lang=en] body[data-mobile-game=mines] header #close::before{content:'←';font-size:22px;line-height:1}
+ html[lang=en] .matrix-page .cabinet-title{min-width:0;flex:1}
+ html[lang=en] .matrix-page .cabinet-title h1{display:block;white-space:normal;font-size:23px;letter-spacing:.2px}
+ html[lang=en] .matrix-page .cabinet-title h1 small{display:table;margin-top:5px;font-size:8px}
+}
+@media(max-width:480px){
+ html[lang=en][data-concept=festival] .energy-card .card-bottom{display:flex;flex-direction:column;align-items:stretch;gap:7px}
+ html[lang=en][data-concept=festival] .energy-card .play-label{width:100%;justify-content:center;min-height:28px;white-space:normal}
+}

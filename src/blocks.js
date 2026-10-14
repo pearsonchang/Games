@@ -152,7 +152,7 @@
     // Match the three equally-spaced visual stops at 500, 1000 and 2000 points.
     const progress=score<500?score/3000:score<1000?1/6+(score-500)/1500:score<2000?1/2+(score-1000)/3000:1;
     $('progress').setAttribute('aria-valuenow',String(Math.min(score,2000)));
-    $('progress').setAttribute('aria-valuetext',`${format(score)} 分，${$('reward-note').textContent}`);
+    $('progress').setAttribute('aria-valuetext',`${format(score)} 分，${window.PlayroomI18n?.sourceText($('reward-note')) ?? $('reward-note').textContent}`);
     $('progress').firstElementChild.style.transform=`scaleX(${progress})`;
     paymentControls();
     if(idle&&!entryShown){entryShown=true;openPanel('entry-panel');}

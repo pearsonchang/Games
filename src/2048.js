@@ -131,15 +131,15 @@
     text('next-note',finished?state.result.reason==='target'?'2048 已达成，最高档奖励已到账。':'本局结束，准备迎接下一次挑战。':next?`合出 ${next.tile}，结算可到账 ${next.amount} 积分。`:'最高档奖励已达成。');
     $('progress').firstChild.style.transform=`scaleX(${Math.min(1,Math.max(0,(Math.log2(state.highest||2)-1)/10))})`;
     $('progress').setAttribute('aria-valuenow',state.highest);
-    $('progress').setAttribute('aria-valuetext',`最高数字 ${state.highest}，${$('next-note').textContent}`);
+    $('progress').setAttribute('aria-valuetext',`最高数字 ${state.highest}，${window.PlayroomI18n?.sourceText($('next-note')) ?? $('next-note').textContent}`);
     document.querySelectorAll('[data-tier]').forEach(node=>{
       const reached=state.highest>=Number(node.dataset.tier);
       node.classList.toggle('reached',reached);node.classList.toggle('next-tier',!finished&&Number(node.dataset.tier)===next?.tile);
-      node.setAttribute('aria-label',`${node.dataset.tier}，${node.querySelector('strong').textContent}${reached?'，已达成':''}`);
+      node.setAttribute('aria-label',`${node.dataset.tier}，${window.PlayroomI18n?.sourceText(node.querySelector('strong')) ?? node.querySelector('strong').textContent}${reached?'，已达成':''}`);
     });
     text('restart',finished?'再挑战 · 50 积分':'放弃重开 · 50 积分');
     text('save-note',embedded?'返回大厅保留本局 · 刷新页面会重置':'独立试玩积分 · 返回后重新进入会重置');
-    if(!persistent)text('save-note',$('save-note').textContent+' · 最佳仅本次有效');
+    if(!persistent)text('save-note',(window.PlayroomI18n?.sourceText($('save-note')) ?? $('save-note').textContent)+' · 最佳仅本次有效');
     renderCore();renderSpawnPool();paymentControls();paintCells();
   }
   function showResult(force=false){

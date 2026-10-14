@@ -5,6 +5,7 @@
   if (!game) return;
   const phone = matchMedia('(max-width: 740px)');
   const $ = selector => document.querySelector(selector);
+  const sourceText = node => window.PlayroomI18n?.sourceText(node) ?? node.textContent;
   const relocations = [];
   const sheets = [];
   function relocate(node, destination) {
@@ -87,7 +88,7 @@
       if (useSheet) chooser.querySelector('.mobile-sheet-body').append(options);
       else { origin.after(options); chooser.close(); }
       targetButton.hidden = !useSheet;
-      targetButton.textContent = ($('#target-label').textContent || '指定点数') + ' · 改选 ↗';
+      targetButton.textContent = (sourceText($('#target-label')) || '指定点数') + ' · 改选 ↗';
       targetButton.disabled = !!$('#modes button').disabled;
     };
     new MutationObserver(syncTarget).observe(document.body, { attributes: true, attributeFilter: ['data-mode'] });
@@ -128,7 +129,7 @@
       if (!note) { note = document.createElement('p'); note.id = 'mobile-slot-note'; note.className = 'mobile-slot-note'; help.querySelector('.mobile-sheet-body').prepend(note); }
       const column = $('#probability-chart').children[Number(slot.dataset.slot)];
       const multiplier = Number(slot.textContent.replace('×', ''));
-      note.textContent = column.getAttribute('aria-label') + '。投入 50 积分，到账 ' + (multiplier * 50) + ' 积分，净收益 ' + (multiplier * 50 - 50) + ' 积分。';
+      note.textContent = (window.PlayroomI18n?.sourceAttribute(column, 'aria-label') ?? column.getAttribute('aria-label')) + '。投入 50 积分，到账 ' + (multiplier * 50) + ' 积分，净收益 ' + (multiplier * 50 - 50) + ' 积分。';
       open(help);
     };
     slots.addEventListener('click', explain);
