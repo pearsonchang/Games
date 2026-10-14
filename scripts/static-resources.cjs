@@ -21,7 +21,12 @@ function resourcePath(owner, value) {
 function mapReferences(source, extension, replace) {
   if (extension === '.html') return source.replace(/(\b(?:src|href)\s*=\s*)(["'])(.*?)\2/gs, (_, prefix, quote, value) => prefix + quote + replace(value.replace(/&amp;/g, '&')).replace(/&/g, '&amp;') + quote);
   if (extension === '.css') return source.replace(/url\(\s*(["']?)([^)]+?)\1\s*\)/g, (_, quote, value) => `url(${quote}${replace(value)}${quote})`);
-  if (extension === '.js') return source.replace(/(["'])([\w./-]+\.(?:html|css|js|png|jpe?g|webp|svg|avif)(?:\?[^'"\s]*)?)\1/g, (_, quote, value) => quote + replace(value) + quote);
+  if (extension === '.js') return source.replace(/(["'])([\w./-]+\.(?:html|css|js|png|jpe?g|webp|svg|avif)(?:\?[^'"\s]*)?)\1/g, (match, quote, value, offset) => {
+    // A concatenated string may be only part of a URL. Appending a version here
+    // would move a later query value into the version parameter instead.
+    const dynamic = /\+\s*$/.test(source.slice(0, offset)) || /^\s*\+/.test(source.slice(offset + match.length));
+    return quote + replace(value, {dynamic}) + quote;
+  });
   return source;
 }
 module.exports = {walk, resourcePath, mapReferences};

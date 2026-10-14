@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#1c2052"><title>星际方块 · PLAYROOM</title><link rel="icon" type="image/svg+xml" href="blocks-icon.svg"><link rel="stylesheet" href="blocks.css"><link rel="stylesheet" href="puzzle-worlds.css"></head>
+<body class="world-blocks">
+<div class="space-grid" aria-hidden="true"></div><div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div>
+<div class="puzzle-scenery" aria-hidden="true"><img src="puzzle-workshop.svg" alt="" width="1200" height="840"></div>
+<div class="game-shell">
+  <header class="game-header"><button id="back" class="icon-button" aria-label="返回游戏大厅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><a class="wordmark" href="./#games"><span class="desktop-wordmark">PLAY<strong>ROOM</strong></span><span class="mobile-wordmark">星际方块 <i aria-hidden="true">✦</i></span></a><div class="header-tools"><span class="balance-badge"><i aria-hidden="true">✦</i><span>模拟积分 <b id="balance">—</b></span></span><button id="menu-open" class="icon-button" aria-label="游戏设置" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h14"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="9" cy="18" r="2"/></svg></button></div></header>
+  <main>
+    <div class="intro"><div><p class="eyebrow"><span></span> BLOCK FLOW <i>/ 08</i></p><h1>星际方块<span class="title-star" aria-hidden="true">✦</span></h1><p class="subtitle">能量拼装工坊 · 把灵感拼成星轨</p></div><div class="world-companion" aria-hidden="true"><span>ASSEMBLY<br><b>能量拼装工坊</b></span><img src="puzzle-bot.svg" alt="" width="160" height="152"></div></div>
+    <div class="play-layout">
+      <section class="play-column" aria-label="方块游戏">
+        <div class="play-surface">
+          <div class="scoreboard">
+            <div class="hud-stat steps-badge" id="steps-badge"><span>剩余步数</span><div><b id="steps-left">30</b><small>/ 30</small></div><em id="steps-phase">自由思考</em></div>
+            <div class="score-main"><span>本局得分</span><strong id="score">0</strong><em id="score-gain" aria-hidden="true"></em></div>
+            <div class="hud-stat reward-stat"><span id="reward-caption">当前达标奖励</span><div><b id="reward-amount">0</b><small>积分</small></div><em id="reward-timing">结束时到账</em></div>
+            <span class="score-decoration" aria-hidden="true">✧</span>
+          </div>
+          <div class="board-frame" id="board-frame">
+            <div class="board-topline"><span><i></i>能量拼装台</span><span class="bench-id"><img src="puzzle-bot.svg" alt="" aria-hidden="true" width="160" height="152">8 × 8</span></div>
+            <div class="board-stage">
+              <div class="bench-trim" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <div id="board" class="board" role="grid" aria-label="8 行 8 列棋盘，用方向键移动，回车放置" aria-rowcount="8" aria-colcount="8"></div>
+              <div id="line-preview" class="line-preview" aria-hidden="true" hidden></div><div id="effects" class="effects" aria-hidden="true"></div><div id="callout" class="callout" aria-hidden="true"></div>
+              <div id="tier-toast" class="tier-toast" role="status" hidden></div>
+
+            </div>
+            <div class="board-bottomline"><span id="combo-label">每一块，都有可能。</span><span id="lines-mini">0 条已消除</span></div>
+          </div>
+
+        </div>
+        <div class="control-dock">
+          <div id="dock-idle" class="dock-idle" aria-hidden="true"><span class="dock-orbit">✦</span><b>找到你的节奏</b><p>没有倒计时<br>想好，再落下一块</p><span class="dock-count">30 <small>MOVES</small></span></div>
+          <div id="tray-heading" class="tray-heading"><span id="tray-label">你的方块 <b id="tray-count">3 / 3</b></span><span>拖入棋盘 · 或点选放置</span></div>
+          <div id="tray" class="tray" aria-label="可用方块"></div>
+          <div id="hint" class="hint" role="status" aria-live="polite">先试试把两个长条拼成一行。</div>
+
+        </div>
+          <section class="reward-track" aria-label="积分奖励进度">
+            <p id="reward-note">再得 500 分，结算可到账 20 积分</p>
+            <div class="reward-route"><div id="progress" class="progress" role="progressbar" aria-label="奖励目标进度" aria-valuemin="0" aria-valuemax="2000" aria-valuenow="0"><span></span></div><div id="reward-tiers" class="reward-tiers"></div></div>
+          </section>
+        <div id="game-actions" class="game-actions"><button id="help" class="utility-button" aria-haspopup="dialog"><span aria-hidden="true">?</span> 玩法奖励</button><button id="stats-open" class="utility-button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V12M12 19V5M19 19V9"/></svg> 本局统计</button><button id="round-open" class="primary" aria-haspopup="dialog">开始挑战 · 50 积分 <span>↗</span></button></div>
+      </section>
+
+    </div>
+    <footer>每局 50 模拟积分 · 奖励含投入，不叠加<span id="wallet-note">Demo 奖励参数，收益分布尚未校准。</span></footer>
+  </main>
+</div>
+<dialog id="entry-panel" class="game-dialog entry-dialog" aria-labelledby="entry-title"><button class="dialog-close icon-button" data-close aria-label="关闭开局面板">×</button><section class="entry-card" aria-labelledby="entry-title">
+                  <p class="eyebrow">30 MOVE CHALLENGE <span aria-hidden="true">✦</span></p>
+                  <h2 id="entry-title">每一步，<span>都算数。</span></h2>
+                  <p class="entry-description">拖动方块，填满整行或整列。<br>30 次放置，不限时间，想好再出手。</p>
+                  <div id="entry-rewards" class="entry-rewards"></div>
+                  <p class="entry-note">不足 500 分到账 0 · 奖励含投入，不叠加</p>
+                  <button id="start" class="primary" disabled>开始挑战 · 50 积分 <span>↗</span></button>
+                  <p id="entry-status" role="status">正在连接…</p>
+                </section></dialog>
+<dialog id="settings-dialog" class="game-dialog" aria-labelledby="settings-title"><button class="dialog-close icon-button" data-close aria-label="关闭设置">×</button><p class="eyebrow">FLOW DECK</p><h2 id="settings-title">游戏设置</h2><button id="sound" class="setting-row" aria-label="关闭音效" aria-pressed="true"><span><b>游戏音效</b><small>落块、消除与连击反馈</small></span><span id="sound-copy" class="switch-state">已开启</span></button><div class="settings-actions"><button id="restart" class="secondary" disabled>放弃重开 · 50 积分</button><button id="return" class="text-button">← 返回大厅</button></div><p class="dialog-note">返回大厅保留本局 · 刷新页面会重置</p><p id="save-note" class="dialog-note">个人最佳保存在本机</p></dialog>
+<dialog id="stats-dialog" class="game-dialog" aria-labelledby="stats-title"><button class="dialog-close icon-button" data-close aria-label="关闭本局统计">×</button><p class="eyebrow">YOUR FLOW</p><h2 id="stats-title">每一步，都有积累。</h2><section class="stats-panel" aria-label="本局统计"><div class="best-score"><span>挑战最佳</span><strong id="best">0</strong></div><div><span>消除线数</span><strong id="lines">00</strong></div><div><span>最高连击</span><strong id="max-combo">×0</strong></div><div><span>放置次数</span><strong id="moves">00</strong></div></section><p class="dialog-note">得分记录你的表现；积分按奖励档结算，单局最高到账 80。未到 500 分到账 0。</p><button class="primary" data-close>继续拼吧 <span>↗</span></button></dialog>
+<dialog id="rules-dialog" class="game-dialog" aria-labelledby="rules-title"><button class="dialog-close icon-button" data-close aria-label="关闭玩法">×</button><p class="eyebrow">QUICK START</p><h2 id="rules-title">让方块连成星轨</h2><p>拖动方块到棋盘；也可以先点选方块，再点击目标格。点选后，方块上的亮点对应你点击的格子。靠近边缘时，预览会对齐最近的完整格位；只有整块能放入才会落下。方块不能旋转或重叠。</p><ul><li>每放置 1 个小方格：<strong>+5 分</strong></li><li>一次消除 N 条线：<strong>100 × N² × 连击数</strong></li><li>连续两次消除为 ×2，三次为 ×3；一次放置未消除，连击归零。</li><li>每局消耗 50 积分，最多成功放置 30 次。误拖、碰撞或越界不扣步数；三个方块用完再补充。步数用完或所有剩余方块无处可放时，自动按最高得分档结算。</li></ul><div class="score-example">单行 +100　双行 +400　双行 ×2 连击 +800<small>以上消除奖励另加本次放置分数</small></div><p class="dialog-note">键盘：选中方块后用方向键移动落点，Enter 放置，Esc 取消。无倒计时。奖励表：不足 500 分到账 0；500 分到账 20；1,000 分到账 50；2,000 分及以上到账 80 积分。各档不叠加，到账金额含投入。Demo 参数尚未校准，不承诺固定返还率。</p><button class="primary" data-close>开始拼吧 <span>↗</span></button></dialog>
+<dialog id="restart-dialog" class="game-dialog" aria-labelledby="restart-title"><p class="eyebrow">FRESH START</p><h2 id="restart-title">重新开启一局？</h2><p>重开将放弃当前局的全部奖励，入场费不退，并再消耗 50 积分。余额不足时保留当前对局。返回大厅可以保留本局继续玩。</p><div class="dialog-actions"><button class="secondary" data-close>继续本局</button><button class="primary" id="confirm-restart">放弃并支付 50 积分</button></div></dialog>
+<dialog id="result-dialog" class="game-dialog result-dialog" aria-labelledby="result-title"><div class="result-mark" aria-hidden="true">✦</div><p class="eyebrow" id="result-eyebrow">NICE FLOW</p><h2 id="result-title">这一局，拼得漂亮</h2><p id="result-reason">本局已结束。</p><div class="result-score"><span>本局得分</span><strong id="result-score">0</strong></div><div class="result-stats"><span id="result-lines"></span><span id="result-combo"></span></div><div class="result-payout"><span>本局到账</span><strong id="result-amount">0 积分</strong><p id="result-net">入场 50 · 净收益 −50</p></div><p id="result-balance"></p><button class="primary" id="play-again">再挑战 · 50 积分 <span>↗</span></button><button class="text-button" id="review-board">看看棋盘</button></dialog>
+<div id="placement-outline" class="placement-outline" aria-hidden="true" hidden></div>
+<div id="drag-piece" class="drag-piece" aria-hidden="true" hidden></div>
+<script src="platform-wallet.js"></script><script src="blocks-engine.js"></script><script src="blocks-input.js"></script><script src="blocks.js"></script>
+</body></html>

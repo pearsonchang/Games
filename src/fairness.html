@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#11182e"><title>PLAYROOM · 对局验证</title><link rel="stylesheet" href="fairness.css"></head>
+<body class="fairness-page"><main>
+<a href="index.html#games">← 返回游戏大厅</a><div class="fairness-eyebrow" style="margin-top:32px">PLAYROOM / VERIFIABLE PLAY</div>
+<h1>每一掷，都有迹可循。</h1><p class="fairness-subtitle">导入骰子对局记录，重新计算规则摘要、随机值、顶面点数与奖励。验证在你的设备上进行，文件不会上传。</p>
+<p class="fairness-boundary">当前为本地复算试点，尚未连接区块链。通过复算仅说明记录内部一致；本地承诺没有独立时间锚定，无法证明平台未挑选结果或事后重造记录。</p>
+<section class="fairness-card" aria-label="导入与验证"><label for="recent">本机最近 30 局</label><select id="recent"><option value="">选择已完成的对局</option></select>
+<label for="receipt-file">导入导出的 JSON 记录</label><input id="receipt-file" type="file" accept=".json,application/json">
+<label for="receipt" style="margin-top:16px">或粘贴记录</label><textarea id="receipt" spellcheck="false" placeholder="粘贴完整的对局 JSON"></textarea><div class="fairness-actions"><button id="verify" type="button">重新计算并核对</button></div><div id="verification" class="fairness-result" role="status" aria-live="polite">等待验证记录。</div></section>
+<section class="fairness-card"><div class="fairness-eyebrow">RULES / DICE V1</div><h2>固定规则，公开结算</h2><div class="fairness-rules"><p>每局 50 模拟积分，三颗独立六面骰子。</p><p>大小：小为 4–10，大为 11–17，三同号不计大小；命中到账 100。三同号命中到账 1,500。奖励均包含投入，未命中到账 0。</p><details><summary>查看全部命中概率、奖励与返还率</summary><div id="sum-rules"></div><p>返还率为大量独立对局的平均到账 / 投入，包含投入，不保证有限局数收益。各模式返还率不同。</p></details><p>规则版本：<code>dice-v1</code><br>规则摘要：<code id="rules-hash" style="overflow-wrap:anywhere">计算中…</code></p></div></section>
+<section class="fairness-card"><h2>链上骰子试点</h2><p class="fairness-subtitle">Sepolia 测试入口目前仅用于载入旧合约、查看和恢复已有对局，已暂停部署与新局入口。普通大厅仍可直接试玩。</p><a href="fairness-testnet.html">查看测试网接入状态 ↗</a> · <a href="fairness-setup.html">管理旧版接入</a></section>
+</main><script src="dice-rules.js"></script><script src="fairness-core.js"></script><script src="fairness-verifier.js"></script></body></html>

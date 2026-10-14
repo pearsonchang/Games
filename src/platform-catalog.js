@@ -7,12 +7,13 @@ const catalog=[
 {id:'horse',name:'星际赛马',category:'竞速与弹珠',tag:'选马观赛',description:'选一匹小马，见证冲线时刻',cost:'50 积分 / 局',cover:'cover-horse',available:true},
 {id:'slots',name:'星际老虎机',category:'掷骰与转轴',tag:'经典三列',description:'转动星际图案，揭晓三连组合',cost:'50 积分 / 局',cover:'cover-slots',available:true},
 {id:'matrix',name:'星际矩阵',category:'掷骰与转轴',tag:'多列老虎机',description:'五列三行，连接你的星际图案',cost:'50 积分 / 局',cover:'cover-matrix',available:true},
-{id:'2048',name:'2048',category:'益智'},
+{id:'blocks',name:'星际方块',category:'益智消除',tag:'方块消除',description:'30 步拼出高分，解锁积分奖励',cost:'50 积分 / 局',cover:'cover-blocks',available:true},
+{id:'2048',name:'星际 2048',category:'益智消除',tag:'数字合并',description:'滑动合并数字，向 2048 进发',cost:'50 积分 / 局',cover:'cover-2048',available:true},
 {id:'memory',name:'记忆翻牌',category:'益智'},
 {id:'rhythm',name:'节奏点击',category:'反应'}];
 
 function gameName(id) { return catalog.find(game => game.id === id)?.name || '游戏'; }
 const gameRoutes = {
   minesweeper: 'minesweeper.html', rocket: 'rocket.html', dice: 'dice.html',
-  plinko: 'plinko.html', horse: 'horse.html', slots: 'slots.html', matrix: 'matrix.html'
+  plinko: 'plinko.html', horse: 'horse.html', slots: 'slots.html', matrix: 'matrix.html', blocks: 'blocks.html', '2048': '2048.html'
 };

@@ -1,3 +1,5 @@
+const {FusionRound}=require('../src/2048-engine.js');
+const {BlocksRound}=require('../src/blocks-engine.js');
 const {MatrixRound}=require('../src/matrix-engine.js');
 const {SlotsRound}=require('../src/slots-engine.js');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
@@ -24,7 +26,7 @@ assert.equal(seen.size,24);for(const row of ranks){assert.deepEqual(row,[6,6,6,6
 }
 {
  const elements=new Map(),listeners={};function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},setAttribute(){},removeAttribute(){},close(){},showModal(){}});return elements.get(id)}
- const ctx=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(n,f)=>listeners[n]=f},SlotsRound,MatrixRound,location:{origin:'https://test.local',hash:''},HorseRound,...require('../src/mines-engine.js'),...require('../src/rocket-engine.js'),...require('../src/dice-engine.js'),...require('../src/plinko-engine.js'),setInterval(){},setTimeout(){return 1},clearTimeout(){},Date,console});
+ const ctx=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(n,f)=>listeners[n]=f},SlotsRound,MatrixRound,BlocksRound,FusionRound,location:{origin:'https://test.local',hash:''},HorseRound,...require('../src/mines-engine.js'),...require('../src/rocket-engine.js'),...require('../src/dice-engine.js'),...require('../src/plinko-engine.js'),setInterval(){},setTimeout(){return 1},clearTimeout(){},Date,console});
  vm.runInContext(['platform-catalog','lobby-preferences','game-load-guard','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),ctx);const run=code=>vm.runInContext(code,ctx);
  const send=(data,source=el('horse-frame').contentWindow,origin='https://test.local')=>listeners.message({data,source,origin});
  run("let testTime=0;bridge.rounds.horse.now=()=>testTime;bridge.rounds.horse.random=()=>.999;play('horse')");

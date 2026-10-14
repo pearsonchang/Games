@@ -1,0 +1,72 @@
+/* Keep controls in document flow: a floating dock must not cover the rules. */
+.dice-glass .companion-controls{min-width:0;padding:26px 24px}
+.dice-glass .control-heading{gap:10px;min-height:32px;flex-wrap:wrap}
+.dice-glass .control-heading h2{margin:0 auto 0 0;line-height:1.5}
+.dice-glass .control-heading>.frame-badge{position:static;flex:0 0 22px;width:22px;height:28px;font-size:24px;transform:none;text-shadow:none}
+.dice-glass .control-heading>span:last-child{color:#bdcce4;line-height:1.5}
+.dice-glass .rule{font-size:13px;line-height:1.75;color:#c4d3e9;overflow-wrap:anywhere;margin:12px 0 16px}
+.dice-glass .payout{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;padding:14px 0}
+.dice-glass .payout>span{flex-wrap:wrap;gap:6px;color:#c3edff;font-size:13px;line-height:1.5}
+.dice-glass .payout b#prize{margin-left:4px;line-height:1.2}
+.dice-glass .payout small{font-size:12px}
+.dice-glass .payout p{max-width:none;text-align:left;font-size:12px;line-height:1.65;color:#c2d0e7;margin:0;overflow-wrap:anywhere}
+.dice-glass .payout p b{color:#eef3ff;font-weight:650}
+.dice-glass .action-cost{min-width:0;gap:6px}
+.dice-glass .action-cost>span{line-height:1.5;overflow-wrap:anywhere;color:#c4d7ef}
+.dice-glass .action-cost small{color:#c2d0e7}
+.dice-glass .hint{height:auto;min-height:20px;font-size:12px;line-height:1.6;color:#c2d0e7;overflow-wrap:anywhere}
+.dice-glass .roll{min-height:52px;line-height:1.5;white-space:normal;transform:none}
+.dice-glass .modes button{min-width:0;overflow:visible}
+
+@media(max-width:850px){
+ html:has(body[data-mobile-game=dice]){scroll-padding-bottom:20px}
+ body[data-mobile-game=dice] main{padding:0 12px 16px;gap:16px}
+ body[data-mobile-game=dice] .companion-controls{padding:24px 20px 26px;margin:0}
+ body[data-mobile-game=dice] .control-heading{display:flex;gap:8px;margin-bottom:14px}
+ body[data-mobile-game=dice] .control-heading h2{font-size:17px}
+ body[data-mobile-game=dice] .control-heading>span:last-child{font-size:12px}
+ body[data-mobile-game=dice] .modes{gap:8px}
+ body[data-mobile-game=dice] .modes button{min-height:64px;padding:10px 4px;gap:5px}
+ body[data-mobile-game=dice] .modes b{font-size:14px;line-height:1.5}
+ body[data-mobile-game=dice] .modes em{font-size:12px;line-height:1.5}
+ body[data-mobile-game=dice] #options{margin-top:12px}
+ body[data-mobile-game=dice] .size-options button{min-height:48px;flex-wrap:wrap;gap:5px;font-size:17px}
+ body[data-mobile-game=dice] .size-options small{font-size:13px}
+ body[data-mobile-game=dice] .sum-options button{min-height:44px}
+ body[data-mobile-game=dice] .rule{font-size:13px;line-height:1.75;margin:12px 0 16px;color:#c4d3e9}
+ body[data-mobile-game=dice] .action-bar{
+  position:static;inset:auto;z-index:auto;width:100%;max-width:100%;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
+  gap:12px;padding:14px;margin:0;border:1px solid #89a9d34d;
+  border-radius:16px;background:#15223e;box-shadow:inset 0 1px #ffffff08;backdrop-filter:none;
+ }
+ body[data-mobile-game=dice] .payout{padding:0 0 14px;margin:0 0 14px;border-bottom:1px solid #89a9d333}
+ body[data-mobile-game=dice] .action-bar .payout{
+  grid-column:1/-1;order:-1;display:grid;grid-template-columns:minmax(0,1fr);
+  gap:4px;padding:0 0 12px;margin:0;border:0;border-bottom:1px solid #89a9d333;
+ }
+ body[data-mobile-game=dice] .payout b#prize,
+ body[data-mobile-game=dice] .action-bar .payout b#prize{font-size:26px;margin-left:4px}
+ body[data-mobile-game=dice] .payout p,
+ body[data-mobile-game=dice] .action-bar .payout p{font-size:12px;line-height:1.65;text-align:left;max-width:none;margin:0}
+ body[data-mobile-game=dice] .action-cost{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px}
+ body[data-mobile-game=dice] .action-cost>span{font-size:12px;line-height:1.5}
+ body[data-mobile-game=dice] .action-cost>strong{font-size:22px;line-height:1.5}
+ body[data-mobile-game=dice] .action-cost small{font-size:12px}
+ body[data-mobile-game=dice] #roll{height:auto;min-height:56px;padding:12px 10px;font-size:17px;border-radius:12px}
+ body[data-mobile-game=dice] .hint{grid-column:1/-1;min-height:20px;font-size:12px;line-height:1.6;margin:0}
+ body[data-mobile-game=dice] footer{padding:12px 20px max(24px,env(safe-area-inset-bottom));margin:0}
+ /* Result text may grow with text zoom or a long reward amount. */
+ body[data-mobile-game=dice] .result,
+ body[data-mobile-game=dice] .result.revealed{height:auto;min-height:80px;overflow:visible}
+ body[data-mobile-game=dice] .result p{font-size:12px;line-height:1.6}
+}
+@media(max-width:359px){
+ body[data-mobile-game=dice] .companion-controls{padding-inline:18px}
+ body[data-mobile-game=dice] .control-heading>span:last-child{flex-basis:100%;padding-left:30px}
+ body[data-mobile-game=dice] .modes b{font-size:13px}
+ body[data-mobile-game=dice] .modes em{font-size:11px}
+ body[data-mobile-game=dice] .action-bar{grid-template-columns:minmax(0,1fr);padding:12px}
+ body[data-mobile-game=dice] .action-cost{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+ body[data-mobile-game=dice] .action-cost>strong{white-space:nowrap}
+}

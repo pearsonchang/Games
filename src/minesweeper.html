@@ -6,8 +6,8 @@
 <title>金币扫雷 · PLAYROOM</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffac36' d='M16 2 29 9v15L16 31 3 24V9z'/%3E%3Cpath fill='%23906228' d='m16 16 13-7v15l-13 7z'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="arcade-theme.css"><link rel="stylesheet" href="theme-a.css"><link rel="stylesheet" href="mine-chamber.css"><link rel="stylesheet" href="mine-treasure.css">
-</head>
-<body class="arcade-mines">
+<link rel="stylesheet" href="mobile-games.css"></head>
+<body class="arcade-mines" data-mobile-game="mines">
 <div class="expedition-scenery" aria-hidden="true"></div>
 <main class="game playing cash-mode treasure-mode" aria-label="金币扫雷游戏">
  <header><button id="close" class="plain">游戏大厅</button><div class="game-brand"><strong>金币扫雷</strong><span>COINSWEEPER</span></div><div class="reward-note">模拟积分 <b id="balance-value">—</b></div><button id="mine-sound" class="mine-sound" aria-pressed="true" aria-label="关闭音效" title="音效开关">♪</button><button id="menu" class="menu" aria-label="游戏菜单">•••</button></header>
@@ -33,5 +33,5 @@
  <div id="round-status" class="sr-only" role="status" aria-live="polite"></div>
 </main>
 <script src="dice-audio.js"></script><script src="mine-audio.js"></script><script src="mine-effects.js"></script><script src="mines-engine.js"></script><script src="game.js"></script>
-</body>
+<script src="mobile-games.js"></script></body>
 </html>

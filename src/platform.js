@@ -10,6 +10,8 @@ const wallet = new PointsWallet();
 let preferenceStorage;
 try { preferenceStorage = window.localStorage; } catch { /* Private browsing may deny access. */ }
 const preferences = new LobbyPreferences(catalog.filter(game => game.available).map(game => game.id), preferenceStorage);
+let diceFairness;
+try { diceFairness = new Fairness.DemoProvider({storage: preferenceStorage}); } catch { /* Plain demo remains available where Web Crypto is unavailable. */ }
 const session = {
   visited: false, activeGame: 'minesweeper', loadedGames: new Set(), rounds: [],
   get points() { return wallet.points; },
@@ -29,8 +31,9 @@ const loadGuard = new GameLoadGuard({change(state, id) {
   if (state === 'ready') preferences.visit(id);
 }});
 const bridge = new GameBridge({
-  engines: {minesweeper: MinesRound, rocket: RocketRound, dice: DiceRound, plinko: PlinkoRound, horse: HorseRound, slots: SlotsRound, matrix: MatrixRound},
+  engines: {minesweeper: MinesRound, rocket: RocketRound, dice: DiceRound, plinko: PlinkoRound, horse: HorseRound, slots: SlotsRound, matrix: MatrixRound, blocks: BlocksRound, '2048': FusionRound},
   frames, loadedGames: session.loadedGames, wallet, origin: location.origin,
+  fairnessProviders: {dice: diceFairness},
   onFinish(result) {
     session.rounds.push({...result, time: wallet.clock()});
     if (!platform.hidden) render();
@@ -42,9 +45,10 @@ const bridge = new GameBridge({
 function render() {
   document.getElementById('header-points').textContent = formatPoints(wallet.points);
   content.innerHTML = renderPlatformPage({page, session, filter, preferences});
+  window.LobbyShowcase?.mount(content);
 }
 function pauseFrames(activeGame) {
-  for (const id of session.loadedGames) bridge.post(id, {type: 'platform-pause', paused: id !== activeGame});
+  for (const id of session.loadedGames) bridge.post(id, {type: 'platform-pause', paused: document.hidden || id !== activeGame});
 }
 function showPage(next) {
   loadGuard.leave();
@@ -65,22 +69,28 @@ function play(id = 'minesweeper') {
   session.activeGame = id;
   loadGuard.open(id);
   platform.hidden = true;
+  window.LobbyShowcase?.suspend();
   surface.hidden = false;
   for (const [key, frame] of Object.entries(frames)) if (frame) frame.hidden = key !== id;
   pauseFrames(id);
-  if (!session.loadedGames.has(id)) {
-    frames[id].src = gameRoutes[id];
+  if (!session.loadedGames.has(id) || !loadGuard.readyGames.has(id)) {
+    // A navigation attempt is not proof that the game actually initialized.
+    // Re-entering a stalled frame retries presentation, keeping its round.
+    loadFrame(id, session.loadedGames.has(id));
     session.loadedGames.add(id);
   } else bridge.sync(id, true);
   window.scrollTo(0, 0);
+}
+function loadFrame(id, retry = false) {
+  const route = gameRoutes[id];
+  frames[id].src = retry ? route + (route.includes('?') ? '&' : '?') + 'retry=' + Date.now() : route;
 }
 function retryGame() {
   if (surface.hidden || !Object.hasOwn(gameRoutes, session.activeGame)) return;
   const id = session.activeGame;
   loadGuard.open(id, true);
   // Reload presentation only: the parent keeps the same round and wallet.
-  const route = gameRoutes[id];
-  frames[id].src = route + (route.includes('?') ? '&' : '?') + 'retry=' + Date.now();
+  loadFrame(id, true);
 }
 function announce(message) {
   clearTimeout(statusTimer);
@@ -94,7 +104,7 @@ document.addEventListener('click', event => {
     const id = button.dataset.favorite;
     const saved = preferences.toggle(id);
     render();
-    const target = [...document.querySelectorAll('[data-favorite]')].find(item => item.dataset.favorite === id) || document.querySelector('.filter[aria-pressed="true"]');
+    const target = [...document.querySelectorAll('[data-favorite]')].find(item => item.dataset.favorite === id && !item.closest('[inert]')) || document.querySelector('.filter[aria-pressed="true"]');
     target?.focus({preventScroll: true});
     announce(`${saved ? '已收藏' : '已取消收藏'}${gameName(id)}${preferences.persistent ? '' : ' · 本次页面有效'}`);
   }
@@ -121,10 +131,16 @@ window.addEventListener('message', event => {
     bridge.post(id, {type: 'platform-pause', paused: surface.hidden || session.activeGame !== id});
   }
 });
+document.addEventListener('visibilitychange', () => {
+  const id = surface.hidden ? null : session.activeGame;
+  pauseFrames(id);
+  if (!document.hidden && id && loadGuard.readyGames.has(id)) bridge.sync(id, true);
+});
 setInterval(() => {
-  if (!surface.hidden && session.activeGame === 'minesweeper') bridge.sync('minesweeper');
+  if (!surface.hidden && !document.hidden && session.activeGame === 'minesweeper' && loadGuard.readyGames.has('minesweeper')) bridge.sync('minesweeper');
 }, 1000);
 setInterval(() => {
-  for (const id of ['rocket', 'dice', 'plinko', 'horse', 'slots', 'matrix']) bridge.sync(id);
+  const id = surface.hidden || document.hidden ? null : session.activeGame;
+  bridge.pulse(id && loadGuard.readyGames.has(id) ? id : null);
 }, 100);
 showPage(location.hash.slice(1));

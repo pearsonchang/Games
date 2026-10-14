@@ -1,3 +1,5 @@
+const {FusionRound}=require('../src/2048-engine.js');
+const {BlocksRound}=require('../src/blocks-engine.js');
 const {MatrixRound}=require('../src/matrix-engine.js');
 const {SlotsRound}=require('../src/slots-engine.js');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
@@ -8,7 +10,7 @@ const {DiceRound}=require('../src/dice-engine.js');
 const {PlinkoRound}=require('../src/plinko-engine.js');
 const elements=new Map(),listeners={};
 function el(id){if(!elements.has(id))elements.set(id,{hidden:false,innerHTML:'',textContent:'',contentWindow:{messages:[],postMessage(d){this.messages.push(d)}},setAttribute(){},removeAttribute(){},close(){},showModal(){}});return elements.get(id)}
-const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},SlotsRound,MatrixRound,location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,HorseRound,setInterval(){},setTimeout(){return 1},clearTimeout(){},Date,console});
+const context=vm.createContext({document:{getElementById:el,querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener:(name,fn)=>listeners[name]=fn},SlotsRound,MatrixRound,BlocksRound,FusionRound,location:{origin:'https://test.local',hash:''},MinesRound,RocketRound,DiceRound,PlinkoRound,HorseRound,setInterval(){},setTimeout(){return 1},clearTimeout(){},Date,console});
 vm.runInContext(['platform-catalog','lobby-preferences','game-load-guard','platform-wallet','platform-view','platform-bridge','platform'].map(name=>fs.readFileSync('src/'+name+'.js','utf8')).join('\n'),context);
 const run=code=>vm.runInContext(code,context),read=()=>JSON.parse(run('JSON.stringify({points:session.points,ledger:session.ledger,rounds:session.rounds})'));
 function send(type,extra={},source=el('game-frame').contentWindow,origin='https://test.local'){listeners.message({origin,source,data:{type,...extra}})}

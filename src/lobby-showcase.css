@@ -1,0 +1,76 @@
+/* Native touch scrolling keeps the banner independent of game animation loops. */
+.energy-showcase { min-width:0; }
+.energy-showcase-track { display:flex; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scrollbar-width:none; border-radius:20px; outline-offset:4px; }
+.energy-showcase-track::-webkit-scrollbar { display:none; }
+.energy-showcase .energy-hero { flex:0 0 100%; box-sizing:border-box; scroll-snap-align:start; scroll-snap-stop:always; min-width:0; min-height:350px; box-shadow:inset 0 1px #c9bdff33; --showcase-accent:#a6edff; }
+.energy-showcase [data-showcase-tone=cyan] { background:radial-gradient(ellipse at 93% 20%,#51caff66,transparent 64%),linear-gradient(115deg,#25245c,#3735a1 57%,#386ad5); }
+.energy-showcase [data-showcase-tone=blue] { background:radial-gradient(ellipse at 93% 20%,#8d7dff88,transparent 64%),linear-gradient(115deg,#242657,#35369e 57%,#4768db); }
+.energy-showcase [data-showcase-tone=pink] { --showcase-accent:#ecb9ff; background:radial-gradient(ellipse at 93% 20%,#d180e871,transparent 64%),linear-gradient(115deg,#292457,#48329b 57%,#7450ce); }
+.energy-showcase .energy-hero:after { background:var(--showcase-accent); }
+.energy-showcase .energy-hero h2 { font-size:42px; margin:20px 0 14px; }
+.energy-showcase .energy-hero h2>span { color:var(--showcase-accent); font-size:23px; white-space:normal; line-height:1.4; }
+.energy-showcase .energy-hero-copy>p { max-width:270px; font-size:13px; min-height:44px; margin:0; }
+.energy-showcase .energy-hero-actions { margin-top:19px; }
+.energy-showcase .energy-feature-art { width:310px; height:310px; left:49%; top:44%; }
+.energy-showcase .energy-hero-scene { perspective:none; }
+.energy-showcase :is(.showcase-minesweeper,.showcase-dice,.showcase-plinko) .energy-feature-art { filter:none; mix-blend-mode:screen; }
+.energy-showcase .showcase-matrix .energy-feature-art { width:475px; height:329px; }
+.energy-showcase .energy-hero-foot { gap:14px; }
+.energy-showcase .energy-hero-foot>span:nth-child(2) { margin-left:0; }
+.energy-showcase .energy-hero-foot .showcase-cost { margin-left:auto; color:#f6d69a; font:600 11px Inter,sans-serif; letter-spacing:0; white-space:nowrap; }
+.energy-showcase-controls { display:flex; align-items:center; gap:15px; min-height:56px; padding:5px 4px 0; color:#acb8e2; }
+.showcase-counter { min-width:49px; color:#a7b8e8; font:600 11px Orbit,Inter,sans-serif; letter-spacing:.7px; font-variant-numeric:tabular-nums; }
+.showcase-dots { display:flex; align-items:center; gap:3px; margin-right:auto; }
+.energy-showcase-controls button { display:grid; place-items:center; min-width:44px; min-height:44px; padding:0; border:0; border-radius:12px; background:transparent; color:#c5d6ff; cursor:pointer; touch-action:manipulation; }
+.energy-showcase-controls button:hover { background:#8d92e91c; }
+.energy-showcase-controls button:focus-visible { outline:2px solid #8aeaff; outline-offset:1px; }
+.energy-showcase-controls .showcase-dots button { min-width:25px; border-radius:8px; }
+.showcase-dots button span { display:block; width:6px; height:6px; border-radius:5px; background:#67699a; transition:width .2s,background .2s; }
+.showcase-dots button[aria-current=true] span { width:22px; background:#91eaff; box-shadow:0 0 9px #91eaff30; }
+.showcase-actions { display:flex; gap:4px; }
+.showcase-actions .showcase-arrow { border:1px solid #a9adff29; font-size:19px; }
+.showcase-actions [data-showcase-toggle] { font-size:14px; border:1px solid #a9adff29; }
+.showcase-actions button:disabled { opacity:.4; cursor:default; }
+.showcase-sr-only { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media(max-width:760px) {
+  .energy-showcase .energy-feature-art { width:270px; height:270px; }
+  .energy-showcase .showcase-matrix .energy-feature-art { width:335px; height:232px; }
+  .energy-showcase .energy-hero h2 { font-size:36px; }
+  .energy-showcase .energy-hero h2>span { font-size:19px; }
+}
+@media(max-width:650px) {
+  .energy-showcase-track { border-radius:16px; }
+  .energy-showcase .energy-hero { grid-template-columns:54% 46%; min-height:310px; }
+  .energy-showcase .energy-hero-copy { padding:22px 0 52px 20px; }
+  .energy-showcase .energy-feature-label b { display:none; }
+  .energy-showcase .energy-hero h2 { font-size:30px; margin:18px 0 10px; white-space:nowrap; }
+  .energy-showcase .energy-hero h2>span { margin-top:10px; font-size:17px; max-width:175px; }
+  .energy-showcase .energy-hero-copy>p { font-size:11px; line-height:1.7; max-width:160px; min-height:55px; }
+  .energy-showcase .energy-hero-actions { margin-top:12px; }
+  .energy-showcase .energy-main-cta.primary { min-height:44px; font-size:12px; padding:9px 15px; gap:18px; }
+  .energy-showcase .energy-feature-art { width:clamp(155px,48vw,200px); height:auto; aspect-ratio:1; left:43%; top:43%; }
+  .energy-showcase .showcase-matrix .energy-feature-art { width:clamp(175px,54vw,225px); height:auto; aspect-ratio:520 / 360; left:39%; }
+  .energy-showcase .energy-floating-code { right:11%; bottom:61px; }
+  .energy-showcase .energy-hero-foot { height:36px; gap:8px; }
+  .energy-showcase .energy-hero-foot>span:first-child { display:none; }
+  .energy-showcase .energy-hero-foot>span:nth-child(2) { font-size:9px; }
+  .energy-showcase .energy-hero-foot .showcase-cost { font-size:10px; }
+  .energy-showcase-controls { gap:8px; min-height:51px; padding-inline:0; }
+  .showcase-counter { min-width:43px; font-size:10px; }
+  .showcase-dots { gap:0; }
+  .energy-showcase-controls .showcase-dots button { min-width:24px; }
+  .showcase-dots button[aria-current=true] span { width:17px; }
+  .showcase-actions .showcase-arrow { display:none; }
+}
+@media(max-width:370px) {
+  .energy-showcase .energy-hero-copy { padding-left:15px; }
+  .energy-showcase .energy-hero h2 { font-size:26px; }
+  .energy-showcase .energy-hero h2>span { font-size:15px; }
+  .energy-showcase .energy-hero-copy>p { max-width:135px; }
+  .energy-showcase-controls { gap:5px; }
+  .showcase-counter { display:none; }
+  .energy-showcase-controls .showcase-dots button { min-width:24px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .showcase-dots button span { transition:none; }
+}

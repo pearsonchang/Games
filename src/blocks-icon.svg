@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+ <defs><linearGradient id="deck" x1="30" y1="35" x2="175" y2="170" gradientUnits="userSpaceOnUse"><stop stop-color="#5058a4"/><stop offset="1" stop-color="#242e64"/></linearGradient><g id="tile"><rect width="25" height="25" rx="5" fill="currentColor"/><path d="M2 18v2a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-2" stroke="#16245a" stroke-opacity=".25" stroke-width="3"/><rect x="3" y="3" width="19" height="18" rx="3" stroke="white" stroke-opacity=".35"/></g></defs>
+ <ellipse cx="100" cy="161" rx="70" ry="16" fill="#182354" opacity=".35"/>
+ <g transform="rotate(-10 100 100)"><rect x="32" y="50" width="138" height="122" rx="16" fill="#293269" stroke="#8792e7" stroke-width="2"/><rect x="32" y="41" width="138" height="124" rx="16" fill="url(#deck)" stroke="#bdc8ff" stroke-width="2"/>
+ <g stroke="#adb5ff" stroke-opacity=".16"><rect x="42" y="51" width="118" height="104" rx="8"/><path d="M70 52v102m30-102v102m30-102v102M43 79h116M43 108h116M43 137h116"/></g>
+ <g color="#8adff4"><use href="#tile" x="44" y="127"/><use href="#tile" x="74" y="127"/><use href="#tile" x="104" y="127"/><use href="#tile" x="134" y="127"/></g>
+ <g color="#b49bf5"><use href="#tile" x="44" y="97"/><use href="#tile" x="74" y="97"/><use href="#tile" x="74" y="67"/></g><g color="#f4c677"><use href="#tile" x="134" y="97"/></g>
+ <path d="M26 143h151" stroke="#d1fbff" stroke-width="3" stroke-linecap="round"/>
+ </g>
+ <g transform="translate(108 21) rotate(10 27 27)" color="#9eeaff"><use href="#tile"/><use href="#tile" x="29"/><use href="#tile" x="29" y="29"/></g>
+ <path d="m40 24 3 9 9 3-9 3-3 9-3-9-9-3 9-3 3-9Z" fill="#dcc9ff"/><path d="m177 97 2 6 7 2-7 3-2 6-3-6-6-3 6-2 3-6Z" fill="#c6f6ff"/>
+ <path d="M20 111c-16 21 27 29 72 12m-6 1 7-2-4 7" stroke="#b6b1ff" stroke-width="1.5" stroke-linecap="round"/><circle cx="176" cy="59" r="3" fill="#f0c6ea"/>
+</svg>

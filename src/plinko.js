@@ -4,6 +4,15 @@ const canvas=$('board'),ctx=canvas.getContext('2d'),reduced=matchMedia('(prefers
 let lane=2,state='idle',balance=0,connected=false,pending=false,roundId='',path=null;
 let clock=0,elapsed=0,hitCursor=0,preview=true,history=[],trail=[],flashes=new Map(),bursts=[];
 let finishFx=null,launchFx=null,impactShake=null,buddyMotion=null,lastBuddyHit=0;
+let platformPaused=false,drawHandle=0,lastDraw=0;
+function queueDraw(){if(!drawHandle&&!platformPaused&&!document.hidden)drawHandle=requestAnimationFrame(draw);}
+function pausePresentation(){
+ if(platformPaused||document.hidden){
+  cancelAnimationFrame(drawHandle);drawHandle=0;lastDraw=0;
+  buddyMotion?.cancel();plinkoAudio.stop();
+  if(charging){cancelCharge();select();}
+ }else queueDraw();
+}
 function moveBuddy(kind='bounce'){
  const buddy=$('volt-buddy');if(reduced.matches||document.hidden||!buddy?.animate)return;
  buddyMotion?.cancel();
@@ -54,10 +63,12 @@ $('launch').onclick=()=>{
 };
 $('back').onclick=()=>{cancelCharge();select();plinkoAudio.leave();send({type:'game-return'});};
 $('volt-sound').onclick=()=>{plinkoAudio.unlock();const on=plinkoAudio.toggle();$('volt-sound').setAttribute('aria-pressed',on);$('volt-sound').setAttribute('aria-label',on?'关闭音效':'开启音效');$('volt-sound').textContent=on?'♪':'♩';};
-document.addEventListener('visibilitychange',()=>{if(document.hidden){buddyMotion?.cancel();plinkoAudio.stop();if(charging){cancelCharge();$('status').textContent=`入口 ${lane+1} · 准备释放`;select();}}});
+document.addEventListener('visibilitychange',pausePresentation);
+window.addEventListener('pagehide',()=>{platformPaused=true;pausePresentation();});
 window.addEventListener('message',e=>{
  if(e.origin!==location.origin||e.source!==parent||!e.data)return;
  const d=e.data;
+ if(d.type==='platform-pause'){platformPaused=!!d.paused;pausePresentation();return;}
  if(d.type==='plinko-error'){cancelCharge();pending=false;select();$('message').textContent=d.message;return;}
  if(d.type!=='plinko-state')return;
  connected=true;if(d.state==='dropping')pending=false;balance=d.balance;$('balance').textContent=balance.toLocaleString();
@@ -236,8 +247,14 @@ function drawFinish(now){
  ctx.restore();
 }
 function draw(now){
+ drawHandle=0;
+ if(platformPaused||document.hidden)return;
+ queueDraw();
+ // Keep the idle chamber lively at 30 fps; a moving ball stays at display rate.
+ if(state!=='dropping'&&!charging&&lastDraw&&now-lastDraw<1000/30)return;
+ lastDraw=now;
  const ratio=Math.min(devicePixelRatio||1,2),w=canvas.clientWidth,h=w*600/700;
- if(!w){requestAnimationFrame(draw);return;}
+ if(!w)return;
  if(canvas.width!==Math.round(w*ratio)){canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);}
  ctx.setTransform(canvas.width/700,0,0,canvas.height/600,0,0);ctx.clearRect(0,0,700,600);
  const time=(elapsed+(state==='dropping'?Math.max(0,now-clock):0))/1000;
@@ -259,6 +276,5 @@ function draw(now){
  }
  drawImpacts(now);drawFinish(now);
  drawBall(ball,now);ctx.restore();
- requestAnimationFrame(draw);
 }
-select();requestAnimationFrame(draw);send({type:'plinko-ready'});
+select();queueDraw();send({type:'plinko-ready'});

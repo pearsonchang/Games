@@ -2,13 +2,14 @@
   "name": "playroom-gamefi-demo",
   "version": "0.1.0",
   "private": true,
-  "description": "PLAYROOM seven-game static demo with simulated points",
+  "description": "PLAYROOM nine-game static demo with simulated points",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
     "check": "node scripts/check-static.cjs",
     "test": "node --test",
+    "preview": "node scripts/preview.cjs",
     "build": "node scripts/build.cjs"
   }
 }

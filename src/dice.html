@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07111f"><title>TRIPLE · 三骰挑战</title>
 <link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="dice.css"><link rel="stylesheet" href="arcade-theme.css"><link rel="stylesheet" href="theme-a.css"><link rel="stylesheet" href="glass-games.css"><link rel="stylesheet" href="dice-energy.css"><link rel="stylesheet" href="dice-ui.css"><link rel="stylesheet" href="dice-companions.css">
-</head>
-<body class="glass-game dice-glass" data-mode="size">
+<link rel="stylesheet" href="mobile-games.css"><link rel="stylesheet" href="fairness.css"><link rel="stylesheet" href="dice-layout.css"></head>
+<body class="glass-game dice-glass" data-mode="size" data-mobile-game="dice">
 <div class="world-art" aria-hidden="true"><i class="world-orbit"></i><i class="world-orbit orbit-two"></i><i class="world-trace"></i><i class="world-dot"></i></div>
 <header><button id="back" class="back">游戏大厅</button><a class="brand" href="#">TRIPLE<span>三骰挑战</span></a><button id="sound" class="sound" aria-pressed="true" aria-label="关闭音效">音效 开</button><span class="balance">模拟积分 <b id="balance">—</b></span></header>
 <main>
@@ -46,8 +46,8 @@
  <path class="frame-light light-top" d="M177 9H248M359 18H444"/><path class="frame-light light-left" d="M19 162V204M19 279V314"/>
  <path class="frame-light light-right" d="M981 142V184M981 271V303"/><path class="frame-light light-bottom" d="M243 582H362M653 582H720"/>
  <path class="frame-fastener" d="M48 34h5M957 39h5M47 562h5M949 562h5"/>
- </svg></div><span class="frame-badge" aria-hidden="true">✦</span>
- <div class="control-heading"><h2>选择挑战</h2><span>三种玩法</span></div>
+ </svg></div>
+ <div class="control-heading"><span class="frame-badge" aria-hidden="true">✦</span><h2>选择挑战</h2><span>三种玩法</span></div>
  <div class="modes" id="modes">
   <button data-mode="size" aria-pressed="true"><span class="mode-art" data-mode-art="size" aria-hidden="true"></span><div><b>大 / 小</b><small>选择点数范围</small></div><em>2×</em></button>
   <button data-mode="sum" aria-pressed="false"><span class="mode-art" data-mode-art="sum" aria-hidden="true"></span><div><b>指定点数</b><small>命中目标总点数</small></div><em>3.6–100×</em></button>
@@ -60,5 +60,5 @@
 <section class="history" aria-label="最近七局战报"><div class="history-heading"><h2>最近战报</h2><span>仅记录本次体验</span></div><div id="history"><span class="history-empty">完成第一掷，这里会留下你的点数。</span></div></section>
 </main>
 <footer>PLAYROOM <span>仅使用模拟积分，无货币价值 · 返回大厅不影响结算</span></footer>
-<script src="dice-engine.js"></script><script src="dice-renderer.js"></script><script src="dice-visual.js"></script><script src="dice-audio.js"></script><script src="dice.js"></script>
-</body></html>
+<script src="dice-rules.js"></script><script src="fairness-core.js"></script><script src="dice-engine.js"></script><script src="dice-renderer.js"></script><script src="dice-visual.js"></script><script src="dice-audio.js"></script><script src="platform-wallet.js"></script><script src="fairness-ui.js"></script><script src="dice.js"></script>
+<script src="mobile-games.js"></script></body></html>

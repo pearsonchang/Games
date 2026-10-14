@@ -175,3 +175,7 @@
 }
 [data-concept=festival][data-festival-motion=off] #platform *,[data-concept=festival][data-festival-motion=off] #platform *:before,[data-concept=festival][data-festival-motion=off] #platform *:after { animation:none!important; transition:none!important; }
 [data-concept=festival][data-festival-motion=off] .energy-card:hover { transform:none; }[data-concept=festival][data-festival-motion=off] .energy-card .game-open:hover .energy-art { translate:none; scale:1; }
+
+[data-concept=festival] .energy-card[data-play=blocks]{--energy:#a9edff;--field:#7160c6;--field-deep:#333b83}
+
+[data-concept=festival] .energy-card[data-play="2048"]{--energy:#ffdf97;--field:#8760d3;--field-deep:#42458c}

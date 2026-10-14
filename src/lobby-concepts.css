@@ -303,3 +303,7 @@ body { --text: var(--ink); --muted: var(--quiet); --line: var(--edge); --surface
   .hero-main-art .icon-motion, .hero-rocket .icon-motion, .game-card .concept-symbol { animation:none; }
   .game-card:not(:disabled):hover { transform:none; }
 }
+
+.game-card[data-play=blocks]{--tile:#bdddf7;--tile-ink:#445a91;--tile-ornament:#dfceff}
+
+.game-card[data-play="2048"]{--tile:#d5c7ff;--tile-ink:#50418b;--tile-ornament:#adf0ff}

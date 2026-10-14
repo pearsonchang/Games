@@ -1,0 +1,302 @@
+/* Shared phone ergonomics; each game's artwork and desktop layout stay local. */
+.mobile-settings-open,.mobile-horse-picker,.mobile-entrances,.mobile-target-open,.mobile-native-close,.mobile-board-toolbar,.mobile-mine-secondary{display:none}
+.mobile-sheet{box-sizing:border-box;width:min(560px,calc(100% - 32px));max-height:85vh;border:1px solid #637da76b;border-radius:22px;background:#14213b;color:#edf3ff;padding:20px;font:inherit}
+.mobile-sheet::backdrop{background:#020817b8}
+.mobile-sheet-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:16px;position:sticky;top:-20px;background:#14213b;z-index:5;padding-block:10px;border-bottom:1px solid #809dc633}
+.mobile-sheet-head h2{margin:0;font-size:20px;color:#edf3ff;letter-spacing:0}
+.mobile-sheet-close{flex:0 0 44px;width:44px;height:44px;display:grid;place-items:center;border:1px solid #879ec547;border-radius:12px;background:#263652;color:#dcecff;font:28px/1 sans-serif;padding:0}
+.mobile-sheet-body{font-size:14px;line-height:1.7;min-width:0}
+.mobile-sheet-body p{color:#b9c9e2;line-height:1.7}
+.mobile-audio-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 20px}
+.mobile-audio-row>button{position:static!important;display:block!important;min-width:88px!important;width:auto!important;min-height:44px!important;margin:0!important;border:1px solid #91bdd65e!important;border-radius:12px!important;background:#263b5a!important;color:transparent!important;font-size:0!important;padding:10px 16px!important;box-shadow:none!important}
+.mobile-audio-row>button::before{display:none!important}
+.mobile-audio-row>button::after{content:'已开启';position:static!important;display:block!important;color:#a0edfa;font:600 14px/1.4 sans-serif;transform:none!important;background:none!important}
+.mobile-audio-row>button[aria-pressed=false]::after{content:'已关闭';color:#b5c3da}
+.mobile-help-button,.mobile-return-button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:52px;padding:12px 16px;margin-bottom:12px;border:1px solid #809dc64d;border-radius:12px;background:#213451;color:#e6efff;font-family:inherit;font-size:15px;font-weight:600;line-height:1.5}
+.mobile-return-button{justify-content:center;background:#172840;color:#afc4e3}
+.mobile-settings-note{font-size:12px;margin:16px 0 0}
+.mobile-slot-note{padding:14px;border:1px solid #77d4e064;border-radius:12px;background:#1b3951;color:#c7f3ff!important}
+.mobile-presentation-paused *,.mobile-presentation-paused *::before,.mobile-presentation-paused *::after{animation-play-state:paused!important}
+.mobile-win-details:not([hidden]){display:contents}.mobile-win-details>summary{display:none}
+
+@media(max-width:740px){
+ html:has(body[data-mobile-game]){scroll-padding-bottom:180px}
+ body[data-mobile-game]{--mobile-dock-bg:#15223e;overflow-x:clip;min-width:0}
+ body[data-mobile-game] *,body[data-mobile-game] *::before,body[data-mobile-game] *::after{box-sizing:border-box}
+ body[data-mobile-game] header{display:flex;flex-wrap:nowrap;align-items:center;gap:8px;min-height:64px;height:auto;margin:0 auto 10px;padding:8px 12px;max-width:100%;width:100%;border-bottom:1px solid #89a4d02b}
+ body[data-mobile-game] header>button:first-child,body[data-mobile-game] .header-left>button{min-width:44px;min-height:44px;height:44px;padding:8px 10px;font-size:12px;border-radius:12px;flex-shrink:0}
+ body[data-mobile-game] header .brand,body[data-mobile-game] header .game-brand,body[data-mobile-game] header .wordmark{font-size:14px;letter-spacing:.5px;min-width:0;margin:0;flex:1}
+ body[data-mobile-game] header .brand span,body[data-mobile-game] header .game-brand span{display:none}
+ body[data-mobile-game] header .game-brand strong,body[data-mobile-game] header .brand strong{font-size:14px}
+ body[data-mobile-game] header .balance,body[data-mobile-game] header .wallet,body[data-mobile-game] header .reward-note{order:2;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:0;white-space:nowrap;font-size:10px;line-height:1.4;padding:0;margin:0 0 0 auto;border:0;background:none;min-width:55px;min-height:44px;box-shadow:none}
+ body[data-mobile-game] header .balance b,body[data-mobile-game] header .wallet b,body[data-mobile-game] header .reward-note b{font-size:19px;line-height:1.25;margin:0;color:#ffd38b;font-variant-numeric:tabular-nums}
+ body[data-mobile-game] .mobile-settings-open{order:3;display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:10px;border:1px solid #8ba6d34d;border-radius:12px;background:#21314d;color:#bbd9f3;margin:0}
+ .mobile-settings-open svg{width:23px;height:23px}
+ body[data-mobile-game] header #menu,body[data-mobile-game] header #rules{display:none}
+ body[data-mobile-game] button,body[data-mobile-game] summary{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+ body[data-mobile-game] button:focus-visible,body[data-mobile-game] summary:focus-visible,body[data-mobile-game] [role=button]:focus-visible{outline:2px solid #8de6fa;outline-offset:3px}
+ body[data-mobile-game] .mobile-compatible-dialog{position:fixed;inset:auto 0 0;box-sizing:border-box;width:100%;max-width:560px;max-height:88dvh;margin:auto auto 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom));border:1px solid #91a7d359;border-bottom:0;border-radius:24px 24px 0 0;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 -12px 48px #02071759}
+ body[data-mobile-game] dialog button{min-height:44px}
+ body[data-mobile-game] dialog summary{min-height:44px;display:flex;align-items:center;gap:8px}
+ body[data-mobile-game] dialog::backdrop{background:#020817b8;backdrop-filter:none}
+ body[data-mobile-game] dialog #dismiss,body[data-mobile-game] dialog #fx-close,body[data-mobile-game] dialog #rules-close,body[data-mobile-game] dialog #guide-close{width:44px;height:44px;min-width:44px;min-height:44px}
+ body[data-mobile-game] .fx-dialog-head,body[data-mobile-game] .rules-drawer-head{position:sticky;top:-20px;z-index:10;background:#14213b;padding-block:10px}
+ body[data-mobile-game=mines] dialog #dismiss{position:sticky;top:0;float:right}
+ body[data-mobile-game] footer{font-size:11px;line-height:1.6;padding:16px 16px 20px;margin:0}
+
+ /* 01 · Coinsweeper: full-width cells and a cash-out dock that never scrolls away. */
+ body[data-mobile-game=mines] .game{width:100%;max-width:100%;padding:0 12px calc(156px + env(safe-area-inset-bottom));margin:0;min-height:100dvh}
+ body[data-mobile-game=mines] .game header{width:calc(100% + 24px);max-width:none;margin-left:-12px}
+ body[data-mobile-game=mines] .play-layout{display:flex;flex-direction:column;gap:10px}
+ body[data-mobile-game=mines] .intro{min-height:48px;height:48px;max-width:none;width:100%;margin:0;padding:6px 72px 6px 2px;overflow:visible}
+ body[data-mobile-game=mines] .intro h1,body[data-mobile-game=mines] #description{display:none}
+ body[data-mobile-game=mines] .expedition-label{font-size:9px;letter-spacing:1.8px;margin:0 0 4px}
+ body[data-mobile-game=mines] #title{font-size:16px;line-height:1.4;margin:0;color:#e3ebff}
+ body[data-mobile-game=mines] .explorer-perch{top:-12px;right:-4px;width:78px;height:65px;bottom:auto}
+ body[data-mobile-game=mines] #explorer-cat{width:100%;height:100%;object-fit:contain}
+ body[data-mobile-game=mines] .board-panel{width:100%;max-width:none;margin:0}
+ body[data-mobile-game=mines] #stats{min-height:58px;height:58px;padding:6px 10px;gap:9px;margin:0 0 6px}
+ body[data-mobile-game=mines] #treasure-chest{width:40px;height:40px}
+ body[data-mobile-game=mines] #coins{font-size:28px}
+ body[data-mobile-game=mines] #payout-label,body[data-mobile-game=mines] .exploration-label{font-size:11px}
+ body[data-mobile-game=mines] #opened{font-size:22px}
+ body[data-mobile-game=mines] .board-caption{padding:4px 3px;min-height:26px;font-size:11px}
+ body[data-mobile-game=mines] .board-instruments{font-size:11px;gap:9px}
+ .mobile-board-toolbar{display:flex;justify-content:flex-end;margin:4px 0 8px}
+ .mobile-mine-secondary{display:block}
+ body[data-mobile-game=mines] #modes{display:flex;gap:8px;margin:0;width:100%}
+ body[data-mobile-game=mines] #modes button{min-height:44px;flex:1;font-size:13px;margin:0}
+ body[data-mobile-game=mines] .board-shell{width:100%;max-width:none;aspect-ratio:auto;margin:0}
+ body[data-mobile-game=mines] #board{display:grid;width:100%;max-width:none;aspect-ratio:auto;height:auto;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(9,minmax(44px,1fr));gap:5px;padding:8px}
+ body[data-mobile-game=mines] #board .cell{min-height:44px;min-width:0;aspect-ratio:auto;height:44px}
+ body[data-mobile-game=mines] .art{width:36px;height:36px}
+ body[data-mobile-game=mines] .bottom{position:fixed;z-index:30;inset:auto 0 0;display:grid;gap:6px;padding:10px 12px calc(8px + env(safe-area-inset-bottom));width:100%;max-width:none;margin:0;background:var(--mobile-dock-bg);border:1px solid #7da6d645;border-bottom:0;border-radius:20px 20px 0 0;box-shadow:0 -8px 24px #03091d3b;backdrop-filter:none}
+ body[data-mobile-game=mines] #next-step{margin:0;padding:0 2px;min-height:28px;font-size:10px;line-height:1.4;gap:12px}
+ body[data-mobile-game=mines] #next-step b{font-size:13px}
+ body[data-mobile-game=mines] #primary{width:100%;min-height:54px;height:54px;margin:0;border-radius:13px;font-size:17px}
+ body[data-mobile-game=mines] #notice{margin:0;line-height:1.5;min-height:17px;font-size:10px;text-align:center}
+ body[data-mobile-game=mines] .sub-actions{margin:0;display:flex;gap:10px;justify-content:center}
+ body[data-mobile-game=mines] .sub-actions button{min-height:44px;font-size:12px}
+
+ /* 02 · Dice: the stage fits above three compact modes; targets open as a sheet. */
+ body[data-mobile-game=dice] main{display:grid;grid-template-columns:1fr;grid-template-areas:'arena' 'controls' 'history';margin:8px auto 0;padding:0 12px calc(150px + env(safe-area-inset-bottom));gap:10px;max-width:560px}
+ body[data-mobile-game=dice] .cat-perch{width:104px;height:48px;top:-28px;left:auto;right:12px}
+ body[data-mobile-game=dice] .space-cat{max-height:48px;object-fit:contain}
+ body[data-mobile-game=dice] .arena-head{padding:10px 12px;min-height:44px}
+ body[data-mobile-game=dice] .arena-head h1{font-size:18px}
+ body[data-mobile-game=dice] .stage{padding:8px 12px 10px;min-height:0;gap:0}
+ body[data-mobile-game=dice] .stage-copy{font-size:10px;padding:4px 7px;min-height:27px}
+ body[data-mobile-game=dice] .stage-copy .target-label,body[data-mobile-game=dice] .target-divider{display:none}
+ body[data-mobile-game=dice] .dice-row{--size:66px;gap:22px;margin:30px 0 25px;min-height:0;height:auto}
+ body[data-mobile-game=dice] .energy-line{margin-bottom:8px}
+ body[data-mobile-game=dice] .result,body[data-mobile-game=dice] .result.revealed{min-height:80px;height:80px;padding:6px 8px;overflow:hidden}
+ body[data-mobile-game=dice] .result strong{font-size:13px}
+ body[data-mobile-game=dice] .result p{font-size:10px}
+ body[data-mobile-game=dice] .score-total{font-size:26px}
+ body[data-mobile-game=dice] .star-perch{width:48px;height:48px;right:6px;bottom:70px}
+ body[data-mobile-game=dice] .companion-controls{padding:12px;margin:0}
+ body[data-mobile-game=dice] .control-heading{margin-bottom:8px}
+ body[data-mobile-game=dice] .control-heading h2{font-size:14px}
+ body[data-mobile-game=dice] .modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ body[data-mobile-game=dice] .modes button{min-height:56px;padding:8px 3px;gap:3px;translate:none}
+ body[data-mobile-game=dice] .modes .mode-art,body[data-mobile-game=dice] .modes small{display:none}
+ body[data-mobile-game=dice] .modes b{font-size:12px}
+ body[data-mobile-game=dice] .modes em{font-size:10px}
+ body[data-mobile-game=dice] #options{margin-top:8px}
+ body[data-mobile-game=dice] .size-options button{min-height:44px}
+ body[data-mobile-game=dice] .mobile-target-open:not([hidden]){display:flex;align-items:center;justify-content:space-between;min-height:44px;width:100%;border:1px solid #9fb8ec66;border-radius:10px;color:#d6e9ff;background:#233956;padding:8px 12px;margin-top:8px;font-family:inherit;font-size:14px;font-weight:600;line-height:1.4}
+ body[data-mobile-game=dice] .rule{margin:7px 0;font-size:11px}
+ body[data-mobile-game=dice] .payout{padding:8px 0 2px}
+ body[data-mobile-game=dice] .action-bar .payout{grid-column:1/-1;order:-1;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0;margin:0;border:0;min-height:24px}
+ body[data-mobile-game=dice] .action-bar .payout b#prize{font-size:20px}
+ body[data-mobile-game=dice] .action-bar .payout p{font-size:10px;max-width:none;margin:0}
+ body[data-mobile-game=dice] .action-bar{position:fixed;z-index:30;inset:auto 0 0;display:grid;grid-template-columns:1fr 1.3fr;gap:6px 12px;padding:10px 12px calc(8px + env(safe-area-inset-bottom));background:var(--mobile-dock-bg);border:1px solid #7da6d645;border-bottom:0;border-radius:20px 20px 0 0;box-shadow:0 -8px 24px #03091d3b;backdrop-filter:none}
+ body[data-mobile-game=dice] .action-cost{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:4px}
+ body[data-mobile-game=dice] #roll{height:54px;min-height:54px;font-size:16px;border-radius:13px;margin:0}
+ body[data-mobile-game=dice] #hint{grid-column:1/-1;text-align:center;font-size:10px;line-height:1.5;min-height:15px}
+ body[data-mobile-game=dice] #dice-target-dialog .sum-options{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ body[data-mobile-game=dice] #dice-target-dialog .sum-options button{min-height:48px;font-size:16px}
+
+ /* 03 · Derby: select first, then watch. The chosen horse remains on the track HUD. */
+ body[data-mobile-game=horse] .app{padding:0 12px calc(128px + env(safe-area-inset-bottom));width:100%;max-width:560px}
+ body[data-mobile-game=horse] header{width:calc(100% + 24px);max-width:none;margin-left:-12px}
+ body[data-mobile-game=horse] main{display:block;margin:0;padding:0}
+ body[data-mobile-game=horse] .arena{padding:12px;border-radius:20px;overflow:hidden}
+ body[data-mobile-game=horse] .arena-head{margin-bottom:8px;min-height:32px}
+ body[data-mobile-game=horse] .arena-head .eyebrow{display:none}
+ body[data-mobile-game=horse] .arena-head h1{font-size:18px}
+ body[data-mobile-game=horse] .phase{font-size:10px;padding:5px 7px}
+ body[data-mobile-game=horse] .mobile-horse-picker{display:block;margin-bottom:10px}
+ body[data-mobile-game=horse] .selection-title{display:flex;align-items:center;margin:0 0 6px}
+ body[data-mobile-game=horse] .selection-title .eyebrow{display:none}
+ body[data-mobile-game=horse] .selection-title h2{font-size:12px;margin:0}
+ body[data-mobile-game=horse] #selection-state{font-size:10px}
+ body[data-mobile-game=horse] #horses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ body[data-mobile-game=horse] .horse-option{display:grid;grid-template-columns:1fr;grid-template-rows:36px auto;place-items:center;position:relative;padding:5px 2px;min-height:68px;border-radius:11px;text-align:center}
+ body[data-mobile-game=horse] .horse-option .number{position:absolute;top:3px;left:4px;font-size:9px;margin:0;z-index:1}
+ body[data-mobile-game=horse] .horse-option strong{grid-row:2;font-size:11px;line-height:1.4;margin:0}
+ body[data-mobile-game=horse] .horse-option small{display:none}
+ body[data-mobile-game=horse] .horse-option .mini-horse{position:static;grid-row:1;width:42px;height:36px;margin:0}
+ body[data-mobile-game=horse] .horse-option[aria-pressed=true]{border-color:#99effa;box-shadow:inset 0 0 0 1px #99effa;background:#254966}
+ body[data-mobile-game=horse]:has(#circuit:is([data-scene=count],[data-scene=race],[data-scene=sprint])) .mobile-horse-picker{display:none}
+ body[data-mobile-game=horse] .park-scene{height:64px;min-height:0}
+ body[data-mobile-game=horse] .park-sign{transform:scale(.75);transform-origin:top left}
+ body[data-mobile-game=horse] .park-marquee{font-size:10px}
+ body[data-mobile-game=horse] .track-header{min-height:27px;padding:5px 7px;font-size:10px}
+ body[data-mobile-game=horse] .lane{height:54px;min-height:54px}
+ body[data-mobile-game=horse] .runner{width:70px;height:54px}
+ body[data-mobile-game=horse] .runner .horse-art{height:54px}
+ body[data-mobile-game=horse] .track-footer{min-height:29px;padding:6px 7px;font-size:11px}
+ body[data-mobile-game=horse] .positions{margin:8px 0;font-size:11px}
+ body[data-mobile-game=horse]:has(#circuit[data-scene=ready]) .positions{display:none}
+ body[data-mobile-game=horse] #result{margin:10px 0 0;min-height:66px;padding:10px;font-size:12px}
+ body[data-mobile-game=horse] #result strong{font-size:16px}
+ body[data-mobile-game=horse] #result p{font-size:11px}
+ body[data-mobile-game=horse] aside{margin:10px 0 0}
+ body[data-mobile-game=horse] .prizes{padding:12px;margin:0}
+ body[data-mobile-game=horse] .launch-panel{position:fixed;z-index:30;inset:auto 0 0;display:grid;grid-template-columns:80px 1fr;gap:6px 10px;padding:10px 12px calc(8px + env(safe-area-inset-bottom));border:1px solid #7da6d645;border-bottom:0;border-radius:20px 20px 0 0;background:var(--mobile-dock-bg);backdrop-filter:none;box-shadow:0 -8px 24px #03091d3b}
+ body[data-mobile-game=horse] .launch-panel .entry{margin:0;padding:0;font-size:10px}
+ body[data-mobile-game=horse] #start{height:54px;min-height:54px;font-size:17px;border-radius:13px}
+ body[data-mobile-game=horse] #message{grid-column:1/-1;margin:0;min-height:15px;line-height:1.5;font-size:10px;text-align:center}
+
+ /* 04 · Rocket: stable recovery controls, with the flight still in view. */
+ body[data-mobile-game=rocket] .rocket-game{width:100%;max-width:560px;padding:0 12px calc(165px + env(safe-area-inset-bottom));margin:0 auto;min-height:100dvh}
+ body[data-mobile-game=rocket] header{width:calc(100% + 24px);max-width:none;margin-left:-12px}
+ body[data-mobile-game=rocket] .header-left{gap:8px;flex:1;min-width:0}
+ body[data-mobile-game=rocket] .port-heading{margin:12px 0;min-height:36px}
+ body[data-mobile-game=rocket] .port-heading h1{font-size:22px}
+ body[data-mobile-game=rocket] .port-heading>div>span{font-size:9px}
+ body[data-mobile-game=rocket] .arena-grid{display:block}
+ body[data-mobile-game=rocket] .space{height:clamp(300px,calc(100svh - 285px),480px);min-height:300px}
+ body[data-mobile-game=rocket] .flight-status{top:46px}
+ body[data-mobile-game=rocket] #multiplier{font-size:56px}
+ body[data-mobile-game=rocket] .port-guide{height:48px;min-height:0;margin:0}
+ body[data-mobile-game=rocket] #port-cat{height:62px;width:62px}
+ body[data-mobile-game=rocket] .controls{position:fixed;z-index:30;inset:auto 0 0;display:grid;grid-template-columns:1fr;gap:7px;padding:10px 12px calc(8px + env(safe-area-inset-bottom));margin:0;border:1px solid #7da6d645;border-bottom:0;border-radius:20px 20px 0 0;background:var(--mobile-dock-bg);backdrop-filter:none;box-shadow:0 -8px 24px #03091d3b}
+ body[data-mobile-game=rocket] .round-summary{margin:0;padding:0 2px;min-height:38px;display:flex;align-items:center;justify-content:space-between;font-size:10px;line-height:1.4}
+ body[data-mobile-game=rocket] .round-summary>span{min-width:0}
+ body[data-mobile-game=rocket] .round-summary b{font-size:20px}
+ body[data-mobile-game=rocket] #payout-label{align-items:flex-end;text-align:right;color:#ffd38b}
+ body[data-mobile-game=rocket] #payout{font-size:25px;line-height:1.2;font-variant-numeric:tabular-nums}
+ body[data-mobile-game=rocket] #action{min-height:54px;height:54px;margin:0;border-radius:13px;font-size:17px}
+ body[data-mobile-game=rocket] #message{font-size:10px;line-height:1.5;min-height:15px;margin:0;text-align:center}
+ body[data-mobile-game=rocket] .disclaimer{display:none}
+ body[data-mobile-game=rocket] .mobile-native-close{display:grid;place-items:center;position:sticky;top:0;z-index:5;width:44px;height:44px;margin:0 0 4px auto;border:1px solid #7f9cc75c;border-radius:12px;color:#deebff;background:#243650;font-size:26px}
+
+ /* 05 · Plinko: entrance selection beside launch; the board keeps its width. */
+ body[data-mobile-game=plinko] main{display:block;margin:8px auto 0;padding:0 12px calc(190px + env(safe-area-inset-bottom));max-width:560px}
+ body[data-mobile-game=plinko] .arena{padding:10px 8px;margin:0}
+ body[data-mobile-game=plinko] .volt-companion{height:44px;width:52px;top:-25px;right:10px}
+ body[data-mobile-game=plinko] .stage-top{min-height:44px;padding:5px 4px 10px;gap:8px}
+ body[data-mobile-game=plinko] .stage-title strong{font-size:17px}
+ body[data-mobile-game=plinko] .stage-title small{font-size:9px}
+ body[data-mobile-game=plinko] #status{font-size:10px;line-height:1.4}
+ body[data-mobile-game=plinko] .entry-caption,body[data-mobile-game=plinko] .entry-controls{display:none}
+ body[data-mobile-game=plinko] .board-wrap{margin-top:0;aspect-ratio:auto;height:auto}
+ body[data-mobile-game=plinko] #board{width:100%;height:auto}
+ body[data-mobile-game=plinko] #slots{position:relative;top:auto;bottom:auto;left:auto;right:auto;width:100%;height:49px;padding:0 5px 5px}
+ body[data-mobile-game=plinko] .slot{min-height:44px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;touch-action:manipulation}
+ body[data-mobile-game=plinko] #result{min-height:64px;padding:10px 5px;margin:8px 0 0}
+ body[data-mobile-game=plinko] #result>span{font-size:15px}
+ body[data-mobile-game=plinko] #result>small{font-size:10px}
+ body[data-mobile-game=plinko] aside{margin:12px 0 0;padding:12px}
+ body[data-mobile-game=plinko] .control-title,body[data-mobile-game=plinko] .entry-hint,body[data-mobile-game=plinko] aside>.summary{display:none}
+ body[data-mobile-game=plinko] .launch-dock{position:fixed;z-index:30;inset:auto 0 0;display:grid;grid-template-columns:70px 1fr;gap:7px 10px;padding:10px 12px calc(8px + env(safe-area-inset-bottom));background:var(--mobile-dock-bg);border:1px solid #7da6d645;border-bottom:0;border-radius:20px 20px 0 0;backdrop-filter:none;box-shadow:0 -8px 24px #03091d3b}
+ body[data-mobile-game=plinko] .mobile-entrances{display:flex;align-items:center;gap:12px;grid-column:1/-1}
+ body[data-mobile-game=plinko] .mobile-entrances>span{font-size:10px;color:#adc5de;flex:0 0 60px}
+ body[data-mobile-game=plinko] #lanes{display:grid;grid-template-columns:repeat(5,minmax(44px,1fr));gap:5px;width:100%;height:auto;min-height:44px;margin:0;padding:0;border:0;background:none}
+ body[data-mobile-game=plinko] #lanes::before,body[data-mobile-game=plinko] #lanes::after{display:none}
+ body[data-mobile-game=plinko] #lanes button{position:static!important;left:auto!important;top:auto!important;transform:none!important;width:100%;min-width:44px;height:44px;min-height:44px;border-radius:11px;font-size:14px;margin:0;padding:0;align-items:center;background:#233956!important;border:1px solid #718dbb66}
+ body[data-mobile-game=plinko] #lanes button::before{display:none}
+ body[data-mobile-game=plinko] #lanes button[aria-pressed=true]{background:#86e3f5!important;color:#142943;border-color:#b5f3ff;box-shadow:inset 0 -3px #4da1ba!important}
+ body[data-mobile-game=plinko] .dock-cost{margin:0;padding:0;font-size:10px;min-height:54px}
+ body[data-mobile-game=plinko] #launch{height:54px;min-height:54px;padding:8px 12px;font-size:17px;border-radius:13px;margin:0}
+ body[data-mobile-game=plinko] #message{grid-column:1/-1;margin:0;font-size:10px;line-height:1.5;min-height:15px;text-align:center}
+ body[data-mobile-game=plinko] #mobile-help details>summary{display:none}
+ body[data-mobile-game=plinko] .probability-chart{gap:4px;padding:8px 0}
+ body[data-mobile-game=plinko] .probability-column>span{font-size:10px}
+
+ /* 06 / 07 · Slots: compact cabinets and readable, optional detail drawers. */
+ body[data-mobile-game=slots] .app,body[data-mobile-game=matrix] .app{padding:0 12px calc(120px + env(safe-area-inset-bottom));max-width:560px}
+ body[data-mobile-game=slots] header,body[data-mobile-game=matrix] header{width:calc(100% + 24px);max-width:none;margin-left:-12px}
+ body[data-mobile-game=slots] header .wordmark,body[data-mobile-game=matrix] header .wordmark{font-size:13px}
+ body[data-mobile-game=slots] main,body[data-mobile-game=matrix] main{display:block;margin:0;padding:0}
+ body[data-mobile-game=slots] .intro{margin:12px 0;min-height:35px}
+ body[data-mobile-game=slots] .intro .eyebrow,body[data-mobile-game=slots] .intro h1>span{display:none}
+ body[data-mobile-game=slots] .intro h1{font-size:23px;line-height:1.3;margin:0}
+ body[data-mobile-game=slots] .machine{padding:12px;border-radius:22px}
+ body[data-mobile-game=slots] .machine-top{padding:4px 0 10px;min-height:57px}
+ body[data-mobile-game=slots] .marquee strong{font-size:20px}
+ body[data-mobile-game=slots] .marquee>span{font-size:7px;letter-spacing:1px}
+ body[data-mobile-game=slots] .machine-star{width:34px;height:34px}
+ body[data-mobile-game=slots] .jackpot-label b{font-size:25px}
+ body[data-mobile-game=slots] .reels{--cell:84px}
+ body[data-mobile-game=slots] .machine-meta{font-size:9px}
+ body[data-mobile-game=slots] .result{min-height:68px;padding:10px 8px;margin:8px 0;font-size:12px}
+ body[data-mobile-game=slots] .result strong{font-size:15px}
+ body[data-mobile-game=slots] .result p{font-size:10px}
+ body[data-mobile-game=slots] .action-panel,body[data-mobile-game=matrix] .action-panel{position:fixed;z-index:30;inset:auto 0 0;display:grid;gap:10px;margin:0;padding:10px 12px calc(12px + env(safe-area-inset-bottom));grid-template-columns:75px 1fr;background:var(--mobile-dock-bg);border:1px solid #7da6d645;border-bottom:0;border-radius:20px 20px 0 0;box-shadow:0 -8px 24px #03091d3b}
+ body[data-mobile-game=slots] #spin,body[data-mobile-game=matrix] #spin{min-height:54px;height:54px;font-size:17px;border-radius:13px}
+ body[data-mobile-game=slots] .examples-open{min-height:44px;font-size:11px;margin:6px 0 0}
+ body[data-mobile-game=slots] .machine-foot{margin-top:8px;padding-top:6px;font-size:8px}
+ body[data-mobile-game=slots] #mobile-help .paytable{border:0;background:none;box-shadow:none;padding:0;margin:0;max-height:none;overflow:visible}
+ body[data-mobile-game=slots] #mobile-help .lucky-note{display:none}
+ body[data-mobile-game=matrix] .cabinet-heading{padding:12px 10px 6px;min-height:63px}
+ body[data-mobile-game=matrix] .cabinet-title h1{font-size:23px}
+ body[data-mobile-game=matrix] .orbit-pilot{width:62px;height:53px}
+ body[data-mobile-game=matrix] .orbit-pilot svg{height:48px}
+ body[data-mobile-game=matrix] .orbit-pilot>span{display:none}
+ body[data-mobile-game=matrix] .matrix-machine{padding:0 12px 12px}
+ body[data-mobile-game=matrix] .matrix-track{min-height:44px;font-size:10px;gap:6px}
+ body[data-mobile-game=matrix] .line-tour-controls button{min-height:44px;padding:6px 9px;font-size:11px}
+ body[data-mobile-game=matrix] .matrix-result{min-height:72px;padding:9px 10px}
+ body[data-mobile-game=matrix] .matrix-result-top{align-items:center}
+ body[data-mobile-game=matrix] #result-detail{font-size:11px;line-height:1.5;min-height:17px}
+ body[data-mobile-game=matrix] .mobile-win-details:not([hidden]){display:block;border:1px solid #8da7cf40;border-radius:11px;margin:8px 0;background:#182c46}
+ body[data-mobile-game=matrix] .mobile-win-details>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:9px 12px;color:#b7d8f0;font-size:12px;list-style:none}
+ body[data-mobile-game=matrix] .mobile-win-details>summary::after{content:'＋';font-size:18px}
+ body[data-mobile-game=matrix] .mobile-win-details[open]>summary::after{content:'−'}
+ body[data-mobile-game=matrix] #winning-lines{padding:4px 10px 10px;margin:0}
+ body[data-mobile-game=matrix] #winning-lines button{min-height:44px}
+ body[data-mobile-game=matrix] .cabinet-tools{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+ body[data-mobile-game=matrix] .cabinet-tools .round-tag{display:none}
+ body[data-mobile-game=matrix] .cabinet-tools button{min-height:44px;font-size:11px;padding:6px 5px;border:1px solid #879bc63d;border-radius:10px;background:#233553}
+ body[data-mobile-game=matrix] .mini-pattern{min-height:44px}
+}
+@media(max-width:740px) and (max-height:700px){
+ body[data-mobile-game=dice] .dice-row{--size:59px;gap:22px;margin:26px 0 22px}
+ body[data-mobile-game=dice] .stage-copy>span:last-child{display:none}
+ body[data-mobile-game=dice] .result,body[data-mobile-game=dice] .result.revealed{min-height:76px;height:76px}
+ body[data-mobile-game=dice] .arena-head{padding-block:7px;min-height:38px}
+ body[data-mobile-game=dice] .dice-row{margin-top:20px;margin-bottom:18px}
+ body[data-mobile-game=horse] .park-scene{height:46px}
+ body[data-mobile-game=horse] .lane{height:46px;min-height:46px}
+ body[data-mobile-game=horse] .runner{width:62px;height:46px}
+ body[data-mobile-game=horse] .runner .horse-art{height:46px}
+ body[data-mobile-game=rocket] .port-heading{margin:8px 0}
+ body[data-mobile-game=rocket] .space{height:max(280px,calc(100svh - 280px));min-height:280px}
+ body[data-mobile-game=plinko] .board-wrap{max-width:300px;margin-left:auto;margin-right:auto}
+ body[data-mobile-game=slots] .reels{--cell:70px}
+ body[data-mobile-game=slots] .intro{margin:8px 0}
+ body[data-mobile-game=matrix] .matrix-instruments{padding-top:3px;padding-bottom:5px}
+}
+@media(max-width:360px){
+ body[data-mobile-game] header{gap:5px;padding-left:8px;padding-right:8px}
+ body[data-mobile-game] header .brand,body[data-mobile-game] header .game-brand,body[data-mobile-game] header .wordmark{font-size:12px}
+ body[data-mobile-game] header .balance b,body[data-mobile-game] header .wallet b{font-size:17px}
+ body[data-mobile-game=plinko] .mobile-entrances{gap:6px}
+ body[data-mobile-game=plinko] .mobile-entrances>span{flex-basis:42px;line-height:1.4}
+ body[data-mobile-game=plinko] #lanes{gap:3px}
+ body[data-mobile-game=dice] .dice-row{--size:57px;gap:20px}
+ body[data-mobile-game=dice] .score-equation{gap:4px}
+ body[data-mobile-game=dice] .score-face .pip-face{width:18px;height:18px}
+}
+@media(max-width:740px) and (max-height:620px){
+ body[data-mobile-game=dice] .control-heading{display:none}
+ body[data-mobile-game=dice] .dice-row{margin-top:14px;margin-bottom:12px}
+ body[data-mobile-game=matrix] #matrix-board{--cell:clamp(50px,10svh,70px)}
+ body[data-mobile-game=matrix] #matrix-board .symbol{width:50px;height:50px}
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-mobile-game] .mobile-settings-open,body[data-mobile-game] .mobile-sheet{animation:none;transition:none}
+}

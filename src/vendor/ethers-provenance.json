@@ -1,0 +1,8 @@
+{
+  "package": "ethers",
+  "version": "6.17.0",
+  "source": "https://registry.npmjs.org/ethers/-/ethers-6.17.0.tgz",
+  "filesSha256": {
+    "ethers.umd.min.js": "532950515fd29ae9f7a21ceb2b68100815024d7944c3d5a92246d5b900bd703b"
+  }
+}

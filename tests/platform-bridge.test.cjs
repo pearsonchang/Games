@@ -76,3 +76,47 @@ test('an immediate rocket crash cannot turn a repeated launch into a second debi
   bridge.handle(event); bridge.handle(event);
   assert.equal(bridge.rounds.rocket.state, 'crashed'); assert.equal(wallet.points, 950);
 });
+
+test('idle snapshots are deduplicated and hidden games never build or post snapshots', () => {
+  const wallet = new PointsWallet();
+  const frames = Object.fromEntries(Object.keys(engines).map(id => [id, {contentWindow: {messages: [], postMessage(data) { this.messages.push(data); }}}]));
+  const bridge = new GameBridge({engines, frames, wallet, loadedGames: new Set(Object.keys(engines)), origin: 'https://test.local'});
+  let snapshots = 0;
+  for (const round of Object.values(bridge.rounds)) {
+    const snapshot = round.snapshot.bind(round);
+    round.snapshot = (...args) => { snapshots++; return snapshot(...args); };
+  }
+  for (let i = 0; i < 100; i++) bridge.pulse();
+  assert.equal(snapshots, 0);
+  assert.equal(Object.values(frames).flatMap(f => f.contentWindow.messages).length, 0);
+  for (let i = 0; i < 100; i++) bridge.pulse('horse');
+  assert.equal(snapshots, 1, 'an unchanged idle frame does not even construct snapshots');
+  assert.equal(frames.horse.contentWindow.messages.length, 1);
+  assert.equal(frames.rocket.contentWindow.messages.length, 0);
+  wallet.credit(10, 'test balance change'); bridge.pulse('horse');
+  assert.equal(frames.horse.contentWindow.messages.at(-1).balance, 1010);
+  assert.equal(frames.horse.contentWindow.messages.length, 2);
+  bridge.sync('horse', true); // Re-entry/ready must always receive a fresh state.
+  assert.equal(frames.horse.contentWindow.messages.length, 3);
+});
+
+test('background timed rounds still settle exactly once without touching their frames', () => {
+  for (const gameId of ['rocket', 'dice', 'plinko', 'horse', 'slots', 'matrix']) {
+    let now = 0, finishes = 0;
+    const source = {messages: [], postMessage(data) { this.messages.push(data); }};
+    const wallet = new PointsWallet();
+    const bridge = new GameBridge({engines: {[gameId]: engines[gameId]}, frames: {[gameId]: {contentWindow: source}}, wallet, loadedGames: new Set([gameId]), origin: 'https://test.local', onFinish() { finishes++; }});
+    const round = bridge.rounds[gameId]; round.now = () => now; round.random = () => .5;
+    bridge.handle({origin: 'https://test.local', source, data: {...requests[gameId], roundId: ''}});
+    assert.equal(wallet.points, 950);
+    source.messages.length = 0; now = 999999;
+    for (let i = 0; i < 100; i++) bridge.pulse();
+    assert.equal(finishes, 1, gameId);
+    assert.equal(source.messages.length, 0, gameId);
+    const balance = wallet.points;
+    bridge.sync(gameId, true);
+    assert.equal(source.messages.at(-1).balance, balance);
+    assert.equal(finishes, 1);
+    if (gameId === 'plinko') assert.ok(source.messages.at(-1).path, 'returning to Plinko restores its path');
+  }
+});

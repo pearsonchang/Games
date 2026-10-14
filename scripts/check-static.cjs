@@ -29,7 +29,7 @@ for (const filename of files) {
     return value;
   });
 }
-const entrypoints = ['index', 'minesweeper', 'rocket', 'dice', 'plinko', 'horse', 'slots', 'matrix', 'palettes', 'palette-demo', 'lobby-designs', 'lobby-demo', 'lobby-a-themes'];
+const entrypoints = ['index', 'minesweeper', 'rocket', 'dice', 'plinko', 'horse', 'slots', 'matrix', 'blocks', '2048', 'palettes', 'palette-demo', 'lobby-designs', 'lobby-demo', 'lobby-a-themes', 'fairness', 'fairness-testnet', 'fairness-setup'];
 for (const entry of entrypoints) {
   if (!names.has(`${entry}.html`)) errors.push(`Missing required entrypoint: ${entry}.html`);
 }

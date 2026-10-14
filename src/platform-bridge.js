@@ -2,10 +2,11 @@
 
 // The parent owns rounds and points. Frames submit intents, never reward amounts.
 class GameBridge {
-  constructor({engines, frames, loadedGames, wallet, origin, onFinish, onReturn, onUpdate}) {
+  constructor({engines, frames, loadedGames, wallet, origin, onFinish, onReturn, onUpdate, fairnessProviders = {}}) {
     Object.assign(this, {frames, loadedGames, wallet, origin, onFinish, onReturn, onUpdate});
     this.rounds = {};
     this.finished = new Set();
+    this.presented = new Map();
     this.definitions = {
       minesweeper: {prefix: 'mines', debit: '金币扫雷 · 开局消耗', credit: '金币扫雷 · 主动收取', loss: r => r.state === 'forfeited' ? '金币扫雷 · 结束本局' : '金币扫雷 · 踩雷，奖励归零',
         actions: {'mines-start': (r, d) => r.start(d.roundId), 'mines-reveal': (r, d) => r.reveal(d.index, d.roundId), 'mines-flag': (r, d) => r.flag(d.index, d.roundId), 'mines-collect': (r, d) => r.collect(d.roundId), 'mines-forfeit': (r, d) => r.forfeit(d.roundId)}},
@@ -19,15 +20,28 @@ class GameBridge {
         actions: {'slots-spin': (r, d) => r.start(d.roundId)}},
       matrix: {prefix: 'matrix', debit: '星际矩阵 · 转动消耗', credit: '星际矩阵 · 连线奖励', loss: () => '星际矩阵 · 未命中',
         actions: {'matrix-spin': (r, d) => r.start(d.roundId)}},
+      '2048': {prefix: '2048', debit: '星际 2048 · 挑战入场', credit: '星际 2048 · 数字奖励', loss: r=>r.reason==='abandoned'?'星际 2048 · 放弃本局，奖励 0':'星际 2048 · 未达奖励档，到账 0', actions: {
+        '2048-start': (r,d)=>r.start(d.roundId),
+        '2048-move': (r,d)=>r.move(d.direction,d.roundId,d.revision),
+        '2048-restart': (r,d)=>r.restart(d.roundId,d.revision)
+      }},
+      blocks: {prefix: 'blocks', debit: '星际方块 · 挑战入场', credit: '星际方块 · 得分奖励', loss: r=>r.reason==='abandoned'?'星际方块 · 放弃本局，奖励 0':'星际方块 · 未达奖励档，到账 0', actions: {
+        'blocks-start': (r,d) => r.start(d.roundId),
+        'blocks-place': (r,d) => r.place(d.slot,d.row,d.col,d.roundId,d.revision),
+        'blocks-restart': (r,d) => r.restart(d.roundId,d.revision)
+      }},
       horse: {prefix: 'horse', debit: '星际赛马 · 参赛消耗', credit: '星际赛马 · 名次奖励', loss: () => '星际赛马 · 第 4 名，奖励 0',
         actions: {'horse-start': (r, d) => r.start(d.selected, d.roundId)}}
     };
     for (const [gameId, Engine] of Object.entries(engines)) {
       const definition = this.definitions[gameId];
       const round = new Engine({
+        fairness: fairnessProviders[gameId],
         // Engines increment their counter only after a successful charge.
         charge: amount => wallet.charge(amount, definition.debit, `${gameId}:${round.counter + 1}:debit`),
         credit: amount => wallet.credit(amount, definition.credit, `${gameId}:${round.id}:credit`),
+        refund: amount => wallet.credit(amount, `${definition.prefix} · 验证准备失败，退回投入`, `${gameId}:${round.id}:refund`),
+        onStateChange: () => { this.sync(gameId, true); this.onUpdate?.(); },
         onFinish: result => {
           const key = `${gameId}:${result.id}`;
           if (this.finished.has(key)) return;
@@ -46,7 +60,22 @@ class GameBridge {
     const round = this.rounds[gameId];
     // Settle before reading the balance passed to the snapshot.
     round.tick?.();
-    this.post(gameId, round.snapshot(this.wallet.points, full));
+    const snapshot = round.snapshot(this.wallet.points, full);
+    // A full Plinko snapshot includes its large path only on entry/action.
+    // Compare public state independently of that optional presentation data.
+    const key = JSON.stringify({...snapshot, path: undefined});
+    if (!full && this.presented.get(gameId)?.key === key) return;
+    this.presented.set(gameId, {key, balance: snapshot.balance, state: snapshot.state, roundId: snapshot.roundId});
+    this.post(gameId, snapshot);
+  }
+  pulse(activeGame = null) {
+    // Time-based rounds must still settle offscreen. Their hidden frames do
+    // not need snapshots, DOM updates, or a stream of postMessage events.
+    for (const gameId of this.loadedGames) this.rounds[gameId]?.tick?.();
+    if (!this.loadedGames.has(activeGame)) return;
+    const round = this.rounds[activeGame], previous = this.presented.get(activeGame);
+    const live = ['flying', 'rolling', 'dropping', 'racing', 'spinning'].includes(round.state);
+    if (live || !previous || previous.balance !== this.wallet.points || previous.state !== round.state || previous.roundId !== round.id) this.sync(activeGame);
   }
   handle(event) {
     const data = event.data;

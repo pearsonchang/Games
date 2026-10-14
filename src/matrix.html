@@ -5,8 +5,8 @@
  <title>ORBIT MATRIX · 星际矩阵</title><meta name="description" content="五列三行，十条星轨。连线、百搭与全盘徽章奖励的星际老虎机 Demo。">
  <link rel="preload" href="fonts/oxanium-variable.ttf" as="font" type="font/ttf" crossorigin>
  <link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="slots.css"><link rel="stylesheet" href="slots-fx.css"><link rel="stylesheet" href="slots-space.css"><link rel="stylesheet" href="slots-rewards.css"><link rel="stylesheet" href="slots-arcade.css"><link rel="stylesheet" href="matrix.css"><link rel="stylesheet" href="matrix-effects.css"><link rel="stylesheet" href="matrix-cabinet.css">
-</head>
-<body class="matrix-page">
+<link rel="stylesheet" href="mobile-games.css"></head>
+<body class="matrix-page" data-mobile-game="matrix">
  <div class="matrix-scene" aria-hidden="true"><div class="station-view"></div><div class="viewport-strut strut-left"></div><div class="viewport-strut strut-right"></div><div class="station-caption">ORBITAL STATION <b>07</b> · OBSERVATION DECK</div></div>
  <div class="app">
   <header><button class="quiet" id="back">‹ <span>游戏大厅</span></button><a class="wordmark" href="#">ORBIT<span>MATRIX</span></a><button class="quiet sound" id="sound" aria-pressed="true" aria-label="关闭音效">音效 开</button><div class="balance"><span>模拟积分</span><b id="balance">—</b></div></header>
@@ -80,5 +80,5 @@
   <p class="guide-foot">单线奖励 = 5 × 连线倍率。总返还 = 各中奖线奖励之和 + 徽章奖励。</p>
  </dialog>
  <script src="matrix-engine.js"></script><script src="platform-wallet.js"></script><script src="slots-audio.js"></script><script src="matrix-examples.js"></script><script src="matrix-effects.js"></script><script src="matrix-interface.js"></script><script src="matrix.js"></script>
-</body>
+<script src="mobile-games.js"></script></body>
 </html>

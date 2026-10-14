@@ -20,3 +20,8 @@ html,body{background:#0b1322}
 .upcoming{border-color:#263751}.upcoming-list span{background:#152139;color:#a3b7d4}.catalog-footer{color:#8e9fb9}
 .continue{background:#172941;border-color:#304768}.primary{background:#91bff0;color:#101d30;box-shadow:0 3px 0 #375b87}.primary:hover{background:#b1d5fb}
 .art-plinko{width:156px;height:156px}@media(max-width:650px){.art-plinko{width:92px;height:92px}}
+
+/* Score-only block puzzle, also used by the palette preview. */
+.art-blocks{background-image:url('blocks-icon.svg');background-size:contain;background-position:center}.cover-blocks{background:linear-gradient(135deg,#483784,#315780)}
+
+.art-2048{background-image:url('2048-icon.svg');background-size:contain;background-position:center}.cover-2048{background:linear-gradient(135deg,#503984,#325d89)}
