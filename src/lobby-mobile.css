@@ -1,0 +1,145 @@
+/* Phone lobby proportions. Desktop and the other design studies keep their layouts. */
+@media(max-width:650px){
+ [data-concept=festival] .topbar{height:60px;min-width:0;padding-inline:14px;gap:8px}
+ [data-concept=festival] .topbar:after{left:14px;right:14px}
+ [data-concept=festival] .brand{min-width:0;gap:6px}
+ [data-concept=festival] .energy-brand-mark{width:28px;height:28px}
+ [data-concept=festival] .energy-brand-wordmark{font-size:14px;letter-spacing:0}
+ [data-concept=festival] .topbar .header-actions{min-width:0;gap:6px}
+ [data-concept=festival] .topbar .header-wallet{min-height:44px;gap:5px;padding:5px 7px;border-radius:10px}
+ [data-concept=festival] .energy-credit-icon{width:21px;height:21px}
+ [data-concept=festival] .topbar .header-wallet strong{font-size:17px;letter-spacing:0}
+ [data-concept=festival] .header-wallet .energy-wallet-label{font-size:9px;letter-spacing:0}
+ [data-concept=festival] .topbar .language-control{padding-inline:5px;border-radius:10px}
+ [data-concept=festival] #content{padding:12px 14px calc(88px + env(safe-area-inset-bottom,0px))}
+
+ [data-concept=festival] .energy-welcome{min-height:40px;margin:0 0 12px;gap:10px}
+ [data-concept=festival] .energy-welcome-kicker{display:none}
+ [data-concept=festival] .energy-welcome h1{font-size:21px;line-height:1.25;letter-spacing:-.4px}
+ html[lang=en][data-concept=festival] .energy-welcome h1{font-size:20px}
+ html[lang=en][data-concept=festival] .energy-welcome h1>span{display:inline;margin-inline-start:.22em}
+ [data-concept=festival] .energy-game-count{width:auto;min-width:52px;height:40px;margin:0 3px 0 0;gap:0;border-radius:10px;border:0;background:none}
+ [data-concept=festival] .energy-game-count strong{font-size:18px;letter-spacing:0}
+ [data-concept=festival] .energy-game-count>span:not(.energy-count-orbit){font-size:9px}
+ [data-concept=festival] .energy-count-orbit,[data-concept=festival] .energy-game-count>.ui-glyph{display:none}
+
+ [data-concept=festival] .energy-showcase-track{border-radius:16px}
+ [data-concept=festival] .energy-showcase .energy-hero{grid-template-columns:56% 44%;min-height:216px}
+ [data-concept=festival] .energy-showcase .energy-hero-copy{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:14px 4px 42px 16px}
+ [data-concept=festival] .energy-showcase .energy-feature-label{font-size:9px;line-height:1.3}
+ [data-concept=festival] .energy-showcase .energy-hero h2{max-width:100%;font-size:25px;line-height:1.15;letter-spacing:-.5px;white-space:normal;margin:8px 0 7px}
+ html[lang=en][data-concept=festival] .energy-showcase .energy-hero h2{font-size:22px;letter-spacing:-.4px}
+ [data-concept=festival] .energy-showcase .energy-hero h2>span{display:none}
+ [data-concept=festival] .energy-showcase .energy-hero-copy>p{min-height:0;max-width:100%;font-size:11px;line-height:1.45;margin:0;color:#d4dcff}
+ [data-concept=festival] .energy-showcase .energy-hero-actions{margin-top:auto;padding-top:12px}
+ [data-concept=festival] .energy-showcase .energy-main-cta.primary{min-height:44px;padding:8px 12px;gap:16px;font-size:12px;border-radius:9px}
+ [data-concept=festival] .energy-showcase .energy-feature-art{width:clamp(140px,40vw,210px);height:auto;aspect-ratio:1;left:46%;top:45%;filter:none}
+ [data-concept=festival] .energy-showcase .showcase-matrix .energy-feature-art{width:clamp(160px,46vw,245px);height:auto;aspect-ratio:520/360;left:43%}
+ [data-concept=festival] .energy-showcase .energy-portal{width:150px;height:150px;top:45%;left:48%;border-width:7px;box-shadow:none}
+ [data-concept=festival] .energy-showcase .portal-front{width:185px;height:53px;border-width:2px;top:54%;left:43%}
+ [data-concept=festival] .energy-showcase .energy-hero-word{font-size:48px;left:25px;bottom:45px}
+ [data-concept=festival] .energy-showcase .energy-floating-code,[data-concept=festival] .energy-showcase .energy-hero-speed{display:none}
+ [data-concept=festival] .energy-showcase .energy-scene-cross{top:30px;left:4%;font-size:15px}
+ [data-concept=festival] .energy-showcase .energy-hero-foot{height:30px;padding-inline:12px;gap:8px}
+ [data-concept=festival] .energy-showcase .energy-hero-foot>span:nth-child(2){max-width:65%;font-size:9px;line-height:1.25}
+ [data-concept=festival] .energy-showcase .energy-hero-foot .showcase-cost{font-size:10px}
+ [data-concept=festival] .energy-hero-favorite{width:44px;height:44px;right:2px;top:2px}
+ [data-concept=festival] .energy-showcase-controls{height:44px;min-height:44px;padding:0;gap:6px}
+ [data-concept=festival] .showcase-counter{font-size:9px;min-width:43px}
+ [data-concept=festival] .energy-showcase-controls .showcase-dots{flex:1;justify-content:center;margin:0;gap:0}
+ [data-concept=festival] .energy-showcase-controls .showcase-dots button{flex:1;min-width:24px;max-width:27px;min-height:44px}
+ [data-concept=festival] .showcase-actions [data-showcase-toggle]{border:0}
+ [data-concept=festival] .energy-rail{display:none}
+
+ [data-concept=festival] .energy-collection{margin-top:8px;scroll-margin-top:12px}
+ [data-concept=festival] .energy-collection .shelf-heading{min-height:24px;margin:0 0 8px;gap:8px}
+ [data-concept=festival] .energy-collection .shelf-heading h2{font-size:17px;line-height:1.3}
+ [data-concept=festival] .energy-collection .shelf-heading>span{display:none}
+ [data-concept=festival] .filters{margin:0 0 10px;padding:0;gap:6px;overflow-x:auto;scrollbar-width:none}
+ [data-concept=festival] .filters::-webkit-scrollbar{display:none}
+ [data-concept=festival] .filter{min-height:44px;padding:8px 10px;font-size:11px;border-radius:9px}
+ [data-concept=festival] .catalog{gap:12px 10px}
+ [data-concept=festival] .energy-card .cover{height:106px}
+ [data-concept=festival] .energy-card .energy-art{width:102px;height:102px;margin-top:12px}
+ [data-concept=festival] .energy-card .card-category{font-size:9px;top:8px;left:10px;max-width:calc(100% - 58px);line-height:1.25}
+ [data-concept=festival] .energy-card .favorite-button{width:44px;height:44px;top:0;right:0}
+ [data-concept=festival] .energy-card-code,[data-concept=festival] .energy-card-mark{display:none}
+ [data-concept=festival] .energy-card-orbit{width:112px;height:28px;bottom:9px}
+ [data-concept=festival] .energy-card .game-details{padding:9px 10px 10px}
+ [data-concept=festival] .energy-card .game-name{font-size:15px;line-height:1.3;letter-spacing:0}
+ html[lang=en][data-concept=festival] .energy-card .game-name{font-size:15px}
+ [data-concept=festival] .energy-card .game-description{font-size:11px;line-height:1.4;min-height:2.8em;margin-top:4px}
+ [data-concept=festival] .energy-card .card-bottom{display:flex;flex-direction:row;align-items:center;gap:5px;margin-top:7px;padding-top:7px}
+ html[lang=en][data-concept=festival] .energy-collection .energy-card .card-bottom{flex-direction:row;align-items:center;gap:5px}
+ [data-concept=festival] .energy-card .entry-cost{font-size:10px}
+ [data-concept=festival] .energy-card .play-label{display:none}
+ [data-concept=festival] .energy-card .game-title-row>.ui-glyph{display:block;flex:none;width:15px;height:15px;color:var(--energy)}
+ [data-concept=festival] .navigation{width:calc(100% - 28px);max-width:420px;min-height:56px;bottom:max(10px,env(safe-area-inset-bottom,0px));padding:5px;border-radius:16px;gap:6px;backdrop-filter:none}
+ [data-concept=festival] .navigation button{min-height:44px;font-size:12px;gap:7px}
+ [data-concept=festival] .navigation .ui-glyph{width:18px;height:18px}
+}
+@media(max-width:360px){
+ [data-concept=festival] .topbar,[data-concept=festival] #content{padding-inline:12px}
+ [data-concept=festival] .energy-brand-wordmark{font-size:12px}
+ [data-concept=festival] .energy-brand-mark{width:25px;height:25px}
+ [data-concept=festival] .energy-credit-icon{display:none}
+ [data-concept=festival] .topbar .header-wallet strong{font-size:16px}
+ [data-concept=festival] .energy-welcome h1,html[lang=en][data-concept=festival] .energy-welcome h1{font-size:18px}
+ [data-concept=festival] .energy-showcase .energy-hero-copy{padding-left:12px}
+ [data-concept=festival] .energy-showcase .energy-hero h2{font-size:23px}
+ html[lang=en][data-concept=festival] .energy-showcase .energy-hero h2{font-size:20px}
+ [data-concept=festival] .energy-showcase .energy-feature-art{width:135px;left:46%}
+ [data-concept=festival] .energy-showcase .showcase-matrix .energy-feature-art{width:160px}
+ [data-concept=festival] .energy-card .cover{height:96px}
+ [data-concept=festival] .energy-card .energy-art{width:92px;height:92px}
+}
+
+/* Secondary pages share the phone shell, but not the catalog's compact labels. */
+@media(max-width:650px){
+ [data-concept=festival]{--lobby-safe-top:env(safe-area-inset-top,0px);--lobby-safe-bottom:env(safe-area-inset-bottom,0px)}
+ [data-concept=festival] #platform button,[data-concept=festival] #platform a,[data-concept=festival] #help button{touch-action:manipulation}
+ [data-concept=festival] .topbar .language-select{font-size:16px;width:54px}
+ [data-concept=festival] #content:is([data-page=rewards],[data-page=me]){overflow-wrap:anywhere}
+ [data-concept=festival] #content:is([data-page=rewards],[data-page=me])>h1{font-size:24px;line-height:1.25;margin-bottom:8px}
+ [data-concept=festival] #content:is([data-page=rewards],[data-page=me])>.station-eyebrow{margin-bottom:8px}
+ [data-concept=festival] #content .panel-grid{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:16px}
+ [data-concept=festival] #content .panel-grid>*{min-width:0}
+ [data-concept=festival] #content .panel{min-width:0;padding:16px;border-radius:16px}
+ [data-concept=festival] #content .panel h2{font-size:17px;line-height:1.4}
+ [data-concept=festival] #content .points-panel .balance{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;font-size:36px;letter-spacing:-1px;margin:14px 0 10px;overflow-wrap:anywhere}
+ [data-concept=festival] #content .balance>span{margin:0;font-size:13px}
+ [data-concept=festival] #content .panel .muted{font-size:12px;line-height:1.6}
+ [data-concept=festival] #content .text-button{min-height:44px;margin-top:8px;padding:9px 0}
+ [data-concept=festival] #content .exploration-panel .shelf-heading{gap:12px;margin-bottom:8px}
+ [data-concept=festival] #content .exploration-panel .shelf-heading>span{display:block;flex:none;white-space:nowrap;font-size:11px}
+ [data-concept=festival] #content .exploration-track{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0 12px}
+ [data-concept=festival] #content .exploration-stop{min-height:76px;padding:8px 5px;align-content:center;gap:7px;border:1px solid #7686ba33;border-radius:11px;background:#15203a;color:#b9c9e6}
+ [data-concept=festival] #content .exploration-stop.visited{background:#273b59;border-color:#83e8ff70;color:#e7faff}
+ [data-concept=festival] #content .exploration-stop .ui-glyph{width:22px;height:22px}
+ [data-concept=festival] #content .exploration-stop span{max-width:100%;min-width:0;font-size:11px;line-height:1.3;letter-spacing:0;white-space:normal;overflow-wrap:anywhere}
+ [data-concept=festival] #content .exploration-note{font-size:11px;line-height:1.5}
+ [data-concept=festival] #content .list-panel{margin-top:12px}
+ [data-concept=festival] #content .record{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:10px;padding:13px 0;align-items:start;font-size:12px;line-height:1.5}
+ [data-concept=festival] #content .record>div,[data-concept=festival] #content .record>span{min-width:0;max-width:100%;overflow-wrap:anywhere}
+ [data-concept=festival] #content .profile{gap:12px;margin:18px 0}
+ [data-concept=festival] #content .profile .avatar{width:46px;height:46px;flex:none;font-size:21px}
+ [data-concept=festival] #content .profile>div{min-width:0}
+ [data-concept=festival] #content .profile h2{font-size:17px}
+ [data-concept=festival] #content .profile .muted{font-size:12px}
+ [data-concept=festival] #content .collection-shortcut{min-height:72px;padding:12px;gap:10px}
+ [data-concept=festival] #content .collection-shortcut>span{min-width:0;flex:1;font-size:13px}
+ [data-concept=festival] #content .collection-shortcut b{flex:none;font-size:20px}
+ [data-concept=festival] #content .empty{padding:20px 0}
+ [data-concept=festival] #content .row-button{gap:12px;min-height:56px;padding:14px;font-size:13px}
+ [data-concept=festival] #content .row-button span{min-width:0}
+ [data-concept=festival] #content .row-button span:last-child{text-align:right;font-size:11px}
+ [data-concept=festival] #content .notice{font-size:11px;line-height:1.65;margin-top:14px}
+ [data-concept=festival] #content .native-settings{min-width:0;padding:12px;font-size:13px}
+ /* Keep the heading and both dismiss controls visible while the rules scroll. */
+ [data-concept=festival] #help{position:fixed;inset:calc(var(--lobby-safe-top) + 12px) 0 calc(var(--lobby-safe-bottom) + 12px);width:calc(100% - 28px);max-width:420px;max-height:calc(100dvh - var(--lobby-safe-top) - var(--lobby-safe-bottom) - 24px);margin:auto;padding:16px;overflow:hidden;border-radius:18px}
+ [data-concept=festival] #help[open]{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:14px}
+ [data-concept=festival] #help-title{min-height:30px;padding-right:38px;align-content:center;font-size:18px;line-height:1.4}
+ [data-concept=festival] #help-close{top:8px;right:8px;width:44px;height:44px;min-height:44px;color:#e1eaff}
+ [data-concept=festival] #help-text{min-height:0;overflow:auto;overscroll-behavior:contain;margin:0;padding-right:4px;font-size:14px;line-height:1.75}
+ [data-concept=festival] #help-ok{min-height:44px}
+}

@@ -13,7 +13,7 @@ class FairnessPanel {
       <p class="fairness-phase" role="status"></p><div class="fairness-receipt-summary"></div><p class="fairness-meta"></p>
       <div class="fairness-actions"><button type="button" data-fair-verify>复算本局</button><button type="button" data-fair-export>导出记录</button></div>
       <div class="fairness-checks" role="status" aria-live="polite"></div><details class="fairness-export" hidden><summary>复制或手动保存本局记录</summary><textarea readonly aria-label="本局 JSON 记录" spellcheck="false"></textarea><button type="button" data-fair-copy>复制记录</button><p role="status">可下载文件，也可复制记录到独立验证页。</p></details><details class="fairness-technical"><summary>查看种子与完整摘要</summary><dl class="fairness-fields"></dl></details>
-      <a class="fairness-verifier-link" href="fairness.html" target="_blank" rel="noopener">打开独立验证页 ↗</a><p class="fairness-note">只保存最近 30 局已完成的记录到本机；积分仍随页面刷新重置。</p>`;
+      <a class="fairness-verifier-link" href="fairness.html" target="_blank" rel="noopener">打开独立验证页 ↗</a><p class="fairness-note">只保存最近 30 局已完成的记录到本机。返回大厅保留本局；积分与存档方式请查看大厅说明。</p>`;
     document.body.append(this.dialog);
     this.button.onclick=()=>{this.render();this.dialog.showModal();};
     this.dialog.querySelector('[data-fair-close]').onclick=()=>this.dialog.close();

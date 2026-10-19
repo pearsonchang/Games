@@ -1,0 +1,139 @@
+/* Shared money/readout boundaries for the classic and five-column cabinets. */
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header{height:auto;min-height:68px}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .balance{flex-shrink:0;max-width:45%;min-width:0}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .balance b{display:block;max-width:100%;white-space:normal;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;line-height:1.3}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .action-panel{position:relative;inset:auto;z-index:2;min-width:0}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .action-panel:before{pointer-events:none}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .spin{min-width:0;height:auto;white-space:normal;line-height:1.4}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) #spin-label{min-width:0;overflow-wrap:anywhere}
+body[data-mobile-game=slots] #machine>.window-shell{overflow:hidden;isolation:isolate}
+/* The settled payout stays in its readout; particles never cross that readout. */
+body[data-mobile-game=slots] #win-burst{display:none}
+body[data-mobile-game=slots] #machine .window-shell>.confetti{inset:0;border-radius:inherit}
+body[data-mobile-game=slots] #result{position:relative;z-index:2;min-width:0;flex-wrap:wrap;justify-content:flex-start;gap:10px 12px;height:auto}
+body[data-mobile-game=slots] #result>div{min-width:0;flex:1 1 160px}
+body[data-mobile-game=slots] #result strong,body[data-mobile-game=slots] #result p{overflow-wrap:anywhere;white-space:normal}
+body[data-mobile-game=slots] #result .slot-result-payout{flex:0 1 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 5px;text-align:right;margin-left:auto;align-items:baseline;max-width:100%}
+body[data-mobile-game=slots] .slot-result-payout>span{grid-column:1/-1;font-size:11px;color:#b9cde3;line-height:1.5}
+body[data-mobile-game=slots] #result .slot-result-payout>strong{font:700 28px/1.3 var(--font-game);color:#ffe095;letter-spacing:0}
+body[data-mobile-game=slots] .slot-result-payout>small{font-size:11px;color:#b9cde3}
+body[data-mobile-game=slots] #result p{font-size:12px;line-height:1.6;margin:4px 0 0;color:#c1d1e8}
+body[data-mobile-game=matrix] .matrix-result{position:relative;z-index:2;height:auto;overflow:visible;min-width:0}
+body[data-mobile-game=matrix] .matrix-result-top{flex-wrap:wrap;gap:6px 12px;align-items:baseline;min-width:0}
+body[data-mobile-game=matrix] #result-label{flex:1 1 160px;min-width:0;overflow-wrap:anywhere}
+body[data-mobile-game=matrix] #result-total{display:flex;align-items:baseline;flex-wrap:wrap;justify-content:flex-end;gap:3px 6px;min-width:0;max-width:100%;margin-left:auto;white-space:normal;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+body[data-mobile-game=matrix] #result-total small{margin:0;line-height:1.5}
+body[data-mobile-game=matrix] #result-detail{white-space:normal;overflow-wrap:anywhere;line-height:1.65;height:auto}
+body[data-mobile-game=matrix] .matrix-track{flex-wrap:wrap;height:auto;gap:5px 10px}
+body[data-mobile-game=matrix] #line-caption{flex:1 1 180px;overflow-wrap:anywhere}
+body[data-mobile-game=matrix] .matrix-window{overflow:hidden}
+body[data-mobile-game=matrix] .matrix-fx-banner{min-width:0;width:88%;max-width:88%;padding-inline:16px}
+body[data-mobile-game=matrix] .matrix-fx-banner>span,body[data-mobile-game=matrix] .matrix-fx-banner>b{white-space:normal;overflow-wrap:anywhere}
+body[data-mobile-game=matrix] .guide-result{flex-wrap:wrap;align-items:baseline}
+body[data-mobile-game=matrix] .guide-result>span{flex:1 1 130px;min-width:0;overflow-wrap:anywhere}
+body[data-mobile-game=matrix] .guide-result>strong{max-width:100%;overflow-wrap:anywhere}
+body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .history b,body[data-mobile-game=matrix] .matrix-history small{overflow-wrap:anywhere;white-space:normal}
+/* Preview equations remain readable while the effects play above them. */
+body[data-mobile-game=slots] #fx-preview .preview-machine{overflow:hidden}
+body[data-mobile-game=slots] #fx-preview .preview-math,body[data-mobile-game=slots] #fx-preview .preview-label{position:relative;z-index:2}
+body[data-mobile-game=slots] .example-equation{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.3fr)}
+body[data-mobile-game=slots] .example-equation>div{min-width:0;overflow-wrap:anywhere}
+
+@media(max-width:740px){
+ html:has(body:is([data-mobile-game=slots],[data-mobile-game=matrix])){-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-bottom:16px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .app{max-width:560px;width:100%;padding:0 12px max(16px,env(safe-area-inset-bottom))}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header{display:grid;grid-template-columns:44px minmax(0,1fr) minmax(0,auto) 44px;min-height:57px;width:calc(100% + 24px);margin:0 -12px 8px;padding:6px 12px;gap:8px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header #back{grid-column:1;grid-row:1;min-width:44px;width:44px;height:44px;padding:0;font-size:0;display:grid;place-items:center}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header #back:before{content:'←';font:22px/1 sans-serif}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header #back>span{display:none}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header .wordmark{grid-column:2;grid-row:1;display:flex;flex-wrap:wrap;gap:0 4px;font-size:13px;line-height:1.35;letter-spacing:.3px;min-width:0;overflow-wrap:anywhere}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header .balance{grid-column:3;grid-row:1;min-width:0;max-width:42vw;white-space:normal;gap:0;line-height:1.3}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header .balance span{margin:0 0 2px;font-size:10px;line-height:1.4;text-align:right}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header .balance b{font-size:19px;letter-spacing:0;line-height:1.3}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header .mobile-settings-open{grid-column:4;grid-row:1}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]).wide-slot-balance header{grid-template-columns:44px minmax(0,1fr) 44px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]).wide-slot-balance header .mobile-settings-open{grid-column:3}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]).wide-slot-balance header .balance{grid-column:1/-1;grid-row:2;display:flex;align-items:flex-start;width:100%;max-width:none;margin:0;padding:6px 10px;min-height:0;border:1px solid #91a8d536;border-radius:10px;background:#18283f;text-align:left}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]).wide-slot-balance header .balance span{text-align:left}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]).wide-slot-balance header .balance b{font-size:19px;line-height:1.4;white-space:nowrap}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) main{padding:0;margin:0;min-width:0}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) #machine{padding:12px 14px 10px;min-width:0}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .action-panel{position:relative;inset:auto;display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;margin:10px 0 0;padding:10px 0 4px;border:0;border-top:1px solid #a1bad93d;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .action-panel:before{display:none}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .stake{min-width:0;padding:0}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .stake>span{font-size:10px;line-height:1.4;letter-spacing:0}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .stake strong{font-size:24px;line-height:1.3;letter-spacing:0;display:flex;gap:4px;align-items:baseline;flex-wrap:wrap}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .stake small{font-size:10px;margin:0}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) #spin{min-height:52px;height:auto;padding:9px 8px;font-size:16px;line-height:1.4;letter-spacing:0;border-radius:12px;gap:7px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .spin-symbol{font-size:25px;flex:none}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .spin kbd{display:none}
+ body[data-mobile-game=slots] .intro{margin:8px 0 10px;gap:8px;flex-wrap:wrap}
+ body[data-mobile-game=slots] .intro h1{font-size:24px}
+ body[data-mobile-game=slots] .machine-top{min-height:48px;padding:0 0 4px;margin-bottom:8px;gap:6px}
+ body[data-mobile-game=slots] .marquee{min-width:0}
+ body[data-mobile-game=slots] .marquee strong{font-size:19px}
+ body[data-mobile-game=slots] .marquee>span{font-size:6px;letter-spacing:.8px}
+ body[data-mobile-game=slots] .jackpot-label{padding-left:8px;flex:none}
+ body[data-mobile-game=slots] .machine-star{width:30px;height:30px;flex-basis:30px}
+ body[data-mobile-game=slots] .rim{padding-bottom:9px}
+ body[data-mobile-game=slots] .reels{--cell:80px}
+ body[data-mobile-game=slots] .machine-meta{flex-wrap:wrap;gap:4px 8px;font-size:10px;letter-spacing:0}
+ body[data-mobile-game=slots] #result{min-height:82px;margin:10px 0;padding:10px;gap:6px 10px}
+ body[data-mobile-game=slots] #result .result-icon{display:none}
+ body[data-mobile-game=slots] #result>div{flex-basis:120px}
+ body[data-mobile-game=slots] #result strong{font-size:14px;line-height:1.5;letter-spacing:0}
+ body[data-mobile-game=slots] #result p{font-size:11px;line-height:1.6}
+ body[data-mobile-game=slots] #result .slot-result-payout{flex:0 1 auto;max-width:100%}
+ body[data-mobile-game=slots] #result .slot-result-payout>strong{font-size:27px;line-height:1.3}
+ body[data-mobile-game=slots] .slot-result-payout>span{font-size:10px}
+ body[data-mobile-game=slots] .examples-open{flex-wrap:wrap;gap:4px 8px;min-height:44px;padding-block:8px}
+ body[data-mobile-game=slots] .machine-foot{min-height:20px;padding:6px 0 0;margin:4px 0 0}
+ body[data-mobile-game=matrix] .cabinet-heading{padding:0;min-height:54px;gap:8px;margin:0 0 4px}
+ body[data-mobile-game=matrix] .cabinet-title{min-width:0}
+ body[data-mobile-game=matrix] .cabinet-title h1{white-space:normal;flex-wrap:wrap;font-size:22px;line-height:1.35;gap:5px 8px}
+ body[data-mobile-game=matrix] .cabinet-title p{font-size:7px;letter-spacing:1px}
+ body[data-mobile-game=matrix] .orbit-pilot{width:48px;height:48px}
+ body[data-mobile-game=matrix] .matrix-instruments{flex-wrap:wrap;gap:5px 10px;padding:6px 0 8px}
+ body[data-mobile-game=matrix] #matrix-board{--cell:clamp(58px,20vw,82px)}
+ body[data-mobile-game=matrix] #matrix-board .symbol{width:70px;height:70px;max-width:86%;max-height:82%}
+ body[data-mobile-game=matrix] .matrix-track{min-height:40px;padding:8px 0 0;font-size:11px;line-height:1.5}
+ body[data-mobile-game=matrix] .line-tour-controls{margin-left:auto;flex-wrap:wrap;min-width:0}
+ body[data-mobile-game=matrix] #matrix-result{min-height:88px;padding:10px 12px;margin:8px 0}
+ body[data-mobile-game=matrix] .matrix-result-top{gap:5px 10px}
+ body[data-mobile-game=matrix] #result-label{flex-basis:130px;font-size:14px;letter-spacing:0;line-height:1.5}
+ body[data-mobile-game=matrix] #result-total{font-size:29px;line-height:1.3}
+ body[data-mobile-game=matrix] #result-detail{font-size:11px;margin:6px 0 0;min-height:18px}
+ body[data-mobile-game=matrix] .cabinet-tools{gap:8px}
+ body[data-mobile-game=matrix] .console-vents{padding:6px 0 0}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .history-heading{margin:16px 0 8px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .history{padding-bottom:5px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) footer{padding:14px 8px 8px;font-size:10px;line-height:1.7}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) #mobile-settings .language-control{display:flex!important;align-items:center;justify-content:space-between;width:100%;margin:12px 0 0;padding:10px 12px;border:1px solid #809dc64d;border-radius:12px;background:#213451}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) #mobile-settings .language-select{font-size:16px;min-height:44px;max-width:100%}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .mobile-sheet{max-height:calc(100dvh - 24px);overflow:hidden;flex-direction:column;gap:12px;padding:16px 16px max(18px,env(safe-area-inset-bottom))}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .mobile-sheet[open]{display:flex}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .mobile-sheet-head{position:static;flex:none;margin:0;padding:0 0 10px;gap:10px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .mobile-sheet-head h2{font-size:18px;line-height:1.4}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .mobile-sheet-body{overflow:auto;min-height:0;overscroll-behavior:contain;padding:3px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .fx-dialog-head{gap:8px;background:#14213b}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .fx-dialog-head>div{min-width:0;flex:1}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .fx-dialog-head h2{font-size:17px;line-height:1.4;overflow-wrap:anywhere}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .fx-dialog-head>button{flex-shrink:0}
+ body[data-mobile-game=slots] #fx-preview .preview-machine .win-burst{display:none}
+ body[data-mobile-game=slots] .fx-options button{min-width:0;flex-wrap:wrap;gap:4px 8px;line-height:1.5}
+ body[data-mobile-game=slots] .example-equation{gap:5px}
+ body[data-mobile-game=slots] .example-equation b{font-size:20px}
+ body[data-mobile-game=matrix] .guide-line-readout,body[data-mobile-game=matrix] .guide-replay-row{flex-wrap:wrap}
+ body[data-mobile-game=matrix] .guide-result>strong{font-size:23px}
+}
+@media(max-width:359px){
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header{gap:6px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) header .balance b{font-size:17px}
+ body:is([data-mobile-game=slots],[data-mobile-game=matrix]) #machine{padding-inline:10px}
+ body[data-mobile-game=slots] .machine-star{display:none}
+ body[data-mobile-game=slots] .reels{--cell:72px}
+ body[data-mobile-game=matrix] #matrix-result .matrix-result-top{display:block}
+ body[data-mobile-game=matrix] #result-total{justify-content:flex-start;margin-top:4px}
+ body[data-mobile-game=matrix] #result-detail{font-size:11px}
+ body[data-mobile-game=slots] #result .slot-result-payout{flex-basis:100%;justify-content:start;text-align:left;grid-template-columns:auto auto}
+}

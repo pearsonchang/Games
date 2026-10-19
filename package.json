@@ -8,8 +8,15 @@
   },
   "scripts": {
     "check": "node scripts/check-static.cjs",
+    "check:responsive": "node scripts/check-responsive.cjs",
     "test": "node --test",
     "preview": "node scripts/preview.cjs",
-    "build": "node scripts/build.cjs"
+    "build": "node scripts/build.cjs",
+    "mobile:doctor": "node scripts/mobile.cjs doctor",
+    "mobile:build": "node scripts/mobile.cjs build",
+    "mobile:sync": "node scripts/mobile.cjs sync",
+    "mobile:android": "node scripts/mobile.cjs open android",
+    "mobile:ios": "node scripts/mobile.cjs open ios",
+    "mobile:apk": "node scripts/mobile.cjs apk"
   }
 }

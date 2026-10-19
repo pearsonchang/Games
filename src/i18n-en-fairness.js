@@ -53,7 +53,7 @@
       '可下载文件，也可复制记录到独立验证页。': 'Download the file or copy the receipt to the standalone verifier.',
       '查看种子与完整摘要': 'View seeds and full hashes',
       '打开独立验证页 ↗': 'Open standalone verifier ↗',
-      '只保存最近 30 局已完成的记录到本机；积分仍随页面刷新重置。': 'Only the last 30 completed receipts are saved on this device. Points still reset when the page is refreshed.',
+      '只保存最近 30 局已完成的记录到本机。返回大厅保留本局；积分与存档方式请查看大厅说明。': 'Only the last 30 completed receipts are saved on this device. Your current round is kept when you return to the lobby. See the lobby for details on points and saving.',
       '已复制，可粘贴到独立验证页。': 'Copied. Paste the receipt into the standalone verifier.',
       '已选中记录，请使用系统复制或长按复制。': 'Receipt selected. Use your system’s copy command or press and hold to copy.',
       '正在固定本局规则…': 'Locking this round’s rules…',

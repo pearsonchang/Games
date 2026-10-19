@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#202c57"/><stop offset="1" stop-color="#161d3a"/></linearGradient></defs>
+<rect width="1024" height="1024" fill="url(#bg)"/>
+<g transform="translate(122 122) scale(19.5)">
+<path fill="#83E8FF" fill-rule="evenodd" d="M9 5h14c7 0 12 4.4 12 11s-5 11-12 11h-7v8H7V8a3 3 0 0 1 2-3Zm7 7v9l9-4.5-9-4.5Z"/>
+<path fill="#A391FF" d="M20 30h9l6 5H20v-5Z"/>
+</g></svg>

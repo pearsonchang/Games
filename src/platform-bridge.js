@@ -44,7 +44,14 @@ class GameBridge {
         onStateChange: () => { this.sync(gameId, true); this.onUpdate?.(); },
         onFinish: result => {
           const key = `${gameId}:${result.id}`;
-          if (this.finished.has(key)) return;
+          const counter = Number(result.id.slice(definition.prefix.length + 1));
+          // Only the latest settled counter is needed to reject every older
+          // callback, including after a long-lived local session is restored.
+          for (const previous of this.finished) {
+            if (!previous.startsWith(`${gameId}:`)) continue;
+            if (Number(previous.slice(`${gameId}:${definition.prefix}-`.length)) >= counter) return;
+            this.finished.delete(previous);
+          }
           this.finished.add(key);
           if (!result.amount && definition.loss) wallet.credit(0, definition.loss(result), `${key}:loss`);
           this.onFinish?.(result);
@@ -71,7 +78,8 @@ class GameBridge {
   pulse(activeGame = null) {
     // Time-based rounds must still settle offscreen. Their hidden frames do
     // not need snapshots, DOM updates, or a stream of postMessage events.
-    for (const gameId of this.loadedGames) this.rounds[gameId]?.tick?.();
+    // A restored live round may not have loaded its iframe in this process yet.
+    for (const round of Object.values(this.rounds)) round.tick?.();
     if (!this.loadedGames.has(activeGame)) return;
     const round = this.rounds[activeGame], previous = this.presented.get(activeGame);
     const live = ['flying', 'rolling', 'dropping', 'racing', 'spinning'].includes(round.state);

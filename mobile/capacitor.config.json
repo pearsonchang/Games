@@ -1,0 +1,11 @@
+{
+  "appId": "com.pearsonchang.playroom",
+  "appName": "PLAYROOM",
+  "webDir": "www",
+  "backgroundColor": "#101430",
+  "loggingBehavior": "debug",
+  "server": { "hostname": "localhost", "androidScheme": "https", "iosScheme": "capacitor" },
+  "android": { "allowMixedContent": false, "webContentsDebuggingEnabled": false },
+  "ios": { "contentInset": "never", "scrollEnabled": true },
+  "plugins": { "App": { "disableBackButtonHandler": false } }
+}

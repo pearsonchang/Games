@@ -3,7 +3,7 @@
   'use strict';
   const game = document.body.dataset.mobileGame;
   if (!game) return;
-  const phone = matchMedia('(max-width: 740px)');
+  const phone = matchMedia('(max-width:740px), (max-width:1100px) and (max-height:600px) and (min-aspect-ratio:4/3)');
   const $ = selector => document.querySelector(selector);
   const sourceText = node => window.PlayroomI18n?.sourceText(node) ?? node.textContent;
   const relocations = [];
@@ -61,17 +61,40 @@
     }
     if (game === 'slots') help.addEventListener('click', event => { if (event.target.closest('#fx-open')) help.close(); }, true);
   }
+  // Language is one control, restored to its desktop position after resizing.
+  const moveLanguage = () => {
+    const control = $('.language-control');
+    if (!control) return;
+    relocate(control, settingsBody);
+    if (phone.matches) settingsBody.append(control);
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', moveLanguage, { once: true });
+  else moveLanguage();
   if (game === 'mines') {
+    document.body.dataset.embedded = String(window.parent !== window);
     const toolbar = document.createElement('div');
     toolbar.className = 'mobile-board-toolbar';
     $('.progress-track').before(toolbar);
     relocate($('#modes'), toolbar);
-    const secondary = document.createElement('div');
-    secondary.className = 'mobile-mine-secondary';
-    $('.board-panel').after(secondary);
-    relocate($('.sub-actions'), secondary);
+    relocate($('.board-instruments'), toolbar);
+    relocate($('.sub-actions'), settingsBody);
+    $('#round-end').addEventListener('click', () => settings.close(), true);
+    // The board uses the remaining height; short screens can still scroll.
+    // display:contents keeps the existing desktop grid unchanged.
+    const content = document.createElement('div');
+    content.className = 'mobile-mine-content';
+    $('.play-layout').prepend(content);
+    content.append($('.intro'), $('.board-panel'));
+    // i18n mounts its selector at DOMContentLoaded, after this script.
   }
   if (game === 'dice') {
+    // Keep secondary controls out of the phone's play area, using the same
+    // elements so receipts, language state and event handlers are preserved.
+    const verification = $('.fairness-strip');
+    relocate(verification, settingsBody);
+    verification?.addEventListener('click', event => {
+      if (event.target.closest('button')) settings.close();
+    }, true);
     relocate($('.payout'), $('.action-bar'));
     const chooser = sheet('选择目标总点数', 'dice-target-dialog');
     const options = $('#options');
@@ -104,6 +127,17 @@
     $('#circuit').before(picker);
     relocate($('.selection-title'), picker);
     relocate($('#horses'), picker);
+    // Keep the header compact without duplicating the language selector.
+    relocate($('#phase'), $('.selection-title'));
+  }
+  if (game === 'slots' || game === 'matrix') {
+    const balance = $('header .balance b');
+    if (balance) {
+      // Keep long balances intact instead of breaking decimals or covering the title.
+      const fitBalance = () => document.body.classList.toggle('wide-slot-balance', sourceText(balance).length > 10);
+      new MutationObserver(fitBalance).observe(balance, { childList: true, characterData: true, subtree: true });
+      fitBalance();
+    }
   }
   let syncSlots = () => {};
   if (game === 'plinko') {

@@ -1,0 +1,15 @@
+/* App-only additions; ordinary browser layout remains unchanged. */
+html.native-app { overscroll-behavior: none; background:#101430; -webkit-tap-highlight-color:transparent; }
+.native-app body { overscroll-behavior: none; }
+.native-app #concept-switcher { display:none; }
+.native-app #platform { padding-top:env(safe-area-inset-top,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px); }
+/* Keep the entire game-frame viewport clear of the notch and home indicator. */
+.native-app #play-surface { position:fixed;inset:0;box-sizing:border-box;width:100%;min-width:0;max-width:100%;height:100dvh;overflow:hidden;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px); }
+.native-app #play-surface>iframe { min-width:0;max-width:100%;min-height:0; }
+.native-app .native-boot { position:fixed;inset:0;z-index:5000;display:grid;place-content:center;text-align:center;gap:14px;background:#101430;color:#c8d8ff;font:600 16px system-ui;padding:24px; }
+.native-app .native-boot[hidden] { display:none; }
+.native-boot strong { color:#8eeaff;font-size:27px;letter-spacing:.1em; }
+.native-notice { margin:12px 0;padding:12px 16px;border:1px solid #5a6386;border-radius:14px;background:#202747;color:#e2eaff;font-size:14px;line-height:1.6; }
+.native-settings { display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0;padding:14px 16px;border:1px solid #465176;border-radius:14px;background:#202747;color:#e2eaff; }
+.native-settings button { min-width:56px;min-height:44px;border:1px solid #8796cc;border-radius:12px;color:#eef6ff;background:#384571;font:inherit; }
+.native-settings button[aria-pressed="true"] { color:#081929;background:#89e4ff;border-color:#a3eeff; }

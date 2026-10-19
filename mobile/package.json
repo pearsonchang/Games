@@ -1,0 +1,30 @@
+{
+  "name": "playroom-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Android and iOS container for the local PLAYROOM demo",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "prepare:web": "node ../scripts/prepare-mobile.cjs",
+    "sync": "node ../scripts/mobile.cjs sync",
+    "doctor": "node ../scripts/mobile.cjs doctor",
+    "android": "node ../scripts/mobile.cjs open android",
+    "ios": "node ../scripts/mobile.cjs open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/browser": "8.0.5",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/haptics": "8.0.2",
+    "@capacitor/ios": "8.5.3",
+    "@capacitor/preferences": "8.0.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3",
+    "esbuild": "0.28.2"
+  }
+}

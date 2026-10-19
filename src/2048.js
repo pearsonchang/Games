@@ -138,7 +138,7 @@
       node.setAttribute('aria-label',`${node.dataset.tier}，${window.PlayroomI18n?.sourceText(node.querySelector('strong')) ?? node.querySelector('strong').textContent}${reached?'，已达成':''}`);
     });
     text('restart',finished?'再挑战 · 50 积分':'放弃重开 · 50 积分');
-    text('save-note',embedded?'返回大厅保留本局 · 刷新页面会重置':'独立试玩积分 · 返回后重新进入会重置');
+    text('save-note',embedded?'返回大厅保留本局；积分与存档方式请查看大厅说明。':'独立试玩积分 · 返回后重新进入会重置');
     if(!persistent)text('save-note',(window.PlayroomI18n?.sourceText($('save-note')) ?? $('save-note').textContent)+' · 最佳仅本次有效');
     renderCore();renderSpawnPool();paymentControls();paintCells();
   }

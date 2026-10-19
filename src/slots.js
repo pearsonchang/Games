@@ -50,7 +50,7 @@ function renderResult(result){
   $('machine').dataset.reward=slotFeedback(result).id;
   const title=win?(result.values[0]===5?'星际徽章 · 100×':'三连命中 · '+result.multiplier+'×'):pair?'两同号 · 返还投入':'这一转，擦肩而过';
   $('result').dataset.kind=result.kind;
-  $('result').innerHTML='<span class="result-icon" aria-hidden="true">'+(win?'✦':pair?'↺':'✧')+'</span><div><strong>'+title+'</strong><p>本局到账 <b>'+points(result.amount)+'</b> 积分 · 净收益 '+(result.amount>50?'+':'')+points(result.amount-50)+' 积分</p></div>';
+  $('result').innerHTML='<span class="result-icon" aria-hidden="true">'+(win?'✦':pair?'↺':'✧')+'</span><div class="slot-result-copy"><strong>'+title+'</strong><p>净收益 '+(result.amount>50?'+':'')+points(result.amount-50)+' 积分</p></div><div class="slot-result-payout"><span>本局到账</span><strong>'+points(result.amount)+'</strong><small>积分</small></div>';
   $('round-tag').textContent=win?'好运命中':pair?'投入已返还':'本局已结束';
   reels.forEach((reel,i)=>{
     const matched=win||(pair&&result.values.filter(v=>v===result.values[i]).length===2);

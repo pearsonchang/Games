@@ -1,0 +1,122 @@
+/* Available window space and safe areas are shared across all app pages. */
+:root{
+ --ui-safe-top:env(safe-area-inset-top,0px);--ui-safe-right:env(safe-area-inset-right,0px);--ui-safe-bottom:env(safe-area-inset-bottom,0px);--ui-safe-left:env(safe-area-inset-left,0px);
+ --ui-page-gutter:clamp(12px,3vw,24px);--ui-viewport-height:100dvh;--ui-header-height:0px;--ui-dock-space:0px;
+}
+html[data-ui-embedded=true]{--ui-safe-top:0px;--ui-safe-right:0px;--ui-safe-bottom:0px;--ui-safe-left:0px}
+html[data-ui-surface]{-webkit-text-size-adjust:100%;text-size-adjust:100%;scrollbar-gutter:auto}
+html[data-ui-surface] body{min-width:0}
+html[data-ui-surface] :is(button,a,input,select,textarea){touch-action:manipulation}
+html[data-ui-surface] :is(input,select,textarea){font-size:max(1rem,16px)}
+html[data-ui-surface=lobby] #platform{padding-top:var(--ui-safe-top);padding-left:var(--ui-safe-left);padding-right:var(--ui-safe-right)}
+html[data-ui-surface=lobby] #play-surface{position:fixed;inset:0;box-sizing:border-box;width:100%;height:var(--ui-viewport-height);padding:var(--ui-safe-top) var(--ui-safe-right) var(--ui-safe-bottom) var(--ui-safe-left);overflow:hidden}
+html[data-ui-surface=lobby] #play-surface>iframe{width:100%;height:100%;min-width:0;min-height:0;border:0}
+html[data-ui-surface=lobby] #content{padding-bottom:max(100px,var(--ui-dock-space));min-width:0}
+html[data-ui-surface=game] body[data-mobile-game]{padding:var(--ui-safe-top) var(--ui-safe-right) var(--ui-safe-bottom) var(--ui-safe-left)}
+html[data-ui-surface=game] :is(.balance b,.wallet b,.reward-note b,#coins,#prize,#net){font-variant-numeric:tabular-nums}
+body[data-mobile-game=matrix] .cabinet-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+body[data-mobile-game=matrix] .cabinet-tools>button{min-width:0;max-width:100%;height:auto;min-height:44px;white-space:normal;overflow-wrap:break-word;line-height:1.5;padding:8px}
+body[data-mobile-game=matrix] .cabinet-tools .round-tag{grid-column:1/-1}
+body[data-mobile-game=matrix] .line-tour-controls{min-width:0;flex-wrap:wrap}
+
+/* Compact windows include phones in portrait and short landscape windows. */
+@media(max-width:740px),(max-width:1100px) and (max-height:600px) and (min-aspect-ratio:4/3){
+ html[data-ui-surface] :is(button,summary){min-height:44px}
+ body[data-mobile-game] .ui-game-header{position:relative;z-index:10;transform:translateZ(0);display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:6px 10px;width:100%;max-width:100%;height:auto;min-height:0;margin:0;padding:6px var(--ui-page-gutter) 8px;background:#111d35;border-bottom:1px solid #8da7d12b;flex-wrap:wrap}
+ body[data-mobile-game] .ui-game-header .header-left{display:contents}
+ body[data-mobile-game] .ui-game-header :is(#back,#close){grid-column:1;grid-row:1;display:grid;place-items:center;min-width:44px;width:44px;height:44px;padding:0;font-size:0;line-height:1;border-radius:12px}
+ body[data-mobile-game] .ui-game-header :is(#back,#close)::before{content:'←';font:22px/1 system-ui}
+ body[data-mobile-game] .ui-game-header :is(.brand,.game-brand){grid-column:2;grid-row:1;display:block;min-width:0;width:auto;max-width:100%;margin:0;font-size:15px;letter-spacing:.3px;line-height:1.4;white-space:normal;overflow-wrap:break-word}
+ body[data-mobile-game] .ui-game-header :is(.brand,.game-brand) strong{font-size:15px;line-height:1.4}
+ body[data-mobile-game] .ui-game-header :is(.brand,.game-brand)>span{display:none}
+ body[data-mobile-game] .ui-game-header .mobile-settings-open{grid-column:3;grid-row:1;display:grid;place-items:center;min-width:44px;width:44px;height:44px;min-height:44px;margin:0;padding:10px;border:1px solid #8ba6d34d;border-radius:12px;background:#21314d;color:#bbd9f3}
+ body[data-mobile-game] .ui-game-header :is(.balance,.wallet,.reward-note){grid-column:1/-1;grid-row:2;display:flex;flex-direction:row;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 12px;min-width:0;min-height:34px;width:100%;max-width:none;margin:0;padding:4px 10px;border:1px solid #8da7d130;border-radius:9px;background:#192b48;color:#b8c9e3;font-size:11px;line-height:1.5;white-space:normal;box-shadow:none}
+ body[data-mobile-game] .ui-game-header :is(.balance,.wallet,.reward-note) b{flex:0 0 auto;max-width:100%;margin:0;font-size:20px;line-height:1.4;letter-spacing:0;white-space:nowrap;color:#ffd38b}
+ body[data-mobile-game] .ui-game-header :is(.balance,.wallet,.reward-note)>span{margin:0;text-align:left;font-size:11px}
+ body[data-mobile-game] :is(.mobile-sheet,.mobile-compatible-dialog){max-height:calc(var(--ui-viewport-height) - var(--ui-safe-top) - var(--ui-safe-bottom) - 20px);margin-block-start:auto;scroll-padding-block:64px 16px;padding-bottom:max(18px,var(--ui-safe-bottom));overflow-y:auto;overscroll-behavior:contain}
+ body[data-mobile-game] .mobile-sheet-head{flex-shrink:0}
+ body[data-mobile-game] .mobile-sheet-close{flex:0 0 44px;min-width:44px;min-height:44px}
+ body[data-mobile-game] #mobile-settings .language-control{display:flex!important;align-items:center;justify-content:space-between;width:100%;margin:12px 0 0;padding:8px 12px;border:1px solid #809dc64d;border-radius:12px;background:#213451}
+ body[data-mobile-game] #mobile-settings .language-select{font-size:16px;min-height:44px;max-width:100%}
+ /* Fixed panels reserve their measured size even when text wraps. */
+ html.ui-fixed-dock body[data-mobile-game=rocket] .rocket-game,
+ html.ui-fixed-dock body[data-mobile-game=plinko] main,
+ html.ui-fixed-dock body[data-mobile-game=horse] .app,
+ html.ui-fixed-dock body:is([data-mobile-game=slots],[data-mobile-game=matrix]) .app,
+ html.ui-fixed-dock body[data-mobile-game=dice] main{padding-bottom:var(--ui-dock-space)}
+ body[data-mobile-game] :is(.controls,.launch-dock,.launch-panel,.action-panel,.action-bar){padding-bottom:max(10px,var(--ui-safe-bottom))}
+ html[data-ui-surface] .mobile-settings-open svg{width:23px;height:23px}
+}
+
+/* The minefield uses one scrollable content area and an in-flow cash-out. */
+@media(max-width:740px){
+ html[data-ui-surface=game]:has(body[data-mobile-game=mines]){height:var(--ui-viewport-height);overflow:hidden}
+ body[data-mobile-game=mines]{--mine-cell-min:var(--ui-mine-cell-size,36px);height:var(--ui-viewport-height);overflow:hidden;padding:0}
+ body[data-mobile-game=mines] .game{height:var(--ui-viewport-height);padding:var(--ui-safe-top) var(--ui-safe-right) var(--ui-safe-bottom) var(--ui-safe-left);min-height:0}
+ body[data-mobile-game=mines] .game>.ui-game-header{flex:none}
+ body[data-mobile-game=mines] .play-layout{min-height:0}
+ body[data-mobile-game=mines] .mobile-mine-content{padding-inline:var(--ui-page-gutter);scroll-padding-block:8px}
+ body[data-mobile-game=mines] .bottom{position:relative;inset:auto;flex:none;width:100%;max-width:100%;margin:0;padding:8px var(--ui-page-gutter) 10px;min-height:0;z-index:5;background:#132340}
+ body[data-mobile-game=mines] #next-step{height:auto;min-height:0;gap:6px 12px;padding:0 0 7px;align-items:flex-start}
+ body[data-mobile-game=mines] #next-step>span{min-width:0;max-width:50%;font-size:11px;line-height:1.5;overflow-wrap:break-word}
+ body[data-mobile-game=mines] #next-step b{font-size:16px;line-height:1.5;white-space:nowrap}
+ body[data-mobile-game=mines] #primary{height:auto;min-height:48px;padding:10px;line-height:1.45;white-space:normal;overflow-wrap:break-word}
+ body[data-mobile-game=mines] #notice{font-size:11px;line-height:1.5;min-height:0;height:auto;margin:7px 0 0}
+ body[data-mobile-game=mines] #stats{flex-wrap:wrap;height:auto;min-height:52px}
+ body[data-mobile-game=mines] .treasure-amount{max-width:100%;flex-wrap:wrap;gap:4px}
+ body[data-mobile-game=mines] #coins{max-width:100%;font-size:clamp(22px,6.5vw,30px);line-height:1.3;white-space:nowrap}
+ body[data-mobile-game=mines] .mobile-board-toolbar{height:auto;min-height:0}
+ body[data-mobile-game=mines] .board-instruments{flex-wrap:wrap;gap:4px 10px}
+}
+
+@media(min-width:741px) and (max-width:1100px) and (max-height:600px) and (min-aspect-ratio:4/3){
+ body[data-mobile-game=mines] .game{max-width:100%;height:auto;min-height:100dvh;padding:var(--ui-safe-top) var(--ui-safe-right) var(--ui-safe-bottom) var(--ui-safe-left)}
+ body[data-mobile-game=mines] .play-layout{display:grid;grid-template-columns:minmax(300px,1fr) minmax(240px,.8fr);gap:16px;padding:12px var(--ui-page-gutter);align-items:start}
+ body[data-mobile-game=mines] .mobile-mine-content{display:flex;flex-direction:column;min-width:0;padding:0;overflow:visible}
+ body[data-mobile-game=mines] .intro{display:none}
+ body[data-mobile-game=mines] .board-panel{width:100%;max-width:430px;min-width:0;margin:auto}
+ body[data-mobile-game=mines] .board-shell{width:100%;height:auto;aspect-ratio:auto;padding:5px}
+ body[data-mobile-game=mines] #board{display:grid;width:100%;height:auto;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;padding:4px}
+ body[data-mobile-game=mines] #board .cell{min-width:0;width:100%;height:auto;aspect-ratio:1;min-height:36px}
+ body[data-mobile-game=mines] .bottom{position:sticky;top:12px;inset-inline:auto;width:100%;padding:12px;min-width:0;border-radius:14px;background:#132340}
+ body[data-mobile-game=mines] .mobile-board-toolbar{display:flex;flex-direction:column;gap:8px}
+ body[data-mobile-game=mines] #modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ body[data-mobile-game=mines] #modes button{min-height:44px}
+}
+
+/* Short windows can scroll while primary controls retain a readable size. */
+@media(max-height:600px){
+ html[data-ui-surface] dialog{max-height:calc(var(--ui-viewport-height) - var(--ui-safe-top) - var(--ui-safe-bottom) - 20px);overflow-y:auto;scroll-padding-block:60px 16px}
+ html[data-ui-surface] :is(.mobile-sheet-head,.fx-dialog-head,.fairness-heading){position:sticky;top:0;z-index:8}
+}
+
+/* Lobby header and navigation use the same content-first sizing. */
+@media(max-width:650px){
+ html[data-ui-surface=lobby] #platform .topbar{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:7px 10px;height:auto;min-height:0;padding:8px var(--ui-page-gutter) 10px}
+ html[data-ui-surface=lobby] .topbar .brand{grid-column:1;grid-row:1;min-width:0;white-space:normal;overflow-wrap:break-word}
+ html[data-ui-surface=lobby] .topbar .header-actions{display:contents}
+ html[data-ui-surface=lobby] .topbar .guest{display:none}
+ html[data-ui-surface=lobby] .topbar .language-control{grid-column:2;grid-row:1;margin:0;min-height:44px}
+ html[data-ui-surface=lobby] .topbar .language-select{font-size:16px;min-height:44px}
+ html[data-ui-surface=lobby] .topbar .header-wallet{grid-column:1/-1;grid-row:2;display:flex;flex-direction:row;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:3px 10px;width:100%;max-width:100%;height:auto;min-height:44px;padding:6px 10px}
+ html[data-ui-surface=lobby] .topbar .header-wallet strong{max-width:100%;font-size:22px;line-height:1.4;letter-spacing:0;white-space:nowrap;font-variant-numeric:tabular-nums}
+ html[data-ui-surface=lobby] .topbar .header-wallet>span{font-size:11px;line-height:1.5}
+ html[data-ui-surface=lobby] .topbar .header-wallet .energy-wallet-copy{display:flex;flex:1;flex-direction:row;align-items:baseline;justify-content:space-between;flex-wrap:wrap;min-width:0;gap:3px 10px}
+ html[data-ui-surface=lobby] #content{padding-inline:var(--ui-page-gutter);padding-bottom:calc(var(--ui-dock-space) + 12px)}
+ html[data-ui-surface=lobby] .navigation{height:auto;min-height:56px;bottom:max(10px,var(--ui-safe-bottom));gap:5px}
+ html[data-ui-surface=lobby] .navigation button{min-width:0;min-height:44px;line-height:1.4;white-space:normal;padding:8px 5px}
+ html[data-ui-surface=lobby] .energy-showcase .energy-hero{min-height:230px;height:auto}
+ html[data-ui-surface=lobby] .energy-showcase .energy-hero-copy{padding-bottom:42px}
+ html[data-ui-surface=lobby] .energy-showcase .energy-hero h2{overflow-wrap:break-word}
+ html[data-ui-surface=lobby] .energy-showcase .energy-hero-foot{height:auto;min-height:30px;flex-wrap:wrap;padding-block:5px}
+ html[data-ui-surface=lobby] .record{align-items:start;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ html[data-ui-surface=lobby] .record>:last-child{overflow-wrap:anywhere}
+}
+@media(min-width:651px) and (max-width:1000px){
+ html[data-ui-surface=lobby] .topbar{height:auto;min-height:76px;flex-wrap:wrap;padding-block:12px;gap:12px}
+ html[data-ui-surface=lobby] .topbar .header-actions{flex-wrap:wrap;min-width:0;max-width:100%}
+ html[data-ui-surface=lobby] .topbar .header-wallet{flex-wrap:wrap;max-width:100%;height:auto;gap:6px 10px}
+ html[data-ui-surface=lobby] .topbar .header-wallet strong{white-space:nowrap;font-variant-numeric:tabular-nums}
+ html[data-ui-surface=lobby] .panel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html[data-ui-surface=lobby] .panel-grid>*{min-width:0;overflow-wrap:anywhere}
+}

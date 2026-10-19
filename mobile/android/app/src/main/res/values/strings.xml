@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">PLAYROOM</string>
+    <string name="title_activity_main">PLAYROOM</string>
+    <string name="package_name">com.pearsonchang.playroom</string>
+    <string name="custom_url_scheme">com.pearsonchang.playroom</string>
+</resources>

@@ -1,0 +1,3 @@
+# Keep native build launchers usable on each platform.
+mobile/android/gradlew text eol=lf
+*.bat text eol=crlf

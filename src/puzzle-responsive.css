@@ -1,0 +1,126 @@
+/* Puzzle layouts share content-sized HUDs. The board never depends on a fixed
+   estimate of the height of translated controls or system text. */
+.world-blocks .game-shell,.world-fusion .shell{
+  min-width:0;
+  padding-top:var(--ui-safe-top,env(safe-area-inset-top,0px));
+  padding-right:calc(var(--ui-page-gutter,clamp(12px,3vw,24px)) + var(--ui-safe-right,env(safe-area-inset-right,0px)));
+  padding-bottom:calc(16px + var(--ui-safe-bottom,env(safe-area-inset-bottom,0px)));
+  padding-left:calc(var(--ui-page-gutter,clamp(12px,3vw,24px)) + var(--ui-safe-left,env(safe-area-inset-left,0px)));
+}
+.world-blocks .game-header,.world-fusion .header{height:auto;min-height:64px;flex-wrap:wrap;padding-block:8px;gap:8px 12px}
+.world-blocks .header-tools,.world-fusion .header-tools{min-width:0;flex-wrap:wrap;justify-content:flex-end}
+.world-blocks .wordmark,.world-fusion .wordmark{min-width:0;overflow-wrap:anywhere}
+.world-blocks .balance-badge,.world-fusion .wallet{min-width:0;max-width:100%}
+.world-blocks .balance-badge>span,.world-fusion .wallet>span{min-width:0}
+.world-blocks #balance,.world-fusion #balance{font-variant-numeric:tabular-nums;overflow-wrap:anywhere;white-space:normal}
+.world-blocks .play-surface,.world-blocks .control-dock,.world-fusion .arena,.world-fusion .side-panel{min-width:0}
+.world-blocks .scoreboard{height:auto;min-height:72px}
+.world-blocks .hud-stat>span,.world-blocks .hud-stat em{white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+.world-blocks .score-main strong,.world-fusion .score-main>strong,.world-fusion .best-stat b{max-width:100%;overflow-wrap:anywhere}
+.world-blocks .hud-stat>div{flex-wrap:wrap}
+.world-blocks .tray-heading,.world-blocks .control-dock .tray-heading{height:auto;min-height:22px;line-height:1.45}
+.world-blocks .tray-heading>span{min-width:0}
+.world-blocks .control-dock .hint{height:auto;min-height:24px;white-space:normal;line-height:1.5;overflow-wrap:anywhere}
+.world-blocks .slot-note{white-space:normal;line-height:1.3}
+.world-blocks .board-topline,.world-blocks .board-bottomline,.world-fusion .board-caption,.world-fusion .board-footer{height:auto;min-height:26px;line-height:1.5;flex-wrap:wrap;padding-block:4px}
+.world-blocks .board-bottomline>span,.world-fusion .board-footer>span{min-width:0;overflow-wrap:anywhere;white-space:normal}
+.world-blocks .reward-tier>span{white-space:normal;line-height:1.45}
+.world-blocks .game-actions>button,.world-fusion .game-actions>button{min-height:44px;height:auto;white-space:normal;line-height:1.4;padding-block:12px;overflow-wrap:anywhere}
+.world-blocks .utility-button,.world-fusion .utility-button{padding-inline:8px}
+.world-blocks .game-actions>.primary,.world-fusion .game-actions>.primary{min-height:48px}
+.world-fusion .score-panel{height:auto;min-height:64px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:12px}
+.world-fusion .score-main{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.world-fusion .best-stat{min-width:0;max-width:100%}
+.world-fusion .score-main>span,.world-fusion .best-stat>span{line-height:1.5;overflow-wrap:anywhere}
+.world-fusion .score-main em{right:0;top:0;transform:translateY(-30%)}
+.world-fusion .section-heading{flex-wrap:wrap;line-height:1.5}
+.world-fusion .reward-heading{flex-wrap:wrap;line-height:1.5}
+.world-fusion .reward-heading .small-note{width:100%;margin-left:0;line-height:1.5}
+.world-fusion .reward-list li{min-width:0;flex-wrap:wrap;gap:6px}
+.world-fusion .spawn-banner,.world-fusion .core-milestone,.world-blocks .tier-toast{max-width:calc(100% - 16px);white-space:normal;overflow-wrap:anywhere}
+.world-blocks .game-dialog,.world-fusion dialog.sheet{
+  max-height:calc(100dvh - 24px - var(--ui-safe-top,env(safe-area-inset-top,0px)) - var(--ui-safe-bottom,env(safe-area-inset-bottom,0px)));
+  padding-bottom:calc(22px + var(--ui-safe-bottom,env(safe-area-inset-bottom,0px)));
+  overscroll-behavior:contain;
+}
+.world-blocks .game-dialog h2,.world-fusion dialog.sheet h2{padding-right:44px;overflow-wrap:anywhere}
+.world-blocks .game-dialog>.dialog-close,.world-fusion dialog.sheet>.dialog-close{z-index:5}
+.world-blocks .entry-dialog .entry-card::after{display:none}
+.world-blocks .entry-dialog .entry-card .eyebrow,.world-fusion dialog.sheet>.eyebrow{padding-right:48px}
+.world-blocks .entry-dialog .entry-card h2{padding-right:0}
+.world-blocks .setting-row>span:first-child,.world-fusion .setting-row>span:first-child{min-width:0}
+.world-blocks .setting-row,.world-fusion .setting-row{flex-wrap:wrap}
+.world-blocks .result-score strong,.world-blocks .result-payout strong,.world-fusion .result-reward{overflow-wrap:anywhere;flex-wrap:wrap}
+
+/* Portrait phones keep the full width for an eight-cell board. Short screens
+   scroll rather than reducing tiles below a comfortable placement target. */
+@media(max-width:600px){
+  .world-blocks .game-shell,.world-fusion .shell{max-width:480px}
+  .world-blocks .game-header,.world-fusion .header{display:grid;grid-template-columns:44px minmax(0,1fr) 44px auto;gap:8px;min-height:0}
+  .world-blocks .header-tools,.world-fusion .header-tools{display:contents}
+  .world-blocks #back,.world-fusion #back{grid-column:1;grid-row:1}
+  .world-blocks .wordmark,.world-fusion .wordmark{grid-column:2;grid-row:1;white-space:normal;line-height:1.3}
+  .world-blocks .mobile-wordmark,.world-fusion .mobile-wordmark{white-space:normal}
+  .world-blocks .mobile-wordmark i{display:none}
+  .world-blocks #menu-open,.world-fusion #menu-open{grid-column:3;grid-row:1}
+  .world-blocks .language-control,.world-fusion .language-control{grid-column:4;grid-row:1;min-width:52px}
+  .world-blocks .balance-badge,.world-fusion .wallet{grid-column:1/-1;grid-row:2;width:100%;justify-content:space-between;min-height:40px;padding:6px 12px}
+  .world-blocks .balance-badge>span,.world-fusion .wallet>span{display:flex;align-items:baseline;justify-content:flex-end;flex-wrap:wrap;gap:4px 10px;font-size:11px;line-height:1.5}
+  .world-blocks .balance-badge i,.world-fusion .wallet i{display:block;flex-shrink:0;font-size:20px}
+  .world-blocks #balance,.world-fusion #balance{font-size:20px;line-height:1.2}
+  .world-blocks .intro,.world-fusion .intro{display:none}
+  .world-blocks .play-column,.world-fusion .play-layout{display:flex;flex-direction:column;gap:10px}
+  .world-blocks .board-frame,.world-fusion .board-frame{width:100%;max-width:440px;margin-inline:auto}
+  .world-blocks .control-dock .tray{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .world-blocks .control-dock .piece-slot{height:106px;padding-bottom:32px}
+  .world-blocks .piece-slot .piece-grid{--tray-height:62px;--tray-cell:22px}
+  .world-blocks .slot-note{font-size:10px;bottom:6px}
+  .world-blocks .control-dock .tray-heading{flex-direction:row;align-items:flex-start}
+  .world-blocks .tray-heading>span:last-child{max-width:52%;text-align:right}
+  .world-blocks .hud-stat>span{font-size:10px}
+  .world-blocks .board-topline,.world-blocks .board-bottomline{font-size:10px}
+  .world-blocks .reward-tier>span{font-size:10px}
+  .world-fusion .reward-list li{flex-direction:column;justify-content:flex-start;gap:7px}
+  .world-fusion .reward-list li.reached::after{left:calc(50% + 3px)}
+  .world-fusion.show-controls .arena-bottom{flex-wrap:wrap}
+  .world-fusion .arena-bottom .key-tip{flex-wrap:wrap}
+  .world-fusion .dpad{flex-wrap:wrap}
+}
+
+/* Medium windows include tablet portrait and landscape phones. Controls sit
+   beside the board; their height can grow with translation or accessibility text. */
+@media(min-width:601px) and (max-width:1000px){
+  .world-blocks .game-shell,.world-fusion .shell{max-width:980px}
+  .world-blocks .intro,.world-fusion .intro{display:none}
+  .world-blocks main,.world-fusion main{padding-top:12px}
+  .world-blocks .play-layout{max-width:900px}
+  .world-blocks .play-column{display:grid;grid-template-columns:minmax(280px,1fr) minmax(170px,.55fr);grid-template-areas:'surface dock' 'reward dock' 'actions dock';gap:14px 18px;align-items:start}
+  .world-blocks .board-frame{width:100%;padding:8px 10px}
+  .world-blocks .play-surface,.world-blocks .reward-track,.world-blocks .game-actions{width:100%;max-width:500px;margin-inline:auto}
+  .world-blocks .control-dock{width:100%;padding:0;min-height:0}
+  .world-blocks .control-dock .tray{grid-template-columns:1fr;gap:10px}
+  .world-blocks .control-dock .piece-slot{height:112px;padding-bottom:28px}
+  .world-blocks .piece-slot .piece-grid{--tray-height:72px;--tray-cell:24px}
+  .world-blocks .control-dock .tray-heading{flex-direction:column;align-items:flex-start;margin-bottom:10px}
+  .world-blocks .control-dock .tray-heading>span:last-child{max-width:none;text-align:left}
+  .world-blocks .board-topline{padding-bottom:6px}
+  .world-fusion .play-layout{display:grid;grid-template-columns:minmax(280px,1fr) minmax(230px,.7fr);gap:18px;align-items:start}
+  .world-fusion .arena{width:100%}
+  .world-fusion .board-frame{width:100%;max-width:480px}
+  .world-fusion .side-panel{width:100%;gap:12px}
+  .world-fusion .reward-list li{flex-direction:column;justify-content:flex-start}
+  .world-fusion .reward-list li.reached::after{left:calc(50% + 3px)}
+  .world-fusion .mission-card{padding:12px}
+  .world-fusion .mission-card::after{display:none}
+  .world-fusion .reward-heading{font-size:11px}
+  .world-fusion .reward-heading b{font-size:22px}
+  .world-fusion .spawn-next{font-size:11px}
+  .world-fusion .game-actions{grid-template-columns:1fr}
+  .world-fusion .game-actions>.primary{grid-column:auto}
+}
+@media(min-width:601px) and (max-height:600px){
+  .world-blocks .play-column{grid-template-columns:minmax(280px,1fr) minmax(180px,.7fr)}
+  .world-blocks .play-surface,.world-blocks .reward-track,.world-blocks .game-actions{max-width:360px}
+  .world-fusion .play-layout{grid-template-columns:minmax(280px,1fr) minmax(240px,.9fr)}
+  .world-fusion .board-frame{max-width:340px}
+}

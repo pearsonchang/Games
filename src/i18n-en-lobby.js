@@ -111,6 +111,15 @@
     '积分与足迹': 'Points & activity',
     '每个新世界，都值得探索一下。': 'Every new world is worth exploring.',
     '本次体验积分': 'Points this session',
+    '可用模拟积分': 'Available demo points',
+    '仅供体验': 'Demo only',
+    '积分说明': 'How points work',
+    '查看完整规则': 'Full rules',
+    '游戏探索进度': 'Game exploration progress',
+    '最近记录': 'Recent activity',
+    '查看更早明细': 'Earlier entries',
+    '暂无积分明细': 'No point activity yet',
+    '积分变化会记录在这里。': 'Point changes will appear here.',
     '初始赠送 1,000 积分 · 积分玩法每局 50 积分': 'Start with 1,000 demo points · Each points game costs 50 points per round',
     '奖励含本局投入；星际方块按得分、2048 按最高数字结算': 'Rewards include your entry points. Block Flow rewards depend on score; 2048 rewards depend on the highest tile.',
     '去游戏大厅': 'Go to game lobby',
@@ -120,6 +129,16 @@
     '我的游戏收藏': 'My favorite games',
     '把喜欢的世界放在一起': 'Keep your favorite worlds together',
     '本次游戏记录': 'Rounds this session',
+    '游戏记录': 'Round history',
+    '查看更早对局': 'Earlier rounds',
+    '访客模式': 'Guest mode',
+    '无需注册，随时开玩。': 'No sign-up. Just play.',
+    '还没有收藏的游戏': 'No favorites yet',
+    '点亮游戏星标，下次更快找到它。': 'Star a game to find it faster next time.',
+    '帮助与设置': 'Help & settings',
+    '游戏与验证': 'Games & verification',
+    '账户与应用': 'Account & app',
+    '浏览游戏': 'Browse games',
     '还没有完成的游戏。': 'No completed rounds yet.',
     '挑一款游戏': 'Choose a game',
     '对局验证': 'Verify a round',
@@ -429,8 +448,8 @@
     ['星际方块：每局 50 模拟积分，8×8 棋盘，最多成功放置 30 次。误拖不扣步数。每轮三个方块全部放完后补充。拼满整行或整列即可消除；每放一小格加 5 分，消除额外加 100 × 线数² × 连击数。连续放置触发消除会提高连击；未消除则归零。30 步用完或剩余方块全部无处可放时自动结算：不足 500 分到账 0；500 分到账 20；1,000 分到账 50；2,000 分及以上到账 80 积分。按最高档到账，不叠加，奖励含投入。放弃重开不结算奖励、不退入场费，并再扣 50 积分；返回大厅保留当前局。挑战最佳单独保存在本机。奖励表为 Demo 参数，收益分布尚未校准。', 'Block Flow: Each round costs 50 demo points on an 8×8 board, with up to 30 successful placements. Invalid drags do not use a move. Use all three blocks before receiving a new set. Fill a row or column to clear it. Each placed square scores 5, and clearing adds 100 × lines² × combo. Consecutive placements that clear lines increase the combo; a placement without a clear resets it. The round settles after 30 moves or when no remaining block fits: below 500 score returns 0 points; 500 returns 20; 1,000 returns 50; and 2,000 or more returns 80. Only the highest tier applies, and rewards include your entry. Restarting abandons the reward, does not refund the entry and charges another 50 points. Returning to the lobby keeps the round. Your challenge best is saved separately on this device. The reward table is for demonstration and has not been calibrated against player results.']
   ];
   ruleLines.push(['', ''], [
-    '星际 2048：每局 50 模拟积分，4×4 棋盘，滑动或使用方向键合并相同数字，每个数字每步最多合并一次。无效移动不生成新数字；每次有效移动后，在空格中均匀随机选一格，按合并后最高数字对应的公开概率池生成新数字。达到 32、128、256、512、1024 时刷新池分阶段升级，不按余额或输赢改变概率；新数字本身不加游戏分。合出 2048 或没有合法移动时结束：最高数字不到 512 到账 0；512 到账 20；1024 到账 50；2048 到账 80 积分。只按最高档结算一次，奖励不叠加、包含投入，封顶 80 积分；游戏得分不直接兑换积分。放弃重开无奖励、不退入场费，并再扣 50 积分；返回大厅保留当前局，刷新页面重置。奖励为 Demo 参数，未经玩家分布校准，不代表固定返还率。',
-    'Cosmic 2048: Each round costs 50 demo points on a 4×4 board. Swipe or use the arrow keys to merge matching numbers; each tile can merge only once per move. Invalid moves do not spawn a tile. After each valid move, a uniformly chosen empty cell receives a number from the published spawn pool for the highest tile after merging. The pool upgrades at 32, 128, 256, 512 and 1024, without changing probabilities based on your balance or results. Spawning a number adds no game score. The round ends when you reach 2048 or have no legal moves. A highest tile below 512 returns 0 points; 512 returns 20; 1024 returns 50; and 2048 returns 80. Only the highest tier pays, once per round, with a maximum of 80 points including your entry. Game score does not convert directly to points. Restarting forfeits the reward and entry, then costs another 50 points. Returning to the lobby keeps your round; refreshing resets it. These demo rewards have not been calibrated against player results and do not imply a fixed return rate.'
+    '星际 2048：每局 50 模拟积分，4×4 棋盘，滑动或使用方向键合并相同数字，每个数字每步最多合并一次。无效移动不生成新数字；每次有效移动后，在空格中均匀随机选一格，按合并后最高数字对应的公开概率池生成新数字。达到 32、128、256、512、1024 时刷新池分阶段升级，不按余额或输赢改变概率；新数字本身不加游戏分。合出 2048 或没有合法移动时结束：最高数字不到 512 到账 0；512 到账 20；1024 到账 50；2048 到账 80 积分。只按最高档结算一次，奖励不叠加、包含投入，封顶 80 积分；游戏得分不直接兑换积分。放弃重开无奖励、不退入场费，并再扣 50 积分；返回大厅保留当前局；积分与存档方式请查看大厅说明。奖励为 Demo 参数，未经玩家分布校准，不代表固定返还率。',
+    'Cosmic 2048: Each round costs 50 demo points on a 4×4 board. Swipe or use the arrow keys to merge matching numbers; each tile can merge only once per move. Invalid moves do not spawn a tile. After each valid move, a uniformly chosen empty cell receives a number from the published spawn pool for the highest tile after merging. The pool upgrades at 32, 128, 256, 512 and 1024, without changing probabilities based on your balance or results. Spawning a number adds no game score. The round ends when you reach 2048 or have no legal moves. A highest tile below 512 returns 0 points; 512 returns 20; 1024 returns 50; and 2048 returns 80. Only the highest tier pays, once per round, with a maximum of 80 points including your entry. Game score does not convert directly to points. Restarting forfeits the reward and entry, then costs another 50 points. Returning to the lobby keeps your round. See the lobby for points and save details. These demo rewards have not been calibrated against player results and do not imply a fixed return rate.'
   ]);
   messages[ruleLines.map(([zh]) => zh).join('\n')] = ruleLines.map(([, en]) => en).join('\n');
   for (const [zh, en] of ruleLines) if (zh) messages[zh] = en;

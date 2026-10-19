@@ -5,7 +5,7 @@
  <title>LUCKY ORBIT · 星际老虎机</title><meta name="description" content="转动三列幸运转轴，命中中间横线，赢取模拟积分。">
  <link rel="preload" href="fonts/oxanium-variable.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="fonts/orbit-title.ttf" as="font" type="font/ttf" crossorigin>
  <link rel="stylesheet" href="design-tokens.css"><link rel="stylesheet" href="slots.css"><link rel="stylesheet" href="slots-fx.css"><link rel="stylesheet" href="slots-space.css"><link rel="stylesheet" href="slots-rewards.css"><link rel="stylesheet" href="slots-arcade.css">
-<link rel="stylesheet" href="mobile-games.css"><link rel="stylesheet" href="i18n.css"></head>
+<link rel="stylesheet" href="mobile-games.css"><link rel="stylesheet" href="slot-layout.css"><link rel="stylesheet" href="adaptive-ui.css"><script src="adaptive-ui.js" defer></script><link rel="stylesheet" href="i18n.css"></head>
 <body data-mobile-game="slots">
  <div class="sky" aria-hidden="true">
   <div class="orbital-panorama"></div><div class="orbital-grid"></div>
@@ -28,14 +28,13 @@
        <div class="reel"><div class="reel-strip"></div><i class="reel-glint"></i><i class="reel-speed" aria-hidden="true"></i><i class="reel-impact" aria-hidden="true"></i></div><div class="reel"><div class="reel-strip"></div><i class="reel-glint"></i><i class="reel-speed" aria-hidden="true"></i><i class="reel-impact" aria-hidden="true"></i></div><div class="reel"><div class="reel-strip"></div><i class="reel-glint"></i><i class="reel-speed" aria-hidden="true"></i><i class="reel-impact" aria-hidden="true"></i></div>
        <div class="payline" aria-hidden="true"><span>MATCH LINE</span></div>
       </div>
-      <div class="win-burst" id="win-burst" aria-hidden="true"><span id="win-title">TRIPLE MATCH</span><strong id="win-amount"></strong><small id="win-caption">模拟积分到账</small></div><div class="reward-impact" aria-hidden="true"><i></i><i></i></div><div class="reward-field" aria-hidden="true"><i></i><i></i><i></i></div><i class="win-ring" aria-hidden="true"></i><div class="spin-progress" aria-hidden="true"><i></i></div>
+      <div class="win-burst" id="win-burst" aria-hidden="true"><span id="win-title">TRIPLE MATCH</span><strong id="win-amount"></strong><small id="win-caption">模拟积分到账</small></div><div class="reward-impact" aria-hidden="true"><i></i><i></i></div><div class="reward-field" aria-hidden="true"><i></i><i></i><i></i></div><i class="win-ring" aria-hidden="true"></i><div class="spin-progress" aria-hidden="true"><i></i></div><div class="confetti" id="confetti" aria-hidden="true"></div>
      </div>
      <div class="machine-meta"><span><i></i> 只看中间横线</span><span id="reel-status">3 ORBITS · 1 LINE</span></div>
      <div class="result" id="result" role="status" aria-live="polite"><span class="result-icon" aria-hidden="true">✧</span><div><strong>星轨已就绪</strong><p>两同号返还投入 · 三同号赢取奖励</p></div></div>
      <div class="action-panel"><div class="stake"><span>本局消耗</span><strong>50 <small>积分</small></strong></div><button class="spin" id="spin" disabled><span class="spin-symbol" aria-hidden="true">↻</span><span id="spin-label">连接中…</span><kbd>SPACE</kbd></button></div>
      <button class="examples-open" id="examples-open" type="button"><span>查看倍率示例</span><span>50 × 4 = 200 积分 <b aria-hidden="true">↗</b></span></button>
      <div class="machine-foot"><span>ORBIT STATION</span><i></i><span>探索下一份好运</span><i></i><span>SECTOR 06</span></div>
-     <div class="confetti" id="confetti" aria-hidden="true"></div>
     </div>
     <div class="history-heading"><h2>最近的星轨记录</h2><span>最近 6 局</span></div><ol class="history" id="history"><li class="history-empty">第一组星际信号，等你揭晓。</li></ol>
    </section>
@@ -45,7 +44,7 @@
     <div class="prize-list" id="prize-list"></div>
     <div class="pair-rule" id="pair-rule"><span><b>任意两个相同</b><small>含首尾相同</small></span><strong>1×<small>返还 50 积分</small></strong></div>
     <p class="payout-note">奖励包含本局投入，只取最高一项。<br>三个图案都不同时，本局奖励为 0。</p>
-    <details><summary>玩法与概率</summary><p>每局消耗 50 模拟积分，三列转轴独立随机。只按中间横线结算，上下图案仅供展示。无法在转动中改变或提前停止结果。</p><p>每列概率：环星 40%、推进器 25%、星晶 15%、卫星 10%、跃迁门 5%、星际徽章 5%。</p><p>理论返还率 97%，长期每局平均净收益 −1.5 积分，短期结果会波动。返回大厅不影响结算；刷新页面会重置体验积分。</p></details>
+    <details><summary>玩法与概率</summary><p>每局消耗 50 模拟积分，三列转轴独立随机。只按中间横线结算，上下图案仅供展示。无法在转动中改变或提前停止结果。</p><p>每列概率：环星 40%、推进器 25%、星晶 15%、卫星 10%、跃迁门 5%、星际徽章 5%。</p><p>理论返还率 97%，长期每局平均净收益 −1.5 积分，短期结果会波动。返回大厅保留本局；积分与存档方式请查看大厅说明。</p></details>
     <div class="lucky-note"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="slots-symbols.svg#planet"></use></svg><p>下一站，未知星域<br><b>让好运沿轨道相遇。</b></p></div>
    </aside>
   </main>

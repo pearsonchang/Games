@@ -1,0 +1,101 @@
+/* Phone race layout: stable lanes and rewards, with no floating action dock. */
+@media(max-width:740px){
+ html:has(body[data-mobile-game=horse]){-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-bottom:16px}
+ body[data-mobile-game=horse]{background:radial-gradient(ellipse at 90% 10%,#35306445,transparent 65%),#101a32}
+ body[data-mobile-game=horse] .app{width:100%;max-width:560px;padding:0 12px max(16px,env(safe-area-inset-bottom));margin:auto}
+ body[data-mobile-game=horse] header{width:calc(100% + 24px);max-width:none;min-height:56px;margin:0 -12px;padding:6px 12px;gap:10px}
+ body[data-mobile-game=horse] header #back{width:44px;min-width:44px;padding:0;font-size:0;display:grid;place-items:center}
+ body[data-mobile-game=horse] header #back:before{content:'←';font-size:22px;line-height:1}
+ body[data-mobile-game=horse] header .brand strong{font-size:15px;letter-spacing:0}
+ body[data-mobile-game=horse] header .wallet span{display:block;font-size:10px}
+ body[data-mobile-game=horse] main{display:block;margin:8px 0 0;padding:0}
+ body[data-mobile-game=horse] .arena{padding:8px 10px;min-width:0;border:1px solid #8ca7dc33;border-radius:18px;background:#17243b9e;overflow:hidden}
+ body[data-mobile-game=horse] .arena-head{display:none}
+ /* The selector stays in place while locked, so starting never moves the track. */
+ body[data-mobile-game=horse]:has(#circuit) .mobile-horse-picker{display:block;margin:0 0 8px}
+ body[data-mobile-game=horse] .selection-title{display:flex;align-items:center;gap:8px;margin:0 0 6px;min-height:22px}
+ body[data-mobile-game=horse] .selection-title h2{font-size:13px;line-height:1.4}
+ body[data-mobile-game=horse] #selection-state{margin-left:auto;font-size:10px;line-height:1.4;white-space:nowrap}
+ body[data-mobile-game=horse] #phase{font-size:10px;line-height:1.4;padding:3px 6px;border-radius:6px;white-space:nowrap}
+ body[data-mobile-game=horse] #horses{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ body[data-mobile-game=horse] .horse-option{display:grid;grid-template-rows:32px auto;place-items:center;min-width:0;min-height:60px;padding:4px 2px;border-radius:10px}
+ body[data-mobile-game=horse] .horse-option .number{position:absolute;top:3px;left:5px;font-size:9px;margin:0;line-height:1.4}
+ body[data-mobile-game=horse] .horse-option strong{grid-row:2;font-size:11px;line-height:1.4;max-width:100%;overflow-wrap:anywhere;text-align:center}
+ body[data-mobile-game=horse] .horse-option small{display:none}
+ body[data-mobile-game=horse] .horse-option .mini-horse{position:static;grid-row:1;width:42px;height:32px;opacity:1}
+ body[data-mobile-game=horse] .horse-option[aria-pressed=true]:after{top:3px;right:5px;font-size:10px}
+ body[data-mobile-game=horse] .circuit{border-radius:12px;box-shadow:0 3px 0 #09172b;overflow:hidden}
+ body[data-mobile-game=horse] .park-scene{height:44px}
+ body[data-mobile-game=horse] .park-sign{top:5px;left:8px;padding:2px 6px;transform:none}
+ body[data-mobile-game=horse] .park-sign span{font-size:10px;line-height:1.4}
+ body[data-mobile-game=horse] .park-sign small{font-size:7px;line-height:1.4;letter-spacing:1px}
+ body[data-mobile-game=horse] .park-marquee{right:8px;bottom:5px;font-size:10px;padding:2px 6px}
+ body[data-mobile-game=horse] .track-header{height:27px;min-height:27px;padding:3px 7px;gap:6px}
+ body[data-mobile-game=horse] .track-header #race-caption{font-size:11px;line-height:1.4;text-align:center}
+ body[data-mobile-game=horse] .finish-label{font-size:9px;letter-spacing:0}
+ body[data-mobile-game=horse] .start-signal{padding:3px 5px;gap:3px;flex-shrink:0}
+ body[data-mobile-game=horse] .start-signal i{width:5px;height:5px}
+ body[data-mobile-game=horse] .track{margin:0 6px}
+ body[data-mobile-game=horse] .lane{height:48px;min-height:48px}
+ body[data-mobile-game=horse] .lane-label{left:4px;top:50%;transform:translateY(-50%);min-width:23px;padding:3px 2px;font-size:11px}
+ body[data-mobile-game=horse] .lane-label small{display:none}
+ body[data-mobile-game=horse] .runway{left:29px;right:15px}
+ body[data-mobile-game=horse] .runner{width:64px;height:48px}
+ body[data-mobile-game=horse] .lane:after{left:31px;right:20px;bottom:5px}
+ body[data-mobile-game=horse] .finish-line{right:19px}
+ body[data-mobile-game=horse] .finish-badge{top:2%;right:4%;font-size:9px;min-width:16px;padding:0 3px}
+ body[data-mobile-game=horse] .track-footer{min-height:27px;padding:5px 7px;font-size:10px;line-height:1.5;gap:8px}
+ body[data-mobile-game=horse] #chosen-label{min-width:0;overflow-wrap:anywhere}
+ body[data-mobile-game=horse] #race-clock{flex-shrink:0}
+ body[data-mobile-game=horse] .positions{display:flex;flex-direction:column;align-items:stretch;gap:3px;margin:6px 0;min-height:42px}
+ body[data-mobile-game=horse]:has(#circuit[data-scene=ready]) .positions{display:flex}
+ body[data-mobile-game=horse] .positions>span{display:block;font-size:10px;line-height:1.4;color:#afc2df}
+ body[data-mobile-game=horse] .positions ol{min-width:0;gap:5px}
+ body[data-mobile-game=horse] .positions li{min-width:0;padding:4px 2px;gap:3px;font-size:10px;line-height:1.6;white-space:nowrap}
+ body[data-mobile-game=horse] .positions li b{font-size:10px}
+ body[data-mobile-game=horse] #result{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:8px;min-height:58px;margin:0;padding:8px 9px;border-radius:10px}
+ body[data-mobile-game=horse] #result>div{min-width:0}
+ body[data-mobile-game=horse] .result-label{font-size:10px;line-height:1.5;margin:0 0 2px;overflow-wrap:anywhere}
+ body[data-mobile-game=horse] #result strong{display:block;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+ body[data-mobile-game=horse] #result .amount{font-size:17px;color:#ffe095}
+ body[data-mobile-game=horse] #result p{max-width:none;margin:0;font-size:11px;line-height:1.5;text-align:right;overflow-wrap:anywhere}
+ body[data-mobile-game=horse] aside{margin:8px 0 0;padding:10px;border-radius:16px;min-width:0;background:linear-gradient(135deg,#243252,#222744);border-color:#8ca7dc44}
+ body[data-mobile-game=horse] .prizes{margin:0;padding:0}
+ body[data-mobile-game=horse] .section-heading{gap:8px;min-height:18px;margin:0 0 6px}
+ body[data-mobile-game=horse] .section-heading h2{font-size:12px;line-height:1.5}
+ body[data-mobile-game=horse] .section-heading span{font-size:10px;color:#b3c3dd;line-height:1.5;text-align:right}
+ body[data-mobile-game=horse] .prize-grid{gap:6px}
+ body[data-mobile-game=horse] .prize{padding:4px 2px;border-radius:8px}
+ body[data-mobile-game=horse] .prize span{font-size:10px;line-height:1.4}
+ body[data-mobile-game=horse] .prize b{font-size:18px;line-height:1.3}
+ body[data-mobile-game=horse] .launch-panel{position:static;inset:auto;z-index:auto;width:100%;display:grid;grid-template-columns:62px minmax(0,1fr);gap:6px 10px;margin:8px 0 0;padding:8px 0 0;border:0;border-top:1px solid #9cb4d52e;border-radius:0;background:none;box-shadow:none;backdrop-filter:none}
+ body[data-mobile-game=horse] .entry{margin:0;padding:0;font-size:10px;line-height:1.5;align-self:center}
+ body[data-mobile-game=horse] .entry b{display:block;font-size:21px;line-height:1.4;color:#ffe095}
+ body[data-mobile-game=horse] .entry small{font-size:10px}
+ body[data-mobile-game=horse] #start{height:auto;min-height:50px;padding:9px 7px;font-size:15px;line-height:1.4;border-radius:12px;white-space:normal}
+ body[data-mobile-game=horse] #message{grid-column:1/-1;min-height:16px;margin:0;font-size:10px;line-height:1.5;color:#b3c5df;overflow-wrap:anywhere}
+ body[data-mobile-game=horse] footer{padding:10px 8px 0;font-size:10px;color:#8fa9c9}
+ body[data-mobile-game=horse] #mobile-settings .language-control{display:flex!important;align-items:center;justify-content:space-between;width:100%;margin:12px 0 0;padding:10px 12px;background:#213451;border-radius:12px;border:1px solid #809dc64d}
+ body[data-mobile-game=horse] #mobile-settings .language-select{font-size:16px;min-height:44px;max-width:100%}
+ body[data-mobile-game=horse] .mobile-compatible-dialog{max-height:calc(100dvh - 24px);overflow:hidden;flex-direction:column;gap:12px;padding:16px 16px max(18px,env(safe-area-inset-bottom))}
+ body[data-mobile-game=horse] .mobile-sheet[open]{display:flex}
+ body[data-mobile-game=horse] .mobile-sheet-head{position:static;flex:none;margin:0;padding:0 0 10px;gap:10px}
+ body[data-mobile-game=horse] .mobile-sheet-head h2{font-size:18px;line-height:1.4}
+ body[data-mobile-game=horse] .mobile-sheet-body{overflow:auto;min-height:0;overscroll-behavior:contain;padding:3px}
+ body[data-mobile-game=horse] #mobile-help details{border:0;margin:0;padding:0}
+}
+@media(max-width:359px){
+ body[data-mobile-game=horse] .app{padding-inline:10px}
+ body[data-mobile-game=horse] header{width:calc(100% + 20px);margin-inline:-10px;padding-inline:10px;gap:8px}
+ body[data-mobile-game=horse] header .brand strong{font-size:13px}
+ body[data-mobile-game=horse] header .wallet b{font-size:17px}
+ body[data-mobile-game=horse] #selection-state{display:none}
+ body[data-mobile-game=horse] #phase{margin-left:auto}
+ body[data-mobile-game=horse] .arena,body[data-mobile-game=horse] aside{padding:8px}
+ body[data-mobile-game=horse] .horse-option .mini-horse{width:38px}
+ body[data-mobile-game=horse] .positions ol{gap:3px}
+ body[data-mobile-game=horse] .positions li{font-size:9px;gap:2px}
+ body[data-mobile-game=horse] #result{grid-template-columns:minmax(0,1fr);gap:3px}
+ body[data-mobile-game=horse] #result p{text-align:left}
+ body[data-mobile-game=horse] #start{font-size:14px}
+}
